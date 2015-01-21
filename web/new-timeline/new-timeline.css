@@ -1,0 +1,74 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
+}
+
+.vis {
+  background: #000;
+  border: none;
+  shape-rendering: crispEdges;
+}
+
+rect.bar {
+  stroke: #000;
+  fill: #2AB991;
+  fill-opacity: .75;
+}
+g.barGroup:hover rect.bar {
+  fill-opacity: 1;
+}
+
+line.peakLine {
+  stroke: #AEFF00;
+  stroke-width: 1px;
+}
+
+text {
+  font-family: sans-serif;
+  font-size: 9px;
+  fill: #fff;
+}
+
+text.rule {
+  fill: #888;
+}
+line.tickLine {
+  stroke: #333;
+}
+line.mouseLine {
+  stroke: #0ff;
+  stroke-opacity: .3;
+}
+
+#controls {
+  padding: 10px;
+  text-align: center;
+}
+a {
+  cursor: pointer;
+  color: #2AB991;
+  text-decoration: none;
+}
+a.active {
+  color: #AEFF00;
+}
+
+#infobox {
+  position: absolute;
+  width: 200px;
+  height: auto; 
+  padding: 8px;
+  display: none;
+  background: #333;
+  color: #aaa;  
+}
+.title {
+  color: #fff;
+  font-weight: bold;
+}
