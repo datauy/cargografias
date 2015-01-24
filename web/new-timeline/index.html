@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 
 
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -41,11 +42,7 @@
     </div>
     <div layout="column" flex="50">
       <div>
-        <md-content md-theme="docs-dark" class="" layout="row">
-          <md-input-container class="md-docs-dark-theme md-input-has-value"  flex="100">
-          <input ng-model="filter"  id="nombre"  class="md-input" tabindex="0" id="input_06B" aria-invalid="false" 
-        placeholder="Ingrese el nombre del funcionario a buscar">
-        </md-input-container>
+          <div auto-complete url="/search" model="data.tags"></div>
       </div>
     </div>
     <div layout="column" flex="40">
@@ -70,6 +67,7 @@
 
 
     <link rel="stylesheet" href="new-timeline.css" type="text/css">
+    <link rel="stylesheet" href="autocomplete.css" type="text/css">
     <script type="text/javascript" src="new-timeline.js"></script>
 
 
