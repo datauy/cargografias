@@ -11,7 +11,10 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo": "http://www.biografiasyvidas.com/biografia/k/fotos/kirchner.jpg"
   },
    {
     "Name":"Cristina Fernandez - Presidente",
@@ -25,7 +28,10 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo":"http://www.igdigital.com/wp-content/uploads/2013/05/Cristina-Fernandez.jpg"    
   },
   {
     "Name":"Cristina Fernandez - Presidente",
@@ -39,7 +45,11 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo":"http://www.igdigital.com/wp-content/uploads/2013/05/Cristina-Fernandez.jpg"
+
   },
   {
     "Name":"Fernando De La Rua - Presidente",
@@ -53,7 +63,10 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo": "http://www.presidencia.gob.ar/images/stories/galeriapresidentes/gallery/full/delarua.jpg"
   },
    {
     "Name":"Carlos Menem - Presidente",
@@ -67,7 +80,10 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo": "http://www.cidob.org/var/plain/storage/images/documentacion/biografias_lideres_politicos/america_del_sur/argentina/carlos_menem/12341-9-esl-ES/carlos_menem_ficha_biografia.jpg"
   },
    {
     "Name":"Carlos Menem - Presidente",
@@ -81,7 +97,10 @@
     "Estimated_Population":"458",
     "Population_Year":"1938",
     "World_Population":"2295",
-    "Percent_World_Population":"0.19956427015251"
+    "type": "ejecutivo",
+    "region": "nacional",
+    "Percent_World_Population":"0.19956427015251",
+    "photo": "http://www.cidob.org/var/plain/storage/images/documentacion/biografias_lideres_politicos/america_del_sur/argentina/carlos_menem/12341-9-esl-ES/carlos_menem_ficha_biografia.jpg"
   }
   
   

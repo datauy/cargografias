@@ -169,7 +169,7 @@ function drawStarting() {
   // bars
   vis.selectAll("g.barGroup")
     .append("svg:rect")
-      .attr("class", "bar")
+      .attr("class", function(d) { return "bar " + d.type  + " " + d.region})
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", function(d) { return scales.years(d.End) - scales.years(d.Start); })
@@ -329,6 +329,8 @@ function showInfoBox(e, i) {
     var d = data[i];
     
     var info = "<span class='title'>" + d.Name + "</span>";
+    info += "<br />";
+    info += "<img src='" + d.photo + "'>" ;
     info += "<br />" + formatYear(d.Start) + " - " + formatYear(d.End);
     if (!isNaN(d.Land_area_million_km2)) info += "<br />" + " Peak (" + formatYear(d.Peak) + "): " + d.Land_area_million_km2 + " million sq km";
     if (!isNaN(d.Estimated_Population)) info += "<br />" + d.Estimated_Population + " million people in " + formatYear(d.Population_Year);

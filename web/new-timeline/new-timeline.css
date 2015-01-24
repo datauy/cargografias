@@ -9,6 +9,35 @@ rect.bar {
   fill: #2AB991;
   fill-opacity: .75;
 }
+rect.bar.legislativo,
+rect.bar.Legislativo {
+  fill: #00f;
+}
+rect.bar.legislativo.nacional{
+  fill: #00f;
+}
+rect.bar.legislativo.provincial{
+  fill: #005AFF;
+}
+}
+rect.bar.legislativo.provincial.concejal{
+  fill: #0BF;
+}
+rect.bar.ejecutivo,
+rect.bar.Ejecutivo{
+  fill: #f00;
+}
+rect.bar.ejecutivo.nacional{
+  fill: #F00000;
+}
+rect.bar.ejecutivo.provincial{
+  fill: #F00900;
+}
+rect.bar.provincial.intendente{
+  fill: #F05B00;
+}
+}
+
 g.barGroup:hover rect.bar {
   fill-opacity: 1;
 }
@@ -54,6 +83,9 @@ a.active {
   display: none;
   background: #333;
   color: #aaa;  
+}
+#infobox img {
+  max-width: 100px;
 }
 .title {
   font-weight: bold;
