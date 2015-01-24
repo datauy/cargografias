@@ -1,43 +1,79 @@
 
 <!DOCTYPE html>
-<html>
+<html ng-app="cargografias">
 <head>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    
+
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    
+    <!-- Angular Material Dependencies -->
+    <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
+    
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/hammerjs/hammer.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-messages.min.js"></script>
+    
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    
+
+
+
 </head>
 
-<body>
+<body  ng-controller="DemoCtrl" layout="column">
 
-<div id="controls">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td align="left">
-        <span class="title">Cargografias 3.0</span> [ARG]
-      </td>
-      <td align="center" style="padding: 0 20px">
-        <span id="layoutControls" class="controlGroup">
+<div id="controls" layout="row" flex>
+    <div layout="column" flex="20">
+      <div>
+        <span class="title">Cargografias 3.0</span>
+        <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+      </div>
+    </div>
+    <div layout="column" flex="50">
+      <div>
+        <md-content md-theme="docs-dark" class="" layout="row">
+          <md-input-container class="md-docs-dark-theme md-input-has-value"  flex="100">
+          <input ng-model="filter"  id="nombre"  class="md-input" tabindex="0" id="input_06B" aria-invalid="false" 
+        placeholder="Ingrese el nombre del funcionario a buscar">
+        </md-input-container>
+      </div>
+    </div>
+    <div layout="column" flex="40">
+     <div>
+           <span id="layoutControls" class="controlGroup">
           <a id="layout-timespan" class="active" onclick="javascript:setControl(this, 'display', 'aligned', true); return false;">Periodos</a> |
           <a id="layout-timeline" onclick="javascript:setControl(this, 'display', 'timeline', true); return false;">Linea</a> |
           <a id="layout-peakrs" onclick="javascript:setControl(this, 'display', 'centered', true); return false;">Picos</a>
         </span>
-
         <span id="heightControls" class="controlGroup">
           <a id="height-fixed" class="active" onclick="javascript:setControl(this, 'height', 'fixed', true); return false;">Normal </a> |
           <a id="height-area" onclick="javascript:setControl(this, 'height', 'area', true); return false;">Superfice</a> |
           <a id="height-population" onclick="javascript:setControl(this, 'height', 'population', true); return false;">Poblacion representada</a>
         </span>
-      </td>
-      <td align="right">
-        Basado en <a href="http://www.visualizing.org/visualizations/historys-largest-empires" target="_blank"> Empires Data-Viz<a>
-      </td>
-    </tr>
-  </table>
+      </div>
 </div>
 
-<div id="infobox">  
-</div>
-<link rel="stylesheet" href="new-timeline.css" type="text/css">
-<script type="text/javascript" src="new-timeline.js"></script>
 
+<div id="infobox">  </div>
+
+
+
+
+    <link rel="stylesheet" href="new-timeline.css" type="text/css">
+    <script type="text/javascript" src="new-timeline.js"></script>
+
+
+    <script type="text/javascript" src="app.js"></script>
+    
 </body>
 </html>

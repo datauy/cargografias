@@ -71,7 +71,7 @@ $(document).ready(function() {
 function setVisSize() {
 
   wid = $(window).width() - 4;
-  hei = $(window).height() - 25 - $("#controls").height();
+  hei = $(window).height() - 50;
 
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
