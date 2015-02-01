@@ -161,28 +161,40 @@ function drawStarting() {
   // empire containers
   vis.selectAll("g")
     .data(data)
-    .enter().append("svg:g")
+    .enter()
+    .append("svg:g")
       .attr("class", "barGroup")
       .attr("index", function(d, i) { return i; })
-      .attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(i) + ")"; });
+      .attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(i) + ")"; })
+           // let's create a subselection
+      
 
-  // bars
-  vis.selectAll("g.barGroup")
-    .append("svg:rect")
+      .selectAll("g.barGroup")
+      .data(function(d) {
+        return d.posts
+      })
+      .enter()
+      .append("svg:rect")
       .attr("class", function(d) { return "bar " + d.type  + " " + d.region})
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", function(d) { return scales.years(d.End) - scales.years(d.Start); })
-      .attr("height", barHeight);
-
-  // peak lines
-  vis.selectAll("g.barGroup")
-    .append("svg:line")
+      .attr("width", function(d) {
+       return scales.years(d.End) - scales.years(d.Start); })
+      .attr("height", barHeight)
+  
+  // // peak lines    
+      .selectAll("g.barGroup")
+      .append("svg:line")
       .attr("class", "peakLine")
       .attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.Start); })
       .attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.Start); })
       .attr("y1", 0)
       .attr("y2", barHeight);
+
+      
+
+  
+  
 
   // bar labels
   vis.selectAll("g.barGroup")
