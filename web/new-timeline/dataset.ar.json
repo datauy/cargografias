@@ -48,13 +48,13 @@
             "Peak":2012,
             "End":2015,
             "Span":300,
-            "Population_millions":"458",
-            "Estimated_Population":"458",
-            "Population_Year":"1938",
-            "World_Population":"2295",
-            "type": "ejecutivo",
-            "region": "nacional",
-            "Percent_World_Population":"0.19956427015251"
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
         }
     ],
     "photo":"http://www.igdigital.com/wp-content/uploads/2013/05/Cristina-Fernandez.jpg"    
@@ -81,31 +81,32 @@
     ],
     "photo": "http://www.presidencia.gob.ar/images/stories/galeriapresidentes/gallery/full/delarua.jpg"
   },
+  
    {
-    "Name":"Carlos Menem - Presidente",
-    "posts":[
-        {
-                "name": "Presidente",
-                "Land_area_million_km2":33.7,
-                "Contiguous":"No",
-                "Start":1989,
-                "Peak":1991,
-                "End":1995,
-                "Span":300,
-                "Population_millions":"458",
-                "Estimated_Population":"458",
-                "Population_Year":"1938",
-                "World_Population":"2295",
-                "type": "ejecutivo",
-                "region": "nacional",
-                "Percent_World_Population":"0.19956427015251"
+    "Name":"Carlos Menem",   
+    "photo": "http://www.cidob.org/var/plain/storage/images/documentacion/biografias_lideres_politicos/america_del_sur/argentina/carlos_menem/12341-9-esl-ES/carlos_menem_ficha_biografia.jpg",
+    "posts":[{
+            "name": "Presidente",
+            "Land_area_million_km2":33.7,
+            "Contiguous":"No",
+            "Start":1989,
+            "Peak":1994,
+            "End":1995,
+            "Span":300,
+            "Population_millions":"458",
+            "Estimated_Population":"458",
+            "Population_Year":"1938",
+            "World_Population":"2295",
+            "type": "ejecutivo",
+            "region": "nacional",
+            "Percent_World_Population":"0.19956427015251"
         },
-          {
+        {
             "name": "Presidente",
             "Land_area_million_km2":33.7,
             "Contiguous":"No",
             "Start":1995,
-            "Peak":1997,
+            "Peak":1999,
             "End":1999,
             "Span":300,
             "Population_millions":"458",
@@ -115,8 +116,6 @@
             "type": "ejecutivo",
             "region": "nacional",
             "Percent_World_Population":"0.19956427015251"
-        }
-    ],
+    }],
     "photo": "http://www.cidob.org/var/plain/storage/images/documentacion/biografias_lideres_politicos/america_del_sur/argentina/carlos_menem/12341-9-esl-ES/carlos_menem_ficha_biografia.jpg"
-  }
-]
+  }]
