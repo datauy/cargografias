@@ -41,9 +41,7 @@ $(document).ready(function() {
       }
     }
 
-    // sort + totals -- not in processData because we only need to do it once
     
-    data.sort(function(a, b) { return d3.ascending(a.Start, b.Start); });
     
     totals.area = d3.sum(data, function(d) { return d.Land_area_million_km2; });
     totals.population = d3.sum(data, function(d) { return d.Estimated_Population; });
@@ -55,7 +53,7 @@ $(document).ready(function() {
     // process data for scales, etc.
     processData();
 
-    //console.log(data);
+    
     drawStarting();
     addInteractionEvents();
     
@@ -92,10 +90,16 @@ function processData() {
 
     barHeight = (hei - padding.top - padding.bottom) / data.length;
     
+    
+
+
     scales.years = d3.scale.linear()
-      .domain([ d3.min(data, function(d) { return d.Start; }), d3.max(data, function(d) { return d.End; }) ])
+      .domain([ 
+        d3.min(data, function(d) {  return d3.min(d.posts, function(inner) { return inner.start; }) }),
+        d3.max(data, function(d) {  return d3.max(d.posts, function(inner) { return inner.end;   }) })
+        ])
       .range([ padding.left, wid - padding.right ]);
-  
+    
     scales.indexes = d3.scale.linear()
       .domain([ 0, data.length - 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
@@ -186,8 +190,10 @@ function drawStarting() {
       .selectAll("g.barGroup")
       .append("svg:line")
       .attr("class", "peakLine")
-      .attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.Start); })
-      .attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.Start); })
+      .attr("x1", function(d) { 
+        return scales.years(d.Peak) - scales.years(d.Start); })
+      .attr("x2", function(d) { return 
+        scales.years(d.Peak) - scales.years(d.Start); })
       .attr("y1", 0)
       .attr("y2", barHeight);
 
