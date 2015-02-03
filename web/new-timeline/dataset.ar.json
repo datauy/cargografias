@@ -17,6 +17,38 @@
                 "type": "ejecutivo",
                 "region": "nacional",
                 "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Gobernador",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1999,
+                "Peak":2003,
+                "end":2003,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "provincial",
+                "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Intendente",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1987,
+                "Peak":1988,
+                "end":1991,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "municipal",
+                "Percent_World_Population":"0.19956427015251"
         }
     ],
     "photo": "http://www.biografiasyvidas.com/biografia/k/fotos/kirchner.jpg"

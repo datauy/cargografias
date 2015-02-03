@@ -3,6 +3,7 @@ var wid, hei;
 var transitionDuration = 800;
 
 var data = [];
+var posts = [];
 var scales = {};
 var totals = {};
 
@@ -61,6 +62,7 @@ $(document).ready(function() {
     setTimeout(function() {
       setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
+      setControl($("#controls #groupControls #group-name"), "group", "name", true);
     }, 500);
   
   });
@@ -118,7 +120,12 @@ function processData() {
       var range = hei - padding.top - padding.bottom;
       return range * percentage;
     }
-    
+
+   //find all other posts by region and province
+   //TODO: Replace for a proper group
+   //var posts = data.map(function(d) { return d.posts.map( function(z){ return z.name + "-" + z.type }); })
+   posts = ["Presidente-nacional", "Gobernador-provincial", "Intendente-municipal"];
+
     // calculate ordering items
     var y_area = padding.top;
     // Height
@@ -135,6 +142,12 @@ function processData() {
         else y_popPercent += scales.popPercents(d[j].Percent_World_Population);
 
         d[j].parent = i;
+
+        //Post Position
+        
+        d[j].postsPosition = posts.indexOf(d[j].name + "-" + d[j].region);
+
+
 
       };
     }
@@ -276,16 +289,22 @@ function redraw() {
         var tx, ty;
         //timeline modes.
 
+        
+        console.log(controls.group);
+
         if (controls.display == "timeline") tx = scales.years(d.start);
         else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
         else tx = padding.left;
 
         
-        if (controls.height == "contiguous") ty = scales.indexes(d.parent);
+        if (controls.group == "posts") {console.log(d.postsPosition); ty = scales.indexes(d.postsPosition);}
+        else if (controls.height == "contiguous") ty = scales.indexes(d.parent);
         else if (controls.height == "area") ty = d.area_y;
         else if (controls.height == "population") ty = d.popPercent_y; 
         else ty = scales.indexes(i);                
         
+
+
 
         return "translate(" + tx + ", " + ty + ")"; 
       });
