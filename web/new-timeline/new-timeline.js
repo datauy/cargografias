@@ -9,7 +9,7 @@ var totals = {};
 
 var vis;
 var padding = { top: 40, right: 140, bottom: 30, left: 30 }
-var barHeight = 10; 
+var barHeight = 20; 
 var defaultPopPercent = .08;
 
 var controls = {
@@ -124,7 +124,7 @@ function processData() {
    //find all other posts by region and province
    //TODO: Replace for a proper group
    //var posts = data.map(function(d) { return d.posts.map( function(z){ return z.name + "-" + z.type }); })
-   posts = ["Presidente-nacional", "Gobernador-provincial", "Intendente-municipal"];
+   posts = ["Presidente-nacional", "Gobernador-provincial", "Intendente-municipal", "Diputado-nacional"];
 
     // calculate ordering items
     var y_area = padding.top;
@@ -142,7 +142,7 @@ function processData() {
         else y_popPercent += scales.popPercents(d[j].Percent_World_Population);
 
         d[j].parent = i;
-
+        d[j].position = j;
         //Post Position
         
         d[j].postsPosition = posts.indexOf(d[j].name + "-" + d[j].region);
@@ -290,18 +290,41 @@ function redraw() {
         //timeline modes.
 
         
-        console.log(controls.group);
+       
 
+        //TimeLine
         if (controls.display == "timeline") tx = scales.years(d.start);
         else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
-        else tx = padding.left;
+        // the size of the last one + next.
+        else tx = d.position * (scales.years(d.end) - scales.years(d.start) );
+        //else tx = padding.left;
+        console.log(tx);
+        console.log(padding.left);
 
         
-        if (controls.group == "posts") {console.log(d.postsPosition); ty = scales.indexes(d.postsPosition);}
-        else if (controls.height == "contiguous") ty = scales.indexes(d.parent);
-        else if (controls.height == "area") ty = d.area_y;
-        else if (controls.height == "population") ty = d.popPercent_y; 
-        else ty = scales.indexes(i);                
+        //Heights
+        if (controls.height == "contiguous") { 
+              //depends on politicans
+              scales.indexes = d3.scale.linear()
+                  .domain([ 0,  data.length - 1 ])
+                  .range([ padding.top, hei - padding.bottom - barHeight ]);
+                  
+              ty = scales.indexes(d.parent);
+        }
+        else {
+          //depends on total of posts
+          var totalPosts = d3.sum(data, function(d){return d.posts.length});
+          scales.indexes = d3.scale.linear()
+            .domain([ 0,  totalPosts- 1 ])
+            .range([ padding.top, hei - padding.bottom - barHeight ]);
+
+          if (controls.height == "posts")  ty = scales.indexes(d.postsPosition);
+          else if (controls.height == "area") ty = d.area_y;
+          else if (controls.height == "population") ty = d.popPercent_y; 
+          else ty = scales.indexes(i);  
+        }
+
+
         
 
 

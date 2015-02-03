@@ -87,6 +87,22 @@
                 "type": "ejecutivo",
                 "region": "nacional",
                 "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Diputado",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1997,
+                "Peak":1999,
+                "end":2001,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
         }
     ],
     "photo":"http://www.igdigital.com/wp-content/uploads/2013/05/Cristina-Fernandez.jpg"    
@@ -107,6 +123,22 @@
                 "Population_Year":"1938",
                 "World_Population":"2295",
                 "type": "ejecutivo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Diputado",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1991,
+                "Peak":1994,
+                "end":1995,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
                 "region": "nacional",
                 "Percent_World_Population":"0.19956427015251"
         }
