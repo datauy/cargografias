@@ -92,8 +92,6 @@ function processData() {
     barHeight = (hei - padding.top - padding.bottom) / data.length;
     
     
-
-
     scales.years = d3.scale.linear()
       .domain([ 
         d3.min(data, function(d) {  return d3.min(d.posts, function(inner) { return inner.start; }) }),
@@ -126,9 +124,9 @@ function processData() {
     var y_area = padding.top;
     for(i = 0; i < data.length; i++) {
       d = data[i];
-      for (var j = 0; j < d.length; j++) {
-        d.area_y = y_area;
-        y_area += scales.areas(d[j].Land_area_million_km2);
+      for (var j = 0; j < d.posts.length; j++) {
+        d.posts[j].area_y = y_area;
+        y_area += scales.areas(d.posts[j].Land_area_million_km2);
       };
     }
 
@@ -136,10 +134,10 @@ function processData() {
     for(i = 0; i < data.length; i++) {
       d = data[i];
       
-      for (var j = 0; j < d.length; j++) {
-        d.popPercent_y = y_popPercent;
-        if (isNaN(d[j].Percent_World_Population)) y_popPercent += scales.popPercents(defaultPopPercent);
-        else y_popPercent += scales.popPercents(d[j].Percent_World_Population);
+      for (var j = 0; j < d.posts.length; j++) {
+        d.posts[j].popPercent_y = y_popPercent;
+        if (isNaN(d.posts[j].Percent_World_Population)) y_popPercent += scales.popPercents(defaultPopPercent);
+        else y_popPercent += scales.popPercents(d.posts[j].Percent_World_Population);
       };
    
     }
@@ -181,13 +179,13 @@ function drawstarting() {
         var posts = d3.select(this)
         .selectAll('g')
         .data(politician.posts);
-
+        console.log(j);
         posts.enter()
         .append("svg:g")
         .attr("class", "barGroup")
         .attr("index", function(d, i) { return j; })
         //.attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(  pos(politician.posts,j,i)) + ")"; })
-        .attr("transform", function(d, i) { return "translate(" + (j*150*i) + ", " + (i*150) + ")"; })
+        .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
         .attr("class", function(d) { return "bar " + d.type  + " " + d.region})
         .attr("x", 0)
@@ -268,7 +266,7 @@ function redraw() {
       .attr("y2", hei - padding.bottom);
 
   // empire containers
-  vis.selectAll("g")
+  vis.selectAll("g.barGroup")
     .transition()
       .duration(transitionDuration)
       .style("fill-opacity", function(d) { 
@@ -277,6 +275,7 @@ function redraw() {
       })
       .attr("transform", function(d, i) {
         var tx, ty;
+        console.log(d);
         if (controls.display == "timeline") tx = scales.years(d.start);
         else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
         else tx = padding.left;
@@ -386,7 +385,7 @@ function setControl(elem, con, val, re) {
   $(elem).parents(".controlGroup").find("a").removeClass("active");
   $(elem).addClass("active");
   controls[con] = val;
-  //if (re) redraw();
+  if (re) redraw();
 }
 
 function parseTransform(s) {
