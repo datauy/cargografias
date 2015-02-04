@@ -131,7 +131,11 @@ function processData() {
     // Height
     var y_popPercent = padding.top;
     for(i = 0; i < data.length; i++) {
-      d = data[i].posts;
+
+      //Check sort by date 
+      d = data[i].posts = data[i].posts.sort(function(a, b){ return d3.ascending(a.start, b.start); });
+      console.log(d);
+      //Ordenar.
       for (var j = 0; j < d.length; j++) {
         d[j].area_y = y_area;
         
@@ -148,8 +152,19 @@ function processData() {
         d[j].postsPosition = posts.indexOf(d[j].name + "-" + d[j].region);
 
 
+        //Save previous year reference to be uses on carrear compare
+
+        if (j -1 >=0){
+          d[j].pre = d[j-1];
+        }
+        else{
+         d[j].pre = {start:0, pre:0, tx:0} ;
+        }
+
 
       };
+
+
     }
 
     
@@ -295,12 +310,32 @@ function redraw() {
         //TimeLine
         if (controls.display == "timeline") tx = scales.years(d.start);
         else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
-        // the size of the last one + next.
-        else tx = d.position * (scales.years(d.end) - scales.years(d.start) );
-        //else tx = padding.left;
-        console.log(tx);
-        console.log(padding.left);
+        // the size of the last one + next.data
+        else {
+          if (d.position=== 0) tx = 0;
+          else if (d.position === 1 ) tx = 
+            //width of the previous
+            (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+            //distance between previous
+            (scales.years(d.start) - scales.years(d.pre.end))
+          else {
+            var first = scales.years.ticks()[0];
+            
+            
+            tx = d.pre.tx + 
+            //width of the previous
+            (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+            //distance between previous
+            (scales.years(d.start) - scales.years(d.pre.end))
+          
 
+              
+             
+              
+          }
+        }
+        
+        
         
         //Heights
         if (controls.height == "contiguous") { 
@@ -328,7 +363,8 @@ function redraw() {
         
 
 
-
+        d.tx = tx;
+        d.ty = ty;
         return "translate(" + tx + ", " + ty + ")"; 
       });
 
