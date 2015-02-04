@@ -49,6 +49,22 @@
                 "type": "ejecutivo",
                 "region": "municipal",
                 "Percent_World_Population":"0.19956427015251"
+        },
+        {
+                "name": "Diputado",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":2009,
+                "Peak":2008,
+                "end":2010,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
         }
     ],
     "photo": "http://www.biografiasyvidas.com/biografia/k/fotos/kirchner.jpg"
