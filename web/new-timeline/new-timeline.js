@@ -107,6 +107,11 @@ function processData() {
     scales.indexes = d3.scale.linear()
       .domain([ 0,  totalPosts- 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
+
+    
+    scales.politicians = d3.scale.linear()
+      .domain([ 0,  data.length- 1 ])
+      .range([ padding.top, hei - padding.bottom - barHeight ]);
       
     scales.areas = function(a) {
       var percentage = a / totals.area;
@@ -303,10 +308,6 @@ function redraw() {
       .attr("transform", function(d, i) {
         var tx, ty;
         //timeline modes.
-
-        
-       
-
         //TimeLine
         if (controls.display == "timeline") tx = scales.years(d.start);
         //Peaks
@@ -314,7 +315,7 @@ function redraw() {
         
 
         //Carreer comparsion
-        else {
+        else if (controls.display == "aligned") {
           var first = scales.years.ticks()[0];
           if (d.position=== 0) tx = 0;
           else if (d.position === 1 ) tx = 
@@ -339,6 +340,7 @@ function redraw() {
 
           
         if (controls.height == "posts") { 
+            //Overwrites years
             //depends on total of type of posts
             scales.indexes = d3.scale.linear()
               .domain([ 0,  posts.length - 1 ])
@@ -356,7 +358,7 @@ function redraw() {
           else if (controls.height == "population") ty = d.popPercent_y; 
           else ty = scales.indexes(i);  
         }
-        
+         
 
 
         
@@ -367,7 +369,8 @@ function redraw() {
         return "translate(" + tx + ", " + ty + ")"; 
       });
 
-  // bars
+
+  // bars height! 
   vis.selectAll("g.barGroup rect.bar")
     .transition()
       .duration(transitionDuration)
@@ -376,8 +379,10 @@ function redraw() {
         else return .75;
       })
       .attr("height", function(d) {
-        if (controls.height == "contiguous") return scales.areas(d.Land_area_million_km2); 
-        if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
+        if (controls.height == "contiguous") { 
+          return scales.politicans(d.parent);
+        } 
+        else if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population); 
         else return barHeight;
       });
@@ -388,7 +393,10 @@ function redraw() {
     .transition()
       .duration(transitionDuration)
       .attr("y", function(d) {
-        if (controls.height == "area") return scales.areas(d.Land_area_million_km2)/2 - labelHeight; 
+        if (controls.height == "contiguous") { 
+          return scales.politicans(d.parent)/2 - labelHeight; 
+        } 
+        else if (controls.height == "area") return scales.areas(d.Land_area_million_km2)/2 - labelHeight; 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population)/2 - labelHeight; 
         else return barHeight/2 - labelHeight;      
       });
@@ -398,7 +406,10 @@ function redraw() {
     .transition()
       .duration(transitionDuration)
       .attr("y2", function(d) {
-        if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
+        if (controls.height == "contiguous") { 
+          return scales.politicans(d.parent);
+        } 
+        else if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population); 
         else return barHeight;      
       });
@@ -486,4 +497,3 @@ function formatYear(y) {
 }
 
 
-function pos(d,j,i) { var a =  j * 10  + (i * d.length);  return a;} // rect position
