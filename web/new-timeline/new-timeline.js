@@ -109,9 +109,9 @@ function processData() {
       .range([ padding.top, hei - padding.bottom - barHeight ]);
 
     
-    scales.politicians = d3.scale.linear()
-      .domain([ 0,  data.length- 1 ])
-      .range([ padding.top, hei - padding.bottom - barHeight ]);
+    scales.politicians = function(a) {
+      return barHeight ;
+    }
       
     scales.areas = function(a) {
       var percentage = a / totals.area;
@@ -139,8 +139,6 @@ function processData() {
 
       //Check sort by date 
       d = data[i].posts = data[i].posts.sort(function(a, b){ return d3.ascending(a.start, b.start); });
-      console.log(d);
-      //Ordenar.
       for (var j = 0; j < d.length; j++) {
         d[j].area_y = y_area;
         
@@ -380,7 +378,7 @@ function redraw() {
       })
       .attr("height", function(d) {
         if (controls.height == "contiguous") { 
-          return scales.politicans(d.parent);
+          return scales.politicians(d.parent);
         } 
         else if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population); 
@@ -394,7 +392,7 @@ function redraw() {
       .duration(transitionDuration)
       .attr("y", function(d) {
         if (controls.height == "contiguous") { 
-          return scales.politicans(d.parent)/2 - labelHeight; 
+          return scales.politicians(d.parent)/2 - labelHeight; 
         } 
         else if (controls.height == "area") return scales.areas(d.Land_area_million_km2)/2 - labelHeight; 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population)/2 - labelHeight; 
@@ -407,7 +405,7 @@ function redraw() {
       .duration(transitionDuration)
       .attr("y2", function(d) {
         if (controls.height == "contiguous") { 
-          return scales.politicans(d.parent);
+          return scales.areas(d.Land_area_million_km2); 
         } 
         else if (controls.height == "area") return scales.areas(d.Land_area_million_km2); 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population); 
