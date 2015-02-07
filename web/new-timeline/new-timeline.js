@@ -71,8 +71,8 @@ $(document).ready(function() {
 
 function setVisSize() {
 
-  wid = $(window).width() - 4;
-  hei = $(window).height() - 50;
+  wid = $(window).width() - 2;
+  hei = $(window).height() - 80;
 
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
@@ -265,6 +265,8 @@ function drawstarting() {
       .attr("dy", 0)
       .attr("text-anchor", "middle")
       .text(function(d) { return formatYear(d); });
+
+
     
 }
 

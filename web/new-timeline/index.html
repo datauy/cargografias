@@ -16,7 +16,6 @@
     
     <!-- Angular Material Dependencies -->
     <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
-    
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -40,12 +39,14 @@
         <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
       </div>
     </div>
-    <div layout="column" flex="50">
+    <div layout="column" flex="60">
       <div>
           <div auto-complete url="/search" model="data.tags"></div>
       </div>
     </div>
-    <div layout="column" flex="45">
+    <div layout="column" flex="35">
+
+    
      <div layout="row">
           <span id="layoutControls" class="controlGroup">
           <a id="layout-timespan" class="active" 
@@ -68,14 +69,14 @@
         <span id="heightControls" class="controlGroup">
           <a id="height-fixed" class="active" 
           onclick="javascript:setControl(this, 'height', 'contiguous', true); return false;">Agrupar </a> |
-          <!-- <a id="height-fixed" class="active" 
+     <!--      <a id="height-fixed" class="active" 
           onclick="javascript:setControl(this, 'height', 'fixed', true); return false;">Normal </a> | -->
           <a id="height-area" 
-          onclick="javascript:setControl(this, 'height', 'area', true); return false;">Desagrupar</a> |
-<!--           <a id="height-population" 
+          onclick="javascript:setControl(this, 'height', 'area', true); return false;">Desagrupar</a> 
+<!--            <a id="height-population" 
           onclick="javascript:setControl(this, 'height', 'population', true); return false;">Poblacion</a> -->
         </span>
-      </div>
+      </div> 
 </div>
 
 
