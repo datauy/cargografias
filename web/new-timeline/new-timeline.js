@@ -19,7 +19,7 @@ var controls = {
 
 $(document).ready(function() {
 
-  vis = d3.select("body").append("svg:svg")
+  vis = d3.select("div.vis").append("svg:svg")
     .attr("class", "vis");
 
   setVisSize();
@@ -72,7 +72,7 @@ $(document).ready(function() {
 function setVisSize() {
 
   wid = $(window).width() - 2;
-  hei = $(window).height() - 80;
+  hei = $(window).height() - 100;
 
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
@@ -148,7 +148,9 @@ function processData() {
         if (isNaN(d[j].Percent_World_Population)) y_popPercent += scales.popPercents(defaultPopPercent);
         else y_popPercent += scales.popPercents(d[j].Percent_World_Population);
 
+        d[j].politician = data[i];
         d[j].parent = i;
+
         d[j].position = j;
         //Post Position
         
@@ -241,19 +243,15 @@ function drawstarting() {
       
 
   
-  
-
   // bar labels
   vis.selectAll("g.barGroup")
     .append("svg:text")
       .attr("class", "barLabel")
       .attr("x", function(d) { 
-        return scales.years(d.end) - scales.years(d.start); })
-      .attr("y", 0)
-      .attr("dx", 5)
-      .attr("dy", ".35em")
-      .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
-      .text(function(d) { return d.name; });
+        return scales.years(d.start); })
+      .attr("y", 0);
+  
+
 
   // tick labels
   vis.selectAll("text.rule")
@@ -296,6 +294,10 @@ function redraw() {
       })
       .attr("y1", padding.top)
       .attr("y2", hei - padding.bottom);
+
+
+
+ 
 
   // empire containers
   vis.selectAll("g.barGroup")
@@ -370,6 +372,7 @@ function redraw() {
       });
 
 
+
   // bars height! 
   vis.selectAll("g.barGroup rect.bar")
     .transition()
@@ -387,6 +390,31 @@ function redraw() {
         else return barHeight;
       });
 
+
+
+ // labels
+  vis.selectAll("g.barGroup")
+    .selectAll("svg text")
+      .attr("class", "barLabel")
+      .attr("x", function(d) { 
+        return 0; })
+      .attr("y", 0)
+      .attr("dx", ".35em")
+      .attr("dy", 0)
+      .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
+      .text(function(d) { 
+        //if (d.)
+        if (controls.height == "posts"){
+          //TODO: what if d.getBioResume
+          return d.politician.name + "(" + d.start + "-"+ d.end + ")"  ;   
+        }
+        else {
+          //TODO: what if d.getPostResume()
+          return d.name + "(" + d.start + "-"+ d.end + ")"  ;   
+        }
+
+        
+      });
   // bar labels
   var labelHeight = 0;
   vis.selectAll("g.barGroup text.barLabel")
@@ -400,7 +428,10 @@ function redraw() {
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population)/2 - labelHeight; 
         else return barHeight/2 - labelHeight;      
       });
-      
+  
+
+
+
   // peak lines
   vis.selectAll("g.barGroup line.peakLine")
     .transition()
@@ -475,6 +506,7 @@ function showInfoBox(e, i) {
 }
 
 function setControl(elem, con, val, re) {
+
   $(elem).parents(".controlGroup").find("a").removeClass("active");
   $(elem).addClass("active");
   controls[con] = val;

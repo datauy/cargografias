@@ -67,18 +67,10 @@ angular.module('cargografias', ['ngMaterial', 'ngMessages'])
     }
 }]
 ).controller('DemoCtrl', function($scope, $mdDialog) {
-  $scope.user = {
-    title: 'Developer',
-    email: 'ipsum@lorem.com',
-    firstName: '',
-    lastName: '' ,
-    company: 'Google' ,
-    address: '1600 Amphitheatre Pkwy' ,
-    city: 'Mountain View' ,
-    state: 'CA' ,
-    biography: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
-    postalCode : '94043'
-  };
+  
+
+
+  //TODO: Move to a proper controller
   $scope.showAdvanced = function(ev) {
     $mdDialog.show({
       controller: DialogController,
@@ -91,6 +83,31 @@ angular.module('cargografias', ['ngMaterial', 'ngMessages'])
       $scope.alert = 'You cancelled the dialog.';
     });
   };
+
+  //TODO: Move to a proper controller
+  $scope.data = {
+      selectedIndex : 0,
+      secondLocked : true,
+      secondLabel : "Item Two"
+    };
+    $scope.next = function() {
+      setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
+      $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2) ;
+    };
+    $scope.previous = function() {
+      setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
+      $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
+    };
+
+
+    //TODO: Move to a proper class
+
+
+    $scope.filterTimeline = function(action, type) {
+      setControl(this, action, type, true);
+    };
+   
+
 
 });
 
