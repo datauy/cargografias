@@ -6,7 +6,7 @@ var data = [];
 var posts = [];
 var scales = {};
 var totals = {};
-
+var maxYear, minYear = 0;
 var vis;
 var padding = { top: 40, right: 140, bottom: 30, left: 30 }
 var barHeight = 20; 
@@ -93,12 +93,10 @@ function processData() {
 
     barHeight = (hei - padding.top - padding.bottom) / data.length;
     
-    
+    maxYear = d3.max(data, function(d) {  return d3.max(d.posts, function(inner) { return inner.end;   }) });
+    minYear = d3.min(data, function(d) {  return d3.min(d.posts, function(inner) { return inner.start; }) })
     scales.years = d3.scale.linear()
-      .domain([ 
-        d3.min(data, function(d) {  return d3.min(d.posts, function(inner) { return inner.start; }) }),
-        d3.max(data, function(d) {  return d3.max(d.posts, function(inner) { return inner.end;   }) })
-        ])
+      .domain([ minYear,maxYear])
       .range([ padding.left, wid - padding.right ]);
     
 
@@ -129,7 +127,7 @@ function processData() {
    //find all other posts by region and province
    //TODO: Replace for a proper group
    //var posts = data.map(function(d) { return d.posts.map( function(z){ return z.name + "-" + z.type }); })
-   posts = ["Presidente-nacional", "Gobernador-provincial", "Intendente-municipal", "Diputado-nacional"];
+   posts = ["Presidente-nacional", "Senador-nacional" ,"Gobernador-provincial", "Intendente-municipal", "Diputado-nacional"];
 
     // calculate ordering items
     var y_area = padding.top;
@@ -233,11 +231,29 @@ function drawstarting() {
         .attr("y1", 0)
         .attr("y2", barHeight);
 
+        d3.select(this)
+          .append('svg:text')
+          .attr('class', 'group')
+          .attr('class', 'itemLabel')
+          .attr("x", scales.years(maxYear))
+          .attr("y", (j+1)*barHeight )
+          .text(function(d) {
+            return d.name;
+
+          });
+        d3.select(this)
+        .append("svg:image")
+        .attr('class', 'picture')
+        .attr("xlink:href",function(d){ return d.photo})
+        .attr('width', 75)
+        .attr('height', 75)
+        .attr("x", scales.years(maxYear))
+        .attr("y", (j+0.3)*barHeight )
 
 
+      });
 
 
-      })
      
 
       
@@ -245,12 +261,14 @@ function drawstarting() {
   
   // bar labels
   vis.selectAll("g.barGroup")
+    
     .append("svg:text")
       .attr("class", "barLabel")
       .attr("x", function(d) { 
         return scales.years(d.start); })
       .attr("y", 0);
-  
+
+
 
 
   // tick labels
@@ -342,6 +360,7 @@ function redraw() {
 
           
         if (controls.height == "posts") { 
+            barHeight = (hei - padding.top - padding.bottom) / posts.length;
             //Overwrites years
             //depends on total of type of posts
             scales.indexes = d3.scale.linear()
@@ -351,6 +370,7 @@ function redraw() {
           ty = scales.indexes(d.postsPosition);
         }
         else {
+          barHeight = (hei - padding.top - padding.bottom) / data.length;
           //depends on politicans
             scales.indexes = d3.scale.linear()
                 .domain([ 0,  data.length - 1 ])
@@ -392,6 +412,7 @@ function redraw() {
 
 
 
+
  // labels
   vis.selectAll("g.barGroup")
     .selectAll("svg text")
@@ -415,6 +436,19 @@ function redraw() {
 
         
       });
+  
+  vis.selectAll("g.barGroup")
+        .selectAll("svg image.picture")
+        .attr("xlink:href",function(d){ 
+          if (controls.height == "posts"){ return '';}
+          else return d.photo;
+        })
+        .attr('width', 75)
+        .attr('height', 75)
+        .attr("x", scales.years(maxYear))
+        .attr("y", function(d,i){ (i+0.5)*barHeight });
+  
+
   // bar labels
   var labelHeight = 0;
   vis.selectAll("g.barGroup text.barLabel")
@@ -478,6 +512,9 @@ function addInteractionEvents() {
  * Display info box for data index i, at mouse
  ***********************************************************/
 function showInfoBox(e, i) {
+
+
+  //TODO: Cambiar por angular?
 
   if (i == null) $("#infobox").hide();
   else {

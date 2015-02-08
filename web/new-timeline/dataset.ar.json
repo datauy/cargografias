@@ -69,6 +69,76 @@
     ],
     "photo": "http://www.biografiasyvidas.com/biografia/k/fotos/kirchner.jpg"
   },
+  {
+    "name":"Eduardo Duhalde",
+    "posts": [
+        {
+                "name": "Presidente",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":2002,
+                "Peak":2003,
+                "end":2003,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Gobernador",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1991,
+                "Peak":1995,
+                "end":1999,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "provincial",
+                "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Intendente",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1983,
+                "Peak":1985,
+                "end":1987,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "municipal",
+                "Percent_World_Population":"0.19956427015251"
+        },
+        {
+                "name": "Diputado",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1987,
+                "Peak":1988,
+                "end":1991,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        }
+    ],
+    "photo": "http://www.presidencia.gob.ar/images/stories/galeriapresidentes/gallery/full/duhalde.jpg"
+  },
    {
     "name":"Cristina Fernandez",
     "posts": [
@@ -156,6 +226,56 @@
                 "World_Population":"2295",
                 "type": "legislativo",
                 "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        }
+        ,
+         {
+                "name": "Senador",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1983,
+                "Peak":1985,
+                "end":1989,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        }
+        ,
+         {
+                "name": "Senador",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1993,
+                "Peak":1994,
+                "end":1996,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "legislativo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        },
+         {
+                "name": "Gobernador",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1996,
+                "Peak":1998,
+                "end":1999,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "provincial",
                 "Percent_World_Population":"0.19956427015251"
         }
     ],

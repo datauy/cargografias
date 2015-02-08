@@ -59,7 +59,7 @@ line.peakLine {
 
 
 text {
-  font-size: 11px;
+  font-size: 0.8em;
   fill: #fff;
 }
 
@@ -71,10 +71,12 @@ text.rule {
 
 text.barLabel {
 
-  font-size: 12px;
+  font-size: 0.7em;
 }
 
-
+text.itemLabel{
+  font-size: 1em;
+}
 
 
 
@@ -99,6 +101,14 @@ a.active {
 
 }
 
+svg image.picture{
+  max-width: 100px;
+  min-width: 100px;
+  width: 100px;
+  height: 100px;
+
+}
+
 #infobox {
   position: absolute;
   width: 200px;
@@ -111,6 +121,7 @@ a.active {
 #infobox img {
   max-width: 100px;
 }
+
 .title {
   font-weight: bold;
 }
