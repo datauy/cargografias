@@ -127,7 +127,9 @@ function processData() {
    //find all other posts by region and province
    //TODO: Replace for a proper group
    //var posts = data.map(function(d) { return d.posts.map( function(z){ return z.name + "-" + z.type }); })
-   posts = ["Presidente-nacional", "Senador-nacional" ,"Gobernador-provincial", "Intendente-municipal", "Diputado-nacional"];
+   posts = ["Presidente-nacional", "Vicepresidente-nacional",
+            "Senador-nacional" ,"Gobernador-provincial", 
+            "Intendente-municipal", "Diputado-nacional"];
 
     // calculate ordering items
     var y_area = padding.top;
@@ -410,7 +412,27 @@ function redraw() {
         else return barHeight;
       });
 
+    vis.selectAll("svg image")
+        .attr("xlink:href",function(d){ 
+          console.log(controls.height);
+          if (controls.height == "posts"){ return '';}
+          else return d.photo;
+        })
+        .attr('width', 75)
+        .attr('height', 75)
+        .attr("x", scales.years(maxYear))
+        .attr("y", function(d,i) {return (i+0.3)*barHeight;})
+  
+    vis.selectAll('svg text.itemLabel')
+          .attr('class', 'group')
+          .attr('class', 'itemLabel')
+          .attr("x", scales.years(maxYear))
+          .attr("y", function(d,i) {return (i+1)*barHeight;})
+          .text(function(d,i) {
+            if (controls.height == "posts"){ return posts[i];}
+            else{ return d.name;} 
 
+          });
 
 
  // labels
@@ -437,17 +459,7 @@ function redraw() {
         
       });
   
-  vis.selectAll("g.barGroup")
-        .selectAll("svg image.picture")
-        .attr("xlink:href",function(d){ 
-          if (controls.height == "posts"){ return '';}
-          else return d.photo;
-        })
-        .attr('width', 75)
-        .attr('height', 75)
-        .attr("x", scales.years(maxYear))
-        .attr("y", function(d,i){ (i+0.5)*barHeight });
-  
+
 
   // bar labels
   var labelHeight = 0;

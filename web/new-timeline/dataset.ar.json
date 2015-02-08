@@ -88,6 +88,22 @@
                 "region": "nacional",
                 "Percent_World_Population":"0.19956427015251"
         },
+        {
+                "name": "Vicepresidente",
+                "Land_area_million_km2":33.7,
+                "Contiguous":"No",
+                "start":1989,
+                "Peak":1990,
+                "end":1991,
+                "Span":300,
+                "Population_millions":"458",
+                "Estimated_Population":"458",
+                "Population_Year":"1938",
+                "World_Population":"2295",
+                "type": "ejecutivo",
+                "region": "nacional",
+                "Percent_World_Population":"0.19956427015251"
+        },
          {
                 "name": "Gobernador",
                 "Land_area_million_km2":33.7,
