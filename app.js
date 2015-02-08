@@ -17,6 +17,7 @@ app.use(compression({
   }
 }));
 app.use(express.static(__dirname + '/web'));
+app.use('/test', express.static(__dirname + '/web'));
 app.disable('etag');
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
