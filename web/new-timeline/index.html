@@ -16,7 +16,6 @@
     
     <!-- Angular Material Dependencies -->
     <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
-    
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -34,49 +33,50 @@
 <body  ng-controller="DemoCtrl" layout="column">
 
 <div id="controls" layout="row" flex>
-    <div layout="column" flex="15">
-      <div>
-        <span class="title">Cargografias 3.0</span>
-        <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+      <div layout="column" flex="15">
+        <div>
+          <span class="title">Cargografias 3.0</span>
+          <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+        </div>
       </div>
-    </div>
-    <div layout="column" flex="50">
-      <div>
-          <div auto-complete url="/search" model="data.tags"></div>
+      <div layout="column" flex="60">
+      <div class="tabsdemoStaticTabs">
+          <md-tabs class="md-accent" md-selected="data.selectedIndex">
+            <md-tab id="tab1" aria-controls="tab1-content">
+              Linea
+            </md-tab>
+            <md-tab id="tab2" aria-controls="tab2-content">
+              Comparacion
+            </md-tab>
+            <md-tab id="tab3" aria-controls="tab3-content">
+              Estadisticas
+            </md-tab>
+          </md-tabs>
+          </div>
+        <div>
+            <div auto-complete url="/search" model="data.tags"></div>
+        </div>
       </div>
-    </div>
-    <div layout="column" flex="45">
-     <div layout="row">
-          <span id="layoutControls" class="controlGroup">
-          <a id="layout-timespan" class="active" 
-          onclick="javascript:setControl(this, 'display', 'aligned', true); return false;">Carrerimetro</a> |
-          <a id="layout-timeline" 
-          onclick="javascript:setControl(this, 'display', 'timeline', true); return false;">Linea</a> |
-          <a id="layout-peakrs" 
-          onclick="javascript:setControl(this, 'display', 'centered', true); return false;">Picos</a>
-          </span>
-      </div>
-        <div layout="row">
-          <span id="groupControls" class="controlGroup">
-          <a id="group-posts" class="active" 
-          onclick="javascript:setControl(this, 'height', 'posts', true); return false;">Cargos</a> |
-          <a id="group-name" 
-          onclick="javascript:setControl(this, 'height', 'contiguous', true); return false;">Personas</a> 
-          </span>
-      </div>
-    <div layout="row">
-        <span id="heightControls" class="controlGroup">
-          <a id="height-fixed" class="active" 
-          onclick="javascript:setControl(this, 'height', 'contiguous', true); return false;">Agrupar </a> |
-          <!-- <a id="height-fixed" class="active" 
-          onclick="javascript:setControl(this, 'height', 'fixed', true); return false;">Normal </a> | -->
-          <a id="height-area" 
-          onclick="javascript:setControl(this, 'height', 'area', true); return false;">Desagrupar</a> |
-<!--           <a id="height-population" 
-          onclick="javascript:setControl(this, 'height', 'population', true); return false;">Poblacion</a> -->
-        </span>
-      </div>
+      <div layout="column" flex="25">
+        <div class="row">
+          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','aligned')">Carrera</md-button>
+          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','timeline')">Linea</md-button>
+          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','centered')">Picos</md-button>
+        </div>
+        <div class="row">
+        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','posts')">Cargos</md-button>
+        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Politicos</md-button>
+        </div>
+        <div class="row">
+        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Agrupar</md-button>
+        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','area')">Desglosar</md-button>
+        </div>
+      </div> 
+  </div>
 </div>
+<div class="vis"></div>
+
+
 
 
 <div id="infobox">  </div>
