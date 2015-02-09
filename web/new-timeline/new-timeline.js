@@ -8,7 +8,7 @@ var scales = {};
 var totals = {};
 var maxYear, minYear = 0;
 var vis;
-var padding = { top: 40, right: 140, bottom: 30, left: 30 }
+var padding = { top: 40, right: 30, bottom: 30, left: 140 }
 var barHeight = 20; 
 var defaultPopPercent = .08;
 
@@ -237,7 +237,7 @@ function drawstarting() {
           .append('svg:text')
           .attr('class', 'group')
           .attr('class', 'itemLabel')
-          .attr("x", scales.years(maxYear))
+          .attr("x", padding.left / 7)
           .attr("y", (j+1)*barHeight )
           .text(function(d) {
             return d.name;
@@ -249,13 +249,13 @@ function drawstarting() {
         .attr("xlink:href",function(d){ return d.photo})
         .attr('width', 75)
         .attr('height', 75)
-        .attr("x", scales.years(maxYear))
+        .attr("x", padding.left / 7)
         .attr("y", (j+0.3)*barHeight )
 
 
       });
 
-
+  
      
 
       
@@ -339,12 +339,7 @@ function redraw() {
         //Carreer comparsion
         else if (controls.display == "aligned") {
           var first = scales.years.ticks()[0];
-          if (d.position=== 0) tx = 0;
-          else if (d.position === 1 ) tx = 
-            //width of the previous
-            (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-            //distance between previous
-            (scales.years(d.start) - scales.years(d.pre.end))
+          if (d.position=== 0) tx = padding.left;
           else {
             
             
@@ -420,13 +415,13 @@ function redraw() {
         })
         .attr('width', 75)
         .attr('height', 75)
-        .attr("x", scales.years(maxYear))
+        .attr("x", padding.left / 7)
         .attr("y", function(d,i) {return (i+0.3)*barHeight;})
   
     vis.selectAll('svg text.itemLabel')
           .attr('class', 'group')
           .attr('class', 'itemLabel')
-          .attr("x", scales.years(maxYear))
+          .attr("x", padding.left / 7)
           .attr("y", function(d,i) {return (i+1)*barHeight;})
           .text(function(d,i) {
             if (controls.height == "posts"){ return posts[i];}
