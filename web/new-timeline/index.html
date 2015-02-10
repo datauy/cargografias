@@ -1,95 +1,85 @@
 
 <!DOCTYPE html>
-<html ng-app="cargografias">
+<html>
 <head>
     
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/css/publico.css" />
+    
+    <link rel="stylesheet" type="text/css" href="/css/animaciones.css" />
+
+
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 
+    
 
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/js/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     
     <!-- Angular Material Dependencies -->
-    <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
+    
+    
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/hammerjs/hammer.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-messages.min.js"></script>
-    
     <script src="bower_components/angular-material/angular-material.js"></script>
     
+
+    
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-moment/angular-moment.js"></script>
+    <script src="/bower_components/moment/lang/de.js"></script>
 
 
 
 </head>
+<body>
 
-<body  ng-controller="DemoCtrl" layout="column">
-
-<div id="controls" layout="row" flex>
-      <div layout="column" flex="15">
-        <div>
-          <span class="title">Cargografias 3.0</span>
-          <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+    <div>
+        <div ng-app="cargoApp">
+            <div ng-view id="cargoContainer"></div>
         </div>
-      </div>
-      <div layout="column" flex="60">
-      <div class="tabsdemoStaticTabs">
-          <md-tabs class="md-accent" md-selected="data.selectedIndex">
-            <md-tab id="tab1" aria-controls="tab1-content">
-              Linea
-            </md-tab>
-            <md-tab id="tab2" aria-controls="tab2-content">
-              Comparacion
-            </md-tab>
-            <md-tab id="tab3" aria-controls="tab3-content">
-              Estadisticas
-            </md-tab>
-          </md-tabs>
-          </div>
-        <div>
-            <div auto-complete url="/search" model="data.tags"></div>
+        <div ng-app="cargografias">
+
+          <div ng-controller="DemoCtrl" layout="column">
+             <div ng-include src="'page.html'"></div>
+            
+            <div class="vis"></div>
+            <div id="infobox">  </div>
+          </div> 
         </div>
-      </div>
-      <div layout="column" flex="25">
-        <div class="row">
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','aligned')">Carrera</md-button>
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','timeline')">Linea</md-button>
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','centered')">Picos</md-button>
-        </div>
-        <div class="row">
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','posts')">Cargos</md-button>
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Politicos</md-button>
-        </div>
-        <div class="row">
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Agrupar</md-button>
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','area')">Desglosar</md-button>
-        </div>
-      </div> 
-  </div>
-</div>
-<div class="vis"></div>
-
-
-
-
-<div id="infobox">  </div>
-
-
 
 
     <link rel="stylesheet" href="new-timeline.css" type="text/css">
     <link rel="stylesheet" href="autocomplete.css" type="text/css">
-    <script type="text/javascript" src="new-timeline.js"></script>
+    
 
 
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="remove-diacritics.js"></script>
+    <script type="text/javascript" src="new-timeline.js"></script>
+    <script src="/js/lib/v2/CargografiasBubbles.js"></script>
+    
+    <script src="angular/app.js"></script>
+    <script src="angular/services/services.js"></script>
+    <script src="angular/controllers/controllers.js"></script>
+    <script src="angular/controllers/loaderController.js"></script>
+    <script src="angular/filters/filters.js"></script>
+    <script src="angular/directives/cargoBubbles.js"></script>
+    <script src="angular/factories/cargosLoaderFactory.js"></script>
+    <script src="angular/factories/cargosFactory.js"></script>
+    <script src="angular/factories/presetsFactory.js"></script>
+</body>
     
 </body>
 </html>

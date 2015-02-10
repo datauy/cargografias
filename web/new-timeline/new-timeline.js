@@ -3,7 +3,7 @@ var wid, hei;
 var transitionDuration = 800;
 
 var data = [];
-var posts = [];
+var memberships = [];
 var scales = {};
 var totals = {};
 var maxYear, minYear = 0;
@@ -17,35 +17,44 @@ var controls = {
   height: "fixed"
 }
 
-$(document).ready(function() {
+
+
+
+
+function setVisSize() {
+
+  wid = $(window).width() - 2;
+  hei = $(window).height() - 100;
+
+  $(".vis").attr("width", wid).attr("height", hei);
+  $(".vis .background").attr("width", wid).attr("height", hei);
+    
+}
+
+$(window).resize(reloadTimeline);
+
+function reloadTimeline(){
+  setBasicsParams();
+  setVisSize();
+  drawstarting();
+  processData();
+  redraw();
+}
+
+
+function setBasicsParams(){
+  vis = d3.select("div.vis").remove("svg");
 
   vis = d3.select("div.vis").append("svg:svg")
     .attr("class", "vis");
 
-  setVisSize();
-
-  d3.json("dataset.ar.json", function(d) {
   
-    data = d;
-    
-    // parse data
-    for(i = 0; i < data.length; i++) {
-      d = data[i];
-      for(prop in d) {
-        if (!isNaN(d[prop])) {
-          d[prop] = parseFloat(d[prop]);
-        } else if (d[prop] == "Yes") {
-          d[prop] = true;
-        } else if (d[prop] == "No") {
-          d[prop] = false;
-        }
-      }
-    }
-
+  
     
     
-    totals.area = d3.sum(data, function(d) { return d3.sum(d.posts, function(p){ return p.Land_area_million_km2; }) });
-    totals.population = d3.sum(data, function(d) { return d3.sum(d.posts, function(p){ return p.Estimated_Population; }) });
+    
+    totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
+    totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
     
     totals.popPercent = d3.sum(data, function(d) { 
       if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
@@ -64,26 +73,10 @@ $(document).ready(function() {
       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
       setControl($("#controls #groupControls #group-name"), "group", "name", true);
     }, 500);
-  
-  });
-
-});
-
-function setVisSize() {
-
-  wid = $(window).width() - 2;
-  hei = $(window).height() - 100;
-
-  $(".vis").attr("width", wid).attr("height", hei);
-  $(".vis .background").attr("width", wid).attr("height", hei);
-    
 }
 
-$(window).resize(function() {
-  setVisSize();
-  processData();
-  redraw();
-});
+
+
 
 /************************************************************
  * Process the data once it's imported
@@ -93,17 +86,17 @@ function processData() {
 
     barHeight = (hei - padding.top - padding.bottom) / data.length;
     
-    maxYear = d3.max(data, function(d) {  return d3.max(d.posts, function(inner) { return inner.end;   }) });
-    minYear = d3.min(data, function(d) {  return d3.min(d.posts, function(inner) { return inner.start; }) })
+    maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
+    minYear = d3.min(data, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
     scales.years = d3.scale.linear()
       .domain([ minYear,maxYear])
       .range([ padding.left, wid - padding.right ]);
     
 
 
-    var totalPosts = d3.sum(data, function(d){return d.posts.length});
+    var totalmemberships = d3.sum(data, function(d){return d.memberships.length});
     scales.indexes = d3.scale.linear()
-      .domain([ 0,  totalPosts- 1 ])
+      .domain([ 0,  totalmemberships- 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
 
     
@@ -124,10 +117,10 @@ function processData() {
       return range * percentage;
     }
 
-   //find all other posts by region and province
+   //find all other memberships by region and province
    //TODO: Replace for a proper group
-   //var posts = data.map(function(d) { return d.posts.map( function(z){ return z.name + "-" + z.type }); })
-   posts = ["Presidente-nacional", "Vicepresidente-nacional",
+   //var memberships = data.map(function(d) { return d.memberships.map( function(z){ return z.name + "-" + z.type }); })
+   memberships = ["Presidente-nacional", "Vicepresidente-nacional",
             "Senador-nacional" ,"Gobernador-provincial", 
             "Intendente-municipal", "Diputado-nacional"];
 
@@ -138,7 +131,7 @@ function processData() {
     for(i = 0; i < data.length; i++) {
 
       //Check sort by date 
-      d = data[i].posts = data[i].posts.sort(function(a, b){ return d3.ascending(a.start, b.start); });
+      d = data[i].memberships = data[i].memberships.sort(function(a, b){ return d3.ascending(a.start, b.start); });
       for (var j = 0; j < d.length; j++) {
         d[j].area_y = y_area;
         
@@ -154,7 +147,7 @@ function processData() {
         d[j].position = j;
         //Post Position
         
-        d[j].postsPosition = posts.indexOf(d[j].name + "-" + d[j].region);
+        d[j].membershipsPosition = memberships.indexOf(d[j].name + "-" + d[j].region);
 
 
         //Save previous year reference to be uses on carrear compare
@@ -208,15 +201,15 @@ function drawstarting() {
     .append("svg:g")
       .each(function(politician, j){
 
-        var posts = d3.select(this)
+        var memberships = d3.select(this)
         .selectAll('g')
-        .data(politician.posts);
+        .data(politician.memberships);
         
-        posts.enter()
+        memberships.enter()
         .append("svg:g")
         .attr("class", "barGroup")
         .attr("index", function(d, i) { return j; })
-        //.attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(  pos(politician.posts,j,i)) + ")"; })
+        //.attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(  pos(politician.memberships,j,i)) + ")"; })
         .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
         .attr("class", function(d) { return "bar " + d.type  + " " + d.region})
@@ -356,15 +349,15 @@ function redraw() {
         
 
           
-        if (controls.height == "posts") { 
-            barHeight = (hei - padding.top - padding.bottom) / posts.length;
+        if (controls.height == "memberships") { 
+            barHeight = (hei - padding.top - padding.bottom) / memberships.length;
             //Overwrites years
-            //depends on total of type of posts
+            //depends on total of type of memberships
             scales.indexes = d3.scale.linear()
-              .domain([ 0,  posts.length - 1 ])
+              .domain([ 0,  memberships.length - 1 ])
               .range([ padding.top, hei - padding.bottom - barHeight ]);
 
-          ty = scales.indexes(d.postsPosition);
+          ty = scales.indexes(d.membershipsPosition);
         }
         else {
           barHeight = (hei - padding.top - padding.bottom) / data.length;
@@ -410,7 +403,7 @@ function redraw() {
     vis.selectAll("svg image")
         .attr("xlink:href",function(d){ 
           console.log(controls.height);
-          if (controls.height == "posts"){ return '';}
+          if (controls.height == "memberships"){ return '';}
           else return d.photo;
         })
         .attr('width', 75)
@@ -424,7 +417,7 @@ function redraw() {
           .attr("x", padding.left / 7)
           .attr("y", function(d,i) {return (i+1)*barHeight;})
           .text(function(d,i) {
-            if (controls.height == "posts"){ return posts[i];}
+            if (controls.height == "memberships"){ return memberships[i];}
             else{ return d.name;} 
 
           });
@@ -442,7 +435,7 @@ function redraw() {
       .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
       .text(function(d) { 
         //if (d.)
-        if (controls.height == "posts"){
+        if (controls.height == "memberships"){
           //TODO: what if d.getBioResume
           return d.politician.name + "(" + d.start + "-"+ d.end + ")"  ;   
         }
@@ -506,8 +499,9 @@ function redraw() {
 function addInteractionEvents() {
 
   // bar group hover
-  $("g.barGroup").click(
-    function(e) { showInfoBox( e, $(this).attr("index") ); }
+  $("g.barGroup").hover(function(e) { 
+    //showInfoBox( e, $(this).attr("index") ); 
+    }
   );
   $(".vis .background, .vis .mouseLine").click(function(e) { 
     showInfoBox( e, null); 
