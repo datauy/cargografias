@@ -215,7 +215,9 @@ function drawstarting() {
         .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
         //TODO: Merge region and type
-        //.attr("class", function(d) { return "bar " + d.type  + " " + d.region})
+        .attr("class", function(d) {
+          return "bar " + d.type  + " " + d.region
+        })
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
@@ -449,7 +451,7 @@ function redraw() {
         }
         else {
           //TODO: what if d.getPostResume()
-          return d.name + "(" + d.start + "-"+ d.end + ")"  ;   
+          return d.role + "(" + d.start + "-"+ d.end + ")"  ;   
         }
 
         
