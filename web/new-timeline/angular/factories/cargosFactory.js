@@ -320,7 +320,7 @@ angular.module('cargoApp.factories')
       var yearsSum = 0;
       for (var i = 0; i < person.memberships.length; i++) {
         var m = person.memberships[i];
-        m.start = m.start_date;
+        m.start = m.start_date ? parseInt(m.start_date.substring(0,4)) : moment().year();
         m.end = m.end_date ? parseInt(m.end_date.substring(0,4)) : moment().year();
         m.started = moment(m.start_date);
         m.finished = moment(m.end_date);

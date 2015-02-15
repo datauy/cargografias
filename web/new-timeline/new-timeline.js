@@ -36,14 +36,27 @@ $(window).resize(reloadTimeline);
 function reloadTimeline(){
   setBasicsParams();
   setVisSize();
-  drawstarting();
+  // process data for scales, etc.
   processData();
-  redraw();
+
+    
+  drawstarting();
+  addInteractionEvents();
+    
+  setTimeout(function() {
+    setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
+    setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
+    setControl($("#controls #groupControls #group-name"), "group", "name", true);
+  }, 500);
+  //redraw();
 }
 
 
 function setBasicsParams(){
-  vis = d3.select("div.vis").remove("svg");
+  
+  //remove old svg
+  //TODO: is it another way of doing this?
+  d3.select("div.vis svg").remove();
 
   vis = d3.select("div.vis").append("svg:svg")
     .attr("class", "vis");
@@ -61,18 +74,7 @@ function setBasicsParams(){
       else return d.Percent_World_Population; 
     });
     
-    // process data for scales, etc.
-    processData();
-
     
-    drawstarting();
-    addInteractionEvents();
-    
-    setTimeout(function() {
-      setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
-      setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
-      setControl($("#controls #groupControls #group-name"), "group", "name", true);
-    }, 500);
 }
 
 
@@ -209,10 +211,11 @@ function drawstarting() {
         .append("svg:g")
         .attr("class", "barGroup")
         .attr("index", function(d, i) { return j; })
-        //.attr("transform", function(d, i) { return "translate(" + padding.left + ", " + scales.indexes(  pos(politician.memberships,j,i)) + ")"; })
+        
         .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
-        .attr("class", function(d) { return "bar " + d.type  + " " + d.region})
+        //TODO: Merge region and type
+        //.attr("class", function(d) { return "bar " + d.type  + " " + d.region})
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
@@ -221,8 +224,12 @@ function drawstarting() {
         .selectAll("g.barGroup")
         .append("svg:line")
         .attr("class", "peakLine")
-        .attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
-        .attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
+        //TODO: What should we do with peaks?
+        //.attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
+        //.attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
+        .attr("x1", function(d) { return scales.years(d.start) - scales.years(d.start); })
+        .attr("x2", function(d) { return scales.years(d.start) - scales.years(d.start); })
+        
         .attr("y1", 0)
         .attr("y2", barHeight);
 
@@ -239,7 +246,7 @@ function drawstarting() {
         d3.select(this)
         .append("svg:image")
         .attr('class', 'picture')
-        .attr("xlink:href",function(d){ return d.photo})
+        .attr("xlink:href",function(d){ return d.image})
         .attr('width', 75)
         .attr('height', 75)
         .attr("x", padding.left / 7)
@@ -325,8 +332,9 @@ function redraw() {
         //timeline modes.
         //TimeLine
         if (controls.display == "timeline") tx = scales.years(d.start);
-        //Peaks
-        else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
+        //TODO: What we should do with Peaks
+        //else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
+        else if (controls.display == "centered") tx = visCenter - (scales.years(d.start) - scales.years(d.start));
         
 
         //Carreer comparsion
@@ -404,7 +412,7 @@ function redraw() {
         .attr("xlink:href",function(d){ 
           console.log(controls.height);
           if (controls.height == "memberships"){ return '';}
-          else return d.photo;
+          else return d.image;
         })
         .attr('width', 75)
         .attr('height', 75)
@@ -523,7 +531,7 @@ function showInfoBox(e, i) {
     
     var info = "<span class='title'>" + d.name + "</span>";
     info += "<br />";
-    info += "<img src='" + d.photo + "'>" ;
+    info += "<img src='" + d.image + "'>" ;
     info += "<br />" + formatYear(d.start) + " - " + formatYear(d.end);
     if (!isNaN(d.Land_area_million_km2)) info += "<br />" + " Peak (" + formatYear(d.Peak) + "): " + d.Land_area_million_km2 + " million sq km";
     if (!isNaN(d.Estimated_Population)) info += "<br />" + d.Estimated_Population + " million people in " + formatYear(d.Population_Year);
