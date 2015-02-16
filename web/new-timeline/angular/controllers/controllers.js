@@ -10,6 +10,8 @@ angular.module('cargoApp.controllers')
     $scope.estado = "";
   	$rootScope.observers =[];
     $rootScope.yearObserver =[];
+    $rootScope.jerarquimetroObserver =[];
+    $scope.filterLinea ="cargo";
     var parsedParams;
 
     var processParameters = function(params){
@@ -17,14 +19,12 @@ angular.module('cargoApp.controllers')
         $scope.filterLinea = parsedParams.shift();
         $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
     }
-    $rootScope.jerarquimetroObserver =[];
-    $scope.filterLinea ="cargo";
+
 
     //Load initial ids from the url
     if($routeParams.ids){
      processParameters($routeParams.ids);
     }
-
 
   $scope.$watch('activeYear', function(){
     updateTheUrl();
@@ -47,7 +47,6 @@ angular.module('cargoApp.controllers')
 
 
   var onDataLoaded = function(){
-    
      $rootScope.estado = "Motor de Visualizacion";
       for (var i = 0; i < $rootScope.observers.length; i++) {
         var observer = $rootScope.observers[i];
@@ -77,13 +76,10 @@ angular.module('cargoApp.controllers')
       var observer = $rootScope.jerarquimetroObserver[i];
       var jerarquimetro = cargosFactory.getJerarquimetro($scope.poderometroYear, $scope.activePersons);
       observer(jerarquimetro);
-    };
-    $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
+    };    
   }
 
-
   $scope.presets = presetsFactory.presets;
-
 
   $scope.filterAutoPersons = function(q){
     if (q.length > 3){
@@ -93,7 +89,6 @@ angular.module('cargoApp.controllers')
   };
   
   $scope.clearFilter = function(){
-      
      //HACK: why?????????
      $("#nombre").val('');
      $scope.nombre ='',
@@ -144,19 +139,14 @@ angular.module('cargoApp.controllers')
 
     $scope.refreshAllVisualizations = function(){
       
-      //Refresh TimeLine
-      //var idPersonas = cargoTimeline.options.filtro.idPersonas;
-      //var timelineParams = {
-        // filtro: { idPersonas: idPersonas },
-         //mostrarPor: $scope.filterLinea,
-      //};
-      //window.cargoTimeline.update(timelineParams);
+      //TODO: This should all go to observers.
       
+      $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
       reloadTimeline();
       //Updates Url
-      //updateTheUrl();
+      updateTheUrl();
     }
 
 
@@ -171,11 +161,8 @@ angular.module('cargoApp.controllers')
     	}
       person.autoPersona.agregada = false;
       person.autoPersona.styles = "";
-    	
       $scope.redrawPoderometro();
       updateTheUrl();
-      
-
     };
 
     $scope.clearAll = function(){
@@ -183,26 +170,26 @@ angular.module('cargoApp.controllers')
         $scope.activePersons[i].autoPersona.agregada = false;
       };
       $scope.activePersons = [];
-      
-      
-
       updateTheUrl();
       $scope.showPresets=true;
 
     }
 
-    //First time Loader    
-    var showSlides = $cookies.showSlides;
-    if (!showSlides){
-       $scope.showSlides = true;
-       $cookies.showSlides = true;
-    }
-    //TODO: Descomentar para que se muestre solo la primera vez
-    $scope.closeSlides = function(){
-      $scope.showSlides = false;
-      // Setting  cookie
-      $cookies.showSlides = true;
-    }
+
+    //TODO: Move this to a new controller that only handles hello tutorial
+
+    // //First time Loader    
+    // var showSlides = $cookies.showSlides;
+    // if (!showSlides){
+    //    $scope.showSlides = true;
+    //    $cookies.showSlides = true;
+    // }
+    // //TODO: Descomentar para que se muestre solo la primera vez
+    // $scope.closeSlides = function(){
+    //   $scope.showSlides = false;
+    //   // Setting  cookie
+    //   $cookies.showSlides = true;
+    // }
     
 
   });
