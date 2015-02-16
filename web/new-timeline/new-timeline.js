@@ -120,11 +120,16 @@ function processData() {
     }
 
    //find all other memberships by region and province
-   //TODO: Replace for a proper group
-   //var memberships = data.map(function(d) { return d.memberships.map( function(z){ return z.name + "-" + z.type }); })
-   memberships = ["Presidente-nacional", "Vicepresidente-nacional",
-            "Senador-nacional" ,"Gobernador-provincial", 
-            "Intendente-municipal", "Diputado-nacional"];
+   var membershipsArray = data.map(function(d) { return d.memberships.map( function(z){ return z.role + "-" + z.organization.name }); })
+   //and now we remove duplicates
+   membershipsArray = d3.merge(membershipsArray);
+   $.each(membershipsArray, function(i, el){
+    if($.inArray(el, memberships) === -1) memberships.push(el);
+   });
+  //now we order them
+  memberships.sort(function(a, b){ return d3.ascending(a, b);});
+
+   
 
     // calculate ordering items
     var y_area = padding.top;
@@ -148,8 +153,7 @@ function processData() {
 
         d[j].position = j;
         //Post Position
-        
-        d[j].membershipsPosition = memberships.indexOf(d[j].name + "-" + d[j].region);
+        d[j].membershipsPosition = memberships.indexOf(d[j].role + "-" + d[j].organization.name);
 
 
         //Save previous year reference to be uses on carrear compare
@@ -214,9 +218,9 @@ function drawstarting() {
         
         .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
-        //TODO: Merge region and type
         .attr("class", function(d) {
-          return "bar " + d.type  + " " + d.region
+          //TODO: change to type and region?
+          return "bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
         })
         .attr("x", 0)
         .attr("y", 0)
@@ -257,15 +261,10 @@ function drawstarting() {
 
       });
 
-  
-     
-
-      
 
   
   // bar labels
   vis.selectAll("g.barGroup")
-    
     .append("svg:text")
       .attr("class", "barLabel")
       .attr("x", function(d) { 
@@ -285,6 +284,22 @@ function drawstarting() {
       .attr("dy", 0)
       .attr("text-anchor", "middle")
       .text(function(d) { return formatYear(d); });
+
+  
+
+  //axis y dimension. This can be done with any posible feed!  
+  var heightMemberships = (hei - padding.top - padding.bottom) / memberships.length;
+  vis.selectAll('text.membershipLabel')
+    .data(memberships)
+    .enter()
+    .append('svg:text')
+    .attr('class', 'membershipLabel')
+    .attr("x", padding.left / 7)
+    .attr("y", function(d,i) { return (i+1)*heightMemberships })
+    .text(function(d) {
+      console.log(d);
+      return d;
+    });
 
 
     
@@ -422,15 +437,22 @@ function redraw() {
         .attr("y", function(d,i) {return (i+0.3)*barHeight;})
   
     vis.selectAll('svg text.itemLabel')
-          .attr('class', 'group')
-          .attr('class', 'itemLabel')
           .attr("x", padding.left / 7)
           .attr("y", function(d,i) {return (i+1)*barHeight;})
           .text(function(d,i) {
-            if (controls.height == "memberships"){ return memberships[i];}
+            if (controls.height == "memberships"){ return '';}
             else{ return d.name;} 
-
           });
+
+    vis.selectAll('text.membershipLabel')
+          .attr("x", padding.left / 7)
+          .attr("y", function(d,i) {return (i+1)*barHeight;})
+          .text(function(d,i) {
+            if (controls.height == "memberships"){ return d;}
+            else{ return '';} 
+          });
+
+
 
 
  // labels
@@ -446,15 +468,11 @@ function redraw() {
       .text(function(d) { 
         //if (d.)
         if (controls.height == "memberships"){
-          //TODO: what if d.getBioResume
           return d.politician.name + "(" + d.start + "-"+ d.end + ")"  ;   
         }
         else {
-          //TODO: what if d.getPostResume()
           return d.role + "(" + d.start + "-"+ d.end + ")"  ;   
         }
-
-        
       });
   
 

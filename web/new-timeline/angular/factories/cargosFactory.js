@@ -199,7 +199,7 @@ angular.module('cargoApp.factories')
               cargo:activeMembershipForYear.post.cargotipo.toLowerCase(),
               name: p.name,
               initials: p.initials,
-              classification: activeMembershipForYear.organization.classification,
+              classification: activeMembershipFrYear.organization.classification,
               district: activeMembershipForYear.organization.name,
               position: activeMembershipForYear.cargonominal,
               size: activeMembershipForYear.weight
@@ -245,6 +245,7 @@ angular.module('cargoApp.factories')
               position: activeMembershipForYear.cargonominal,
               level: activeMembershipForYear.hierarchy
             }
+            //TODO: Translate?
              if (activeMembershipForYear.post.cargotipo == 'Ejecutivo'){
                 ejecutivo.push(item)
               }else if (activeMembershipForYear.post.cargotipo == 'Legislativo'){
@@ -374,7 +375,9 @@ angular.module('cargoApp.factories')
       for (var i = 0; i < person.memberships.length; i++) {
 
         var m = person.memberships[i];
-        var cargo = m.post = this.getPost(m.post_id);
+        person.memberships[i].post = this.getPost(person.memberships[i].post_id);
+        person.memberships[i].organization = this.getOrganization(m.organization_id); 
+        var cargo = person.memberships[i].post;
         if (cargo){
           if (cargo.cargoclase == 'Electivo'){
             summary.elected++;
@@ -405,13 +408,19 @@ angular.module('cargoApp.factories')
           return p;
         }
       }
-      return undefined;
+      console.log('post not found:'  + post_id);
+      return {cargotipo: 'unknown', cargoclase:'unknown'};
     }
     factory.getOrganization = function(organization_id){
 
       for (var i = 0; i < this.organizations.length; i++) {
         var o = this.organizations[i];
         if (o.id === organization_id){
+
+          //TODO: How do we set levels for other countries?
+          //TODO: Should we add them to popit?
+          var level = o.name === 'Argentina' ? 'nacional' : 'provincial' //: 'local'
+          o.level = level
           return o;
         }
       }

@@ -27,7 +27,8 @@ rect.bar.legislativo.nacional{
 rect.bar.legislativo.provincial{
   fill: #7986CB;/*Material Indigo 300*/
 }
-}
+
+rect.bar.legislativo.concejal,
 rect.bar.legislativo.municipal.concejal{
   fill: #C5CAE9;/*Material Indigo 100*/
 }
@@ -42,7 +43,8 @@ rect.bar.ejecutivo.nacional{
 rect.bar.ejecutivo.provincial{
   fill: #E57373;/*Material Red 300*/
 }
-rect.bar.ejecutivo.municipal{
+rect.bar.ejecutivo.municipal.intendent,
+rect.bar.ejecutivo.intendente{
   fill: #FFCDD2; /*Material Red 100*/
 }
 

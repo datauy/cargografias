@@ -15,6 +15,6 @@ angular.module('cargoApp', [
   'ngCookies'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/:ids?', {templateUrl: '/angular/partials/main.html', controller: 'homeController'});
+  $routeProvider.when('/:ids?', {templateUrl: '/new-timeline/angular/partials/main.html', controller: 'homeController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
