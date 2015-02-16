@@ -163,17 +163,8 @@ angular.module('cargoApp.controllers')
     }
 
 
-    $scope.orderLine =function(order){
-      $scope.filterLinea = order;
-      var idPersonas = cargoTimeline.options.filtro.idPersonas;
-      var timelineParams = {
-         filtro: { idPersonas: idPersonas },
-         mostrarPor: $scope.filterLinea,
-      };
-      window.cargoTimeline.update(timelineParams);
-      updateTheUrl();
-
-
+    $scope.orderLine =function(dimension,order){
+      setControl($("#controls #heightControls #height-area"), dimension, order, true);
     }
 
     $scope.remove = function(person){

@@ -8,7 +8,7 @@ var scales = {};
 var totals = {};
 var maxYear, minYear = 0;
 var vis;
-var padding = { top: 40, right: 30, bottom: 30, left: 140 }
+var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 20; 
 var defaultPopPercent = .08;
 
@@ -119,15 +119,18 @@ function processData() {
       return range * percentage;
     }
 
-   //find all other memberships by region and province
-   var membershipsArray = data.map(function(d) { return d.memberships.map( function(z){ return z.role + "-" + z.organization.name }); })
-   //and now we remove duplicates
-   membershipsArray = d3.merge(membershipsArray);
-   $.each(membershipsArray, function(i, el){
-    if($.inArray(el, memberships) === -1) memberships.push(el);
-   });
-  //now we order them
-  memberships.sort(function(a, b){ return d3.ascending(a, b);});
+
+    //clear all;
+    memberships = [];
+    //find all other memberships by region and province
+    var membershipsArray = data.map(function(d) { return d.memberships.map( function(z){ return z.role + "-" + z.organization.name }); })
+    //and now we remove duplicates
+    membershipsArray = d3.merge(membershipsArray);
+    $.each(membershipsArray, function(i, el){
+      if($.inArray(el, memberships) === -1) memberships.push(el);
+    });
+    //now we order them
+    memberships.sort(function(a, b){ return d3.ascending(a, b);});
 
    
 
@@ -295,7 +298,7 @@ function drawstarting() {
     .append('svg:text')
     .attr('class', 'membershipLabel')
     .attr("x", padding.left / 7)
-    .attr("y", function(d,i) { return (i+1)*heightMemberships })
+    .attr("y", function(d,i) { return (i+2)*heightMemberships })
     .text(function(d) {
       console.log(d);
       return d;
@@ -445,8 +448,6 @@ function redraw() {
           });
 
     vis.selectAll('text.membershipLabel')
-          .attr("x", padding.left / 7)
-          .attr("y", function(d,i) {return (i+1)*barHeight;})
           .text(function(d,i) {
             if (controls.height == "memberships"){ return d;}
             else{ return '';} 
