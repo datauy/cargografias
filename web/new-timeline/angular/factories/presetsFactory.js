@@ -21,7 +21,7 @@ angular.module('cargoApp.factories')
       valores:'nombre-2009-1742-710-2090-2402-2418-770-2279',
     });
     factory.presets.push({
-      nombre:'Gobernadores (muy) Reelectos',
+      nombre:'Gobernadores Reelectos',
       valores:'nombre-1992-2204-22-1514-1871-1906-21',
     });
 

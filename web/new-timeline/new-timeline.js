@@ -298,7 +298,7 @@ function drawstarting() {
     .append('svg:text')
     .attr('class', 'membershipLabel')
     .attr("x", padding.left / 7)
-    .attr("y", function(d,i) { return (i+2)*heightMemberships })
+    .attr("y", function(d,i) { return (i+1.5)*heightMemberships })
     .text(function(d) {
       console.log(d);
       return d;

@@ -9,22 +9,26 @@ angular.module('cargoApp.factories', [])
 
     f.load = function($scope,factory,callback, $rootScope){
 
-      //TODO; HOw we can make this into popit?
-      // $http.get('/js/datasets/pesopoder.json')
-      //       .then(function(res){
+            //TODO; How we can make this into popit?
+            // $http.get('/js/datasets/pesopoder.json')
+            //       .then(function(res){
 
-      //         $rootScope.estado = "Representatividad";
-      //         factory.weight = res.data;
-      //       });
+            //         $rootScope.estado = "Representatividad";
+            //         factory.weight = res.data;
+            //       });
 
             $http.get('/js/datasets/gz/cargografias-persons-popit-dump.json')
                .then(function(res){
                 $rootScope.estado = "Personas";
                 factory.persons = res.data;
                   for (var i = 0; i < res.data.length; i++) {
+                    //Search Index
+                    res.data[i].index = i;
+                    //Photo or default photo
                     res.data[i].image = res.data[i].images ?  res.data[i].images[0].url :'/img/person.png'    // intentando obtener la foto desde el popit!
+                    //Initials for graphics
+                    res.data[i].initials = res.data[i].name.match(/[A-Z]/g).join('.') + ".";
                     factory.autoPersons.push(res.data[i]);
-                    factory.persons[i].initials = res.data[i].name.match(/[A-Z]/g).join('.') + ".";
                   };
               }).then(function(){
 
@@ -42,7 +46,7 @@ angular.module('cargoApp.factories', [])
                     .then(function(res){
                       $rootScope.estado = "Organizaciones";
                       factory.organizations = res.data;
-                      //Why is this here?
+                      //TODO: Why is this here? Shouldn't go to organization level attribute?
                       //nivel: res.data[i].name === 'Argentina' ? 'nacional' : 'provincial'
                   }).then(function(){
                     $http.get('/js/datasets/gz/cargografias-posts-popit-dump.json')

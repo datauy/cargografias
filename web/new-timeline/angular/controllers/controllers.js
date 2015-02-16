@@ -125,24 +125,21 @@ angular.module('cargoApp.controllers')
       $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.index }).join('-'));
   }
 
-  $scope.lightAdd = function(autoPersona, id){
-     if (!autoPersona || autoPersona.agregada) return ;
-      
-      $scope.autocomplete = " ";
-      autoPersona.agregada = true;
-      autoPersona.styles = "badge-selected"
-      var person = cargosFactory.getFullPerson(id);
-      person.autoPersona = autoPersona;
-      $scope.activePersons.push(person);
-      data.push(person);
-  }
+    $scope.lightAdd = function(autoPersona, id){
+      if (!autoPersona || autoPersona.agregada) return ;
+      else
+      {
+        $scope.autocomplete = " ";
+        autoPersona.agregada = true;
+        autoPersona.styles = "badge-selected"
+        var person = cargosFactory.getFullPerson(id);
+        person.autoPersona = autoPersona;
+        $scope.activePersons.push(person);
+      }
+    }
     $scope.add = function(autoPersona, id){
-      $scope.lightAdd(autoPersona,id);
-      $scope.refreshAllVisualizations();
-    	
-
-      
-
+        $scope.lightAdd(autoPersona,id);
+        $scope.refreshAllVisualizations();
     };
 
     $scope.refreshAllVisualizations = function(){
@@ -174,16 +171,7 @@ angular.module('cargoApp.controllers')
     	}
       person.autoPersona.agregada = false;
       person.autoPersona.styles = "";
-    	indexOf = cargoTimeline.options.filtro.idPersonas.indexOf(person.id);
-    	if (indexOf > -1){
-    		 cargoTimeline.options.filtro.idPersonas.splice(indexOf, 1);
-    	}
-    	var idPersonas = cargoTimeline.options.filtro.idPersonas;
-			var timelineParams = {
-			   filtro: { idPersonas: idPersonas },
-			   mostrarPor: $scope.filterLinea,
-			};
-    	window.cargoTimeline.update(timelineParams);
+    	
       $scope.redrawPoderometro();
       updateTheUrl();
       
@@ -195,15 +183,11 @@ angular.module('cargoApp.controllers')
         $scope.activePersons[i].autoPersona.agregada = false;
       };
       $scope.activePersons = [];
-      var idPersonas = [];
-      var timelineParams = {
-         filtro: { idPersonas: idPersonas },
-         mostrarPor: $scope.filterLinea,
-      };
-      //window.cargoTimeline.update(timelineParams);
+      
+      
 
-      //updateTheUrl();
-      //$scope.showPresets=true;
+      updateTheUrl();
+      $scope.showPresets=true;
 
     }
 
