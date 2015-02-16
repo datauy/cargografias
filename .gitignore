@@ -20,3 +20,9 @@ node_modules
 Icon?
 ehthumbs.db
 Thumbs.db
+
+
+# other dataousrces non compressed# 
+###################################
+
+/web/js/datasets/*.json
