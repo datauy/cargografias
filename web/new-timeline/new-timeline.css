@@ -5,8 +5,13 @@
   background: #FFF
 }
 
+.vis .background{
+  fill:rgb(233, 233, 233);
+}
+
+
 rect.bar {
-  stroke: #000;
+  stroke: rgb(233, 233, 233);
   fill: #2AB991;
   fill-opacity: .75;
 }
@@ -78,9 +83,12 @@ text.barLabel {
 
 text.itemLabel{
   font-size: 1em;
+  fill: #555;
 }
 
-
+text.membershipLabel{
+ fill: #555; 
+}
 
 
 line.tickLine {
@@ -188,3 +196,5 @@ svg image.picture{
     border-color: #FFFF8D !important; }
   .tabsdemoStaticTabs md-tabs-ink-bar {
     background-color: #FFFF8D !important; }
+
+

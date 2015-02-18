@@ -406,3 +406,8 @@ div.box img {
 a.hand{
   cursor: pointer;
 }
+
+
+.vis .background{
+	fill:rgb(248, 248, 248);
+}

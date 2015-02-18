@@ -227,6 +227,8 @@ function drawstarting() {
         })
         .attr("x", 0)
         .attr("y", 0)
+        .attr("ry", 10)
+        .attr("rx", 10)
         .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
         .attr("height", barHeight)
          // peak lines    
