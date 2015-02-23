@@ -33,16 +33,6 @@
   background: #FDACB8;
 }
 
-.ctl-tooltip.ctl-Ejecutivo.nacional{
-  background: rgba(240, 0, 0, 0.75);
-}
-.ctl-tooltip.ctl-Ejecutivo.provincial{
-  background: rgba(240, 9, 0, 0.75);
-}
-.ctl-tooltip.ctl-Ejecutivo.provincial.intendente{
-  background: rgba(240, 91, 0, 0.75);
-}
-
 
 .ctl-tooltip .ctl-detalles{
 	font-size: 10px;
@@ -66,34 +56,6 @@
 .ctl-cargos rect{
 	cursor: inherit;
 }
-.ctl-cargos rect.ctl-legislativo,
-.ctl-cargos rect.ctl-Legislativo{
-	fill: #00f;
-}
-.ctl-cargos rect.ctl-Legislativo.nacional{
-  fill: #00f;
-}
-.ctl-cargos rect.ctl-Legislativo.provincial{
-  fill: #005AFF;
-}
-}
-.ctl-cargos rect.ctl-Legislativo.provincial.concejal{
-  fill: #0BF;
-}
-.ctl-cargos rect.ctl-ejecutivo,
-.ctl-cargos rect.ctl-Ejecutivo{
-	fill: #f00;
-}
-.ctl-cargos rect.ctl-Ejecutivo.nacional{
-  fill: #F00000;
-}
-.ctl-cargos rect.ctl-Ejecutivo.provincial{
-  fill: #F00900;
-}
-.ctl-cargos rect.ctl-Ejecutivo.provincial.intendente{
-  fill: #F05B00;
-}
-
 
 
 .ctl-cargos text{

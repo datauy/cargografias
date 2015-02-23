@@ -1,0 +1,42 @@
+ <div id="controls" layout="row" flex>
+                  <div layout="column" flex="15">
+                    <div>
+                      <span class="title">Cargografias 3.0</span>
+                      <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+                    </div>
+                  </div>
+                  <div layout="column" flex="60">
+                  <div class="tabsdemoStaticTabs">
+                      <md-tabs class="md-accent" md-selected="data.selectedIndex">
+                        <md-tab id="tab1" aria-controls="tab1-content">
+                          Linea
+                        </md-tab>
+                        <md-tab id="tab2" aria-controls="tab2-content">
+                          Comparacion
+                        </md-tab>
+                        <md-tab id="tab3" aria-controls="tab3-content">
+                          Estadisticas
+                        </md-tab>
+                      </md-tabs>
+                      </div>
+                    <div>
+                        <div auto-complete url="/search" model="data.tags"></div>
+                    </div>
+                  </div>
+                  <div layout="column" flex="25">
+                    <div class="row">
+                      <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','aligned')">Carrera</md-button>
+                      <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','timeline')">Linea</md-button>
+                      <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','centered')">Picos</md-button>
+                    </div>
+                    <div class="row">
+                    <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','posts')">Cargos</md-button>
+                    <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Politicos</md-button>
+                    </div>
+                    <div class="row">
+                    <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Agrupar</md-button>
+                    <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','area')">Desglosar</md-button>
+                    </div>
+                  </div> 
+              </div>
+            </div>

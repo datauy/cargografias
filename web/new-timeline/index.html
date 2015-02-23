@@ -1,95 +1,192 @@
 
 <!DOCTYPE html>
-<html ng-app="cargografias">
+<html>
 <head>
     
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18158765-5']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <title>Cargograf&#237as: L&iacute;nea de Tiempo de Funcionarios Politicos - Argentinos</title>
+    <meta itemprop="name" content="Cargografias">
+    <meta itemprop="description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Es una fuente de consulta que busca facilitar el analisis y comprension de la historia reciente argentina.">
+    <meta itemprop="image" content="http://40.media.tumblr.com/71df2704f63865f5d42697631e73d4f5/tumblr_nfmcfzeGMG1qeky8ko1_1280.jpg">
+    <meta name="keywords" content="argentina, polticos, cargos">
+    <meta name="description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
+    <meta name="robots" content="Index, All">
+    <meta name="robots" content="Index, Follow">
+    <meta name="revisit-after" content="10 days">
+    <link rel="shortcut icon" href="http://www.cargografias.org/favicon.ico"  type="image/x-icon">
+    <meta property="fb:page_id" content="">
+    <meta property="og:image" content="http://40.media.tumblr.com/71df2704f63865f5d42697631e73d4f5/tumblr_nfmcfzeGMG1qeky8ko1_1280.jpg">
+    <meta property="og:description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
+    <meta property="og:title" content="cargografias.org">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@cargografias">
+    <meta name="twitter:creator" content="@cargografias">
+    <meta name="twitter:title" content="Cargografias - Politicos en el tiempo">
+    <meta name="twitter:description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
+    <meta name="twitter:image" content="http://40.media.tumblr.com/71df2704f63865f5d42697631e73d4f5/tumblr_nfmcfzeGMG1qeky8ko1_1280.jpg">
+
+
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
+    <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+
+
+    
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/css/publico.css" />
+    <link rel="stylesheet" type="text/css" href="/css/animaciones.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-    
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
-
-
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/js/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     
     <!-- Angular Material Dependencies -->
-    <script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/hammerjs/hammer.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-messages.min.js"></script>
-    
     <script src="bower_components/angular-material/angular-material.js"></script>
     
 
-
+    
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-moment/angular-moment.js"></script>
+    <script src="/bower_components/moment/lang/de.js"></script>
 
 </head>
 
-<body  ng-controller="DemoCtrl" layout="column">
+<body class="angled stripes">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Cargograf&#237as</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                       
 
-<div id="controls" layout="row" flex>
-      <div layout="column" flex="15">
-        <div>
-          <span class="title">Cargografias 3.0</span>
-          <md-button class="md-raised md-primary"  ng-click="showAdvanced($event)"> ARG</md-button>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" alt="aportar a cargografias">Dejanos tu comentario   </a>
+                            <div class="dropdown-menu">
+                                <iframe src="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&amp;hl=es" width="500" height="765" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                            </div>
+                        </li>
+                        <a class="btn" title="Sigue a @Cargografias en Twitter" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
+                        <i class="fa fa-twitter" style="padding-right: 6px;"></i><b>@Cargograf&iacute;as</b>
+                    </a>
+                    <a class="btn" style="margin-top: 4px;" href="http://github.com/cargografias" target="_blank">
+                        <i class="fa fa-github" style="padding-right: 6px;"></i> Forkea #cargo </a>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
         </div>
-      </div>
-      <div layout="column" flex="60">
-      <div class="tabsdemoStaticTabs">
-          <md-tabs class="md-accent" md-selected="data.selectedIndex">
-            <md-tab id="tab1" aria-controls="tab1-content">
-              Linea
-            </md-tab>
-            <md-tab id="tab2" aria-controls="tab2-content">
-              Comparacion
-            </md-tab>
-            <md-tab id="tab3" aria-controls="tab3-content">
-              Estadisticas
-            </md-tab>
-          </md-tabs>
-          </div>
-        <div>
-            <div auto-complete url="/search" model="data.tags"></div>
+    </div>
+
+
+    <div>
+
+        <div ng-app="cargoApp">
+            <div ng-view id="cargoContainer"></div>
+            
         </div>
-      </div>
-      <div layout="column" flex="25">
-        <div class="row">
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','aligned')">Carrera</md-button>
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','timeline')">Linea</md-button>
-          <md-button class="md-raised md-primary"  ng-click="filterTimeline('display','centered')">Picos</md-button>
+        <div ng-app="cargografias">
+          <div ng-controller="DemoCtrl" layout="column">
+            
+          </div> 
         </div>
-        <div class="row">
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','posts')">Cargos</md-button>
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Politicos</md-button>
+    </div>
+
+    <footer class="well">
+        <div class="span5">
+            <p style="line-height:20px">
+                <a href="http://www.google.com/recaptcha/mailhide/d?k=01C7lOvjG_N7EaBpT3Yp2Lmw==&amp;c=so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501C7lOvjG_N7EaBpT3Yp2Lmw\75\75\46c\75so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">equipo[at]cargografias.org</a>
+            </p>
+            <p style="margin: 0px;">
+                
+                <script>
+                    ! function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0],
+                            p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = p + '://platform.twitter.com/widgets.js';
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, 'script', 'twitter-wjs');
+                </script>
+                <br>
+
+                <br>
+                <br>&bull; Cargograf&iacute;as &copy; 2014 &bull; v2.0 &bull;</p>
         </div>
-        <div class="row">
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','contiguous')">Agrupar</md-button>
-        <md-button class="md-raised md-primary"  ng-click="filterTimeline('height','area')">Desglosar</md-button>
+
+        <div class="row span6" style="background-color: white;padding: 0px 9px 6px 21px;margin-left: 0px; float:right">
+            <h5>Contribuyeron en el upgrade a la version 3.0:</h5>
+            <a href="http://hackslabs.org/" target="_blank">
+                <img alt="Hacklabs" src="img/hacklabslogo.jpg">
+            </a>
+            <a href="http://www.icfj.org/" target="_blank">
+                <img alt="ICFJ" src="img/ICFJ.jpg">
+            </a>
+            <a href="http://wbi.worldbank.org/wbi/" target="_blank">
+                <img alt="World Bank" src="img/worldbank.jpg">
+            </a>
         </div>
-      </div> 
-  </div>
-</div>
-<div class="vis"></div>
+        <div class="clearfix"></div>
 
 
-
-
-<div id="infobox">  </div>
-
-
-
+        <div class="clearfix"></div>
+    </footer>
+    
 
     <link rel="stylesheet" href="new-timeline.css" type="text/css">
     <link rel="stylesheet" href="autocomplete.css" type="text/css">
-    <script type="text/javascript" src="new-timeline.js"></script>
+    
 
 
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="remove-diacritics.js"></script>
+    <script type="text/javascript" src="new-timeline.js"></script>
+    <script src="/js/lib/v2/CargografiasBubbles.js"></script>
+    
+    <script src="angular/app.js"></script>
+    <script src="angular/services/services.js"></script>
+    <script src="angular/controllers/controllers.js"></script>
+    <script src="angular/controllers/loaderController.js"></script>
+    <script src="angular/filters/filters.js"></script>
+    <script src="angular/directives/cargoBubbles.js"></script>
+    <script src="angular/factories/cargosLoaderFactory.js"></script>
+    <script src="angular/factories/cargosFactory.js"></script>
+    <script src="angular/factories/presetsFactory.js"></script>
+</body>
     
 </body>
 </html>
