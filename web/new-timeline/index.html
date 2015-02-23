@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html ng-app="cargoApp">
 <head>
     
     <script type="text/javascript">
@@ -92,7 +92,7 @@
                     </ul>
                     <ul class="nav pull-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" alt="aportar a cargografias">Dejanos tu comentario   </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" alt="aportar a cargografias" ng-cargo-loc="leaveUsYourComment"></a>
                             <div class="dropdown-menu">
                                 <iframe src="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&amp;hl=es" width="500" height="765" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
                             </div>
@@ -112,15 +112,11 @@
 
     <div>
 
-        <div ng-app="cargoApp">
+        <div>
             <div ng-view id="cargoContainer"></div>
             
         </div>
-        <div ng-app="cargografias">
-          <div ng-controller="DemoCtrl" layout="column">
-            
-          </div> 
-        </div>
+        
     </div>
 
     <footer class="well">
@@ -183,6 +179,7 @@
     <script src="angular/controllers/loaderController.js"></script>
     <script src="angular/filters/filters.js"></script>
     <script src="angular/directives/cargoBubbles.js"></script>
+    <script src="angular/directives/cargoLoc.js"></script>
     <script src="angular/factories/cargosLoaderFactory.js"></script>
     <script src="angular/factories/cargosFactory.js"></script>
     <script src="angular/factories/presetsFactory.js"></script>
