@@ -5,16 +5,17 @@
 angular.module('cargoApp.factories', [])
   .factory('cargoLoaderFactory', function($http, $filter) {
     
-
-
     var datasources = [];
 
     var cargografiasSources = [];
 
-    cargografiasSources.push('/js/datasets/gz/cargografias-persons-popit-dump.json');
-    cargografiasSources.push('/js/datasets/gz/cargografias-memberships-popit-dump.json');
-    cargografiasSources.push('/js/datasets/gz/cargografias-organizations-popit-dump.json');
-    cargografiasSources.push('/js/datasets/gz/cargografias-posts-popit-dump.json');
+    var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
+    instanceName = instanceName || 'cargografias';
+
+    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-persons.json');
+    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-memberships.json');
+    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-organizations.json');
+    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-posts.json');
 
 
     //TODO: Uncoment to test other data sources
