@@ -1,0 +1,200 @@
+
+.vis {
+  border: none;
+  shape-rendering: crispEdges;
+  background: #FFF
+}
+
+.vis .background{
+  fill:rgb(233, 233, 233);
+}
+
+
+rect.bar {
+  stroke: rgb(233, 233, 233);
+  fill: #2AB991;
+  fill-opacity: .75;
+}
+
+
+
+/*http://www.google.com/design/spec/style/color.html#color-color-palette*/
+/* Google suggests using the 500 colors as the primary colors in your app and the other colors as accents colors.*/
+
+
+rect.bar.legislativo,
+rect.bar.Legislativo {
+  fill: #3F51B5;/*Material Indigo 500*/
+}
+rect.bar.legislativo.nacional{
+  fill: #3F51B5;/*Material Indigo 500*/
+}
+rect.bar.legislativo.provincial{
+  fill: #7986CB;/*Material Indigo 300*/
+}
+
+rect.bar.legislativo.concejal,
+rect.bar.legislativo.municipal.concejal{
+  fill: #C5CAE9;/*Material Indigo 100*/
+}
+
+rect.bar.ejecutivo,
+rect.bar.Ejecutivo{
+  fill: #F44336; /*Material Red 500*/
+}
+rect.bar.ejecutivo.nacional{
+  fill: #F44336; /*Material Red 500*/
+}
+rect.bar.ejecutivo.provincial{
+  fill: #E57373;/*Material Red 300*/
+}
+rect.bar.ejecutivo.municipal.intendent,
+rect.bar.ejecutivo.intendente{
+  fill: #FFCDD2; /*Material Red 100*/
+}
+
+g.barGroup:hover rect.bar {
+  fill-opacity: 1;
+}
+
+line.peakLine {
+  stroke: #AEFF00;
+  stroke-width: 1px;
+}
+
+
+
+
+text {
+  font-size: 0.8em;
+  fill: #fff;
+}
+
+text.rule {
+  fill: #888;
+}
+
+
+
+text.barLabel {
+
+  font-size: 0.7em;
+}
+
+text.itemLabel{
+  font-size: 1em;
+  fill: #555;
+}
+
+text.membershipLabel{
+ fill: #555; 
+}
+
+
+line.tickLine {
+  stroke: #333;
+}
+line.mouseLine {
+  stroke: #0ff;
+  stroke-opacity: .3;
+}
+
+#controls {
+  padding: 4px;
+
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+a.active {
+
+}
+
+svg image.picture{
+  max-width: 100px;
+  min-width: 100px;
+  width: 100px;
+  height: 100px;
+
+}
+
+#infobox {
+  position: absolute;
+  width: 200px;
+  height: auto; 
+  padding: 8px;
+  display: none;
+  background: #333;
+  color: #aaa;  
+}
+#infobox img {
+  max-width: 100px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+#nombre{
+  width: 100%;
+}
+
+
+.tabsdemoStaticTabs {
+  /*
+ * Animation styles
+ */ }
+  .tabsdemoStaticTabs #tab1-content {
+    background-color: #3F51B5; }
+  .tabsdemoStaticTabs #tab2-content {
+    background-color: #673AB7; }
+  .tabsdemoStaticTabs #tab3-content {
+    background-color: #00796B; }
+  .tabsdemoStaticTabs .tabpanel-container {
+    display: block;
+    position: relative;
+    background: black;
+    border: 0px solid black;
+    height:950px;
+    overflow: hidden; }
+  .tabsdemoStaticTabs [role="tabpanel"] {
+    color: black;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    position: absolute; }
+  .tabsdemoStaticTabs [role="tabpanel"].ng-leave.ng-leave-active, .tabsdemoStaticTabs [role="tabpanel"].ng-enter {
+    top: -300px; }
+  .tabsdemoStaticTabs [role="tabpanel"].ng-leave, .tabsdemoStaticTabs [role="tabpanel"].ng-enter.ng-enter-active {
+    top: 0; }
+  .tabsdemoStaticTabs [role="tabpanel"].ng-leave {
+    z-index: 100; }
+  .tabsdemoStaticTabs .tabpanel-container [role="tabpanel"] {
+    padding: 20px; }
+  .tabsdemoStaticTabs .after-tabs-area {
+    padding: 25px; }
+  .tabsdemoStaticTabs .after-tabs-area > span {
+    margin-top: 25px;
+    padding-right: 15px;
+    vertical-align: middle;
+    line-height: 30px;
+    height: 35px; }
+  .tabsdemoStaticTabs .after-tabs-area > md-checkbox {
+    margin-top: 26px;
+    margin-left: 0px; }
+  .tabsdemoStaticTabs .md-header {
+    background-color: #1976D2 !important; }
+  .tabsdemoStaticTabs md-tab {
+    color: #90caf9 !important; }
+  .tabsdemoStaticTabs md-tab.active, .tabsdemoStaticTabs md-tab:focus {
+    color: white !important; }
+  .tabsdemoStaticTabs md-tab[disabled] {
+    opacity: 0.5; }
+  .tabsdemoStaticTabs .md-header .md-ripple {
+    border-color: #FFFF8D !important; }
+  .tabsdemoStaticTabs md-tabs-ink-bar {
+    background-color: #FFFF8D !important; }
+
+
