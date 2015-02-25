@@ -13,7 +13,6 @@ directive('ngCargoLoc', function() {
 
                 var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
                 instanceName = instanceName || 'cargografias';
-                instanceName = 'cargografias';  //TODO Fix Paths!!
 
                 $http.get('/js/datasets/gz/' + instanceName + '_locdata.json').then(function(res){
                   $scope.text = res.data[$scope.key] 
