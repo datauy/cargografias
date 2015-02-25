@@ -57,13 +57,14 @@ angular.module('cargoApp.controllers')
       $rootScope.estado = "Listo!";
       $rootScope.ready= true;
 
-      //Load initial ids from the url
-      if(parsedParams){
+     if(parsedParams){
           for (var i = 0; i < parsedParams.length; i++) {
-            var id = parsedParams[i];
+            var index = parsedParams[i];
+            var id = cargosFactory.mapId[index];
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
           $scope.refreshAllVisualizations();  
+          $scope.showPresets= false;
         }
 
   };
@@ -163,8 +164,9 @@ angular.module('cargoApp.controllers')
     	}
       person.autoPersona.agregada = false;
       person.autoPersona.styles = "";
-      $scope.redrawPoderometro();
-      updateTheUrl();
+      
+      $scope.refreshAllVisualizations();
+
     };
 
     $scope.clearAll = function(){
