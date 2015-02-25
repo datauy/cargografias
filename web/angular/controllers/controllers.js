@@ -37,7 +37,8 @@ angular.module('cargoApp.controllers')
         //light add all persons from url
         if(parsedParams){
           for (var i = 0; i < parsedParams.length; i++) {
-            var id = parsedParams[i];
+            var index = parsedParams[i];
+            var id = cargosFactory.mapId[index];
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
           $scope.refreshAllVisualizations();  
