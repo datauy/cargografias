@@ -73,6 +73,8 @@ angular.module('cargoApp.factories', [])
                     }
                     //Initials for graphics
                     res.data[i].initials = res.data[i].name.match(/[A-Z]/g).join('.') + ".";
+                    res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
+                    factory.mapId[res.data[i].popitID] = i;
                     factory.autoPersons.push(res.data[i]);
                   };
               }).then(function(){

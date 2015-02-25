@@ -37,10 +37,12 @@ angular.module('cargoApp.controllers')
         //light add all persons from url
         if(parsedParams){
           for (var i = 0; i < parsedParams.length; i++) {
-            var id = parsedParams[i];
+            var index = parsedParams[i];
+            var id = cargosFactory.mapId[index];
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
           $scope.refreshAllVisualizations();  
+          $scope.showPresets= false;
         }
   }
 
@@ -117,7 +119,7 @@ angular.module('cargoApp.controllers')
 
   function updateTheUrl(){
       //Update the URL
-      $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.index }).join('-'));
+      $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
   }
 
     $scope.lightAdd = function(autoPersona, id){
