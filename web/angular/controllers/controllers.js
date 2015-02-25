@@ -41,6 +41,7 @@ angular.module('cargoApp.controllers')
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
           $scope.refreshAllVisualizations();  
+          $scope.showPresets= false;
         }
   }
 
@@ -117,7 +118,7 @@ angular.module('cargoApp.controllers')
 
   function updateTheUrl(){
       //Update the URL
-      $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.index }).join('-'));
+      $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
   }
 
     $scope.lightAdd = function(autoPersona, id){

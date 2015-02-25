@@ -6,7 +6,7 @@ angular.module('cargoApp.factories')
 	.factory('cargosFactory', function($http, $filter, cargoLoaderFactory) {
 		
     var factory ={};
-
+    factory.mapId ={};
     factory.persons= [];
     factory.posts= [];
     factory.memberships= [];
