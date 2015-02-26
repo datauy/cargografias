@@ -66,13 +66,13 @@ angular.module('cargoApp.factories', [])
                     res.data[i].index = i;
                     //Photo or default photo
                     try{
-                      res.data[i].image = res.data[i].images ?  res.data[i].images[0].url :'/img/person.png'    // intentando obtener la foto desde el popit!
+                      res.data[i].image = res.data[i].images ? res.data[i].images[0].url :'/img/person.png'    // get popit picture
                     }
                     catch(e){
                       res.data[i].image = '/img/person.png' ;
                     }
                     //Initials for graphics
-                    res.data[i].initials = res.data[i].name.match(/[A-Z]/g).join('.') + ".";
+                    res.data[i].initials = res.data[i].name ? res.data[i].name.split(' ').map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
                     res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
                     factory.mapId[res.data[i].popitID] = i;
                     factory.autoPersons.push(res.data[i]);
