@@ -26,3 +26,4 @@ Thumbs.db
 ###################################
 
 /web/js/datasets/*.json
+/web/js/datasets/gz/*.json
