@@ -31,14 +31,14 @@
             </div>
           </div>
       </div>
-      <div class="span2" ng-hide="showPresets" >
-                  <span class="label" style="width:100%;margin-bottom:4px">Seleccionados: {{activePersons.length}} </span><br>
-                  <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning" style="width:100%;margin-bottom:4px">
-                  <i class="fa fa-times" ></i> Limpiar filtro.
+      <div class="span4" ng-hide="showPresets" >
+                  <span class="label">Seleccionados: {{activePersons.length}} </span><br>
+                  <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
+                  <i class="fa fa-times" ></i> Limpar todo
                   </a>
                   <br>
-                  <a href="#" class="badge badge-warning" style="background-color:#79CEDF;width:100%;margin-bottom:4px"  onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
-                  return false;"><i class="fa fa-twitter"></i>Twittear esta selecci&oacute;n</a>    </div>
+                  <a href="#" class="badge badge-warning" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                  return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
 
 	   </div>
      <div ng-hide="showPresets">

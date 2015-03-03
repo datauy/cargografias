@@ -254,14 +254,6 @@ function drawstarting() {
             return d.name;
 
           });
-        d3.select(this)
-        .append("svg:image")
-        .attr('class', 'picture')
-        .attr("xlink:href",function(d){ return d.image})
-        .attr('width', 75)
-        .attr('height', 75)
-        .attr("x", padding.left / 7)
-        .attr("y", (j+0.3)*barHeight )
 
 
       });
@@ -346,8 +338,9 @@ function redraw() {
     .transition()
       .duration(transitionDuration)
       .style("fill-opacity", function(d) { 
-        if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .4;
-        else return 1;
+        //if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .4;
+        //else 
+        return 1;
       })
       .attr("transform", function(d, i) {
         var tx, ty;
@@ -418,8 +411,9 @@ function redraw() {
     .transition()
       .duration(transitionDuration)
       .style("fill-opacity", function(d) { 
-        if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .25;
-        else return .75;
+        //if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .25;
+        //else 
+          return .80;
       })
       .attr("height", function(d) {
         if (controls.height == "contiguous") { 

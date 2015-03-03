@@ -77,11 +77,12 @@ text.rule {
 
 
 text.barLabel {
-  font-size: 1.4em;
+
+  font-size: 0.7em;
 }
 
 text.itemLabel{
-  font-size: 1.4em;
+  font-size: 1em;
   fill: #555;
 }
 

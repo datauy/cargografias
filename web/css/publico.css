@@ -55,15 +55,7 @@ blockquote p {
 	line-height: 19px;
 	font-size: 14.5px;
 }
-.nav-pills>li>a {
-		/*border: 1px solid #df382c;*/
-		margin-top: 0px;
-		margin-bottom: 0px;
-		line-height: 11px;
-		font-size: 11px;
-		padding-top: 3px;
-		padding-bottom: 3px;
-}
+
 .nav-pills>.active>a, .nav-pills>.active>a:hover, .nav-pills>.active>a:focus{
 	background-color:#646464;
 	color:#fafafa;
@@ -281,7 +273,7 @@ div.search-row .badge.badge-warning.remove {
 	padding-left: 11px;
 	padding-right: 11px;
 	font-weight: normal;
-	font-size: 12px;
+  font-size: 1.4em;
 }
 .label{
 	text-align: center;
@@ -418,4 +410,34 @@ a.hand{
   width: 328px;
   height: 36px;
   margin-top: 11px;
+}
+
+div.loader h3{
+  "margin-top:100px;
+  margin-bottom:200px;
+  height:200px;
+  width:500px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+.span4{
+  margin: auto;
+}
+
+.well{
+  position: relative;
+  height: 206px;
+}
+
+.well div.sponsors{
+  position: absolute;
+
+  right: 200px;
+  background: white;
+}
+
+div.main{
+  margin-top: 44px;
 }

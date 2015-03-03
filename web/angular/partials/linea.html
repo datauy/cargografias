@@ -6,17 +6,20 @@
 				<span class="subtitulo">Muestra los recorridos en la funci&oacute;n p&uacute;blica de de los funcionarios seleccionados</span>
 			</div>
 			<ul class="nav nav-pills alert-error titulo-tab-ul">
-			  <li ng-class="filterLinea == 'nombre' ? 'active' : '' ">
-			  	<a id="ordenCargo" href="" ng-click="orderLine('height', 'memberships')">Ordenar por Cargo</a>
+			  <li class="" ng-class="filterLine == 'nombre' ? 'active' : '' ">
+			  	<a id="ordenCargo" href="" ng-click="orderLine('height', 'memberships')">Cargo</a>
 			  </li>
-			  <li ng-class="filterLinea == 'nombre' ? 'active' : '' ">
-			    <a id="ordenNombre" href="" ng-click="orderLine('height', 'contiguous')">Ordenar por Nombre</a>
+			  <li class="" ng-class="filterLine == 'nombre' ? 'active' : '' ">
+			    <a id="ordenNombre" href="" ng-click="orderLine('height', 'contiguous')">Nombre</a>
 			  </li>
-        <li ng-class="filterLinea == 'nombre' ? 'active' : '' ">
-          <a id="ordenNombre" href="" ng-click="orderLine('display','aligned')">Alinear por Carrera</a>
+        <li class="" ng-hide="filterLine === 'timeline'" ng-class="filterLine == 'nombre' ? 'active' : '' ">
+          <a id="ordenNombre" href="" ng-click="orderLine('display','aligned')">Carrera</a>
+        </li>
+        <li class="" ng-hide="filterLine === 'aligned'" ng-class="filterLine == 'nombre' ? 'active' : '' ">
+          <a id="ordenNombre" href="" ng-click="orderLine('display','timeline')">Año</a>
         </li>
 			</ul>
-			<span class="label" style="float: right;">Año Seleccionado: {{activeYear}}</span>
+			<!-- <span class="label" style="float: right;">Año Seleccionado: {{activeYear}}</span> -->
 			<div class="clearfix"></div>
 				
 		</div>

@@ -11,12 +11,12 @@ angular.module('cargoApp.controllers')
   	$rootScope.observers =[];
     $rootScope.yearObserver =[];
     $rootScope.jerarquimetroObserver =[];
-    $scope.filterLinea ="cargo";
+    $scope.filterLine ="aligned";
     var parsedParams;
 
     var processParameters = function(params){
         parsedParams = params.split('-');
-        $scope.filterLinea = parsedParams.shift();
+        $scope.filterLine = parsedParams.shift();
         $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
     }
 
@@ -120,7 +120,7 @@ angular.module('cargoApp.controllers')
 
   function updateTheUrl(){
       //Update the URL
-      $location.path("/" + $scope.filterLinea  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
+      $location.path("/" + $scope.filterLine  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
   }
 
     $scope.lightAdd = function(autoPersona, id){
@@ -154,6 +154,7 @@ angular.module('cargoApp.controllers')
 
 
     $scope.orderLine =function(dimension,order){
+      $scope.filterLine = order;
       setControl($("#controls #heightControls #height-area"), dimension, order, true);
     }
 
