@@ -551,7 +551,7 @@ function showInfoBox(e, i) {
   if (i == null) $("#infobox").hide();
   else {
     var d = data[i];
-    
+    console.log(d);
     var info = "<span class='title'>" + d.name + "</span>";
     info += "<br />";
     info += "<img src='" + d.image + "'>" ;
