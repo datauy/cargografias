@@ -11,7 +11,8 @@ angular.module('cargoApp.controllers')
   	$rootScope.observers =[];
     $rootScope.yearObserver =[];
     $rootScope.jerarquimetroObserver =[];
-    $scope.filterLine ="aligned";
+    $scope.filter ="aligned";
+    $scope.order= "contiguous";
     var parsedParams;
 
     var processParameters = function(params){
@@ -153,8 +154,12 @@ angular.module('cargoApp.controllers')
     }
 
 
+    $scope.filterLine = function(dimension,order){
+      $scope.filter = order;
+      setControl($("#controls #heightControls #height-area"), dimension, order, true);
+    }
     $scope.orderLine =function(dimension,order){
-      $scope.filterLine = order;
+      $scope.order = order;
       setControl($("#controls #heightControls #height-area"), dimension, order, true);
     }
 
