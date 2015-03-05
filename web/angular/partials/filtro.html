@@ -3,7 +3,7 @@
   		<div class="row">
   		<div class="span5" style="margin-bottom:10px">
   				<div class="search-row clearfix">
-              <input id="nombre" type="search" placeholder="Ingrese el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
+              <input id="nombre" type="search" placeholder="Que funcionario queres buscar?" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
   	  				
               <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
   	  		    </div>
@@ -18,7 +18,7 @@
                   </ul>
             </div>
           </div>
-          <div style="width: 100%;margin-bottom: 7px; margin-top: 10px;max-width: 570px;" ng-show="!showPresets">
+          <div ng-show="search">
             <div class="items">
               <span class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
               <a ng-click="clearResults()" alt="Limpiar filtro" class="badge badge-warning remove" style="padding-right:10px" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i>Limpiar resultados</a>          
@@ -31,14 +31,7 @@
             </div>
           </div>
       </div>
-      <div class="span4" ng-hide="showPresets" >
-                  <span class="label">Seleccionados: {{activePersons.length}} </span><br>
-                  <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
-                  <i class="fa fa-times" ></i> Limpar todo
-                  </a>
-                  <br>
-                  <a href="#" class="badge badge-warning" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
-                  return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
+     
 
 	   </div>
      <div ng-hide="showPresets">

@@ -13,6 +13,7 @@ angular.module('cargoApp.controllers')
     $rootScope.jerarquimetroObserver =[];
     $scope.filter ="aligned";
     $scope.order= "contiguous";
+    $scope.search = false;
     var parsedParams;
 
     var processParameters = function(params){
@@ -88,6 +89,7 @@ angular.module('cargoApp.controllers')
   $scope.filterAutoPersons = function(q){
     if (q.length > 3){
       $scope.showPresets= false;
+      $scope.search = true;
       $scope.autoPersons =cargosFactory.getAutoPersons(q);
     }
   };
@@ -97,7 +99,8 @@ angular.module('cargoApp.controllers')
      $("#nombre").val('');
      $scope.nombre ='',
      $scope.autoPersons = [];
-     $scope.showPresets= true;
+     
+     $scope.search = false;
   };
 
   $scope.clearResults= function(){
@@ -105,6 +108,7 @@ angular.module('cargoApp.controllers')
      $scope.nombre ='',
      $scope.autoPersons = [];
      $scope.showPresets= true;
+     $scope.search = false;
   }
 
 

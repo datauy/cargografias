@@ -12,15 +12,24 @@
 			  <li class="" ng-class="order == 'contiguous' ? 'active' : '' ">
 			    <a id="ordenNombre" href="" ng-click="orderLine('height', 'contiguous')">Nombre</a>
 			  </li>
-        <li ng-class="filter == 'aligned' ? 'active' : '' ">
-          <a id="ordenNombre" href="" ng-click="filterLine('display','aligned')">Carrera</a>
-        </li>
-        <li ng-class="filter == 'timeline' ? 'active' : '' ">
-          <a id="ordenNombre" href="" ng-click="filterLine('display','timeline')">Año</a>
-        </li>
+		        <li ng-class="filter == 'aligned' ? 'active' : '' ">
+		          <a id="ordenNombre" href="" ng-click="filterLine('display','aligned')">Carrera</a>
+		        </li>
+		        <li ng-class="filter == 'timeline' ? 'active' : '' ">
+		          <a id="ordenNombre" href="" ng-click="filterLine('display','timeline')">Año</a>
+		        </li>
+		         <div class="span4" ng-hide="showPresets" >
+                  <span class="label">Seleccionados: {{activePersons.length}} </span><br>
+                  <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
+                  <i class="fa fa-times" ></i> Limpar todo
+                  </a>
+                  <br>
+                  <a href="#" class="badge badge-warning" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                  return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
 			</ul>
 			<!-- <span class="label" style="float: right;">Año Seleccionado: {{activeYear}}</span> -->
-			<div class="clearfix"></div>
+			
+
 				
 		</div>
     <div class="vis"></div>
