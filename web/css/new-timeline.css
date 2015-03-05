@@ -197,3 +197,8 @@ svg image.picture{
     background-color: #FFFF8D !important; }
 
 
+html h3, body h3 {
+  display: block;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+}

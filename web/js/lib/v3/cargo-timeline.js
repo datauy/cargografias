@@ -413,7 +413,7 @@ function redraw() {
       .style("fill-opacity", function(d) { 
         //if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .25;
         //else 
-          return .80;
+          return 1;
       })
       .attr("height", function(d) {
         if (controls.height == "contiguous") { 
@@ -437,7 +437,7 @@ function redraw() {
   
     vis.selectAll('svg text.itemLabel')
           .attr("x", padding.left / 7)
-          .attr("y", function(d,i) {return (i+1)*barHeight;})
+          .attr("y", function(d,i) {return (i+0.8)*barHeight;})
           .text(function(d,i) {
             if (controls.height == "memberships"){ return '';}
             else{ return d.name;} 

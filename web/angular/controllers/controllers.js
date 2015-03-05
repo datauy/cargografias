@@ -18,7 +18,7 @@ angular.module('cargoApp.controllers')
 
     var processParameters = function(params){
         parsedParams = params.split('-');
-        $scope.filterLine = parsedParams.shift();
+        $scope.filter = parsedParams.shift();
         $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
     }
 
@@ -125,7 +125,7 @@ angular.module('cargoApp.controllers')
 
   function updateTheUrl(){
       //Update the URL
-      $location.path("/" + $scope.filterLine  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
+      $location.path("/" + $scope.filter  + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p){ return p.autoPersona.popitID }).join('-'));
   }
 
     $scope.lightAdd = function(autoPersona, id){
@@ -158,13 +158,13 @@ angular.module('cargoApp.controllers')
     }
 
 
-    $scope.filterLine = function(dimension,order){
-      $scope.filter = order;
-      setControl($("#controls #heightControls #height-area"), dimension, order, true);
+    $scope.filterLine= function(dimension,o){
+      $scope.filter = o;
+      setControl($("#controls #heightControls #height-area"), dimension, o, true);
     }
-    $scope.orderLine =function(dimension,order){
-      $scope.order = order;
-      setControl($("#controls #heightControls #height-area"), dimension, order, true);
+    $scope.orderLine =function(dimension,o){
+      $scope.order = o;
+      setControl($("#controls #heightControls #height-area"), dimension, o, true);
     }
 
     $scope.remove = function(person){
