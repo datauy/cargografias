@@ -7,7 +7,6 @@ angular.module('cargoApp.directives', []);
 angular.module('cargoApp', [
   'ngRoute',
   'cargoApp.filters',
-  'cargoApp.services',
   'cargoApp.factories',
   'cargoApp.directives',
   'cargoApp.controllers',

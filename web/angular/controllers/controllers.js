@@ -174,7 +174,9 @@ angular.module('cargoApp.controllers')
     	}
       person.autoPersona.agregada = false;
       person.autoPersona.styles = "";
-      
+      if ($scope.activePersons.length == 0 && !$scope.search){
+        $scope.showPresets = true;
+      }
       $scope.refreshAllVisualizations();
 
     };

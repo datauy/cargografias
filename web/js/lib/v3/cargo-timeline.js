@@ -9,7 +9,7 @@ var totals = {};
 var maxYear, minYear = 0;
 var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
-var barHeight = 20; 
+var barHeight = 10; 
 var defaultPopPercent = .08;
 
 var controls = {
@@ -24,7 +24,7 @@ var controls = {
 function setVisSize() {
 
   wid = $(window).width() - 2;
-  hei = $(window).height() - 100;
+  hei = ($(window).height()/1.5) - 100;
 
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
@@ -248,8 +248,8 @@ function drawstarting() {
           .append('svg:text')
           .attr('class', 'group')
           .attr('class', 'itemLabel')
-          .attr("x", padding.left / 7)
-          .attr("y", (j+1)*barHeight )
+          .attr("x", padding.left / 9)
+          .attr("y", (j+1)*(barHeight/2) )
           .text(function(d) {
             return d.name;
 
@@ -349,7 +349,8 @@ function redraw() {
         if (controls.display == "timeline") tx = scales.years(d.start);
         //TODO: What we should do with Peaks
         //else if (controls.display == "centered") tx = visCenter - (scales.years(d.Peak) - scales.years(d.start));
-        else if (controls.display == "centered") tx = visCenter - (scales.years(d.start) - scales.years(d.start));
+        else if (controls.display == "centered") 
+          tx = visCenter - (scales.years(d.start) - scales.years(d.start));
         
 
         //Carreer comparsion
@@ -383,11 +384,11 @@ function redraw() {
           ty = scales.indexes(d.membershipsPosition);
         }
         else {
-          barHeight = (hei - padding.top - padding.bottom) / data.length;
+          barHeight = ((hei - padding.top - padding.bottom) / data.length);
           //depends on politicans
             scales.indexes = d3.scale.linear()
                 .domain([ 0,  data.length - 1 ])
-                .range([ padding.top, hei - padding.bottom - barHeight ]);
+                .range([ padding.top, hei - padding.bottom - barHeight]);
           if (controls.height == "contiguous")  ty = scales.indexes(d.parent);
           else if (controls.height == "area") ty = d.area_y;
           else if (controls.height == "population") ty = d.popPercent_y; 
@@ -433,17 +434,18 @@ function redraw() {
         .attr('width', 75)
         .attr('height', 75)
         .attr("x", padding.left / 7)
-        .attr("y", function(d,i) {return (i+0.3)*barHeight;})
+        .attr("y", function(d,i) {return (i)*barHeight/2;})
   
     vis.selectAll('svg text.itemLabel')
           .attr("x", padding.left / 7)
-          .attr("y", function(d,i) {return (i+0.8)*barHeight;})
+          .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
           .text(function(d,i) {
             if (controls.height == "memberships"){ return '';}
             else{ return d.name;} 
           });
 
     vis.selectAll('text.membershipLabel')
+          .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
           .text(function(d,i) {
             if (controls.height == "memberships"){ return d;}
             else{ return '';} 
@@ -481,11 +483,11 @@ function redraw() {
       .duration(transitionDuration)
       .attr("y", function(d) {
         if (controls.height == "contiguous") { 
-          return scales.politicians(d.parent)/2 - labelHeight; 
+          return scales.politicians(d.parent)/2; 
         } 
         else if (controls.height == "area") return scales.areas(d.Land_area_million_km2)/2 - labelHeight; 
         else if (controls.height == "population") return scales.popPercents(d.Percent_World_Population)/2 - labelHeight; 
-        else return barHeight/2 - labelHeight;      
+        else return barHeight/2;      
       });
   
 
