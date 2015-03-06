@@ -41,11 +41,11 @@
      </div>
      </div>
       <div class="row">
-       <div class="span14">
+       <div class="full-width">
          <div ng-hide="showPresets">
                       <div class="row" ng-show="activePersons.length > 0">
-                        <div class="span10" id="personas-seleccionadas-box">
-                          <div class="span2 persona-seleccionada" ng-repeat="active in activePersons">
+                        <div class="inline full-width" id="personas-seleccionadas-box">
+                          <div class="persona-seleccionada" ng-repeat="active in activePersons">
                                   <a ng-click="remove(active)" class="badge badge-warning remove"><i class="fa fa-times"></i></a>
                                     <div class="photo-frame">
                                           <img class="photo" ng-src="{{active.image}}">

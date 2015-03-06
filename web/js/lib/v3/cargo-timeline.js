@@ -11,7 +11,7 @@ var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
-
+var totalmemberships = 0 ;
 var controls = {
   display: "aligned",
   height: "fixed"
@@ -86,7 +86,6 @@ function setBasicsParams(){
 
 function processData() {
 
-    barHeight = (hei - padding.top - padding.bottom) / data.length;
     
     maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
     minYear = d3.min(data, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
@@ -96,7 +95,28 @@ function processData() {
     
 
 
-    var totalmemberships = d3.sum(data, function(d){return d.memberships.length});
+    totalmemberships = d3.sum(data, function(d){return d.memberships.length});
+
+
+
+    if (controls.height == "memberships")
+    {
+        
+        hei = (totalmemberships * 65)   - 100;
+        
+        
+    }
+    else{
+
+        
+          hei = (data.length * 65)   - 100;
+        
+    }
+
+  barHeight = (hei - padding.top - padding.bottom) / data.length;
+
+
+
     scales.indexes = d3.scale.linear()
       .domain([ 0,  totalmemberships- 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
@@ -311,6 +331,29 @@ function redraw() {
   $("#infobox").hide();
 
   var visCenter = (wid - padding.left - padding.right) / 2 + padding.left;
+
+  //reload height
+  hei = ($(window).height()/1.5) - 100;
+  if (controls.height == "memberships")
+  {
+      if(totalmemberships > 3){
+        hei = (totalmemberships * 65)   - 100;
+      }   
+      
+  }
+  else{
+
+      if(data.length > 3){
+        hei = (data.length * 65)   - 100;
+      }   
+  }
+
+  d3.selectAll('.vis')
+    .transition()
+    .attr('height', hei);
+
+  
+  
 
   // year ticks
   vis.selectAll("line.tickLine")

@@ -10,7 +10,7 @@ angular.module('cargoApp.factories')
 
     factory.presets.push({
       nombre:'Presidentes de la Democracia',
-      valores:'nombre-2001-466721-',
+      valores:'nombre-2001-466721-df417b-c712cb-e07b04-33d4c4-455e6c-04a407',
     });
     factory.presets.push({
       nombre:'Candidatos 2015',
