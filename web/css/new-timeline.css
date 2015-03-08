@@ -55,6 +55,36 @@ rect.bar.ejecutivo.municipal.intendent,
 rect.bar.ejecutivo.intendente{
   fill: #FFCDD2; /*Material Red 100*/
 }
+rect.bar.legislativo,
+rect.bar.Legislativo {
+  fill: #3F51B5;/*Material Indigo 500*/
+}
+rect.bar.legislativo.nacional{
+  fill: #3F51B5;/*Material Indigo 500*/
+}
+rect.bar.legislativo.provincial{
+  fill: #7986CB;/*Material Indigo 300*/
+}
+
+rect.bar.legislativo.concejal,
+rect.bar.legislativo.municipal.concejal{
+  fill: #C5CAE9;/*Material Indigo 100*/
+}
+
+rect.bar.ejecutivo,
+rect.bar.Ejecutivo{
+  fill: #F44336; /*Material Red 500*/
+}
+rect.bar.ejecutivo.nacional{
+  fill: #F44336; /*Material Red 500*/
+}
+rect.bar.ejecutivo.provincial{
+  fill: #E57373;/*Material Red 300*/
+}
+rect.bar.ejecutivo.municipal.intendent,
+rect.bar.ejecutivo.intendente{
+  fill: #FFCDD2; /*Material Red 100*/
+}
 
 g.barGroup:hover rect.bar {
   fill-opacity: 1;
@@ -123,12 +153,14 @@ svg image.picture{
 
 #infobox {
   position: absolute;
-  width: 200px;
-  height: auto; 
+  width: 220px;
+  height: auto;
   padding: 8px;
   display: none;
-  background: #333;
-  color: #aaa;  
+  background: #FFF;
+  color: #000;
+  text-align: center;
+  opacity: 0.9;
 }
 #infobox img {
   max-width: 100px;
@@ -205,3 +237,53 @@ html h3, body h3 {
   -webkit-margin-before: 0.5em;
   -webkit-margin-after: 0.5em;
 }
+
+
+
+
+#infobox.bar{
+
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear; 
+
+  -webkit-transition: display 250ms linear;
+  -moz-transition: display 250ms linear;
+  -o-transition: display 250ms linear;
+  -ms-transition: display 250ms linear;
+  transition: display 250ms linear; 
+}
+
+
+#infobox.bar.ejecutivo,
+#infobox.bar.Ejecutivo{
+  background-color: #F44336; /*Material Red 500*/
+}
+#infobox.bar.ejecutivo.nacional{
+  background-color: #F44336; /*Material Red 500*/
+}
+#infobox.bar.ejecutivo.provincial{
+  background-color: #E57373;/*Material Red 300*/
+}
+#infobox.bar.ejecutivo.municipal.intendent,
+#infobox.bar.ejecutivo.intendente{
+  background-color: #FFCDD2; /*Material Red 100*/
+}
+#infobox.bar.legislativo,
+#infobox.bar.Legislativo {
+  background-color: #3F51B5;/*Material Indigo 500*/
+}
+#infobox.bar.legislativo.nacional{
+  background-color: #3F51B5;/*Material Indigo 500*/
+}
+#infobox.bar.legislativo.provincial{
+  background-color: #7986CB;/*Material Indigo 300*/
+}
+
+#infobox.bar.legislativo.concejal,
+#infobox.bar.legislativo.municipal.concejal{
+  background-color: #C5CAE9;/*Material Indigo 100*/
+}
+

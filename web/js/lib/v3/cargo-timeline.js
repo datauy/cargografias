@@ -235,6 +235,7 @@ function drawstarting() {
         .append("svg:g")
         .attr("class", "barGroup")
         .attr("index", function(d, i) { return j; })
+        .attr("membership", function(d, i) { return i; })
         
         .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
         .append("svg:rect")
@@ -414,7 +415,6 @@ function redraw() {
 
           
         if (controls.height == "memberships") { 
-          debugger;
             barHeight = (hei - padding.top - padding.bottom) / memberships.length;
             //Overwrites years
             //depends on total of type of memberships
@@ -568,12 +568,12 @@ function addInteractionEvents() {
 
   // bar group hover
   $("g.barGroup").hover(function(e) { 
-    //showInfoBox( e, $(this).attr("index") ); 
+    showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
     }
   );
-  $(".vis .background, .vis .mouseLine").click(function(e) { 
-    showInfoBox( e, null); 
-  });
+  // $(".vis .background, .vis .mouseLine").click(function(e) { 
+  //   showInfoBox( e, null); 
+  // });
 
 
 
@@ -583,30 +583,38 @@ function addInteractionEvents() {
 /************************************************************
  * Display info box for data index i, at mouse
  ***********************************************************/
-function showInfoBox(e, i) {
+function showInfoBox(e, i, j) {
 
 
   //TODO: Cambiar por angular?
 
   if (i == null) $("#infobox").hide();
   else {
-    var d = data[i];
+    //TODO: Can we move this to angular?
+    var politician = data[i];
+    var membership = politician.memberships[j];
     
-    var info = "<span class='title'>" + d.name + "</span>";
+
+
+    var info = "<span class='title'>" + politician.name + "</span>";
     info += "<br />";
-    info += "<img src='" + d.image + "'>" ;
-    info += "<br />" + formatYear(d.start) + " - " + formatYear(d.end);
-    if (!isNaN(d.Land_area_million_km2)) info += "<br />" + " Peak (" + formatYear(d.Peak) + "): " + d.Land_area_million_km2 + " million sq km";
-    if (!isNaN(d.Estimated_Population)) info += "<br />" + d.Estimated_Population + " million people in " + formatYear(d.Population_Year);
-    else info += "<br />" + "no population data available";
-    if (!isNaN(d.Percent_World_Population)) info += "<br />" + "(" + Math.round(d.Percent_World_Population * 100) + "% of world population)";
-    if (d.Contiguous === false) info += "<br />" + "non-contiguous";
+    info += "<img src='" + politician.image + "'>" ;
+    info += "<br />" + membership.role ;
+    info += "<br />" + membership.organization.name ;
+    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
     
+
+    //Initial pos;
     var infoPos;
     if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
     else infoPos = { left: e.pageX-200, top: e.pageY-80 };
     
+    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
+    //clear all clases
+    document.getElementById('infobox').className = '';
+    
     $("#infobox")
+      .addClass(classes)
       .html(info)
       .css(infoPos)
       .show();
