@@ -104,10 +104,11 @@ function processData() {
 
     if (controls.height == "memberships")
     {
-        hei = (totalmemberships * 65)   - 100;
+        hei = (totalmemberships* 65)   - 100;
     }
     else{
-          hei = (data.length * 65)   - 100;
+        
+        hei = (data.length * 65)   - 100;
     }
 
 
@@ -329,10 +330,11 @@ function redraw() {
 
   //reload height
   hei = ($(window).height()/1.5) - 100;
+
   if (controls.height == "memberships")
   {
-      if(totalmemberships > 3){
-        hei = (totalmemberships * 65)   - 100;
+      if(memberships.length > 3){
+        hei = (memberships.length * 65)   - 100;
       }   
       
   }
@@ -412,6 +414,7 @@ function redraw() {
 
           
         if (controls.height == "memberships") { 
+          debugger;
             barHeight = (hei - padding.top - padding.bottom) / memberships.length;
             //Overwrites years
             //depends on total of type of memberships
@@ -571,6 +574,9 @@ function addInteractionEvents() {
   $(".vis .background, .vis .mouseLine").click(function(e) { 
     showInfoBox( e, null); 
   });
+
+
+
   
 }
 
