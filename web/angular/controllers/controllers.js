@@ -99,7 +99,6 @@ angular.module('cargoApp.controllers')
      $("#nombre").val('');
      $scope.nombre ='',
      $scope.autoPersons = [];
-     
      $scope.search = false;
   };
 
@@ -149,8 +148,9 @@ angular.module('cargoApp.controllers')
       
       //TODO: This should all go to observers.
       
-      $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
-      //$scope.redrawPoderometro();
+    $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
+    //$scope.redrawPoderometro();
+      
       data = $scope.activePersons;
       reloadTimeline();
       //Updates Url

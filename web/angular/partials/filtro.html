@@ -1,44 +1,44 @@
   <div class="row" id="filtro">
 	<div class="accordion-group">
-  		<div class="row">
-  		<div class="span7" style="margin-bottom:10px">
-  				<div class="search-row clearfix">
-              <input id="nombre" type="search" placeholder="Ingres el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
-  	  				
-              <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
-  	  		    </div>
-          <div ng-show="showPresets">
-            <h3 style="margin-bottom: 5px;">¿No sabés que buscar? Probá los siguientes grupos</h3>
-            <div class="search-row clearfix">
-                  <ul>
-                      <li ng-repeat="p in presets"> 
-                        <h3><a class="hand" ng-click="load(p.valores)">{{p.nombre}}</a></h3>
-                      </li>
+  		<div layout="row" layout-wrap>
+    		<div class="" style="margin-bottom:10px" flex="40">
+    				<div class="search-row clearfix">
+                <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
+    	  				
+                <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
+    	  		    </div>
+            <div ng-show="showPresets">
+              <h3 style="margin-bottom: 5px;">¿No sabés que buscar? Probá los siguientes grupos</h3>
+              <div class="search-row clearfix">
+                    <ul>
+                        <li ng-repeat="p in presets"> 
+                          <h3><a class="hand" ng-click="load(p.valores)">{{p.nombre}}</a></h3>
+                        </li>
 
-                  </ul>
-            </div>
-          </div>
-      </div>
-  <!--     <div class="span4" ng-hide="showPresets" >
-                  <span class="label">Seleccionados: {{activePersons.length}} </span><br>
-                  <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
-                  <i class="fa fa-times" ></i> Limpar todo
-                  </a> -->
-       <div class="span9">
-          <div ng-show="!showPresets && search" class="full-width" >
-              <div class="items">
-                <span class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
-                <a ng-click="clearResults()" alt="Limpiar filtro" class="badge badge-warning remove" style="padding-right:10px" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i>Limpiar resultados</a>          
-                <div class="resultados"  style="background:#fff;padding:6px;border-bottom: solid 3px white;">
-                <div  class="item" ng-repeat="item in autoPersons" >
-                  <a id="limpiar-buscar-filtro" ng-click="add(item,item.index)" class="badge badge-warning" ng-class="item.styles" style="margin-bottom:4px">
-                    <i ng-hide="item.agregada"class="fa fa-check" ></i> {{item.name}}
-                    </a>                      
-                </div>
+                    </ul>
               </div>
             </div>
+        </div>
+    <!--     <div class="span4" ng-hide="showPresets" >
+                    <span class="label">Seleccionados: {{activePersons.length}} </span><br>
+                    <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
+                    <i class="fa fa-times" ></i> Limpar todo
+                    </a> -->
+         <div flex="40">
+            <div ng-show="!showPresets && search" class="full-width" >
+                <div class="items">
+                  <span class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
+                  <a ng-click="clearResults()" alt="Limpiar filtro" class="badge badge-warning remove" style="padding-right:10px" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i>Limpiar resultados</a>          
+                  <div class="resultados">
+                  <div  class="item" ng-repeat="item in autoPersons" >
+                    <a id="limpiar-buscar-filtro" ng-click="add(item,item.index)" class="badge badge-warning" ng-class="item.styles" style="margin-bottom:4px">
+                      <i ng-hide="item.agregada"class="fa fa-check" ></i> {{item.name}}
+                      </a>                      
+                  </div>
+                </div>
+              </div>
+         </div>
        </div>
-     </div>
      </div>
       <div class="row">
        <div class="full-width">

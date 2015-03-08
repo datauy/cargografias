@@ -337,6 +337,9 @@ function redraw() {
       if(memberships.length > 3){
         hei = (memberships.length * 65)   - 100;
       }   
+      else{
+        hei = (memberships.length * 45)   + 100;
+      }
       
   }
   else{
@@ -344,6 +347,9 @@ function redraw() {
       if(data.length > 3){
         hei = (data.length * 65)   - 100;
       }   
+      else{
+        hei = (data.length * 45)    + 100;
+      }
   }
 
   d3.selectAll('.vis')
@@ -571,9 +577,9 @@ function addInteractionEvents() {
     showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
     }
   );
-  // $(".vis .background, .vis .mouseLine").click(function(e) { 
-  //   showInfoBox( e, null); 
-  // });
+  $(".vis .background, .vis .mouseLine").hover(function(e) { 
+    showInfoBox( e, null); 
+  });
 
 
 

@@ -25,9 +25,10 @@ angular.module('cargoApp.factories')
       return p;
     };
     factory.getHallOfShame =function(activePersons){
-
+      if (activePersons.length == 0){
+        return;
+      }
       var hall = [];
-      if (activePersons.length > 3){
         var shames = [];
         var simpleNumber = function(person){
           var s = this;
@@ -120,7 +121,6 @@ angular.module('cargoApp.factories')
               });
           }
         };
-      }
       return hall; 
     };
     factory.setWeight = function(person){

@@ -6,19 +6,16 @@
 		</div>
 		<div class="accordion-body">
 			<div class="accordion-inner">
-				<div class="hallOfFame">
-					
-					<div class="span3 premio" ng-show="activePersons.length > 2" ng-repeat="item in hallOfShame">
-  					<span><i class="fa fa-trophy"></i>Más {{item.titulo}}</span><br>
-            <h1>{{item.cantidad}} <small>{{item.medida}}</small></h1>
-  					<span>{{item.nombre}}</span>
-					</div>
-          <div ng-show="activePersons.length <=2" >
-            <h2> Elegi 3 o mas para comprar sus estadisticas </h2>
+				<div class="centered">
+          <div class="hallOfFame">  
+            <div class="six-columns premio" ng-repeat="item in hallOfShame">
+              <span><i class="fa fa-trophy"></i>{{item.titulo}}</span><br>
+              <h1>{{item.cantidad  | number:0}} <small>{{item.medida}}</small></h1>
+              <span ng-show="activePersons.length > 1">{{item.nombre}}</span>
+            </div>
+            <div class="clearfix"></div>
           </div>
-
-					<div class="clearfix"></div>
-				</div>
+        </div>
 				<div class="personas index">
 					<table class="table" cellpadding="0" cellspacing="0" ng-show="activePersons.length > 0">
 						<tbody>
