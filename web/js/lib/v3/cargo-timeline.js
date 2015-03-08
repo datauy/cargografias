@@ -58,21 +58,24 @@ function setBasicsParams(){
   //TODO: is it another way of doing this?
   d3.select("div.vis svg").remove();
 
-  vis = d3.select("div.vis").append("svg:svg")
+  vis = d3.select("div.vis")
+    .append("svg:svg")
     .attr("class", "vis");
-
   
+  totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
+  totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
   
-    
-    
-    
-    totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
-    totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
-    
-    totals.popPercent = d3.sum(data, function(d) { 
-      if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
-      else return d.Percent_World_Population; 
+  totals.popPercent = d3.sum(data, function(d) { 
+    if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
+    else return d.Percent_World_Population; 
     });
+  //Append Fonts! 
+  vis
+    .append('def')
+    .append('style')
+    .attr("type", "text/css")
+    .text('@import url(http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic);')
+
     
     
 }
@@ -101,21 +104,14 @@ function processData() {
 
     if (controls.height == "memberships")
     {
-        
         hei = (totalmemberships * 65)   - 100;
-        
-        
     }
     else{
-
-        
           hei = (data.length * 65)   - 100;
-        
     }
 
-  barHeight = (hei - padding.top - padding.bottom) / data.length;
 
-
+    barHeight = (hei - padding.top - padding.bottom) / data.length;
 
     scales.indexes = d3.scale.linear()
       .domain([ 0,  totalmemberships- 1 ])
@@ -314,7 +310,6 @@ function drawstarting() {
     .attr("x", padding.left / 7)
     .attr("y", function(d,i) { return (i+1.5)*heightMemberships })
     .text(function(d) {
-      console.log(d);
       return d;
     });
 
@@ -470,7 +465,7 @@ function redraw() {
 
     vis.selectAll("svg image")
         .attr("xlink:href",function(d){ 
-          console.log(controls.height);
+          
           if (controls.height == "memberships"){ return '';}
           else return d.image;
         })
@@ -510,10 +505,10 @@ function redraw() {
       .text(function(d) { 
         //if (d.)
         if (controls.height == "memberships"){
-          return d.politician.name + "(" + d.start + "-"+ d.end + ")"  ;   
+          return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
         }
         else {
-          return d.role + "(" + d.start + "-"+ d.end + ")"  ;   
+          return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
         }
       });
   
@@ -590,7 +585,7 @@ function showInfoBox(e, i) {
   if (i == null) $("#infobox").hide();
   else {
     var d = data[i];
-    console.log(d);
+    
     var info = "<span class='title'>" + d.name + "</span>";
     info += "<br />";
     info += "<img src='" + d.image + "'>" ;

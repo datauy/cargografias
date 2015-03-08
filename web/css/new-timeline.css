@@ -9,6 +9,9 @@
   fill:rgb(233, 233, 233);
 }
 
+.vis svg{
+  font-family: 'RobotoDraft';
+}
 
 rect.bar {
   stroke: rgb(233, 233, 233);
