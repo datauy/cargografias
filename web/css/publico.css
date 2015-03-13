@@ -92,12 +92,9 @@ blockquote p {
 }
 
 .accordion-group{
-	background-color: #f8f8f8;
+	background-color: white;
 	/*border-color: #B1B1B1;*/
 	margin-bottom:15px;
-	-moz-box-shadow:    0 0 0px ;
-   -webkit-box-shadow:  0 0 0px ;
-   box-shadow:          0 0 0px ;
 }
 
 .accordion-inner{
@@ -115,17 +112,19 @@ blockquote p {
   display: inline-table;
 }
 .premio {
-  /* padding: 6px 25px; */
   border-radius: 25px;
-  background-color: #E4E4E4;
+  background-color: black;
   margin-bottom: 5px;
   text-align: center;
   margin-left: 8px;
   margin-right: 2px;
+  padding: 7px 0 7px;
+  color: white;
 }
 .premio span{
 	color:#dd4814;
 	font-size: 0.9em;
+	font-weight: bold;
 }
 
 .premio h1 small{
@@ -136,22 +135,22 @@ blockquote p {
 	/*-moz-box-shadow:    2px 2px 8px #8F8F8F;	
    -webkit-box-shadow:  2px 2px 8px #8F8F8F;	
    box-shadow: 2px 2px 8px #8F8F8F;	*/
-   color:black;
+   
 }
 
 #comparador .accordion-group{
-	background-color: #D1D1D1;
-	/*border-color: #CACACA;*/
 }
 
 .accordion-group .accordion-heading.alert{
 	border: none;
 	border-radius: 0px;
-	border-color: #A0D1A7;
 	padding-bottom: 5px;
 	padding-right: 15px;
   display: inline-table;
   width: 100%;
+	color: white;
+	background: black;
+	border: 0 none;
 }
 
 .accordion-group .subtitulo{
@@ -162,7 +161,7 @@ blockquote p {
 
 .accordion-group .alert-error{
 	color: #525252;
-	background-color: #DFDFDF;
+	background-color: white;
 
 }
 
@@ -172,12 +171,11 @@ blockquote p {
 #filtro .accordion-group{
   padding-left: 1em;
   padding-right: 1em;
-	background-color: #f2f2f2;
-	border-color: #E6E6E6;
+	
+  border: 0 none;
 	margin-bottom:15px;
-	-moz-box-shadow:    inset 0 0 7px #8F8F8F;
-   -webkit-box-shadow: inset 0 0 7px #8F8F8F;
-   box-shadow:         inset 0 0 7px #8F8F8F;
+  background: white;
+  border-radius: 0;
 }
 
 
@@ -193,7 +191,7 @@ blockquote p {
 
 .badge.badge-warning.remove{
   position: absolute;
-  padding: 1px 0px 2px 5px;
+  padding: 3px 0px 3px 4px;
   margin-left: 0;
   z-index: 2;
 }
@@ -219,7 +217,6 @@ div.search-row .badge.badge-warning.remove {
 		
 		
 		.angled {
-			background-color: #E7E7E7;
 			/*background-image: -webkit-gradient(linear, 0 0, 100% 100%,
 									color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
 									color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
@@ -331,14 +328,16 @@ svg text{
 }
 
 .persona-seleccionada p{
-  font-size: 12px;
+  font-size: 10px;
   line-height: 12px;
   width: 100%;
   text-align: center;
+  padding-top: 8px;
 }
 
 .persona-seleccionada {
   width: 75px;  
+  margin-left: 10px;
 }
 .persona-seleccionada div.photo-frame {
   overflow: hidden;
@@ -472,6 +471,7 @@ div.main{
 
 .premio h1 {
   font-size: 2.8em;
+  margin: 4px 0;
 }
 
 .inline{
@@ -485,12 +485,8 @@ div.main{
 }
 
 .accordion-group {
-background-color: #f2f2f2;
-border-color: #E6E6E6;
 margin-bottom: 15px;
--moz-box-shadow: inset 0 0 7px #8F8F8F;
--webkit-box-shadow: inset 0 0 7px #8F8F8F;
-box-shadow: inset 0 0 7px #8F8F8F;
+border: 0 none;
 }
 
  a.brand h3{
@@ -504,4 +500,8 @@ box-shadow: inset 0 0 7px #8F8F8F;
 
  .search-row h3{
     font-size: 1em;
+ }
+
+ .navbar-fixed-top .navbar-inner{
+  background: black;
  }
