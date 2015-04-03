@@ -73,7 +73,12 @@ angular.module('cargoApp.factories', [])
                     }
                     //Initials for graphics
                     res.data[i].initials = res.data[i].name ? res.data[i].name.split(' ').map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
-                    res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
+                    try{
+                      res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
+                    }
+                    catch(e){
+                      console.log("No Id?-", res.data[i].name, res.data[i].id_sha1);
+                    }
                     factory.mapId[res.data[i].popitID] = i;
                     factory.autoPersons.push(res.data[i]);
                   };

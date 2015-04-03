@@ -11,7 +11,7 @@ var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
-var boxHeight = 30;
+var boxHeight = 35;
 var totalmemberships = 0 ;
 var controls = {
   display: "aligned",
@@ -105,11 +105,11 @@ function processData() {
 
     if (controls.height == "memberships")
     {
-        hei = (totalmemberships* boxHeight)   - 100;
+        hei = (totalmemberships* boxHeight) + 100;
     }
     else{
         
-        hei = (data.length * boxHeight)   - 100;
+        hei = (data.length * boxHeight)+100;
     }
 
 
@@ -344,11 +344,20 @@ function redraw() {
 
   if (controls.height == "memberships")
   {
-    hei = (memberships.length * boxHeight);
+     if(memberships.length > 3){
+      hei = (data.length * boxHeight) ;  
+     
+     }else {
+      hei = (memberships.length * boxHeight) +75;
+    }
       
   }
   else{
-    hei = (data.length * boxHeight) ;
+     if(data.length > 3){
+      hei = (data.length * boxHeight)
+     }else {
+      hei = (data.length * boxHeight)+75;
+    }
   }
 
   d3.selectAll('.vis')
