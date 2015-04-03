@@ -42,7 +42,7 @@ function reloadTimeline(){
     
   drawstarting();
   addInteractionEvents();
-    
+
   setTimeout(function() {
     setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
     setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
@@ -363,14 +363,21 @@ function redraw() {
   vis.selectAll("line.tickLine")
     .transition()
       .duration(transitionDuration)
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      })
       .attr("x1", function(d, i) {
         if (controls.display == "timeline") return scales.years(d);
         else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
         else return padding.left;
       })
       .attr("x2", function(d) {
         if (controls.display == "timeline") return scales.years(d);
         else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
         else return padding.left;
       })
       .attr("y1", padding.top)
@@ -557,7 +564,11 @@ function redraw() {
   vis.selectAll("text.rule")
     .transition()
       .duration(transitionDuration)
-      .attr("x", function(d) {
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      }).attr("x", function(d) {
         if (controls.display == "timeline") return scales.years(d);
         else if (controls.display == "centered") return visCenter;
         else return padding.left;     
