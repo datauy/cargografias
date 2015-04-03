@@ -164,6 +164,14 @@ angular.module('cargoApp.controllers')
     }
     $scope.orderLine =function(dimension,o){
       $scope.order = o;
+      if ($scope.order ==="memberships"){
+        $scope.filter="timeline";
+        setControl($("#controls #heightControls #height-area"), 'display', 'timeline', false);
+      }
+      else if ($scope.order ==="memberships"){
+        $scope.filter="timeline";
+        setControl($("#controls #heightControls #height-area"), 'display', 'timeline', false);
+      }
       setControl($("#controls #heightControls #height-area"), dimension, o, true);
     }
 

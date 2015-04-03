@@ -11,6 +11,7 @@ var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
+var boxHeight = 30;
 var totalmemberships = 0 ;
 var controls = {
   display: "aligned",
@@ -104,11 +105,11 @@ function processData() {
 
     if (controls.height == "memberships")
     {
-        hei = (totalmemberships* 65)   - 100;
+        hei = (totalmemberships* boxHeight)   - 100;
     }
     else{
         
-        hei = (data.length * 65)   - 100;
+        hei = (data.length * boxHeight)   - 100;
     }
 
 
@@ -250,8 +251,8 @@ function drawstarting() {
         })
         .attr("x", 0)
         .attr("y", 0)
-        .attr("ry", 10)
-        .attr("rx", 10)
+        // .attr("ry", 10)
+        // .attr("rx", 10)
         .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
         .attr("height", barHeight)
          // peak lines    
@@ -335,26 +336,15 @@ function redraw() {
   var visCenter = (wid - padding.left - padding.right) / 2 + padding.left;
 
   //reload height
-  hei = ($(window).height()/1.5) - 100;
+  hei = ($(window).height()/1.5);
 
   if (controls.height == "memberships")
   {
-      if(memberships.length > 3){
-        hei = (memberships.length * 65)   - 100;
-      }   
-      else{
-        hei = (memberships.length * 45)   + 100;
-      }
+    hei = (memberships.length * boxHeight);
       
   }
   else{
-
-      if(data.length > 3){
-        hei = (data.length * 65)   - 100;
-      }   
-      else{
-        hei = (data.length * 45)    + 100;
-      }
+    hei = (data.length * boxHeight) ;
   }
 
   d3.selectAll('.vis')
@@ -483,7 +473,10 @@ function redraw() {
       .style('fill', function(d){
          //Carreer comparsion
         if (controls.display == "aligned" && controls.height == "contiguous") {
-          return scales.colorsScale(d.parent)
+          return scales.colorsScale(d.parent);
+        }
+        else if (controls.height == "memberships") {
+          return scales.colorsScale(d.membershipsPosition);
         }
       })
       .attr("height", function(d) {
@@ -531,8 +524,8 @@ function redraw() {
       .attr("x", function(d) { 
         return 0; })
       .attr("y", 0)
-      .attr("dx", ".35em")
-      .attr("dy", 0)
+      .attr("dx", ".66em")
+      .attr("dy", ".33em")
       .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
       .text(function(d) { 
         //if (d.)
