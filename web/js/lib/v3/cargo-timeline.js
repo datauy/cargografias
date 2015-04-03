@@ -118,7 +118,10 @@ function processData() {
       .domain([ 0,  totalmemberships- 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
 
-    
+
+    scales.colorsScale = d3.scale.category20c();
+
+
     scales.politicians = function(a) {
       return barHeight ;
     }
@@ -149,7 +152,9 @@ function processData() {
     //now we order them
     memberships.sort(function(a, b){ return d3.ascending(a, b);});
 
-   
+
+
+
 
     // calculate ordering items
     var y_area = padding.top;
@@ -356,6 +361,11 @@ function redraw() {
     .transition()
     .attr('height', hei);
 
+  d3.selectAll('.background')
+    .transition()
+    .attr('height', hei);
+
+
   
   
 
@@ -468,7 +478,13 @@ function redraw() {
       .style("fill-opacity", function(d) { 
         //if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .25;
         //else 
-          return 1;
+        return 1;
+      })
+      .style('fill', function(d){
+         //Carreer comparsion
+        if (controls.display == "aligned" && controls.height == "contiguous") {
+          return scales.colorsScale(d.parent)
+        }
       })
       .attr("height", function(d) {
         if (controls.height == "contiguous") { 
