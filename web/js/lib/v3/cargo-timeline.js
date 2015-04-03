@@ -268,10 +268,13 @@ function drawstarting() {
         .attr("y1", 0)
         .attr("y2", barHeight);
 
+      
+
         d3.select(this)
           .append('svg:text')
           .attr('class', 'group')
           .attr('class', 'itemLabel')
+          .attr('dy','.33em')
           .attr("x", padding.left / 9)
           .attr("y", (j+1)*(barHeight/2) )
           .text(function(d) {
@@ -315,6 +318,7 @@ function drawstarting() {
     .enter()
     .append('svg:text')
     .attr('class', 'membershipLabel')
+    .attr('dy','.33em')
     .attr("x", padding.left / 7)
     .attr("y", function(d,i) { return (i+1.5)*heightMemberships })
     .text(function(d) {
