@@ -345,10 +345,10 @@ function redraw() {
   if (controls.height == "memberships")
   {
      if(memberships.length > 3){
-      hei = (data.length * boxHeight) ;  
+      hei = (totalmemberships * boxHeight) ;  
      
      }else {
-      hei = (memberships.length * boxHeight) +75;
+      hei = (totalmemberships* boxHeight) +75;
     }
       
   }
