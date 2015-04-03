@@ -12,7 +12,7 @@ angular.module('cargoApp.controllers')
     $rootScope.yearObserver =[];
     $rootScope.jerarquimetroObserver =[];
     $scope.filter ="aligned";
-    $scope.order= "contiguous";
+    $scope.order = "contiguous";
     $scope.search = false;
     var parsedParams;
 
@@ -161,6 +161,7 @@ angular.module('cargoApp.controllers')
     $scope.filterLine= function(dimension,o){
       $scope.filter = o;
       setControl($("#controls #heightControls #height-area"), dimension, o, true);
+      updateTheUrl();
     }
     $scope.orderLine =function(dimension,o){
       $scope.order = o;
@@ -173,6 +174,7 @@ angular.module('cargoApp.controllers')
         setControl($("#controls #heightControls #height-area"), 'display', 'timeline', false);
       }
       setControl($("#controls #heightControls #height-area"), dimension, o, true);
+      updateTheUrl();
     }
 
     $scope.remove = function(person){
