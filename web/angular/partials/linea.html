@@ -1,10 +1,16 @@
 <div class="row" id="linea-de-tiempo">
 	<div class="accordion-group">
 		<div class="full-width alert-error accordion-heading alert ">
-				<h3 class="titulo-tab"><i class="fa fa-tasks"></i>L&iacute;nea de tiempo</h3>
+				<h3 class="titulo-tab"><i class="fa fa-tasks"></i>L&iacute;nea de tiempo
+          <small ng-show="activePersons.length > 0">
+            <span class="label">
+            Seleccionados ({{activePersons.length}})</span></small></h3>
 				<span class="subtitulo">Muestra los recorridos en la funci&oacute;n p&uacute;blica de de los funcionarios seleccionados</span>
-      <div class="span7 right">
+      <div class="span9 right" ng-show="activePersons.length > 0">
   			<ul class="nav nav-pills alert-error titulo-tab-ul">
+             <li>
+                   <a href="" class="label " ><i class="fa fa-filter"></i>Filtra:</a>  
+                </li>
             <li class="" ng-class="order == 'memberships' ? 'active' : '' ">
     			  	<a id="ordenCargo" href="" ng-click="orderLine('height', 'memberships')">Cargo</a>
     			  </li>
@@ -17,6 +23,9 @@
     		        <li ng-class="filter == 'timeline' ? 'active' : '' ">
     		          <a id="ordenNombre" href="" ng-click="filterLine('display','timeline')">Año</a>
     		        </li>
+                <li>
+                   <a href="#" class="badge badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
+                </li>
   		         <li>
                     <a href="#" class="badge badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
                     return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>

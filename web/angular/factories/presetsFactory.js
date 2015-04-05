@@ -14,15 +14,15 @@ angular.module('cargoApp.factories')
     });
     factory.presets.push({
       nombre:'Candidatos 2015',
-      valores:'nombre-2009-2416-9-2417-10-2314-664-1615-663',
+      valores:'nombre-1992-843c98-43300a-0713d6-a445a1-67fc76-be5cbb',
     });
     factory.presets.push({
-      nombre:'Barones del Conurbano',
-      valores:'nombre-2009-1742-710-2090-2402-2418-770-2279',
+      nombre:'Intendentes Populares',
+      valores:'nombre-1992-689d5f-b96f8d-4da31d-c4f4f0',
     });
     factory.presets.push({
       nombre:'Gobernadores Reelectos',
-      valores:'nombre-1992-2204-22-1514-1871-1906-21',
+      valores:'nombre-1992-6c2502-2c487f-818b96-64634b-7b9f45-843c98',
     });
 
     return factory;

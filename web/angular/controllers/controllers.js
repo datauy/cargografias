@@ -147,10 +147,8 @@ angular.module('cargoApp.controllers')
     $scope.refreshAllVisualizations = function(){
       
       //TODO: This should all go to observers.
-      
-    $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
-    //$scope.redrawPoderometro();
-      
+      $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
+      //$scope.redrawPoderometro();
       data = $scope.activePersons;
       reloadTimeline();
       //Updates Url
@@ -198,6 +196,7 @@ angular.module('cargoApp.controllers')
       $scope.activePersons = [];
       updateTheUrl();
       $scope.showPresets=true;
+      $scope.refreshAllVisualizations();
 
     }
 
