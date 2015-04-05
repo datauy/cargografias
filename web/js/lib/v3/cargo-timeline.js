@@ -13,6 +13,7 @@ var barHeight = 10;
 var defaultPopPercent = .08;
 var boxHeight = 35;
 var totalmemberships = 0 ;
+var waitStart = false;
 var controls = {
   display: "aligned",
   height: "fixed"
@@ -34,22 +35,28 @@ function setVisSize() {
 
 $(window).resize(reloadTimeline);
 
-function reloadTimeline(){
+function reloadTimeline(callback){
   setBasicsParams();
   setVisSize();
   // process data for scales, etc.
   processData();
-
-    
   drawstarting();
   addInteractionEvents();
 
-  setTimeout(function() {
-    setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
-    setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
-    setControl($("#controls #groupControls #group-name"), "group", "name", true);
-  }, 500);
-  //redraw();
+
+  var defaultFilterCallback = function() {
+      setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
+      setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
+      setControl($("#controls #groupControls #group-name"), "group", "name", true);
+  };  
+  if (!callback){
+    callback = defaultFilterCallback;
+  }
+    
+
+  setTimeout(callback, 500);
+  
+
 }
 
 
@@ -659,6 +666,51 @@ function showInfoBox(e, i, j) {
       .show();
   }
 
+}
+//In order to isolate order/filtering this method will execute everthing
+function setControlFix(o){
+  var cb = getFilterCallback(o);
+  // if (!vis){
+    reloadTimeline(cb);
+  // }
+  // else {
+    // cb();
+  // }
+  
+}
+
+function getFilterCallback(o){
+  var cb = function(){};
+  // 'membership' orderLine('height', 'memberships')
+  if (o ==="memberships"){
+    cb = function(){
+        setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', false);
+        setControl($("#controls #heightControls #height-area"), 'height', o, true);
+      };
+  }
+  // 'career' filterLine('display','aligned')
+  else if (o ==="name"){
+    cb = function(){
+       setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', true);
+       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
+    };
+
+  }
+  // 'name 'orderLine('height', 'contiguous')
+  else if (o ==="career"){
+    cb = function(){
+      setControl($("#controls #heightControls #layout-timeline"), 'display', 'aligned', true);
+      setControl($("#controls #heightControls #height-area"),'height', 'contiguous', true);
+    };
+  }
+  // 'timeline' filterLine('display','timeline')
+  else{
+    cb = function(){
+       setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', true);
+       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
+    };
+  }
+  return cb;
 }
 
 function setControl(elem, con, val, re) {

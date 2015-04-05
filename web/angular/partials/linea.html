@@ -11,17 +11,14 @@
              <li>
                    <a href="" class="label " ><i class="fa fa-filter"></i>Filtra:</a>  
                 </li>
-            <li class="" ng-class="order == 'memberships' ? 'active' : '' ">
-    			  	<a id="ordenCargo" href="" ng-click="orderLine('height', 'memberships')">Cargo</a>
+            <li class="" ng-class="filter == 'memberships' ? 'active' : '' ">
+    			  	<a id="ordenCargo" href="" ng-click="filterLine('memberships')">Cargo</a>
     			  </li>
-    			  <li class="" ng-class="order == 'contiguous' ? 'active' : '' ">
-    			    <a id="ordenNombre" href="" ng-click="orderLine('height', 'contiguous')">Nombre</a>
+    			  <li class="" ng-class="filter == 'career' ? 'active' : '' ">
+    			    <a id="ordenNombre" href="" ng-click="filterLine('career')">Carrera</a>
     			  </li>
-    		        <li ng-class="filter == 'aligned' ? 'active' : '' ">
-    		          <a id="ordenNombre" href="" ng-click="filterLine('display','aligned')">Carrera</a>
-    		        </li>
-    		        <li ng-class="filter == 'timeline' ? 'active' : '' ">
-    		          <a id="ordenNombre" href="" ng-click="filterLine('display','timeline')">Año</a>
+    		        <li ng-class="filter == 'name' ? 'active' : '' ">
+    		          <a id="ordenNombre" href="" ng-click="filterLine('name')">Nombre</a>
     		        </li>
                 <li>
                    <a href="#" class="badge badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  

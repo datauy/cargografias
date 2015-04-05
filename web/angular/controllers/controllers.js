@@ -11,8 +11,7 @@ angular.module('cargoApp.controllers')
   	$rootScope.observers =[];
     $rootScope.yearObserver =[];
     $rootScope.jerarquimetroObserver =[];
-    $scope.filter ="aligned";
-    $scope.order = "contiguous";
+    $scope.filter ="timeline";
     $scope.search = false;
     var parsedParams;
 
@@ -20,6 +19,7 @@ angular.module('cargoApp.controllers')
         parsedParams = params.split('-');
         $scope.filter = parsedParams.shift();
         $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
+
     }
 
 
@@ -150,30 +150,25 @@ angular.module('cargoApp.controllers')
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
-      reloadTimeline();
+      
+      if ($scope.filter){
+        setControlFix($scope.filter);
+      }
+      else {
+        reloadTimeline();
+      }
+
       //Updates Url
       updateTheUrl();
     }
+    
 
-
-    $scope.filterLine= function(dimension,o){
-      $scope.filter = o;
-      setControl($("#controls #heightControls #height-area"), dimension, o, true);
+    $scope.filterLine= function(f){
+      $scope.filter = f;
+      setControlFix(f);
       updateTheUrl();
     }
-    $scope.orderLine =function(dimension,o){
-      $scope.order = o;
-      if ($scope.order ==="memberships"){
-        $scope.filter="timeline";
-        setControl($("#controls #heightControls #height-area"), 'display', 'timeline', false);
-      }
-      else if ($scope.order ==="memberships"){
-        $scope.filter="timeline";
-        setControl($("#controls #heightControls #height-area"), 'display', 'timeline', false);
-      }
-      setControl($("#controls #heightControls #height-area"), dimension, o, true);
-      updateTheUrl();
-    }
+
 
     $scope.remove = function(person){
     	var indexOf = $scope.activePersons.indexOf(person);
