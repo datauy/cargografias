@@ -151,13 +151,7 @@ angular.module('cargoApp.controllers')
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
       
-      if ($scope.filter){
-        setControlFix($scope.filter);
-      }
-      else {
-        reloadTimeline();
-      }
-
+      reloadTimeline();
       //Updates Url
       updateTheUrl();
     }

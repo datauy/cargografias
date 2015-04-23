@@ -1,7 +1,7 @@
 
 var wid, hei;
 var transitionDuration = 800;
-
+var started = false;
 var data = [];
 var memberships = [];
 var scales = {};
@@ -36,6 +36,7 @@ function setVisSize() {
 $(window).resize(reloadTimeline);
 
 function reloadTimeline(callback){
+  started = true;
   setBasicsParams();
   setVisSize();
   // process data for scales, etc.
@@ -670,12 +671,12 @@ function showInfoBox(e, i, j) {
 //In order to isolate order/filtering this method will execute everthing
 function setControlFix(o){
   var cb = getFilterCallback(o);
-  // if (!vis){
+  if (!started){
     reloadTimeline(cb);
-  // }
-  // else {
-    // cb();
-  // }
+  }
+  else {
+    cb();
+  }
   
 }
 
