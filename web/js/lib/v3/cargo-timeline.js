@@ -128,7 +128,7 @@ function processData() {
       .range([ padding.top, hei - padding.bottom - barHeight ]);
 
 
-    scales.colorsScale = d3.scale.category20c();
+    scales.colorsScale = d3.scale.category20();
 
 
     scales.politicians = function(a) {
