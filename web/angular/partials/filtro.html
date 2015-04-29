@@ -40,8 +40,8 @@
          </div>
        </div>
      </div>
-      <div class="row">
-       <div class="full-width">
+      <div class="row full-width person-box">
+       <div class="eighty">
          <div ng-hide="showPresets">
                       <div class="row" ng-show="activePersons.length > 0">
                         <div class="inline full-width" id="personas-seleccionadas-box">
@@ -56,6 +56,21 @@
                         </div>
                       </div>
             </div>
+        </div>
+        <div class="twenty">
+            <small ng-show="activePersons.length > 0">
+              <span class="label full-width">
+              Seleccionados ({{activePersons.length}})</span>
+            </small>
+            <ul class="nav nav-pills alert-error ">
+            <li>
+                   <a href="#" class="badge full-width badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
+                </li>
+               <li>
+                    <a href="#" class="badge full-width badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                    return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
+              </li>
+            </ul>
         </div>
       </div>
 

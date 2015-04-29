@@ -466,6 +466,30 @@ div.main{
   width: 100%;
 }
 
+.two-third-width{
+  width: 66.6666%;
+}
+.one-third-width{
+  width: 33.3333%;
+}
+.person-box{
+    display: inline-flex;
+}
+.person-box li{
+  list-style: none;
+  width: 100%;
+}
+.person-box ul{
+  margin:0;
+  padding:0;
+}
+.twenty {
+  width: 14%;
+}
+.eighty{
+  width: 86%;
+
+}
 .right {
   float: right;
 }
