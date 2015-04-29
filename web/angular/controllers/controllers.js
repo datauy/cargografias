@@ -2,7 +2,7 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('homeController', function($rootScope,$q, $scope,cargosFactory, presetsFactory, $filter,$cookies, $routeParams, $location, $route, $timeout) {
+  .controller('homeController', function($rootScope,$q, $scope,cargosFactory, presetsFactory, $filter,$cookies, $routeParams, $location, $route, $timeout, $http) {
   	
     $scope.autoPersons = [];
     $scope.showPresets = true;
@@ -84,7 +84,19 @@ angular.module('cargoApp.controllers')
     };    
   }
 
-  $scope.presets = presetsFactory.presets;
+  // Presets
+  loadPresets();
+
+  function loadPresets(){
+
+    var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
+    instanceName = instanceName || 'cargografias';
+
+    $http.get('/js/datasets/gz/' + instanceName + '_locdata.json').then(function(res){
+      $scope.presets = JSON.parse(res.data.predefinedSearches);
+    });
+    
+  }
 
   $scope.filterAutoPersons = function(q){
     if (q.length > 3){
