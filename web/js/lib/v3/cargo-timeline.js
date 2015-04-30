@@ -616,10 +616,18 @@ function addInteractionEvents() {
   // bar group hover
   $("g.barGroup").hover(function(e) { 
     showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
+        $('div.vis').addClass('highlight');
+        $('div.vis').removeClass('reverse');
+        $('.barGroup[membership="'+   $(this).attr("membership")+'"][index="'+ $(this).attr("index")+'"]').addClass('highlight');
+
     }
   );
   $(".vis .background, .vis .mouseLine").hover(function(e) { 
     showInfoBox( e, null); 
+
+    $('div.vis').removeClass('highlight');
+    $('div.vis').addClass('reverse');
+    $('.barGroup[membership="'+   $(this).attr("membership")+'"][index="'+ $(this).attr("index")+'"]').removeClass('highlight');
   });
 
 
@@ -637,6 +645,7 @@ function showInfoBox(e, i, j) {
 
   if (i == null) $("#infobox").hide();
   else {
+
     //TODO: Can we move this to angular?
     var politician = data[i];
     var membership = politician.memberships[j];
