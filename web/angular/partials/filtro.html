@@ -29,10 +29,10 @@
        </div>
      </div>
       <div class="row full-width person-box">
-       <div class="eighty">
+       <div class="eighty left">
          <div ng-hide="showPresets">
                       <div class="row" ng-show="activePersons.length > 0">
-                        <div class="inline full-width" id="personas-seleccionadas-box">
+                        <div class="full-width" id="personas-seleccionadas-box">
                           <div class="persona-seleccionada" ng-repeat="active in activePersons">
                                   <a ng-click="remove(active)" class="badge badge-warning remove"><i class="fa fa-times"></i></a>
                                     <div class="photo-frame"
@@ -47,7 +47,7 @@
                       </div>
             </div>
         </div>
-        <div class="twenty" ng-show="activePersons.length > 0">
+        <div class="twenty right" ng-show="activePersons.length > 0">
             <small>
               <span class="label full-width">
               Seleccionados ({{activePersons.length}})</span>
