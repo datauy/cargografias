@@ -300,13 +300,7 @@ div.vis.highlight g.barGroup{
 
 }
 
-div.vis.reverse g.barGroup{ 
-    
-    animation:alert-reverse 2s;
-    -webkit-animation:alert-reverse 2s;
-    opacity: 1;
 
-}
 
 @-webkit-keyframes alert-inverse{
     0%   {opacity: 0.2;}

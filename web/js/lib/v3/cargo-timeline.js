@@ -37,6 +37,8 @@ $(window).resize(setControlFix());
 
 function reloadTimeline(callback){
   started = true;
+  $('div.vis').removeClass('highlight');
+  $('div.vis').addClass('reverse');
   setBasicsParams();
   setVisSize();
   // process data for scales, etc.
@@ -612,22 +614,36 @@ function redraw() {
  * Add interaction events after initial drawing
  ***********************************************************/
 function addInteractionEvents() {
-
+  var highlightClass= ' highlight';
+  
   // bar group hover
   $("g.barGroup").hover(function(e) { 
+    $("g.barGroup").each(function() {
+        var newClass = $(this).attr('class').replace(' highlight', '');
+        $(this).attr('class',newClass);      
+    });
+
     showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
-        $('div.vis').addClass('highlight');
-        $('div.vis').removeClass('reverse');
-        $('.barGroup[membership="'+   $(this).attr("membership")+'"][index="'+ $(this).attr("index")+'"]').addClass('highlight');
+
+    var newClass = $(this).attr('class') + highlightClass;
+    $(this).attr('class',newClass);
+
+    $('div.vis').addClass('highlight');
+    $('div.vis').removeClass('reverse');
 
     }
   );
   $(".vis .background, .vis .mouseLine").hover(function(e) { 
-    showInfoBox( e, null); 
+    $("g.barGroup").each(function() {
+        var newClass = $(this).attr('class').replace(' highlight', '');
+        $(this).attr('class',newClass);      
+    });
 
+    showInfoBox( e, null); 
     $('div.vis').removeClass('highlight');
     $('div.vis').addClass('reverse');
-    $('.barGroup[membership="'+   $(this).attr("membership")+'"][index="'+ $(this).attr("index")+'"]').removeClass('highlight');
+
+
   });
 
 
@@ -679,6 +695,14 @@ function showInfoBox(e, i, j) {
 }
 //In order to isolate order/filtering this method will execute everthing
 function setControlFix(o){
+
+$('div.vis').removeClass('highlight');
+$('div.vis').addClass('reverse');
+    $("g.barGroup").each(function() {
+        var newClass = $(this).attr('class').replace(' highlight', '');
+        $(this).attr('class',newClass);      
+    });
+
   var cb = getFilterCallback(o);
   if (!started){
     reloadTimeline(cb);
