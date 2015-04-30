@@ -33,7 +33,7 @@ function setVisSize() {
     
 }
 
-$(window).resize(reloadTimeline);
+$(window).resize(setControlFix());
 
 function reloadTimeline(callback){
   started = true;

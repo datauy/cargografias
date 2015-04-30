@@ -8,15 +8,8 @@
                 <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
     	  		    </div>
             <div ng-show="showPresets">
-              <h3 style="margin-bottom: 5px;">¿No sabés que buscar? Probá los siguientes grupos</h3>
-              <div class="search-row clearfix">
-                    <ul>
-                        <li ng-repeat="p in presets"> 
-                          <h3><a class="hand" ng-click="load(p.valores)">{{p.nombre}}</a></h3>
-                        </li>
-
-                    </ul>
-              </div>
+            
+            
             </div>
         </div>
          <div flex="40">
