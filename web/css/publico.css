@@ -338,7 +338,10 @@ svg text{
 }
 
 .persona-seleccionada {
-  width: 75px;  
+  width: 75px;
+  margin-left: 2em;
+  margin-right: 2em;
+
 }
 .persona-seleccionada div.photo-frame {
   overflow: hidden;
@@ -457,7 +460,10 @@ div.main{
     width: 96%;
 }
 
-
+.photo-frame{
+  background-size: cover;
+  background-position: 51% 50%;
+}
 .twitter{
   background-color: #79CEDF;
 }

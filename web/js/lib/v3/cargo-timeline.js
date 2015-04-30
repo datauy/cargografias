@@ -127,8 +127,8 @@ function processData() {
       .domain([ 0,  totalmemberships- 1 ])
       .range([ padding.top, hei - padding.bottom - barHeight ]);
 
-
-    scales.colorsScale = d3.scale.category20c();
+        //TODO Uncomment for colors
+    //scales.colorsScale = d3.scale.category20c();
 
 
     scales.politicians = function(a) {
@@ -492,13 +492,13 @@ function redraw() {
         return 1;
       })
       .style('fill', function(d){
-         //Carreer comparsion
+         /*Carreer comparsion
         if (controls.display == "aligned" && controls.height == "contiguous") {
           return scales.colorsScale(d.parent);
         }
         else if (controls.height == "memberships") {
           return scales.colorsScale(d.membershipsPosition);
-        }
+        }*/
       })
       .attr("height", function(d) {
         if (controls.height == "contiguous") { 

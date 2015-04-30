@@ -35,8 +35,10 @@
                         <div class="inline full-width" id="personas-seleccionadas-box">
                           <div class="persona-seleccionada" ng-repeat="active in activePersons">
                                   <a ng-click="remove(active)" class="badge badge-warning remove"><i class="fa fa-times"></i></a>
-                                    <div class="photo-frame">
-                                          <img class="photo" ng-src="{{active.image}}">
+                                    <div class="photo-frame"
+                                    ng-style="{'background-image':'url(' +active.image +')'}"
+                                    >
+                                          
                                         </div>
                                   <p>{{active.name}}</p>
                                 </div>
