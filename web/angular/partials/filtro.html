@@ -19,11 +19,6 @@
               </div>
             </div>
         </div>
-    <!--     <div class="span4" ng-hide="showPresets" >
-                    <span class="label">Seleccionados: {{activePersons.length}} </span><br>
-                    <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
-                    <i class="fa fa-times" ></i> Limpar todo
-                    </a> -->
          <div flex="40">
             <div ng-show="!showPresets && search" class="full-width" >
                 <div class="items">
@@ -57,17 +52,17 @@
                       </div>
             </div>
         </div>
-        <div class="twenty">
-            <small ng-show="activePersons.length > 0">
+        <div class="twenty" ng-show="activePersons.length > 0">
+            <small>
               <span class="label full-width">
               Seleccionados ({{activePersons.length}})</span>
             </small>
             <ul class="nav nav-pills alert-error ">
             <li>
-                   <a href="#" class="badge full-width badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
+                   <a href="#" class="badge badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
                 </li>
                <li>
-                    <a href="#" class="badge full-width badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                    <a href="#" class="badge badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
                     return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
               </li>
             </ul>
