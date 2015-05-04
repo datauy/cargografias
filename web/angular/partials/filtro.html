@@ -8,22 +8,10 @@
                 <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
     	  		    </div>
             <div ng-show="showPresets">
-              <h3 style="margin-bottom: 5px;">¿No sabés que buscar? Probá los siguientes grupos</h3>
-              <div class="search-row clearfix">
-                    <ul>
-                        <li ng-repeat="p in presets"> 
-                          <h3><a class="hand" ng-click="load(p.valores)">{{p.nombre}}</a></h3>
-                        </li>
-
-                    </ul>
-              </div>
+            
+            
             </div>
         </div>
-    <!--     <div class="span4" ng-hide="showPresets" >
-                    <span class="label">Seleccionados: {{activePersons.length}} </span><br>
-                    <a id="limpiar-buscar-filtro" ng-click="clearAll()" class="badge badge-warning">
-                    <i class="fa fa-times" ></i> Limpar todo
-                    </a> -->
          <div flex="40">
             <div ng-show="!showPresets && search" class="full-width" >
                 <div class="items">
@@ -40,15 +28,17 @@
          </div>
        </div>
      </div>
-      <div class="row">
-       <div class="full-width">
+      <div class="row full-width person-box">
+       <div class="eighty left">
          <div ng-hide="showPresets">
                       <div class="row" ng-show="activePersons.length > 0">
-                        <div class="inline full-width" id="personas-seleccionadas-box">
+                        <div class="full-width" id="personas-seleccionadas-box">
                           <div class="persona-seleccionada" ng-repeat="active in activePersons">
                                   <a ng-click="remove(active)" class="badge badge-warning remove"><i class="fa fa-times"></i></a>
-                                    <div class="photo-frame">
-                                          <img class="photo" ng-src="{{active.image}}">
+                                    <div class="photo-frame"
+                                    ng-style="{'background-image':'url(' +active.image +')'}"
+                                    >
+                                          
                                         </div>
                                   <p>{{active.name}}</p>
                                 </div>
@@ -56,6 +46,21 @@
                         </div>
                       </div>
             </div>
+        </div>
+        <div class="twenty right" ng-show="activePersons.length > 0">
+            <small>
+              <span class="label full-width">
+              Seleccionados ({{activePersons.length}})</span>
+            </small>
+            <ul class="nav nav-pills alert-error ">
+            <li>
+                   <a href="#" class="badge badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
+                </li>
+               <li>
+                    <a href="#" class="badge badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                    return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
+              </li>
+            </ul>
         </div>
       </div>
 

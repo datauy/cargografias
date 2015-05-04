@@ -331,20 +331,37 @@ svg text{
 }
 
 .persona-seleccionada p{
-  font-size: 12px;
+    font-size: 12px;
   line-height: 12px;
   width: 100%;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.persona-seleccionada {
-  width: 75px;  
+.persona-seleccionada {   
+width: 80px;
+  margin: 1em;
+  float: left;
+  display: inline-block;
+
+  padding: 0;
+  list-style: none;
+  margin-bottom: 0em;
+  margin-top: 0em;
 }
+
+
 .persona-seleccionada div.photo-frame {
   overflow: hidden;
   max-height: 60px;
   min-width: 75px;
   height: 60px;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
 }
 .persona-seleccionada img.photo{ }
@@ -457,7 +474,10 @@ div.main{
     width: 96%;
 }
 
-
+.photo-frame{
+  background-size: cover;
+  background-position: 51% 50%;
+}
 .twitter{
   background-color: #79CEDF;
 }
@@ -466,8 +486,36 @@ div.main{
   width: 100%;
 }
 
+.two-third-width{
+  width: 66.6666%;
+}
+.one-third-width{
+  width: 33.3333%;
+}
+.person-box{
+    display: inline-flex;
+}
+.person-box li{
+  list-style: none;
+  width: 100%;
+}
+.person-box ul{
+  margin:0;
+  padding:0;
+}
+.twenty {
+  width: 14%;
+}
+.eighty{
+  width: 86%;
+
+}
 .right {
   float: right;
+
+}
+.left {
+  float: left;
 }
 
 .premio h1 {
