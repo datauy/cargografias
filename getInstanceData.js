@@ -17,7 +17,10 @@ function getFiles(instanceName) {
     var filename = instanceName + file;
     var url = "http://v3.cargografias.org/js/datasets/gz/" + filename;
     console.log("Getting:", url);
-    request({url: url, gzip: true}, function(error, response, body) {
+    request({
+      url: url,
+      gzip: true
+    }, function(error, response, body) {
       if (error) {
         console.log("Error getting file", filename);
       } else if (response.statusCode != 200) {
