@@ -2,17 +2,17 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('homeController', function($rootScope,$q, $scope,cargosFactory, presetsFactory, $filter,$cookies, $routeParams, $location, $route, $timeout, $http) {
+  .controller('homeController', function($rootScope,$q, $scope,cargosFactory, $filter,$cookies, $routeParams, $location, $route, $timeout, $http) {
   	
     $scope.autoPersons = [];
-    $scope.showPresets = true;
   	$scope.activePersons = [];
     $scope.estado = "";
   	$rootScope.observers =[];
     $rootScope.yearObserver =[];
     $rootScope.jerarquimetroObserver =[];
     $scope.filter ="timeline";
-    $scope.search = false;
+
+    $scope.showPresets = true;
     var parsedParams;
 
     var processParameters = function(params){
@@ -21,7 +21,6 @@ angular.module('cargoApp.controllers')
         $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
 
     }
-
 
     //Load initial ids from the url
     if($routeParams.ids){
@@ -33,7 +32,7 @@ angular.module('cargoApp.controllers')
   });
 
 
-  $scope.load = function(params){
+  $scope.load = function(params, hideAfterClick){
       $scope.clearAll();
       processParameters(params);
         //light add all persons from url
@@ -43,14 +42,18 @@ angular.module('cargoApp.controllers')
             var id = cargosFactory.mapId[index];
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
-          $scope.refreshAllVisualizations();  
-          $scope.showPresets= false;
+          $scope.refreshAllVisualizations();
+          $scope.search = true;
+          $scope.showPresets = hideAfterClick ? false : $scope.showPresets;
         }
   }
 
+  // Presets
 
+var presetsLoader = loadPresets();  
 
   var onDataLoaded = function(){
+    
      $rootScope.estado = "Motor de Visualizacion";
       for (var i = 0; i < $rootScope.observers.length; i++) {
         var observer = $rootScope.observers[i];
@@ -59,14 +62,22 @@ angular.module('cargoApp.controllers')
       $rootScope.estado = "Listo!";
       $rootScope.ready= true;
 
-     if(parsedParams){
+      if(parsedParams && parsedParams.length == 1 && parsedParams[0] == '') parsedParams.pop(); //Remove spurius parsing
+      if(parsedParams && parsedParams.length){
+        //Initial load with parameters in the URL
           for (var i = 0; i < parsedParams.length; i++) {
             var index = parsedParams[i];
             var id = cargosFactory.mapId[index];
             $scope.lightAdd(cargosFactory.autoPersons[id], id);
           };
           $scope.refreshAllVisualizations();  
-          $scope.showPresets= false;
+        }else{
+          //Initial load without data in the url
+          presetsLoader.then(function(){
+            if($scope.presets.length){
+              $scope.load($scope.presets[0].valores); //Default load 1st preset
+            }
+          });
         }
 
   };
@@ -84,18 +95,15 @@ angular.module('cargoApp.controllers')
     };    
   }
 
-  // Presets
-  loadPresets();
-
   function loadPresets(){
-
     var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
     instanceName = instanceName || 'cargografias';
-
-    $http.get('/js/datasets/gz/' + instanceName + '_locdata.json').then(function(res){
-      $scope.presets = JSON.parse(res.data.predefinedSearches);
+    var req = $http.get('/js/datasets/gz/' + instanceName + '_locdata.json');
+    req.then(function(res){
+      $scope.presets = JSON.parse(res.data.predefinedSearches || "[]");
+      $scope.showPresets= $scope.presets && $scope.presets.length;
     });
-    
+    return req;
   }
 
   $scope.filterAutoPersons = function(q){
