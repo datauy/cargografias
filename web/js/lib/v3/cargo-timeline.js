@@ -229,20 +229,16 @@ function drawstarting() {
 
   if (controls.height == "memberships")
   {
-     if(memberships.length > 3){
-      hei = (totalmemberships * boxHeight/2)+75 ;  
+    
+      hei = (totalmemberships * boxHeight)+200 ;  
      
-     }else {
-      hei = (totalmemberships* boxHeight) +75;
-    }
+    
       
   }
   else{
-     if(data.length > 3){
-      hei = (data.length * boxHeight)
-     }else {
-      hei = (data.length * boxHeight)+75;
-    }
+    
+      hei = (data.length * boxHeight) + 200
+     
   }
 
   d3.selectAll('.vis')
@@ -255,6 +251,14 @@ function drawstarting() {
     .attr('width', wid)
     .attr('height', hei);
 
+
+  if (data.length == 0){
+      d3.select("div.vis svg")
+        .transition()
+        .remove();
+      started = false;
+
+  }
 
   // empire containers
   vis.selectAll("g")
@@ -331,7 +335,11 @@ function redraw() {
     
     vis.selectAll('svg text.itemLabel')
           .attr("x", padding.left / 7)
-          .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
+          .attr("y", function(d,i) {
+            console.log(i,barHeight,padding.top);
+            return (i)*barHeight + (barHeight/2) + padding.top;
+
+          })
           .text(function(d,i) {
             if (controls.height == "memberships"){ return '';}
             else{ return d.name;} 
