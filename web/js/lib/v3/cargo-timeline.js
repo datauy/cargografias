@@ -309,20 +309,25 @@ function refreshGraph() {
   //     .attr("y2", hei - padding.bottom);
   // yearTicks.exit().remove();
 
-  // tick labels
-  var yearLabels = vis.selectAll("text.rule")
-    .data(scales.years.ticks(10));
 
-  yearLabels.enter()
-      .append("svg:text")
+  var yearsNumbers = scales.years.ticks(10);
+  // tick labels
+  console.log(yearsNumbers);
+  var yearLabelsSelection = 
+    vis.selectAll("text.rule")
+      .data(yearsNumbers, function(d,i){ return i;});
+
+  yearLabelsSelection
+      .enter()
+      .append("text")
       .attr("class", "rule")
       .attr("x", padding.left)
       .attr("y", 20)
       .attr("dy", 0)
       .attr("text-anchor", "middle")
-      .text(function(d) { return formatYear(d); });
+      .text(function(d) { console.log(d); return formatYear(d); });
 
-  yearLabels.exit().remove();
+  yearLabelsSelection.exit().remove();
 
     
 }
