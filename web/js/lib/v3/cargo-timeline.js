@@ -34,16 +34,20 @@ $(window).resize(reloadTimeline);
 
 function reloadTimeline(callback){
 
-  // process data for scales, etc.
+  // process data for scales
   processData();
 
+
+  //Creates the proper objects
   if (!started){
     setVisSize();
     setBasicsParams();
     started = true;
   }
 
-  drawstarting();
+
+  //D3 main enter
+  refreshGraph();
   addInteractionEvents();
 
 
@@ -220,7 +224,7 @@ function processData() {
  * Initial rendering of the vis
  ***********************************************************/
 
-function drawstarting() {
+function refreshGraph() {
 
   var visCenter = (wid - padding.left - padding.right) / 2 + padding.left;
 
@@ -261,26 +265,26 @@ function drawstarting() {
   }
 
   // empire containers
-  vis.selectAll("g")
-    .data(data)
-    .enter()
-    .append("svg:g")
-      .each(function(politician, j){
+  var names = vis.selectAll("g")
+    .data(data, function(d){return d.id;});
     
-        d3.select(this)
-          .append('svg:text')
-          .attr('class', 'group')
-          .attr('class', 'itemLabel')
-          .attr('dy','.33em')
-          .attr("x", padding.left / 9)
-          .attr("y", (j+1)*(barHeight/2) )
-          .text(function(d) {
-            return d.name;
 
-          });
+  names.enter().append("g")
+    .append('svg:text')
+    .attr('class', 'group')
+    .attr('class', 'itemLabel')
+    .attr('dy','.33em')
+    .attr("x", padding.left / 9)
+    .attr("y", function(d,i){
+      return (i+1)*(barHeight/2) ;
+    })
+    .text(function(d) {
+      console.log(d.name);
+      return d.name;
 
+    });
 
-      });
+  names.exit().remove();
 
 
   
@@ -294,26 +298,31 @@ function drawstarting() {
 
 
 
-  // year ticks
-  vis.selectAll("line")
-    .data(scales.years.ticks(10))
-    .enter().append("svg:line")
-      .attr("class", "tickLine")
-      .attr("x1", padding.left)
-      .attr("x2", padding.left)
-      .attr("y1", padding.top)
-      .attr("y2", hei - padding.bottom);
+  // // year ticks
+  // var yearTicks = vis.selectAll("line")
+  //   .data(scales.years.ticks(10)); 
+  // yearTicks.enter().append("svg:line")
+  //     .attr("class", "tickLine")
+  //     .attr("x1", padding.left)
+  //     .attr("x2", padding.left)
+  //     .attr("y1", padding.top)
+  //     .attr("y2", hei - padding.bottom);
+  // yearTicks.exit().remove();
 
   // tick labels
-  vis.selectAll("text.rule")
-    .data(scales.years.ticks(10))
-    .enter().append("svg:text")
+  var yearLabels = vis.selectAll("text.rule")
+    .data(scales.years.ticks(10));
+
+  yearLabels.enter()
+      .append("svg:text")
       .attr("class", "rule")
       .attr("x", padding.left)
       .attr("y", 20)
       .attr("dy", 0)
       .attr("text-anchor", "middle")
       .text(function(d) { return formatYear(d); });
+
+  yearLabels.exit().remove();
 
     
 }
