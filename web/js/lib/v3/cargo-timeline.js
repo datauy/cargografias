@@ -324,8 +324,12 @@ function refreshGraph() {
       .attr("x", padding.left)
       .attr("y", 20)
       .attr("dy", 0)
-      .attr("text-anchor", "middle")
-      .text(function(d) { console.log(d); return formatYear(d); });
+      .attr("text-anchor", "middle");
+
+  yearLabelsSelection
+    .text(function(d) { 
+      console.log(d); 
+      return formatYear(d); });
 
   yearLabelsSelection.exit().remove();
 
