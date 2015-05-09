@@ -233,16 +233,10 @@ function refreshGraph() {
 
   if (controls.height == "memberships")
   {
-    
-      hei = (totalmemberships * boxHeight)+200 ;  
-     
-    
-      
+    hei = (totalmemberships * boxHeight)+200 ;  
   }
   else{
-    
-      hei = (data.length * boxHeight) + 200
-     
+      hei = (data.length * boxHeight) + 200;
   }
 
   d3.selectAll('.vis')
@@ -264,6 +258,12 @@ function refreshGraph() {
 
   }
 
+  //set years
+  scales.years = d3.scale.linear()
+      .domain([ minYear,maxYear])
+      .range([ padding.left, wid - padding.right ]);
+
+
   // empire containers
   var names = vis.selectAll("g")
     .data(data, function(d){return d.id;});
@@ -284,6 +284,49 @@ function refreshGraph() {
 
     });
 
+    names.each(function(politician, j){
+
+        // var memberships = 
+        // d3.select(this)
+        //   .selectAll('g')
+        //   .data(politician.memberships);
+        
+        // memberships.enter()
+        // .append("svg:g")
+        // .attr("class", "barGroup")
+        // .attr("index", function(d, i) { return j; })
+        // .attr("membership", function(d, i) { return i; })
+        
+        // .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
+        // .append("svg:rect")
+        // .attr("class", function(d) {
+        //   //TODO: change to type and region?
+        //   return "bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+        // })
+        // .attr("x", 0)
+        // .attr("y", 0)
+        // // .attr("ry", 10)
+        // // .attr("rx", 10)
+        // .attr("width", function(d) { 
+        //   console.log(d.end,d.start,scales.years(d.end), scales.years(d.start));
+        //   return scales.years(d.end) - scales.years(d.start); })
+        // .attr("height", barHeight)
+        //  // peak lines    
+        // .selectAll("g.barGroup")
+        // .append("svg:line")
+        // .attr("class", "peakLine")
+        // //TODO: What should we do with peaks?
+        // //.attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
+        // //.attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
+        // .attr("x1", function(d) { return scales.years(d.start) - scales.years(d.start); })
+        // .attr("x2", function(d) { return scales.years(d.start) - scales.years(d.start); })
+        
+        // .attr("y1", 0)
+        // .attr("y2", barHeight);
+
+        // memberships.exit().remove();
+    });
+
   names.exit().remove();
 
 
@@ -297,22 +340,47 @@ function refreshGraph() {
       .attr("y", 0);
 
 
-
-  // // year ticks
-  // var yearTicks = vis.selectAll("line")
-  //   .data(scales.years.ticks(10)); 
-  // yearTicks.enter().append("svg:line")
-  //     .attr("class", "tickLine")
-  //     .attr("x1", padding.left)
-  //     .attr("x2", padding.left)
-  //     .attr("y1", padding.top)
-  //     .attr("y2", hei - padding.bottom);
-  // yearTicks.exit().remove();
-
-
   var yearsNumbers = scales.years.ticks(10);
+  // year ticks
+  var yearTicks = vis.selectAll("line.tickLine")
+    .data(yearsNumbers); 
+
+
+  yearTicks.enter().append("line")
+      .attr("class", "tickLine")
+      .attr("x1", padding.left)
+      .attr("x2", padding.left)
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+    
+  yearTicks.transition().duration(transitionDuration)
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      })
+      .attr("x1", function(d, i) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
+        else return padding.left;
+      })
+      .attr("x2", function(d) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
+        else return padding.left;
+      })
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+  yearTicks.exit().remove();
+
+
+  
   // tick labels
-  console.log(yearsNumbers);
+  
   var yearLabelsSelection = 
     vis.selectAll("text.rule")
       .data(yearsNumbers, function(d,i){ return i;});
@@ -321,15 +389,25 @@ function refreshGraph() {
       .enter()
       .append("text")
       .attr("class", "rule")
-      .attr("x", padding.left)
-      .attr("y", 20)
-      .attr("dy", 0)
       .attr("text-anchor", "middle");
 
+  // tick labels
   yearLabelsSelection
-    .text(function(d) { 
-      console.log(d); 
-      return formatYear(d); });
+    .transition()
+      .duration(transitionDuration)
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      }).attr("x", function(d) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        else return padding.left;     
+      })
+      .attr("y", 20)
+      .attr("dy", 0);
+  yearLabelsSelection
+    .text(function(d) { return formatYear(d); });
 
   yearLabelsSelection.exit().remove();
 
@@ -342,19 +420,11 @@ function refreshGraph() {
 
 function redraw() {
 
- 
-  
-
-    scales.years = d3.scale.linear()
-      .domain([ minYear,maxYear])
-      .range([ padding.left, wid - padding.right ]);
-
-
     
     vis.selectAll('svg text.itemLabel')
           .attr("x", padding.left / 7)
           .attr("y", function(d,i) {
-            console.log(i,barHeight,padding.top);
+            
             return (i)*barHeight + (barHeight/2) + padding.top;
 
           })
@@ -369,11 +439,6 @@ function redraw() {
             if (controls.height == "memberships"){ return d;}
             else{ return '';} 
           });
-
-
-
-
-  
       
   // tick labels
   vis.selectAll("text.rule")
