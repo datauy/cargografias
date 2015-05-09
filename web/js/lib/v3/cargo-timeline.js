@@ -269,66 +269,37 @@ function refreshGraph() {
     .data(data, function(d){return d.id;});
     
 
-  names.enter().append("g")
-    .append('svg:text')
+  names.enter()
+    .append("g")
+    .append('text')
     .attr('class', 'group')
     .attr('class', 'itemLabel')
     .attr('dy','.33em')
-    .attr("x", padding.left / 9)
-    .attr("y", function(d,i){
-      return (i+1)*(barHeight/2) ;
+    .attr("x", padding.left / 7)
+    .attr("y", function(d,i) {
+      return (i)*barHeight + (barHeight/2) + padding.top;
     })
-    .text(function(d) {
-      console.log(d.name);
-      return d.name;
-
+    .text(function(d,i) {
+        if (controls.height == "memberships"){ return '';}
+        else{ return d.name;} 
     });
-
     names.each(function(politician, j){
 
-        // var memberships = 
-        // d3.select(this)
-        //   .selectAll('g')
-        //   .data(politician.memberships);
-        
-        // memberships.enter()
-        // .append("svg:g")
-        // .attr("class", "barGroup")
-        // .attr("index", function(d, i) { return j; })
-        // .attr("membership", function(d, i) { return i; })
-        
-        // .attr("transform", function(d, i) { return "translate(" + (i*100) + ", " + (j*barHeight) + ")"; })
-        // .append("svg:rect")
-        // .attr("class", function(d) {
-        //   //TODO: change to type and region?
-        //   return "bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
-        // })
-        // .attr("x", 0)
-        // .attr("y", 0)
-        // // .attr("ry", 10)
-        // // .attr("rx", 10)
-        // .attr("width", function(d) { 
-        //   console.log(d.end,d.start,scales.years(d.end), scales.years(d.start));
-        //   return scales.years(d.end) - scales.years(d.start); })
-        // .attr("height", barHeight)
-        //  // peak lines    
-        // .selectAll("g.barGroup")
-        // .append("svg:line")
-        // .attr("class", "peakLine")
-        // //TODO: What should we do with peaks?
-        // //.attr("x1", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
-        // //.attr("x2", function(d) { return scales.years(d.Peak) - scales.years(d.start); })
-        // .attr("x1", function(d) { return scales.years(d.start) - scales.years(d.start); })
-        // .attr("x2", function(d) { return scales.years(d.start) - scales.years(d.start); })
-        
-        // .attr("y1", 0)
-        // .attr("y2", barHeight);
-
-        // memberships.exit().remove();
+     
     });
 
   names.exit().remove();
 
+  vis.selectAll('text.membershipLabel')
+        .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
+        .text(function(d,i) {
+          if (controls.height == "memberships"){ return d;}
+          else{ return '';} 
+        });
+  
+ 
+   
+        
 
   
   // bar labels
@@ -339,7 +310,7 @@ function refreshGraph() {
         return scales.years(d.start); })
       .attr("y", 0);
 
-
+ 
   var yearsNumbers = scales.years.ticks(10);
   // year ticks
   var yearTicks = vis.selectAll("line.tickLine")
@@ -409,6 +380,7 @@ function refreshGraph() {
   yearLabelsSelection
     .text(function(d) { return formatYear(d); });
 
+
   yearLabelsSelection.exit().remove();
 
     
@@ -421,40 +393,9 @@ function refreshGraph() {
 function redraw() {
 
     
-    vis.selectAll('svg text.itemLabel')
-          .attr("x", padding.left / 7)
-          .attr("y", function(d,i) {
-            
-            return (i)*barHeight + (barHeight/2) + padding.top;
 
-          })
-          .text(function(d,i) {
-            if (controls.height == "memberships"){ return '';}
-            else{ return d.name;} 
-          });
-
-    vis.selectAll('text.membershipLabel')
-          .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
-          .text(function(d,i) {
-            if (controls.height == "memberships"){ return d;}
-            else{ return '';} 
-          });
       
-  // tick labels
-  vis.selectAll("text.rule")
-    .transition()
-      .duration(transitionDuration)
-      .style("opacity", function(d) {
-        //On CarreerMeter hide years. 
-        if (controls.display == "aligned")  return 0;
-        else return 1;
-      }).attr("x", function(d) {
-        if (controls.display == "timeline") { return scales.years(d);}
-        else if (controls.display == "centered") return visCenter;
-        else return padding.left;     
-      })
-      .attr("y", 20)
-      .attr("dy", 0);
+  
       
 }
 
