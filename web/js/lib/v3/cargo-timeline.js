@@ -269,20 +269,21 @@ function refreshGraph() {
     .data(data, function(d){return d.id;});
     
 
-  names.enter()
-    .append("g")
+  names.enter().append("g")
     .append('text')
     .attr('class', 'group')
     .attr('class', 'itemLabel')
     .attr('dy','.33em')
-    .attr("x", padding.left / 7)
-    .attr("y", function(d,i) {
-      return (i)*barHeight + (barHeight/2) + padding.top;
+    .attr("x", padding.left / 9)
+    .attr("y", function(d,i){
+      return (i+1)*(barHeight/2) ;
     })
-    .text(function(d,i) {
-        if (controls.height == "memberships"){ return '';}
-        else{ return d.name;} 
+    .text(function(d) {
+      console.log(d.name);
+      return d.name;
+
     });
+
     names.each(function(politician, j){
 
      
@@ -290,17 +291,25 @@ function refreshGraph() {
 
   names.exit().remove();
 
+ 
+  vis.selectAll('svg text.itemLabel')
+        .attr("x", padding.left / 7)
+        .attr("y", function(d,i) {
+          
+          return (i)*barHeight + (barHeight/2) + padding.top;
+
+        })
+        .text(function(d,i) {
+          if (controls.height == "memberships"){ return '';}
+          else{ return d.name;} 
+        });
+
   vis.selectAll('text.membershipLabel')
         .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
         .text(function(d,i) {
           if (controls.height == "memberships"){ return d;}
           else{ return '';} 
         });
-  
- 
-   
-        
-
   
   // bar labels
   vis.selectAll("g.barGroup")
