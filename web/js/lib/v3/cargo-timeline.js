@@ -227,8 +227,10 @@ function processData() {
 function refreshGraph() {
 
   var visCenter = (wid - padding.left - padding.right) / 2 + padding.left;
+  /************************************************************
+  * reload height
+  ***********************************************************/
 
-  //reload height
   hei = ($(window).height()/1.5);
 
   if (controls.height == "memberships")
@@ -238,6 +240,9 @@ function refreshGraph() {
   else{
       hei = (data.length * boxHeight) + 200;
   }
+  /************************************************************
+  * Transition cargo size.
+  ***********************************************************/
 
   d3.selectAll('.vis')
     .transition()
@@ -249,6 +254,10 @@ function refreshGraph() {
     .attr('width', wid)
     .attr('height', hei);
 
+  /************************************************************
+  * If there is no items, just remove the vis.
+  ***********************************************************/
+
 
   if (data.length == 0){
       d3.select("div.vis svg")
@@ -258,13 +267,18 @@ function refreshGraph() {
 
   }
 
-  //set years
+  /************************************************************
+  * Refresh Years domain based upon the processData.
+  ***********************************************************/
+
   scales.years = d3.scale.linear()
       .domain([ minYear,maxYear])
       .range([ padding.left, wid - padding.right ]);
 
+  /************************************************************
+  * Process Politicians names 
+  ***********************************************************/
 
-  // empire containers
   var names = vis.selectAll("g")
     .data(data, function(d){return d.id;});
     
@@ -311,7 +325,8 @@ function refreshGraph() {
           else{ return '';} 
         });
   
-  // bar labels
+ 
+
   vis.selectAll("g.barGroup")
     .append("svg:text")
       .attr("class", "barLabel")
@@ -319,9 +334,14 @@ function refreshGraph() {
         return scales.years(d.start); })
       .attr("y", 0);
 
- 
+  /************************************************************
+  * Process Years  
+  ***********************************************************/
   var yearsNumbers = scales.years.ticks(10);
-  // year ticks
+  
+  /************************************************************
+  * Add Years Lines
+  ***********************************************************/
   var yearTicks = vis.selectAll("line.tickLine")
     .data(yearsNumbers); 
 
@@ -359,7 +379,10 @@ function refreshGraph() {
 
 
   
-  // tick labels
+  /************************************************************
+  * Add Years Labels
+  ***********************************************************/
+  
   
   var yearLabelsSelection = 
     vis.selectAll("text.rule")
@@ -395,18 +418,7 @@ function refreshGraph() {
     
 }
 
-/************************************************************
- * Redraw the vis with transition
- ***********************************************************/
 
-function redraw() {
-
-    
-
-      
-  
-      
-}
 
 /************************************************************
  * Add interaction events after initial drawing
@@ -519,7 +531,7 @@ function setControl(elem, con, val, re) {
   $(elem).parents(".controlGroup").find("a").removeClass("active");
   $(elem).addClass("active");
   controls[con] = val;
-  if (re) redraw();
+  if (re) refreshGraph();
 }
 
 function parseTransform(s) {
