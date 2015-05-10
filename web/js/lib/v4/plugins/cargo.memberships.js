@@ -42,11 +42,6 @@ window.cargo.plugins.memberships =  {
 	    .append('text')
 	    .attr('class', 'membershipLabel')
 	    .attr('dy','.33em')
-  		.style("opacity", function(d) {
-		    //On CarreerMeter hide years. 
-	        if (controls.height == "memberships")  return 1;
-	        	else return 0;
-      	})
       	.transition()
   		.duration(transitionDuration)
 	    .attr("x", padding.left / 7)
@@ -55,7 +50,11 @@ window.cargo.plugins.memberships =  {
 	    .text(function(d) {
 	    	return d;
 	    });
-
+	  labels.style("opacity", function(d) {
+	    //On CarreerMeter hide years. 
+        if (controls.height == "memberships")  return 1;
+        	else return 0;
+      });
 	  labels.exit().remove();
 
 
