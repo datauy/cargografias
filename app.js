@@ -11,7 +11,7 @@ app.use(compression({
   threshold : 0, // or whatever you want the lower threshold to be
   filter    : function(req, res) {
     if (req.url.indexOf('gz') > 0){
-      res.setHeader( "Content-Encoding", "gzip" );
+       // res.setHeader( "Content-Encoding", "gzip" );
     }
     
   }
@@ -19,6 +19,8 @@ app.use(compression({
 app.use(express.static(__dirname + '/web'));
 app.use('/legisladores-ar', express.static(__dirname + '/web'));
 app.use('/kenya', express.static(__dirname + '/web'));
+app.use('/peru', express.static(__dirname + '/web'));
+app.use('/mex', express.static(__dirname + '/web'));
 app.disable('etag');
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
