@@ -119,27 +119,16 @@ function processData() {
     scales.years = d3.scale.linear()
       .domain([ minYear,maxYear])
       .range([ padding.left, wid - padding.right ]);
-
-
-    totalmemberships = d3.sum(data, function(d){return d.memberships.length});
-
-
-
-    if (controls.height == "memberships")
-    {
-        hei = (totalmemberships* boxHeight) + 100;
-    }
-    else{
         
-        hei = (data.length * boxHeight)+100;
-    }
+    hei = (data.length * boxHeight)+100;
+    
 
 
     barHeight = (hei - padding.top - padding.bottom) / data.length;
 
-    scales.indexes = d3.scale.linear()
-      .domain([ 0,  totalmemberships- 1 ])
-      .range([ padding.top, hei - padding.bottom - barHeight ]);
+    // scales.indexes = d3.scale.linear()
+    //   .domain([ 0,  totalmemberships- 1 ])
+    //   .range([ padding.top, hei - padding.bottom - barHeight ]);
 
 
     scales.colorsScale = d3.scale.category20();
@@ -162,18 +151,8 @@ function processData() {
       return range * percentage;
     }
 
-
-    //clear all;
-    memberships = [];
-    //find all other memberships by region and province
-    var membershipsArray = data.map(function(d) { return d.memberships.map( function(z){ return z.role + "-" + z.organization.name }); })
-    //and now we remove duplicates
-    membershipsArray = d3.merge(membershipsArray);
-    $.each(membershipsArray, function(i, el){
-      if($.inArray(el, memberships) === -1) memberships.push(el);
-    });
-    //now we order them
-    memberships.sort(function(a, b){ return d3.ascending(a, b);});
+    //Todo: Move to plugin loader
+    window.cargo.plugins.memberships.processData();
 
     // calculate ordering items
     var y_area = padding.top;
@@ -196,9 +175,9 @@ function processData() {
         d[j].parent = i;
 
         d[j].position = j;
-        //Post Position
-        d[j].membershipsPosition = memberships.indexOf(d[j].role + "-" + d[j].organization.name);
 
+
+        window.cargo.plugins.memberships.processIndex(d[j],j);
 
         //Save previous year reference to be uses on carrear compare
 
@@ -233,13 +212,15 @@ function refreshGraph() {
 
   hei = ($(window).height()/1.5);
 
-  if (controls.height == "memberships")
-  {
-    hei = (totalmemberships * boxHeight)+200 ;  
-  }
-  else{
-      hei = (data.length * boxHeight) + 200;
-  }
+  //Memberships.Height
+
+  
+  hei = (data.length * boxHeight) + 200;
+  
+  window.cargo.plugins.memberships.setBoxHeight();
+  
+  
+  
   /************************************************************
   * Transition cargo size.
   ***********************************************************/
@@ -314,16 +295,14 @@ function refreshGraph() {
 
         })
         .text(function(d,i) {
-          if (controls.height == "memberships"){ return '';}
+          //Memberships.IndexLabel
+          var label = window.cargo.plugins.memberships.updateIndexLabel();
+          if (controls.height == "memberships"){ return label;}
           else{ return d.name;} 
         });
 
-  vis.selectAll('text.membershipLabel')
-        .attr("y", function(d,i) {return (i)*barHeight + (barHeight/2) + padding.top;})
-        .text(function(d,i) {
-          if (controls.height == "memberships"){ return d;}
-          else{ return '';} 
-        });
+  //Memberships.UpdateLabel
+  window.cargo.plugins.memberships.updateLabel();
   
  
 
@@ -369,7 +348,7 @@ function refreshGraph() {
       .attr("x2", function(d) {
         if (controls.display == "timeline") return scales.years(d);
         else if (controls.display == "centered") return visCenter;
-        //On CarreerMeter move years to left
+        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
         else return padding.left;
       })
       .attr("y1", padding.top)
@@ -405,6 +384,7 @@ function refreshGraph() {
       }).attr("x", function(d) {
         if (controls.display == "timeline") return scales.years(d);
         else if (controls.display == "centered") return visCenter;
+        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
         else return padding.left;     
       })
       .attr("y", 20)
@@ -494,7 +474,7 @@ function setControlFix(o){
 
 function getFilterCallback(o){
   var cb = function(){};
-  // 'membership' orderLine('height', 'memberships')
+  //Membership.Action
   if (o ==="memberships"){
     cb = function(){
         setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', false);
