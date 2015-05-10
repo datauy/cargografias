@@ -3,7 +3,6 @@ var wid, hei;
 var transitionDuration = 800;
 var started = false;
 var data = [];
-var memberships = [];
 var scales = {};
 var totals = {};
 var maxYear, minYear = 0;
@@ -12,7 +11,6 @@ var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
 var boxHeight = 35;
-var totalmemberships = 0 ;
 var waitStart = false;
 var controls = {
   display: "aligned",
@@ -286,6 +284,7 @@ function refreshGraph() {
 
   names.exit().remove();
 
+
  
   vis.selectAll('svg text.itemLabel')
         .attr("x", padding.left / 7)
@@ -302,7 +301,7 @@ function refreshGraph() {
         });
 
   //Memberships.UpdateLabel
-  window.cargo.plugins.memberships.updateLabel();
+  window.cargo.plugins.memberships.updateLabels();
   
  
 
