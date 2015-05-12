@@ -12,10 +12,14 @@ var barHeight = 10;
 var defaultPopPercent = .08;
 var boxHeight = 35;
 var waitStart = false;
-var controls = {
-  display: "aligned",
-  height: "fixed"
-}
+
+//TODO: move to loader? .init()?
+var controls = {}
+controls['display'] = 'timeline';
+controls['height'] = 'contiguous';
+controls['group'] = 'name';
+
+
 
 
 function setVisSize() {
@@ -28,13 +32,12 @@ function setVisSize() {
     
 }
 
-// $(window).resize(reloadTimeline);
+$(window).resize(reloadTimeline);
 
-function reloadTimeline(callback){
+function reloadTimeline(){
 
   // process data for scales
   processData();
-
 
   //Creates the proper objects
   if (!started){
@@ -45,21 +48,11 @@ function reloadTimeline(callback){
 
 
   //D3 main enter
-  // refreshGraph();
+  refreshGraph();
   addInteractionEvents();
 
 
-  var defaultFilterCallback = function() {
-      setControl($("#controls #layoutControls #layout-timeline"), "display", "timeline", false);
-      setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
-      setControl($("#controls #groupControls #group-name"), "group", "name", false);
-  };  
-  if (!callback){
-    callback = defaultFilterCallback;
-  }
-    
-
-  setTimeout(callback, 500);
+  
   
 
 }
@@ -508,57 +501,32 @@ function showInfoBox(e, i, j) {
 }
 //In order to isolate order/filtering this method will execute everthing
 function setControlFix(o){
-  var cb = getFilterCallback(o);
-  if (!started){
-    reloadTimeline(cb);
-  }
-  else {
-    cb();
-  }
+  setControls(o);
+  reloadTimeline();
   
 }
 
-function getFilterCallback(o){
-  var cb = function(){};
+function setControls(o){
+  
   //Membership.Action
   if (o ==="memberships"){
-    cb = function(){
-        setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', false);
-        setControl($("#controls #heightControls #height-area"), 'height', o, true);
-      };
-  }
-  // 'career' filterLine('display','aligned')
-  else if (o ==="name"){
-    cb = function(){
-       setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', true);
-       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
-    };
-
+       controls['display'] = 'timeline';
+       controls['height'] = 'memberships';
   }
   // 'name 'orderLine('height', 'contiguous')
   else if (o ==="career"){
-    cb = function(){
-      setControl($("#controls #heightControls #layout-timeline"), 'display', 'aligned', true);
-      setControl($("#controls #heightControls #height-area"),'height', 'contiguous', true);
-    };
+      controls['display'] = 'aligned';
+      controls['height'] = 'contiguous';
   }
   // 'timeline' filterLine('display','timeline')
   else{
-    cb = function(){
-       setControl($("#controls #heightControls #layout-timeline"), 'display', 'timeline', true);
-       setControl($("#controls #heightControls #height-area"), "height", "contiguous", true);
-    };
+      controls['display'] = 'timeline';
+      controls['height'] = 'contiguous';
+      controls['group'] = 'name';
   }
-  return cb;
 }
 
-function setControl(elem, con, val, re) {
 
-  $(elem).parents(".controlGroup").find("a").removeClass("active");
-  $(elem).addClass("active");
-  controls[con] = val;
-  if (re) refreshGraph();
-}
 
 function parseTransform(s) {
   if (s.substr(0, 10) == "translate(") {
