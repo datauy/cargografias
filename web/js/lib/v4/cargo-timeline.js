@@ -273,11 +273,11 @@ function refreshGraph() {
     names.each(function(politician, j){
        
        var memberships = d3.select(this)
-            .selectAll('g')
-            .data(politician.memberships, function(d,i){ return i;});
+            .selectAll('g.barGroup')
+            .data(politician.memberships, function(d,i){ return d.id;});
             
-            memberships.enter()
-            .append("svg:g")
+      memberships.enter()
+            .append("g")
             .attr("class", "barGroup")
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
@@ -285,22 +285,22 @@ function refreshGraph() {
             .style("fill-opacity", function(d) { 
                 return 0;
               })
-              .attr("transform", function(d, i) {
-                var tx, ty;
-                //TimeLine
-                if (controls.display == "timeline") tx = scales.years(d.start);
-                
-                barHeight = ((hei - padding.top - padding.bottom) / data.length);
-                //depends on politicans
-                scales.indexes = d3.scale.linear()
-                      .domain([ 0,  data.length - 1 ])
-                      .range([ padding.top, hei - padding.bottom - barHeight]);
-                // if (controls.height == "contiguous")
-                ty = scales.indexes(d.parent);
-                d.tx = tx;
-                d.ty = ty;
-                return "translate(" + tx + ", " + ty + ")"; 
-              })
+            .attr("transform", function(d, i) {
+              var tx, ty;
+              //TimeLine
+              if (controls.display == "timeline") tx = scales.years(d.start);
+              
+              barHeight = ((hei - padding.top - padding.bottom) / data.length);
+              //depends on politicans
+              scales.indexes = d3.scale.linear()
+                    .domain([ 0,  data.length - 1 ])
+                    .range([ padding.top, hei - padding.bottom - barHeight]);
+              // if (controls.height == "contiguous")
+              ty = scales.indexes(d.parent);
+              d.tx = tx;
+              d.ty = ty;
+              return "translate(" + tx + ", " + ty + ")"; 
+            })
             .attr("class", function(d) {
               //TODO: change to type and region?
               return "bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
@@ -323,7 +323,15 @@ function refreshGraph() {
   names.exit().remove();
 
 
-
+  // empire containers
+      vis.selectAll("g.barGroup")
+        .transition()
+          .duration(transitionDuration)
+          .style("fill-opacity", function(d) { 
+            //if (controls.height == "population" && isNaN(d.Percent_World_Population)) return .4;
+            //else 
+            return 1;
+          });
 
 
   vis.selectAll('svg text.itemLabel')
@@ -464,39 +472,6 @@ function addInteractionEvents() {
 function showInfoBox(e, i, j) {
 
 
-  //TODO: Cambiar por angular?
-
-  if (i == null) $("#infobox").hide();
-  else {
-    //TODO: Can we move this to angular?
-    var politician = data[i];
-    var membership = politician.memberships[j];
-    
-
-
-    var info = "<span class='title'>" + politician.name + "</span>";
-    info += "<br />";
-    info += "<img src='" + politician.image + "'>" ;
-    info += "<br />" + membership.role ;
-    info += "<br />" + membership.organization.name ;
-    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
-    
-
-    //Initial pos;
-    var infoPos;
-    if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
-    else infoPos = { left: e.pageX-200, top: e.pageY-80 };
-    
-    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
-    //clear all clases
-    document.getElementById('infobox').className = '';
-    
-    $("#infobox")
-      .addClass(classes)
-      .html(info)
-      .css(infoPos)
-      .show();
-  }
 
 }
 //In order to isolate order/filtering this method will execute everthing
