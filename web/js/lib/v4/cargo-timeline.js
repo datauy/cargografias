@@ -273,19 +273,25 @@ function refreshGraph() {
     names.each(function(politician, j){
        
        var memberships = d3.select(this)
-            .selectAll('g.barGroup')
+            .selectAll('rect')
             .data(politician.memberships, function(d,i){ return d.id;});
             
       memberships.enter()
-            .append("g")
-            .attr("class", "barGroup")
+            .append("rect")
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
-            .append("svg:rect")
+            .attr("class", function(d) {
+              //TODO: change to type and region?
+              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+            })
+            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+            .attr("height", barHeight);
+
+           memberships.transition()
+            .duration(transitionDuration)
             .style("fill-opacity", function(d) { 
-                return 0;
-              })
-            .attr("transform", function(d, i) {
+                return 1;
+              }).attr("transform", function(d, i) {
               var tx, ty;
               //TimeLine
               if (controls.display == "timeline") tx = scales.years(d.start);
@@ -300,18 +306,8 @@ function refreshGraph() {
               d.tx = tx;
               d.ty = ty;
               return "translate(" + tx + ", " + ty + ")"; 
-            })
-            .attr("class", function(d) {
-              //TODO: change to type and region?
-              return "bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
-            })
-            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-            .attr("height", barHeight)
-            .transition()
-            .duration(transitionDuration)
-            .style("fill-opacity", function(d) { 
-                return 1;
-              })
+            });
+            
             
   
 
