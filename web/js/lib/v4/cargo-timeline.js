@@ -272,10 +272,17 @@ function refreshGraph() {
 
     names.each(function(politician, j){
        
-       var memberships = d3.select(this)
+      
+      var memberships = d3.select(this)
             .selectAll('rect')
             .data(politician.memberships, function(d,i){ return d.id;});
-            
+      
+
+      barHeight = ((hei - padding.top - padding.bottom) / data.length);
+      //depends on politicans
+      scales.indexes = d3.scale.linear()
+            .domain([ 0,  data.length - 1 ])
+            .range([ padding.top, hei - padding.bottom - barHeight]);
       memberships.enter()
             .append("rect")
             .attr("index", function(d, i) { return j; })
@@ -284,11 +291,44 @@ function refreshGraph() {
               //TODO: change to type and region?
               return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
-            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-            .attr("height", barHeight);
+            .style("fill-opacity", function(d) { 
+                return 1;
+              })
+            .attr("transform", function(d, i) {
+                var tx, ty;
+                //TimeLine
+                if (controls.display == "timeline") tx = scales.years(d.start);
+                
+                
+                
+                // if (controls.height == "contiguous")
+                ty = scales.indexes(d.parent);
+                d.tx = tx;
+                d.ty = ty;
+                return "translate(" + tx + ", " + ty + ")"; 
+            })
+            
 
            memberships.transition()
             .duration(transitionDuration)
+            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+            .attr("height", barHeight)
+            .attr("transform", function(d, i) {
+                var tx, ty;
+                //TimeLine
+                if (controls.display == "timeline") tx = scales.years(d.start);
+                
+                barHeight = ((hei - padding.top - padding.bottom) / data.length);
+                //depends on politicans
+                scales.indexes = d3.scale.linear()
+                      .domain([ 0,  data.length - 1 ])
+                      .range([ padding.top, hei - padding.bottom - barHeight]);
+                // if (controls.height == "contiguous")
+                ty = scales.indexes(d.parent);
+                d.tx = tx;
+                d.ty = ty;
+                return "translate(" + tx + ", " + ty + ")"; 
+            })
             .style("fill-opacity", function(d) { 
                 return 1;
               }).attr("transform", function(d, i) {
