@@ -298,9 +298,20 @@ function refreshGraph() {
                 var tx, ty;
                 //TimeLine
                 if (controls.display == "timeline") tx = scales.years(d.start);
-                
-                
-                
+                else if (controls.display == "aligned") {
+                    var first = scales.years.ticks()[0];
+                    if (d.position=== 0) tx = padding.left;
+                    else {
+                      
+                      
+                      
+                      tx = d.pre.tx + 
+                      //width of the previous
+                      (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                      //distance between previous
+                      (scales.years(d.start) - scales.years(d.pre.end))
+                    }
+                  }
                 // if (controls.height == "contiguous")
                 ty = scales.indexes(d.parent);
                 d.tx = tx;
@@ -315,38 +326,38 @@ function refreshGraph() {
             .attr("height", barHeight)
             .attr("transform", function(d, i) {
                 var tx, ty;
-                //TimeLine
-                if (controls.display == "timeline") tx = scales.years(d.start);
+                //Width
+                tx = scales.years(d.start);
+                 //Carreer comparsion
+                if (controls.display == "aligned") {
+                    var first = scales.years.ticks()[0];
+                    if (d.position=== 0) tx = padding.left;
+                    else {
+                      
+                      
+                      
+                      tx = d.pre.tx + 
+                      //width of the previous
+                      (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                      //distance between previous
+                      (scales.years(d.start) - scales.years(d.pre.end))
+                    }
+                  }
+                  
+                //Height
+                if (controls.height == "contiguous")  ty = scales.indexes(d.parent);
+                else if (controls.height == "area") ty = d.area_y;
+                else if (controls.height == "population") ty = d.popPercent_y; 
+                else ty = scales.indexes(i);  
                 
-                barHeight = ((hei - padding.top - padding.bottom) / data.length);
-                //depends on politicans
-                scales.indexes = d3.scale.linear()
-                      .domain([ 0,  data.length - 1 ])
-                      .range([ padding.top, hei - padding.bottom - barHeight]);
-                // if (controls.height == "contiguous")
-                ty = scales.indexes(d.parent);
+
                 d.tx = tx;
                 d.ty = ty;
                 return "translate(" + tx + ", " + ty + ")"; 
             })
             .style("fill-opacity", function(d) { 
                 return 1;
-              }).attr("transform", function(d, i) {
-              var tx, ty;
-              //TimeLine
-              if (controls.display == "timeline") tx = scales.years(d.start);
-              
-              barHeight = ((hei - padding.top - padding.bottom) / data.length);
-              //depends on politicans
-              scales.indexes = d3.scale.linear()
-                    .domain([ 0,  data.length - 1 ])
-                    .range([ padding.top, hei - padding.bottom - barHeight]);
-              // if (controls.height == "contiguous")
-              ty = scales.indexes(d.parent);
-              d.tx = tx;
-              d.ty = ty;
-              return "translate(" + tx + ", " + ty + ")"; 
-            });
+              });
             
             
   
