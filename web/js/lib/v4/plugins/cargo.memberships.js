@@ -31,7 +31,8 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
-		    hei =  (data.length  * boxHeight/2)+75 ;
+		    hei =  (this.data.length  * boxHeight)*2 ;
+
 		 }
 	},
 	updateBoxes: function(d,i){
@@ -45,7 +46,7 @@ window.cargo.plugins.memberships =  {
 
 			var transform = {
 				tx: scales.years(d.start),
-				ty: (d.membershipsPosition)*(barHeight*5) + padding.top,
+				ty: scales.indexes(d.membershipsPosition*2)
 			};
 			return transform;
 
@@ -77,7 +78,7 @@ window.cargo.plugins.memberships =  {
 		      })
       	.attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
-      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/1.25 + padding.top;})
+      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
 	 labels.exit().remove();
 
 
