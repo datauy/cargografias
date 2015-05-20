@@ -216,12 +216,12 @@ function refreshGraph() {
   d3.selectAll('.vis')
     .transition()
     .attr('width', wid)
-    .attr('height', 1000);
+    .attr('height', hei);
 
   d3.selectAll('.background')
     .transition()
     .attr('width', wid)
-    .attr('height', 1000);
+    .attr('height', hei);
 
   /************************************************************
   * If there is no items, just remove the vis.
@@ -279,6 +279,7 @@ function refreshGraph() {
       scales.indexes = d3.scale.linear()
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
+      
       memberships.enter()
             .append("rect")
             .attr("index", function(d, i) { return j; })
