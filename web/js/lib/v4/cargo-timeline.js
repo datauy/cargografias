@@ -254,7 +254,6 @@ function refreshGraph() {
   var names = vis.selectAll("g")
     .data(data, function(d){return d.id;});
     
-  console.log('refresh');
   names.enter().append("g")
     .append('text')
     .attr('class', 'group')
@@ -265,7 +264,7 @@ function refreshGraph() {
       return (i+1)*(barHeight/2) ;
     })
     .text(function(d) {
-      console.log(d.name);
+      
       return d.name;
 
     });
@@ -295,28 +294,41 @@ function refreshGraph() {
                 return 1;
               })
             .attr("transform", function(d, i) {
-                var tx, ty;
+                var transform = {
+                  tx:0,
+                  ty:0 
+                };
                 //TimeLine
-                if (controls.display == "timeline") tx = scales.years(d.start);
+                if (controls.display == "timeline") {
+                    transform.tx = scales.years(d.start);
+                    transform.ty = scales.indexes(d.parent);  
+                }
+                  
+                //CareerMeeter
                 else if (controls.display == "aligned") {
-                    var first = scales.years.ticks()[0];
-                    if (d.position=== 0) tx = padding.left;
-                    else {
-                      
-                      
-                      
-                      tx = d.pre.tx + 
-                      //width of the previous
-                      (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-                      //distance between previous
-                      (scales.years(d.start) - scales.years(d.pre.end))
-                    }
+                  var first = scales.years.ticks()[0];
+
+                  if (d.position=== 0) { 
+                    transform.tx = padding.left;
                   }
-                // if (controls.height == "contiguous")
-                ty = scales.indexes(d.parent);
-                d.tx = tx;
-                d.ty = ty;
-                return "translate(" + tx + ", " + ty + ")"; 
+                  else {
+                    transform.tx =d.pre.tx + 
+                    //width of the previous
+                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                    //distance between previous
+                    (scales.years(d.start) - scales.years(d.pre.end))
+                  }
+                  transform.ty = scales.indexes(d.parent);  
+                }
+                 
+                if (controls.height == "memberships") { 
+                  transform = window.cargo.plugins.memberships.updateLabels();
+                }
+                
+                
+                d.tx = transform.tx;
+                d.ty = transform.ty;
+                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
             
 
@@ -325,35 +337,41 @@ function refreshGraph() {
             .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
             .attr("height", barHeight)
             .attr("transform", function(d, i) {
-                var tx, ty;
-                //Width
-                tx = scales.years(d.start);
-                 //Carreer comparsion
-                if (controls.display == "aligned") {
-                    var first = scales.years.ticks()[0];
-                    if (d.position=== 0) tx = padding.left;
-                    else {
-                      
-                      
-                      
-                      tx = d.pre.tx + 
-                      //width of the previous
-                      (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-                      //distance between previous
-                      (scales.years(d.start) - scales.years(d.pre.end))
-                    }
-                  }
+                var transform = {
+                  tx:0,
+                  ty:0 
+                };
+                //TimeLine
+                if (controls.display == "timeline") {
+                    transform.tx = scales.years(d.start);
+                    transform.ty = scales.indexes(d.parent);  
+                }
                   
-                //Height
-                if (controls.height == "contiguous")  ty = scales.indexes(d.parent);
-                else if (controls.height == "area") ty = d.area_y;
-                else if (controls.height == "population") ty = d.popPercent_y; 
-                else ty = scales.indexes(i);  
-                
+                //CareerMeeter
+                else if (controls.display == "aligned") {
+                  var first = scales.years.ticks()[0];
 
-                d.tx = tx;
-                d.ty = ty;
-                return "translate(" + tx + ", " + ty + ")"; 
+                  if (d.position=== 0) { 
+                    transform.tx = padding.left;
+                  }
+                  else {
+                    transform.tx =d.pre.tx + 
+                    //width of the previous
+                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                    //distance between previous
+                    (scales.years(d.start) - scales.years(d.pre.end))
+                  }
+                  transform.ty = scales.indexes(d.parent);  
+                }
+                 
+                if (controls.height == "memberships") { 
+                  transform = window.cargo.plugins.memberships.updateBoxes(d);
+                }
+                
+                
+                d.tx = transform.tx;
+                d.ty = transform.ty;
+                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
             .style("fill-opacity", function(d) { 
                 return 1;
@@ -380,6 +398,12 @@ function refreshGraph() {
             return 1;
           });
 
+
+
+  /************************************************************
+  * Process Labels
+  ***********************************************************/
+  
 
   vis.selectAll('svg text.itemLabel')
         .attr("x", padding.left / 7)

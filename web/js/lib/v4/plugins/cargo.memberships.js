@@ -31,8 +31,24 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
-		    hei = (this.count() * boxHeight)+200 ;    
+		    hei = (this.count() * boxHeight)+75 ;    
 		 }
+	},
+	updateBoxes: function(d){
+				
+		var barHeight = (hei - padding.top - padding.bottom) / this.data.length;
+            //Overwrites years
+            //depends on total of type of memberships
+		scales.indexes = d3.scale.linear()
+		  .domain([ 0,  this.data.length - 1 ])
+		  .range([ padding.top, hei - padding.bottom - barHeight ]);
+
+			var transform = {
+				tx: scales.years(d.start),
+				ty: scales.indexes(d.membershipsPosition) -20,
+			};
+			return transform;
+
 	},
 	updateLabels: function(){
 	  var labels = vis.selectAll('text.membershipLabel')
@@ -41,21 +57,32 @@ window.cargo.plugins.memberships =  {
 	  labels.enter()
 	    .append('text')
 	    .attr('class', 'membershipLabel')
-	    .attr('dy','.33em')
-      	.transition()
-  		.duration(transitionDuration)
-	    .attr("x", padding.left / 7)
+	    
+      	.attr("x", function(){ return padding.left / 7;})
 		.attr("y", function(d,i) {
-	        	return (i)*barHeight + (barHeight/2) + padding.top;})
+	        	return (i+1)*(barHeight/2) ;
+	    })
 	    .text(function(d) {
+	    	console.log(d);
 	    	return d;
 	    });
-	  labels.style("opacity", function(d) {
-	    //On CarreerMeter hide years. 
-        if (controls.height == "memberships")  return 1;
-        	else return 0;
-      });
-	  labels.exit().remove();
+	  
+	 
+
+	 labels
+	 	.transition()
+      	.duration(transitionDuration)
+      	.style("opacity", function(d) {
+		    //On CarreerMeter hide years. 
+	        if (controls.height == "memberships")  return 1;
+	        	else return 0;
+		      })
+      	.attr('dy','.33em')
+      	.attr("x", function(){ return padding.left / 7;})
+      	.attr("y", function(d,i) {
+	        	return (i+1)*(barHeight/2) ;
+	    });
+	 labels.exit().remove();
 
 
 	  		
