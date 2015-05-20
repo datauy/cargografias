@@ -31,21 +31,21 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
-		    hei = (this.count() * boxHeight)+75 ;    
+		    hei =  (data.length  * boxHeight/2)+75 ;
 		 }
 	},
-	updateBoxes: function(d){
-				
+	updateBoxes: function(d,i){
+		this.setBoxHeight()
 		var barHeight = (hei - padding.top - padding.bottom) / this.data.length;
             //Overwrites years
             //depends on total of type of memberships
 		scales.indexes = d3.scale.linear()
 		  .domain([ 0,  this.data.length - 1 ])
-		  .range([ padding.top, hei - padding.bottom - barHeight ]);
+		  .range([ padding.top , (hei - padding.bottom)]);
 
 			var transform = {
 				tx: scales.years(d.start),
-				ty: scales.indexes(d.membershipsPosition) -20,
+				ty: (d.membershipsPosition)*(barHeight*5) + padding.top,
 			};
 			return transform;
 
@@ -59,9 +59,7 @@ window.cargo.plugins.memberships =  {
 	    .attr('class', 'membershipLabel')
 	    
       	.attr("x", function(){ return padding.left / 7;})
-		.attr("y", function(d,i) {
-	        	return (i+1)*(barHeight/2) ;
-	    })
+		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
 	    .text(function(d) {
 	    	console.log(d);
 	    	return d;
@@ -79,9 +77,7 @@ window.cargo.plugins.memberships =  {
 		      })
       	.attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
-      	.attr("y", function(d,i) {
-	        	return (i+1)*(barHeight/2) ;
-	    });
+      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/1.25 + padding.top;})
 	 labels.exit().remove();
 
 

@@ -201,15 +201,12 @@ function refreshGraph() {
   * reload height
   ***********************************************************/
 
-  hei = ($(window).height()/1.5);
-
+  // hei = ($(window).height()/1.5);
+  hei = (data.length  * boxHeight/2)+75 ;  
+  console.log(hei);
   //Memberships.Height
-
-  
-  hei = (data.length * boxHeight) + 200;
-  
   window.cargo.plugins.memberships.setBoxHeight();
-  
+  console.log(hei);
   
   
   /************************************************************
@@ -219,12 +216,12 @@ function refreshGraph() {
   d3.selectAll('.vis')
     .transition()
     .attr('width', wid)
-    .attr('height', hei);
+    .attr('height', 1000);
 
   d3.selectAll('.background')
     .transition()
     .attr('width', wid)
-    .attr('height', hei);
+    .attr('height', 1000);
 
   /************************************************************
   * If there is no items, just remove the vis.
@@ -365,7 +362,8 @@ function refreshGraph() {
                 }
                  
                 if (controls.height == "memberships") { 
-                  transform = window.cargo.plugins.memberships.updateBoxes(d);
+                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
+                  console.log(transform);
                 }
                 
                 
