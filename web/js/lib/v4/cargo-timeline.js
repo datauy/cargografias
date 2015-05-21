@@ -150,19 +150,25 @@ function processData() {
       //Check sort by date 
       d = data[i].memberships = data[i].memberships.sort(function(a, b){ return d3.ascending(a.start, b.start); });
       for (var j = 0; j < d.length; j++) {
-        d[j].area_y = y_area;
-        
+
+
+
+        d[j].area_y = y_area;        
         y_area += scales.areas(d[j].Land_area_million_km2);
+
 
         d[j].popPercent_y = y_popPercent;
         if (isNaN(d[j].Percent_World_Population)) y_popPercent += scales.popPercents(defaultPopPercent);
         else y_popPercent += scales.popPercents(d[j].Percent_World_Population);
 
+        
+
         d[j].politician = data[i];
         d[j].parent = i;
-
         d[j].position = j;
 
+        
+        
 
         window.cargo.plugins.memberships.processIndex(d[j],j);
 
@@ -175,6 +181,11 @@ function processData() {
          d[j].pre = {start:0, pre:0, tx:0} ;
         }
 
+        //Used for beziers
+        if (j+1 < d.length){
+          d[j].after = d[j+1];  
+        }
+        
 
       };
 
@@ -199,10 +210,8 @@ function refreshGraph() {
 
   // hei = ($(window).height()/1.5);
   hei = (data.length  * boxHeight/2)+75 ;  
-  console.log(hei);
   //Memberships.Height
   window.cargo.plugins.memberships.setBoxHeight();
-  console.log(hei);
   
   
   /************************************************************
@@ -358,7 +367,7 @@ function refreshGraph() {
                  
                 if (controls.height == "memberships") { 
                   transform = window.cargo.plugins.memberships.updateBoxes(d,i);
-                  console.log(transform);
+                  
                 }
                 
                 
@@ -374,9 +383,12 @@ function refreshGraph() {
             
             
   
-
+  
   
       memberships.exit().remove();
+
+
+      window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
      
     });
   
