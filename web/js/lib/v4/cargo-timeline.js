@@ -10,7 +10,7 @@ var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
-var boxHeight = 22;
+var boxHeight = 35;
 var waitStart = false;
 
 //TODO: move to loader? .init()?
@@ -328,8 +328,6 @@ function refreshGraph() {
 
            memberships.transition()
             .duration(transitionDuration)
-            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-            .attr("height", barHeight)
             .attr("transform", function(d, i) {
                 var transform = {
                   tx:0,
@@ -368,6 +366,8 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
+            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+            .attr("height", barHeight)
             .style("fill-opacity", function(d) { 
                 return 1;
               });

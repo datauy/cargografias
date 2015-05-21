@@ -32,26 +32,28 @@ window.cargo.plugins.memberships =  {
 		if (controls.height == "memberships")
 		{
 		    hei =  (this.data.length  * boxHeight)*2 ;
-
+		    barHeight = (hei - padding.top - padding.bottom) / this.data.length ;
 		 }
 	},
 	updateBoxes: function(d,i){
-		this.setBoxHeight()
-		var barHeight = (hei - padding.top - padding.bottom) / this.data.length;
+		this.setBoxHeight();
+		
             //Overwrites years
             //depends on total of type of memberships
-		scales.indexes = d3.scale.linear()
-		  .domain([ 0,  this.data.length - 1 ])
-		  .range([ padding.top , (hei - padding.bottom)]);
+		 scales.indexes = d3.scale.linear()
+              .domain([ 0,  this.data.length - 1 ])
+              .range([ padding.top, hei - padding.bottom - barHeight ]);
 
 			var transform = {
 				tx: scales.years(d.start),
-				ty: scales.indexes(d.membershipsPosition*2)
+				ty: scales.indexes(d.membershipsPosition)
 			};
 			return transform;
 
 	},
 	updateLabels: function(){
+		this.setBoxHeight();
+        
 	  var labels = vis.selectAll('text.membershipLabel')
 	    .data(this.data, function(d,i){ return i;});
 
