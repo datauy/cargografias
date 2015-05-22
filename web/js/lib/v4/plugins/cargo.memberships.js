@@ -124,10 +124,7 @@ window.cargo.plugins.memberships =  {
 	    
       	.attr("x", function(){ return padding.left / 7;})
 		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
-	    .text(function(d) {
-	    	console.log(d);
-	    	return d;
-	    });
+	    
 	  
 	 
 
@@ -142,6 +139,10 @@ window.cargo.plugins.memberships =  {
       	.attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
       	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
+      	.text(function(d) {
+	    	console.log(d);
+	    	return d;
+	    });
 	 labels.exit().remove();
 
 
