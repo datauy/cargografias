@@ -68,26 +68,33 @@ window.cargo.plugins.memberships =  {
 
         var controlLenght = 20;
 
-        curves
-	        .attr('opacity', 1)
+        if (controls.height != "memberships"){
+        	curves
 	        .transition()
 	        .duration(transitionDuration)
+	        .attr('opacity', 0);
+        	return;
+        }
+
+        curves
+	        .transition()
+	        .duration(transitionDuration)
+	        .attr('opacity', 1)
 	        .attr('d', function(d) {
 	        	if (!d.after || !d.pre){
 	        		return "";
 	        	}
 	        //Scale Left
-	          var fromX = scales.years(d.start) - 2;	
-	          var fromY = scales.indexes(d.membershipsPosition) + 2;
+	          var fromX = scales.years(d.end) ;	
+	          var fromY = scales.indexes(d.membershipsPosition) + barHeight /2;
 
-	          	// ( || 0) + OFFSET_Y + OFFSET_Y_CURVAS : ALTURA_OCULTAMIENTO;
 			//Jump!
 	          var control1X = fromX + controlLenght;
 	          var control1Y = fromY;
 
 	        //Scale Right
 	          var toX = scales.years(d.after.start) - 2;	
-	          var toY = scales.indexes(d.after.membershipsPosition) + 2;
+	          var toY = scales.indexes(d.after.membershipsPosition) + barHeight /2;
 	        //Jump!
 	          var contorl2X = toX - controlLenght;
 	          var control2Y = toY;
