@@ -147,8 +147,10 @@ function processData() {
     var y_popPercent = padding.top;
     for(i = 0; i < data.length; i++) {
 
+      data[i].position = i;
       //Check sort by date 
       d = data[i].memberships = data[i].memberships.sort(function(a, b){ return d3.ascending(a.start, b.start); });
+      
       for (var j = 0; j < d.length; j++) {
 
 
@@ -209,7 +211,7 @@ function refreshGraph() {
   ***********************************************************/
 
   // hei = ($(window).height()/1.5);
-  hei = (data.length  * boxHeight/2)+75 ;  
+  hei = (data.length  * boxHeight)+75 ;  
   //Memberships.Height
   window.cargo.plugins.memberships.setBoxHeight();
   
@@ -279,8 +281,9 @@ function refreshGraph() {
             .data(politician.memberships, function(d,i){ return d.id;});
       
 
+      ///Set current height      
       barHeight = ((hei - padding.top - padding.bottom) / data.length);
-      //depends on politicans
+      //Set a index for boxes, from padding top to hei - padding top
       scales.indexes = d3.scale.linear()
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
@@ -375,10 +378,18 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
-            .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-            .attr("height", barHeight)
-            .style("fill-opacity", function(d) { 
-                return 1;
+            .style("fill", function(d) { 
+                var color = "";
+                if (controls.height == "memberships") { 
+                  color = window.cargo.plugins.memberships.colorScale(politician.position);  
+                }
+                return color;
+
+              })
+              .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+              .attr("height", barHeight)
+              .style("fill-opacity", function(d) { 
+                  return 1;
               });
             
             

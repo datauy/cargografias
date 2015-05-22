@@ -1,3 +1,4 @@
+var category20 = d3.scale.category20();
 window.cargo  =  window.cargo || {};
 window.cargo.plugins  = window.cargo.plugins || {};
 window.cargo.plugins.memberships =  {
@@ -5,6 +6,9 @@ window.cargo.plugins.memberships =  {
 
 	height: 0,
 	data : [],
+	colorScale: function(i){
+		return category20(i);
+	},
 	count : function(){
     	return d3.sum(data, function(d){return d.memberships.length});
 	},
@@ -104,10 +108,9 @@ window.cargo.plugins.memberships =  {
 
 	          return b;
 
+	        }).attr('stroke', function(d) {
+	          return window.cargo.plugins.memberships.colorScale(d.parent);
 	        });
-	        // .attr('stroke', function(d) {
-	        //   return d.colorStroke;
-	        // });
 
 
         curves.exit().remove();

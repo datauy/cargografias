@@ -170,7 +170,7 @@ function processData() {
     // Height
     var y_popPercent = padding.top;
     for(i = 0; i < data.length; i++) {
-
+      data[i].position = i;
       //Check sort by date 
       d = data[i].memberships = data[i].memberships.sort(function(a, b){ return d3.ascending(a.start, b.start); });
       for (var j = 0; j < d.length; j++) {
