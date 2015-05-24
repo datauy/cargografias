@@ -391,9 +391,23 @@ function refreshGraph() {
               .style("fill-opacity", function(d) { 
                   return 1;
               });
-            
-            
-  
+      memberships.append("text")
+        .attr("class", "barLabel")
+        .attr("x", function(d) { 
+          return scales.years(d.start); })
+        .attr("y", 0)
+        .attr("dx", ".66em")
+        .attr("dy", ".33em")
+        .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
+        .text(function(d) { 
+          //TODO: MOVE TO plugin
+          if (controls.height == "memberships"){
+            return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+          }
+          else {
+            return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+          }
+      });
   
   
       memberships.exit().remove();
@@ -442,12 +456,9 @@ function refreshGraph() {
   
  
 
-  vis.selectAll("g.barGroup")
-    .append("svg:text")
-      .attr("class", "barLabel")
-      .attr("x", function(d) { 
-        return scales.years(d.start); })
-      .attr("y", 0);
+  
+    
+      
 
   /************************************************************
   * Process Years  
