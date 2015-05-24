@@ -391,23 +391,28 @@ function refreshGraph() {
               .style("fill-opacity", function(d) { 
                   return 1;
               });
+
           // memberships.append("text")
+          //   .transition()
+          //   .duration(transitionDuration)
           //   .attr("class", "barLabel")
           //   .attr("x", function(d) { 
           //     return scales.years(d.start); })
-          //   .attr("y", 0)
+          //   .attr("y", function(d) {
+          //     return barHeight/2;      
+          //   })
           //   .attr("dx", ".66em")
-          // .attr("dy", ".33em")
-          // .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
-          // .text(function(d) { 
-          //   //if (d.)
-          //   if (controls.height == "memberships"){
-          //     return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-          //   }
-          //   else {
-          //     return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-          //   }
-          // });
+          //   .attr("dy", ".33em")
+          //   .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
+          //   .text(function(d) { 
+          //     //if (d.)
+          //     if (controls.height == "memberships"){
+          //       return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+          //     }
+          //     else {
+          //       return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+          //     }
+          //   });
   
   
       memberships.exit().remove();
