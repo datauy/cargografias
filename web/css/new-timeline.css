@@ -105,21 +105,25 @@ text {
 
 text.rule {
   fill: #000;
+  font-size: 1.2em;
+  
 }
 
 
 
 text.barLabel {
   font-size: 0.8em;
+  fill: black;
 }
 
 text.itemLabel{
-  font-size: 1em;
+  font-size: 1.3em;
   fill: #000;
 }
 
 text.membershipLabel{
  fill: #000; 
+ font-size: 1.3em;
 }
 
 
