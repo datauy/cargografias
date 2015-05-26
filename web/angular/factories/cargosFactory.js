@@ -36,64 +36,64 @@ angular.module('cargoApp.factories')
         }
         //TODO: tenemos que pasarlo a una lista
         shames.push({
-          name: 'Cargos Electos',
+          name: 'Mayor cantidad de Cargos Electivos',
           uom:'cargos',
           expression:'-summary.elected',
           value: 'elected',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Ejecutivos',
+          name: 'Mayor cantidad de Cargos Ejecutivos',
           uom:'cargos',
           expression:'-summary.executives',
           value: 'executives',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Legislativos',
+          name: 'Mayor cantidad de Cargos Legislativos',
           uom:'cargos',
           expression:'-summary.legislative',
           value: 'legislative',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Judiciales',
+          name: 'Mayor cantidad de Cargos Judiciales',
           expression:'-summary.judiciary',
           value: 'judiciary',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Reelecciones',
+          name: 'Mayor cantidad de Reelecciones',
           uom:'relecciones',
           expression:'-summary.reElected',
           value: 'reElected',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos No electivos',
+          name: 'Mayor cantidad de Cargos No electivos',
           uom:'cargos',
           expression:'-summary.notElected',
           value: 'notElected',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Distintos',
+          name: 'Mayor cantidad de Cargos Distintos',
           uom:'cargos',
           expression:'-memberships.length',
           getNumber: function(person){
             return person.memberships.length;
           }
         });
-        shames.push({
-          name: 'Años en cargos',
+       /* shames.push({
+          name: 'Mayor cantidad de Años en cargos',
           uom:'años',
           expression:'-periods.yearsCharges',
           getNumber: function(person){
             return person.periods.yearsCharges;
           }
         });
-        shames.push({
-          name: 'Años en política',
+       */ shames.push({
+          name: 'Mayor cantidad de Años en política',
           uom:'años',
           expression:'-periods.yearsPolitics',
           getNumber: function(person){
