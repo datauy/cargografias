@@ -99,7 +99,7 @@ function setBasicsParams(){
 function processData() {
 
     
-    maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
+    maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) })+5;
     minYear = d3.min(data, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
     scales.years = d3.scale.linear()
       .domain([ minYear,maxYear])
