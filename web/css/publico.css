@@ -341,7 +341,7 @@ svg text{
 }
 
 .persona-seleccionada {   
-width: 80px;
+  width: 80px;
   margin: 1em;
   float: left;
   display: inline-block;
@@ -355,9 +355,9 @@ width: 80px;
 
 .persona-seleccionada div.photo-frame {
   overflow: hidden;
-  max-height: 60px;
+  max-height: 97px;
   min-width: 75px;
-  height: 60px;
+  height: 97px;
   display: inline-block;
   margin: 0;
   padding: 0;
