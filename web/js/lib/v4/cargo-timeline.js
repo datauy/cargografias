@@ -623,4 +623,3 @@ function formatYear(y) {
   else return y;
 }
 
-

@@ -98,10 +98,10 @@ Active Collaborators
 =======
 * [Martín Rabaglia] 
 * [Andres Snitcofsky] 
+* [Daniel Calligaro]
 
 Past Collaborators
 =========
-* [Daniel Calligaro]
 * [Palamago]
 
 

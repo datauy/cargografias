@@ -20,7 +20,7 @@ node_modules
 Icon?
 ehthumbs.db
 Thumbs.db
-
+npm-debug.log
 
 # other dataousrces non compressed# 
 ###################################
