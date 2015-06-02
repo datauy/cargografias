@@ -277,7 +277,7 @@ function refreshGraph() {
        
       
       var memberships = d3.select(this)
-            .selectAll('rect')
+            .selectAll('g')
             .data(politician.memberships, function(d,i){ return d.id;});
       
 
@@ -289,16 +289,13 @@ function refreshGraph() {
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
       memberships.enter()
-            .append("rect")
+            .append("g")
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
               //TODO: change to type and region?
               return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
-            .style("fill-opacity", function(d) { 
-                return 1;
-              })
             .attr("transform", function(d, i) {
                 var transform = {
                   tx:0,
@@ -378,41 +375,44 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
-            .style("fill", function(d) { 
-                var color = "";
-                if (controls.height == "memberships") { 
-                  color = window.cargo.plugins.memberships.colorScale(politician.position);  
-                }
-                return color;
+           
+            
 
-              })
-              .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-              .attr("height", barHeight)
-              .style("fill-opacity", function(d) { 
-                  return 1;
-              });
+            //  .style("fill-opacity", function(d) { 
+           //      return 1;
+           //    })
+           
 
-          // memberships.append("text")
-          //   .transition()
-          //   .duration(transitionDuration)
-          //   .attr("class", "barLabel")
-          //   .attr("x", function(d) { 
-          //     return scales.years(d.start); })
-          //   .attr("y", function(d) {
-          //     return barHeight/2;      
-          //   })
-          //   .attr("dx", ".66em")
-          //   .attr("dy", ".33em")
-          //   .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
-          //   .text(function(d) { 
-          //     //if (d.)
-          //     if (controls.height == "memberships"){
-          //       return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-          //     }
-          //     else {
-          //       return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-          //     }
-          //   });
+           //  .style("fill", function(d) { 
+           //      var color = "";
+           //      if (controls.height == "memberships") { 
+           //        color = window.cargo.plugins.memberships.colorScale(politician.position);  
+           //      }
+           //      return color;
+
+           //    })
+           //    .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+           //    .attr("height", barHeight)
+           //    .style("fill-opacity", function(d) { 
+           //        return 1;
+           //    });
+
+          memberships.append("text")
+            .attr("class", "barLabel")
+            .attr("y", function(d) {
+              return barHeight/2;      
+            })
+            
+            .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
+            .text(function(d) { 
+              //if (d.)
+              if (controls.height == "memberships"){
+                return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+              else {
+                return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+            });
   
   
       memberships.exit().remove();
