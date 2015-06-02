@@ -57,7 +57,7 @@ window.cargo.plugins.memberships =  {
 
 	},
 	updateAdditionalGraphs:function(d,context){
-		console.log(d.name);
+		
 		var curves = d3.select(context)
 			.selectAll('path.curves')
 	        .data(d.memberships, function(d,i){ return i;});
@@ -143,7 +143,7 @@ window.cargo.plugins.memberships =  {
       	.attr("x", function(){ return padding.left / 7;})
       	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d) {
-	    	console.log(d);
+	    	
 	    	return d;
 	    });
 	 labels.exit().remove();

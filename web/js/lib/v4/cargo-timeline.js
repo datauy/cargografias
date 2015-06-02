@@ -288,7 +288,8 @@ function refreshGraph() {
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
-      memberships.enter()
+      memberships
+            .enter()
             .append("g")
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
@@ -333,7 +334,22 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             })
+            .append("text")
+            .attr("class", "barLabel")
+            .attr("y", function(d) {
+              return barHeight/2;      
+            })
             
+            .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
+            .text(function(d) { 
+              //if (d.)
+              if (controls.height == "memberships"){
+                return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+              else {
+                return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+            });
 
            memberships.transition()
             .duration(transitionDuration)
@@ -374,45 +390,9 @@ function refreshGraph() {
                 d.tx = transform.tx;
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
-            })
-           
-            
-
-            //  .style("fill-opacity", function(d) { 
-           //      return 1;
-           //    })
-           
-
-           //  .style("fill", function(d) { 
-           //      var color = "";
-           //      if (controls.height == "memberships") { 
-           //        color = window.cargo.plugins.memberships.colorScale(politician.position);  
-           //      }
-           //      return color;
-
-           //    })
-           //    .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
-           //    .attr("height", barHeight)
-           //    .style("fill-opacity", function(d) { 
-           //        return 1;
-           //    });
-
-          memberships.append("text")
-            .attr("class", "barLabel")
-            .attr("y", function(d) {
-              return barHeight/2;      
-            })
-            
-            .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
-            .text(function(d) { 
-              //if (d.)
-              if (controls.height == "memberships"){
-                return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-              }
-              else {
-                return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-              }
             });
+
+
   
   
       memberships.exit().remove();
