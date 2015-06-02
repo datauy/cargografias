@@ -1,4 +1,3 @@
-
 var wid, hei;
 var transitionDuration = 800;
 var started = false;
@@ -32,27 +31,33 @@ function setVisSize() {
     
 }
 
-$(window).resize(reloadTimeline);
+// $(window).resize(reloadTimeline);
 
+var waiting= false;
 function reloadTimeline(){
 
-  // process data for scales
-  processData();
-
-  //Creates the proper objects
-  if (!started){
-    setVisSize();
-    setBasicsParams();
-    started = true;
-  }
-
-
-  //D3 main enter
-  refreshGraph();
-  addInteractionEvents();
-
-
+  console.log('trigger load');  
   
+  if (!waiting){
+    waiting = true;
+    // process data for scales
+    processData();
+
+    //Creates the proper objects
+    if (!started){
+      started = true;
+      setVisSize();
+      setBasicsParams();
+      
+    }
+
+
+    //D3 main enter
+    refreshGraph();
+    addInteractionEvents();
+    waiting = false;
+
+  }
   
 
 }
@@ -60,34 +65,37 @@ function reloadTimeline(){
 
 function setBasicsParams(){
   
-  vis = d3.select("div.vis")
-    .append("svg:svg")
-    .attr("class", "vis");
-  
-    // background
-  vis.append("svg:rect")
-    .attr("class", "background")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", wid)
-    .attr("height", hei);
 
 
-  totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
-  totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
-  
-  totals.popPercent = d3.sum(data, function(d) { 
-  if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
-      else return d.Percent_World_Population; 
-    });
-  //Append Fonts! 
-  vis
-    .append('def')
-    .append('style')
-    .attr("type", "text/css")
-    .text('@import url(http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic);')
-
+  if (data.length > 0){
+    vis = d3.select("div.vis")
+      .append("svg")
+      .attr("class", "vis");
     
+    // background
+    vis.append("svg:rect")
+      .attr("class", "background")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", wid)
+      .attr("height", hei);
+
+
+    totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
+    totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
+    
+    totals.popPercent = d3.sum(data, function(d) { 
+    if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
+        else return d.Percent_World_Population; 
+      });
+    //Append Fonts! 
+    vis
+      .append('def')
+      .append('style')
+      .attr("type", "text/css")
+      .text('@import url(http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic);')
+
+  }
     
 }
 
@@ -235,10 +243,12 @@ function refreshGraph() {
   ***********************************************************/
 
 
-  if (data.length == 0){
-      d3.select("div.vis svg")
+  if (data.length === 0){
+      d3.selectAll("div.vis svg")
         .transition()
         .remove();
+      
+
       started = false;
 
   }
