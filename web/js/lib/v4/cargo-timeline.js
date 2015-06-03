@@ -294,7 +294,7 @@ function refreshGraph() {
       
 
       
-      memberships
+      var item = memberships
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
@@ -342,30 +342,93 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             });
-            
+      item.transition().duration(transitionDuration)
+      .attr("transform", function(d, i) {
+                var transform = {
+                  tx:0,
+                  ty:0 
+                };
+                //TimeLine
+                if (controls.display == "timeline") {
+                    transform.tx = scales.years(d.start);
+                    transform.ty = scales.indexes(d.parent);  
+                }
+                  
+                //CareerMeeter
+                else if (controls.display == "aligned") {
+                  var first = scales.years.ticks()[0];
+
+                  if (d.position=== 0) { 
+                    transform.tx = padding.left;
+                  }
+                  else {
+                    transform.tx =d.pre.tx + 
+                    //width of the previous
+                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                    //distance between previous
+                    (scales.years(d.start) - scales.years(d.pre.end))
+                  }
+                  transform.ty = scales.indexes(d.parent);  
+                }
+                 
+                if (controls.height == "memberships") { 
+                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
+                  
+                }
+                
+                
+                d.tx = transform.tx;
+                d.ty = transform.ty;
+                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
+            });
       
     
   
-    memberships
-      .append("rect")
+    item.append("rect");
+    item.select('rect')
       .attr("index", function(d, i) { return j; })
       .attr("membership", function(d, i) { return i; })
       .attr("class", function(d) {
         //TODO: change to type and region?
         return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
       })
-      .attr("width", 100)
-      .attr("height", barHeight - 1);
+      .style("fill-opacity", function(d) { 
+                return 1;
+      })
+     .style("fill", function(d) { 
+              var color = "";
+              if (controls.height == "memberships") { 
+                color = window.cargo.plugins.memberships.colorScale(politician.position);  
+              }
+              return color;
 
-    memberships
-        .append("text")
-        .attr("y", barHeight / 2)
-        .attr("dy", ".35em")
-        .text(function(d) { return d.role; });
+      })
+      .attr("width", 100)
+      .attr("height", barHeight)
+
+
+    item.append("text");
+
+    item.select('text')
+        .attr('class','boxLabel')
+        .attr("y", function(d) {
+            return barHeight/2;      
+          })
+        .attr("dx", ".66em")
+        .attr("dy", ".33em")  
+        .text(function(d) { 
+              //if (d.)
+              if (controls.height == "memberships"){
+                return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+              else {
+                return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+              }
+        });
 
     memberships.exit().remove();
 
-       // window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
+    window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
      
     });
   
