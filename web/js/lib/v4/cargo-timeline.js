@@ -1,3 +1,4 @@
+
 var wid, hei;
 var transitionDuration = 800;
 var started = false;
@@ -31,33 +32,27 @@ function setVisSize() {
     
 }
 
-// $(window).resize(reloadTimeline);
+$(window).resize(reloadTimeline);
 
-var waiting= false;
 function reloadTimeline(){
 
-  console.log('trigger load');  
-  
-  if (!waiting){
-    waiting = true;
-    // process data for scales
-    processData();
+  // process data for scales
+  processData();
 
-    //Creates the proper objects
-    if (!started){
-      started = true;
-      setVisSize();
-      setBasicsParams();
-      
-    }
-
-
-    //D3 main enter
-    refreshGraph();
-    addInteractionEvents();
-    waiting = false;
-
+  //Creates the proper objects
+  if (!started){
+    setVisSize();
+    setBasicsParams();
+    started = true;
   }
+
+
+  //D3 main enter
+  refreshGraph();
+  addInteractionEvents();
+
+
+  
   
 
 }
@@ -65,37 +60,34 @@ function reloadTimeline(){
 
 function setBasicsParams(){
   
-
-
-  if (data.length > 0){
-    vis = d3.select("div.vis")
-      .append("svg")
-      .attr("class", "vis");
-    
+  vis = d3.select("div.vis")
+    .append("svg:svg")
+    .attr("class", "vis");
+  
     // background
-    vis.append("svg:rect")
-      .attr("class", "background")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", wid)
-      .attr("height", hei);
+  vis.append("svg:rect")
+    .attr("class", "background")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", wid)
+    .attr("height", hei);
 
 
-    totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
-    totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
+  totals.area = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Land_area_million_km2; }) });
+  totals.population = d3.sum(data, function(d) { return d3.sum(d.memberships, function(p){ return p.Estimated_Population; }) });
+  
+  totals.popPercent = d3.sum(data, function(d) { 
+  if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
+      else return d.Percent_World_Population; 
+    });
+  //Append Fonts! 
+  vis
+    .append('def')
+    .append('style')
+    .attr("type", "text/css")
+    .text('@import url(http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic);')
+
     
-    totals.popPercent = d3.sum(data, function(d) { 
-    if (isNaN(d.Percent_World_Population)) return defaultPopPercent;
-        else return d.Percent_World_Population; 
-      });
-    //Append Fonts! 
-    vis
-      .append('def')
-      .append('style')
-      .attr("type", "text/css")
-      .text('@import url(http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic);')
-
-  }
     
 }
 
@@ -212,7 +204,12 @@ function processData() {
  ***********************************************************/
 
 function refreshGraph() {
+  if (data.length == 0){
+      d3.selectAll("div.vis svg").remove();
 
+      started = false;
+      return;
+  }
   var visCenter = (wid - padding.left - padding.right) / 2 + padding.left;
   /************************************************************
   * reload height
@@ -243,15 +240,7 @@ function refreshGraph() {
   ***********************************************************/
 
 
-  if (data.length === 0){
-      d3.selectAll("div.vis svg")
-        .transition()
-        .remove();
-      
 
-      started = false;
-
-  }
 
   /************************************************************
   * Refresh Years domain based upon the processData.
@@ -265,10 +254,11 @@ function refreshGraph() {
   * Process Politicians names 
   ***********************************************************/
 
-  var names = vis.selectAll("g")
+  var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});
     
   names.enter().append("g")
+    .attr('class', 'group')
     .append('text')
     .attr('class', 'group')
     .attr('class', 'itemLabel')
@@ -286,10 +276,22 @@ function refreshGraph() {
     names.each(function(politician, j){
        
       
-      var memberships = d3.select(this)
-            .selectAll('g')
+      var memberships = 
+          d3.select(this)
+            .selectAll("g.barGroup")
             .data(politician.memberships, function(d,i){ return d.id;});
       
+      memberships.enter()
+            .append("g")
+            .attr("index", function(d, i) { return j; })
+            .attr("membership", function(d, i) { return i; })
+            .attr("class", function(d) {
+              //TODO: change to type and region?
+              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+            })
+            .style("fill-opacity", function(d) { 
+                return 1;
+            });
 
       ///Set current height      
       barHeight = ((hei - padding.top - padding.bottom) / data.length);
@@ -298,72 +300,9 @@ function refreshGraph() {
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
-      memberships
-            .enter()
-            .append("g")
-            .attr("index", function(d, i) { return j; })
-            .attr("membership", function(d, i) { return i; })
-            .attr("class", function(d) {
-              //TODO: change to type and region?
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
-            })
-            .attr("transform", function(d, i) {
-                var transform = {
-                  tx:0,
-                  ty:0 
-                };
-                //TimeLine
-                if (controls.display == "timeline") {
-                    transform.tx = scales.years(d.start);
-                    transform.ty = scales.indexes(d.parent);  
-                }
-                  
-                //CareerMeeter
-                else if (controls.display == "aligned") {
-                  var first = scales.years.ticks()[0];
 
-                  if (d.position=== 0) { 
-                    transform.tx = padding.left;
-                  }
-                  else {
-                    transform.tx =d.pre.tx + 
-                    //width of the previous
-                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-                    //distance between previous
-                    (scales.years(d.start) - scales.years(d.pre.end))
-                  }
-                  transform.ty = scales.indexes(d.parent);  
-                }
-                 
-                if (controls.height == "memberships") { 
-                  transform = window.cargo.plugins.memberships.updateLabels();
-                }
-                
-                
-                d.tx = transform.tx;
-                d.ty = transform.ty;
-                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
-            })
-            .append("text")
-            .attr("class", "barLabel")
-            .attr("y", function(d) {
-              return barHeight/2;      
-            })
-            
-            .style("fill", function(d) { if (d.Contiguous === false) return "#0ff"; })
-            .text(function(d) { 
-              //if (d.)
-              if (controls.height == "memberships"){
-                return d.politician.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-              }
-              else {
-                return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
-              }
-            });
-
-           memberships.transition()
-            .duration(transitionDuration)
-            .attr("transform", function(d, i) {
+      
+      memberships.attr("transform", function(d, i) {
                 var transform = {
                   tx:0,
                   ty:0 
@@ -401,14 +340,29 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             });
+            
+      
+    memberships
+      .append("rect")
+      .attr("index", function(d, i) { return j; })
+      .attr("membership", function(d, i) { return i; })
+      .attr("class", function(d) {
+        //TODO: change to type and region?
+        return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+      })
+      .attr("width", 100)
+      .attr("height", barHeight - 1);
 
-
-  
+    memberships
+        .append("text")
+        .attr("y", barHeight / 2)
+        .attr("dy", ".35em")
+        .text(function(d) { return d.role; });
   
       memberships.exit().remove();
 
 
-      window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
+       // window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
      
     });
   
@@ -612,4 +566,5 @@ function formatYear(y) {
   if (y <= 0) return y*-1 + " BCE";
   else return y;
 }
+
 
