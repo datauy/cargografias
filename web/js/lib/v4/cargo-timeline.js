@@ -282,16 +282,8 @@ function refreshGraph() {
             .data(politician.memberships, function(d,i){ return d.id;});
       
       memberships.enter()
-            .append("g")
-            .attr("index", function(d, i) { return j; })
-            .attr("membership", function(d, i) { return i; })
-            .attr("class", function(d) {
-              //TODO: change to type and region?
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
-            })
-            .style("fill-opacity", function(d) { 
-                return 1;
-            });
+            .append("g");
+            
 
       ///Set current height      
       barHeight = ((hei - padding.top - padding.bottom) / data.length);
@@ -302,7 +294,17 @@ function refreshGraph() {
       
 
       
-      memberships.attr("transform", function(d, i) {
+      memberships
+            .attr("index", function(d, i) { return j; })
+            .attr("membership", function(d, i) { return i; })
+            .attr("class", function(d) {
+              //TODO: change to type and region?
+              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+            })
+            .style("fill-opacity", function(d) { 
+                return 1;
+            })
+            .attr("transform", function(d, i) {
                 var transform = {
                   tx:0,
                   ty:0 
@@ -342,6 +344,8 @@ function refreshGraph() {
             });
             
       
+    
+  
     memberships
       .append("rect")
       .attr("index", function(d, i) { return j; })
@@ -358,9 +362,8 @@ function refreshGraph() {
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
         .text(function(d) { return d.role; });
-  
-      memberships.exit().remove();
 
+    memberships.exit().remove();
 
        // window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
      

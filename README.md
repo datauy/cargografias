@@ -60,6 +60,11 @@ $ npm install
 ```
  en la carpeta principal del repositorio.  
 
+* Bajate la base de datos de tu instancia.
+
+```bash
+$  node getInstanceData.js cargo
+```
 
 * Inicia el servidor nodejs utilizando el comando
 
