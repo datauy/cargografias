@@ -36,7 +36,7 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
-		    hei =  (this.data.length  * boxHeight)*2 ;
+		    hei =  (this.data.length  * boxHeight) ;
 		    barHeight = (hei - padding.top - padding.bottom) / this.data.length ;
 		 }
 	},

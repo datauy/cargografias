@@ -281,10 +281,7 @@ function refreshGraph() {
             .selectAll("g.barGroup")
             .data(politician.memberships, function(d,i){ return d.id;});
       
-      memberships.enter()
-            .append("g");
-            
-
+     
       ///Set current height      
       barHeight = ((hei - padding.top - padding.bottom) / data.length);
       //Set a index for boxes, from padding top to hei - padding top
@@ -294,7 +291,8 @@ function refreshGraph() {
       
 
       
-      var item = memberships
+      memberships.enter()
+            .append("g")
             .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
@@ -304,112 +302,76 @@ function refreshGraph() {
             .style("fill-opacity", function(d) { 
                 return 1;
             })
-            .attr("transform", function(d, i) {
-                var transform = {
-                  tx:0,
-                  ty:0 
-                };
-                //TimeLine
-                if (controls.display == "timeline") {
-                    transform.tx = scales.years(d.start);
-                    transform.ty = scales.indexes(d.parent);  
-                }
-                  
-                //CareerMeeter
-                else if (controls.display == "aligned") {
-                  var first = scales.years.ticks()[0];
 
-                  if (d.position=== 0) { 
-                    transform.tx = padding.left;
-                  }
-                  else {
-                    transform.tx =d.pre.tx + 
-                    //width of the previous
-                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-                    //distance between previous
-                    (scales.years(d.start) - scales.years(d.pre.end))
-                  }
-                  transform.ty = scales.indexes(d.parent);  
-                }
-                 
-                if (controls.height == "memberships") { 
-                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
-                  
-                }
-                
-                
-                d.tx = transform.tx;
-                d.ty = transform.ty;
-                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
-            });
-      item.transition().duration(transitionDuration)
-      .attr("transform", function(d, i) {
-                var transform = {
-                  tx:0,
-                  ty:0 
-                };
-                //TimeLine
-                if (controls.display == "timeline") {
-                    transform.tx = scales.years(d.start);
-                    transform.ty = scales.indexes(d.parent);  
-                }
-                  
-                //CareerMeeter
-                else if (controls.display == "aligned") {
-                  var first = scales.years.ticks()[0];
-
-                  if (d.position=== 0) { 
-                    transform.tx = padding.left;
-                  }
-                  else {
-                    transform.tx =d.pre.tx + 
-                    //width of the previous
-                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
-                    //distance between previous
-                    (scales.years(d.start) - scales.years(d.pre.end))
-                  }
-                  transform.ty = scales.indexes(d.parent);  
-                }
-                 
-                if (controls.height == "memberships") { 
-                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
-                  
-                }
-                
-                
-                d.tx = transform.tx;
-                d.ty = transform.ty;
-                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
-            });
-      
-    
-  
-    item.append("rect");
-    item.select('rect')
-      .attr("index", function(d, i) { return j; })
-      .attr("membership", function(d, i) { return i; })
-      .attr("class", function(d) {
-        //TODO: change to type and region?
-        return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
-      })
-      .style("fill-opacity", function(d) { 
+      memberships.append('rect').attr("index", function(d, i) { return j; })
+            .attr("membership", function(d, i) { return i; })
+            .attr("class", function(d) {
+              //TODO: change to type and region?
+              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+            })
+            .style("fill-opacity", function(d) { 
                 return 1;
-      })
-     .style("fill", function(d) { 
-              var color = "";
-              if (controls.height == "memberships") { 
-                color = window.cargo.plugins.memberships.colorScale(politician.position);  
-              }
-              return color;
+            });
 
-      })
-      .attr("width", 100)
-      .attr("height", barHeight)
+      
+      memberships.select('rect')
+        .transition()
+          .duration(transitionDuration)
+          .style("fill-opacity", function(d) { 
+                          return 1;
+                })
+               .style("fill", function(d) { 
+                        var color = "";
+                        if (controls.height == "memberships") { 
+                          color = window.cargo.plugins.memberships.colorScale(politician.position);  
+                        }
+                        return color;
 
+                })
 
-    item.append("text");
+          .attr("transform", function(d, i) {
+                var transform = {
+                  tx:0,
+                  ty:0 
+                };
+                //TimeLine
+                if (controls.display == "timeline") {
+                    transform.tx = scales.years(d.start);
+                    transform.ty = scales.indexes(d.parent);  
+                }
+                  
+                //CareerMeeter
+                else if (controls.display == "aligned") {
+                  var first = scales.years.ticks()[0];
 
-    item.select('text')
+                  if (d.position=== 0) { 
+                    transform.tx = padding.left;
+                  }
+                  else {
+                    transform.tx =d.pre.tx + 
+                    //width of the previous
+                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                    //distance between previous
+                    (scales.years(d.start) - scales.years(d.pre.end))
+                  }
+                  transform.ty = scales.indexes(d.parent);  
+                }
+                 
+                if (controls.height == "memberships") { 
+                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
+                  
+                }
+                
+                
+                d.tx = transform.tx;
+                d.ty = transform.ty;
+                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
+            })
+          .attr("width", 100)
+          .attr("height", barHeight) //ask this to current plugin.
+    
+    memberships.append("text");
+    memberships.select('text')
         .attr('class','boxLabel')
         .attr("y", function(d) {
             return barHeight/2;      
@@ -424,9 +386,50 @@ function refreshGraph() {
               else {
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
-        });
+        })
+        .transition()
+        .duration(transitionDuration)
+        .attr("transform", function(d, i) {
+                var transform = {
+                  tx:0,
+                  ty:0 
+                };
+                //TimeLine
+                if (controls.display == "timeline") {
+                    transform.tx = scales.years(d.start);
+                    transform.ty = scales.indexes(d.parent);  
+                }
+                  
+                //CareerMeeter
+                else if (controls.display == "aligned") {
+                  var first = scales.years.ticks()[0];
 
-    memberships.exit().remove();
+                  if (d.position=== 0) { 
+                    transform.tx = padding.left;
+                  }
+                  else {
+                    transform.tx =d.pre.tx + 
+                    //width of the previous
+                    (scales.years(d.pre.end)- scales.years(d.pre.start)) +  
+                    //distance between previous
+                    (scales.years(d.start) - scales.years(d.pre.end))
+                  }
+                  transform.ty = scales.indexes(d.parent);  
+                }
+                 
+                if (controls.height == "memberships") { 
+                  transform = window.cargo.plugins.memberships.updateBoxes(d,i);
+                  
+                }
+                
+                
+                d.tx = transform.tx;
+                d.ty = transform.ty;
+                return "translate(" + transform.tx + ", " + transform.ty + ")"; 
+            })//enter
+
+    memberships.exit().transition()
+          .duration(transitionDuration).remove();
 
     window.cargo.plugins.memberships.updateAdditionalGraphs(politician,this);
      
