@@ -12,6 +12,7 @@ var barHeight = 10;
 var defaultPopPercent = .08;
 var boxHeight = 35;
 var waitStart = false;
+var yearsPadding = 5;
 
 //TODO: move to loader? .init()?
 var controls = {}
@@ -104,7 +105,7 @@ function processData() {
     maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
     minYear = d3.min(data, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
     scales.years = d3.scale.linear()
-      .domain([ minYear,maxYear])
+      .domain([ minYear,maxYear + yearsPadding])
       .range([ padding.left, wid - padding.right ]);
         
     hei = (data.length * boxHeight)+100;
@@ -247,7 +248,7 @@ function refreshGraph() {
   ***********************************************************/
 
   scales.years = d3.scale.linear()
-      .domain([ minYear,maxYear])
+      .domain([ minYear,maxYear + yearsPadding])
       .range([ padding.left, wid - padding.right ]);
 
   /************************************************************
