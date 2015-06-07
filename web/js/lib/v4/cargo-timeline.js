@@ -304,7 +304,11 @@ function refreshGraph() {
                 return 1;
             })
 
-      memberships.append('rect').attr("index", function(d, i) { return j; })
+      memberships.append('rect')
+            .attr("rx", 6)
+            .attr("ry", 6)
+
+            .attr("index", function(d, i) { return j; })
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
               //TODO: change to type and region?
@@ -312,7 +316,7 @@ function refreshGraph() {
             })
             .style("fill-opacity", function(d) { 
                 return 1;
-            });
+            })
 
       
       memberships.select('rect')
@@ -322,13 +326,28 @@ function refreshGraph() {
                           return 1;
                 })
                .style("fill", function(d) { 
-                        var color = "";
+                       var color = ''
                         if (controls.height == "memberships") { 
-                          color = window.cargo.plugins.memberships.colorScale(politician.position);  
+                          color  = window.cargo.plugins.memberships.colorScale(politician.position);  
                         }
                         return color;
 
                 })
+               .style("stroke", 
+                  function(d){
+
+                    var cssColor = $(this).css('fill');
+                    var elementColor = window.cargo.plugins.memberships.colorScale(politician.position);  
+                    if (controls.height == "memberships") { 
+                      d.color = elementColor;
+                    }else {
+                      d.color = cssColor;
+                    }
+
+                    return d3.rgb(d.color).darker(1);
+                })
+               .style("stroke-width", '1.5px')
+
 
           .attr("transform", function(d, i) {
                 var transform = {

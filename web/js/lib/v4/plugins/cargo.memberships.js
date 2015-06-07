@@ -64,7 +64,7 @@ window.cargo.plugins.memberships =  {
 
         curves.enter()
 	        .append('path')
-	        .attr('class', 'curves')
+	        .attr('class', 'curves bezier')
 	        .attr('opacity', 0)
 	        .attr('fill', 'none')
 	        .attr('stroke', 'red')
