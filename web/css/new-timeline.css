@@ -15,7 +15,7 @@
 
 rect.bar {
   stroke: rgb(233, 233, 233);
-  fill: #2AB991;
+  fill: #969D9B;
   fill-opacity: .75;
 }
 
@@ -121,10 +121,20 @@ text.itemLabel{
   fill: #000;
 }
 
-text.membershipLabel{
+text.boxLabel tspan.main {
+    font-size: 1.2em;
+}
+text.boxLabel tspan.sub{
+    font-style: oblique;
+}
+text.membershipLabel, text.territoryLabel{
  fill: #000; 
  font-size: 1em;
 }
+
+
+
+
 
 path.bezier{
   stroke-width: 2px;

@@ -72,7 +72,10 @@ angular.module('cargoApp.factories', [])
                       res.data[i].image = '/img/person.png' ;
                     }
                     //Initials for graphics
-                    res.data[i].initials = res.data[i].name ? res.data[i].name.split(' ').map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
+                    var splitedName =  res.data[i].name.split(' ')
+                    res.data[i].initials = res.data[i].name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
+                    //TODO: This should come 100% from data. Remove in the future
+                    res.data[i].lastName = res.data[i].name ? splitedName.reverse()[0] : '';
                     try{
                       res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
                     }

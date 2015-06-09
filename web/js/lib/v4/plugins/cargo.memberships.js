@@ -125,6 +125,7 @@ window.cargo.plugins.memberships =  {
 	    .append('text')
 	    .attr('class', 'membershipLabel')
 	    
+	    
       	.attr("x", function(){ return padding.left / 7;})
 		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
 	    
