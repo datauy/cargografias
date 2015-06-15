@@ -18,14 +18,14 @@
         })();
     </script>
 
-    <title>Cargograf&#237as: L&iacute;nea de Tiempo de Funcionarios Politicos - Argentinos</title>
+    <title>{{customization.pageTitle}}</title>
 
 
 
 
-    <meta itemprop="name" content="Cargografias">
-    <meta itemprop="description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Es una fuente de consulta que busca facilitar el analisis y comprension de la historia reciente argentina.">
-    <meta itemprop="image" content="http://40.media.tumblr.com/71df2704f63865f5d42697631e73d4f5/tumblr_nfmcfzeGMG1qeky8ko1_1280.jpg">
+    <meta itemprop="name" content="{{customization.metaName}}">
+    <meta itemprop="description" content="{{customization.metaDescription}}">
+    <meta itemprop="image" content="{{customization.metaImage}}">
     <meta name="keywords" content="argentina, polticos, cargos">
     <meta name="description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
     <meta name="robots" content="Index, All">
@@ -102,26 +102,16 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="/">Cargografías [<span ng-cargo-loc="siteTitle"></span>]
-                <h3>La línea de tiempo de Funcionarios Políticos</h3>
-                </a>
+                <a class="brand"><h3>{{customization.siteTitle}}</h3></a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                        
 
                     </ul>
                     <ul class="nav pull-right">
-                        
-
-                       
-                    <a class="btn" title="Errores?" target="_blank" href=" https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&amp;hl=es">
-                        <i class="fa fa-warning" style="padding-right: 6px;"></i>¿Encontraste un error?
-                    </a>
-                        <a class="btn"  target="_blank" title="Sigue a @Cargografias en Twitter" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
-                        <i class="fa fa-twitter" style="padding-right: 6px;"></i><b>Seguinos @Cargograf&iacute;as</b>
-                    </a>
-                    <a class="btn" style="margin-top: 4px;" href="http://github.com/cargografias" target="_blank">
-                        <i class="fa fa-github" style="padding-right: 6px;"></i> Forkea #cargo </a>
+                    {{customization.errorButton|safe}}   
+                    {{customization.followButton|safe}}
+                    {{customization.forkButton|safe}}
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
