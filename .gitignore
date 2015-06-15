@@ -27,3 +27,4 @@ npm-debug.log
 
 /web/js/datasets/*.json
 /web/js/datasets/gz/*.json
+.env
