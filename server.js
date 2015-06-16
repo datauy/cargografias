@@ -85,12 +85,14 @@ app.get('/reload', function(req, res) {
 
 app.get('/', function(req, res) {
     res.render('index', instancesMap.cargografias);
+    reload();
 });
 
 app.get('/:instanceName', function(req, res) {
     var instance = instancesMap[req.params.instanceName];
     if(instance){
         res.render('index', instance)
+        reload();
     }else{
         res.status(404).render('instancenotfound');
     }
