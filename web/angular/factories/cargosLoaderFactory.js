@@ -11,7 +11,7 @@ angular.module('cargoApp.factories', [])
 
     var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
     instanceName = instanceName || 'cargografias';
-
+    
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-persons.json');
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-memberships.json');
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-organizations.json');

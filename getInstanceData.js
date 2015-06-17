@@ -15,7 +15,7 @@ function getFiles(instanceName) {
 
   files.forEach(function(file) {
     var filename = instanceName + file;
-    var url = "http://v3.cargografias.org/js/datasets/gz/" + filename;
+    var url = "http://static.cargografias.org/datasets/" + filename;
     console.log("Getting:", url);
     request({
       url: url,
@@ -26,7 +26,7 @@ function getFiles(instanceName) {
       } else if (response.statusCode != 200) {
         console.log("Error getting file", filename, response.statusCode, response.statusMessage);
       } else {
-        var dest = path.normalize("web/js/datasets/gz/" + filename);
+        var dest = path.normalize("public/datasets/" + filename);
         fs.writeFile(dest, beautify(body), function(err) {
           if (err) console.log("Error writing", dest, err);
           else console.log("Complete:", dest);
