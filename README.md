@@ -69,7 +69,7 @@ $  node getInstanceData.js cargo
 * Inicia el servidor nodejs utilizando el comando
 
 ```bash
-$  npm start
+$  node server.js 
 ```
 
 * Inicia el servidor de archivos estaticos 
@@ -79,13 +79,6 @@ $  node static-local.js
 ```
 
 * Abri tu navegador en 'http://localhost:3000' y navega.
-
-
-# Como funciona?
-
-### 100% FrontEnd
-* La aplicacion carga toda la base de datos importada desde popoit en el comienzo de la carga y luego opera con ella en todas las visualizaciones. La principal interacion esta manejada por Angular.JS y los graficos con D3.
-
 
 
 
