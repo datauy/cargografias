@@ -72,6 +72,12 @@ $  node getInstanceData.js cargo
 $  npm start
 ```
 
+* Inicia el servidor de archivos estaticos 
+
+```bash
+$  node static-local.js
+```
+
 * Abri tu navegador en 'http://localhost:3000' y navega.
 
 
