@@ -12,10 +12,10 @@ angular.module('cargoApp.factories', [])
     var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
     instanceName = instanceName || 'cargografias';
 
-    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-persons.json');
-    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-memberships.json');
-    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-organizations.json');
-    cargografiasSources.push('/js/datasets/gz/' + instanceName + '-posts.json');
+    cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-persons.json');
+    cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-memberships.json');
+    cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-organizations.json');
+    cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-posts.json');
 
 
     //TODO: Uncoment to test other data sources

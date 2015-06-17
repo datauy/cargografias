@@ -6,7 +6,12 @@ var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGO_URL;
 var swig = require('swig');
 swig.setDefaults({
-    cache: false
+    cache: false,
+    locals: {
+        config: {
+            baseStaticPath: process.env.BASE_STATIC_PATH 
+        }
+    }
 });
 var Q = require('q');
 

@@ -3,21 +3,6 @@
 <html ng-app="cargoApp">
 <head>
     
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-18158765-5']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-
     <title>{{customization.pageTitle}}</title>
 
 
@@ -68,6 +53,32 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/new-timeline.css" type="text/css">
 
+
+    <script>
+        window.__config = {
+           baseStaticPath: '{{config.baseStaticPath}}' 
+        }    
+    </script>
+
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18158765-5']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+
+
+
     <!-- V2 Libs -->
     <script src="/js/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="js/lib/d3.min.js"></script>
@@ -115,6 +126,9 @@
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
+                {% if customization.subHeading %}
+                <div style="display: block;float: left;padding: 0px 29px 6px;font-size: 15px;font-weight: 200;color: #fff;width: 100%; background: black;">{{customization.subHeading}}</div>
+                {% endif %}
             </div>
         </div>
     </div>
