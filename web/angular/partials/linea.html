@@ -8,19 +8,22 @@
              <li>
                   <span class="label"><i class="fa fa-filter"></i>Filtra:</span>
                 </li>
+            <li ng-class="filter == 'name' ? 'active' : '' ">
+                  <a id="ordenNombre" href="" ng-click="filterLine('name')">Nombre</a>
+                </li>
+            <li class="" ng-class="filter == 'career' ? 'active' : '' ">
+              <a id="ordenNombre" href="" ng-click="filterLine('career')">Carrera</a>
+            </li>
+            <li class="" ng-class="filter == 'memberships' ? 'active' : '' ">
+              <a id="ordenCargo" href="" ng-click="filterLine('memberships')">Cargo</a>
+            </li>
             <li class="" ng-class="filter == 'territory' ? 'active' : '' ">
               <a id="ordenCargo" href="" ng-click="filterLine('territory')">Territorio</a>
             </li>
-            <li class="" ng-class="filter == 'memberships' ? 'active' : '' ">
-    			  	<a id="ordenCargo" href="" ng-click="filterLine('memberships')">Cargo</a>
-    			  </li>
-    			  <li class="" ng-class="filter == 'career' ? 'active' : '' ">
-    			    <a id="ordenNombre" href="" ng-click="filterLine('career')">Carrera</a>
-    			  </li>
-    		        <li ng-class="filter == 'name' ? 'active' : '' ">
-    		          <a id="ordenNombre" href="" ng-click="filterLine('name')">Nombre</a>
-    		        </li>
-             <div class="subtitulo" style="
+
+    			  
+    		    
+             <div ng-hide="filter === 'memberships' || filter === 'territory'" class="subtitulo" style="
                 float: left;
                 margin-top: -18px;
                 background-color: whitesmoke;
@@ -43,6 +46,7 @@
             background-color:#969D9B;
                 
             ">otro</span></div>
+          
 
                 <!-- <span class="label">Año Seleccionado: {{activeYear}}</span> -->  
   			   </ul>

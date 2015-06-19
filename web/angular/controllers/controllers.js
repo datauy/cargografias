@@ -10,7 +10,7 @@ angular.module('cargoApp.controllers')
     $rootScope.observers = [];
     $rootScope.yearObserver = [];
     $rootScope.jerarquimetroObserver = [];
-    $scope.filter = "timeline";
+    $scope.filter = "name";
 
     $scope.showPresets = true;
     var parsedParams;
@@ -22,6 +22,7 @@ angular.module('cargoApp.controllers')
 
     }
 
+    
     //Load initial ids from the url
     if ($routeParams.ids) {
       processParameters($routeParams.ids);
