@@ -256,6 +256,51 @@ function refreshGraph() {
       .range([ padding.left, wid - padding.right ]);
 
   /************************************************************
+  * Process Years  
+  ***********************************************************/
+  var yearsNumbers = scales.years.ticks(10);
+  
+  /************************************************************
+  * Add Years Lines
+  ***********************************************************/
+  var yearTicks = vis.selectAll("line.tickLine")
+    .data(yearsNumbers); 
+
+
+  yearTicks.enter().append("line")
+      .attr("class", "tickLine")
+      .attr("x1", padding.left)
+      .attr("x2", padding.left)
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+    
+  yearTicks.transition().duration(transitionDuration)
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      })
+      .attr("x1", function(d, i) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
+        else return padding.left;
+      })
+      .attr("x2", function(d) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
+        else if (controls.display == "territory") return window.cargo.plugins.territory.getYearTickPosition();
+        else return padding.left;
+      })
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+  yearTicks.exit().remove();
+
+
+  /************************************************************
   * Process Politicians names 
   ***********************************************************/
 
@@ -498,50 +543,7 @@ function refreshGraph() {
     
       
 
-  /************************************************************
-  * Process Years  
-  ***********************************************************/
-  var yearsNumbers = scales.years.ticks(10);
   
-  /************************************************************
-  * Add Years Lines
-  ***********************************************************/
-  var yearTicks = vis.selectAll("line.tickLine")
-    .data(yearsNumbers); 
-
-
-  yearTicks.enter().append("line")
-      .attr("class", "tickLine")
-      .attr("x1", padding.left)
-      .attr("x2", padding.left)
-      .attr("y1", padding.top)
-      .attr("y2", hei - padding.bottom);
-
-    
-  yearTicks.transition().duration(transitionDuration)
-      .style("opacity", function(d) {
-        //On CarreerMeter hide years. 
-        if (controls.display == "aligned")  return 0;
-        else return 1;
-      })
-      .attr("x1", function(d, i) {
-        if (controls.display == "timeline") return scales.years(d);
-        else if (controls.display == "centered") return visCenter;
-        //On CarreerMeter move years to left
-        else return padding.left;
-      })
-      .attr("x2", function(d) {
-        if (controls.display == "timeline") return scales.years(d);
-        else if (controls.display == "centered") return visCenter;
-        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
-        else if (controls.display == "territory") return window.cargo.plugins.territory.getYearTickPosition();
-        else return padding.left;
-      })
-      .attr("y1", padding.top)
-      .attr("y2", hei - padding.bottom);
-
-  yearTicks.exit().remove();
-
 
   
   /************************************************************
