@@ -639,7 +639,7 @@ function formatYear(y) {
   else return y;
 }
 
-
+//TODO > Move to plugin?
 /************************************************************
  * Add interaction events after initial drawing
  ***********************************************************/
@@ -647,13 +647,13 @@ function addInteractionEvents() {
   var $tooltipEl  = $("#infobox");
   // bar group hover
   $("g.barGroup").on('mouseover', function(e) {
-      showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
-
+      showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  );  
+      showOnlyHim(e,$(this).attr("index"));
     }
   );
    $("g.barGroup").on('mouseout', function(e) {
      $tooltipEl.css('display', 'none');
-     
+     showAll(e,$(this).attr("index")); 
   });
 
   $("g.barGroup").on('mousemove', function(e) {
@@ -661,6 +661,26 @@ function addInteractionEvents() {
       $tooltipEl.css('left', event.pageX + 10 + 'px');
      
   });
+
+}
+
+
+/************************************************************
+ * Highlight all persons posts
+ ***********************************************************/
+
+function showOnlyHim(e,i){
+  $("g.barGroup[index!=" + i + "]").css('opacity',0);
+  $("g.barGroup[index=" + i + "]").css('opacity',1);
+  //TODO: How to include plugins here?
+  window.cargo.plugins.memberships.showOnlyHim(e,i);
+
+  
+}
+function showAll(e,i){
+  $("g.barGroup").css('opacity',1);
+  //TODO: HOw to include plugins here?
+  window.cargo.plugins.memberships.showAll(e,i);
 
 }
 

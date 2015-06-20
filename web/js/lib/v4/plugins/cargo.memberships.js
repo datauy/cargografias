@@ -77,6 +77,7 @@ window.cargo.plugins.memberships =  {
         curves.enter()
 	        .append('path')
 	        .attr('class', 'curves bezier')
+	       	.attr('index',d.position)
 	        .attr('opacity', 0)
 	        .attr('fill', 'none')
 	        .attr('stroke', 'red')
@@ -182,6 +183,13 @@ window.cargo.plugins.memberships =  {
 	},
 	getYearTickPosition: function(){
 		return padding.left;     
-	}
+	},
+	showOnlyHim: function(e,i){
+		$("svg.vis path[index!=" + i + "]").css('opacity',0);
+  		$("svg.vis path[index=" + i + "]").css('opacity',1);
+	},
+	showAll: function(e,i){
+		$("svg.vis path").css('opacity',1);
+	},
 
 }

@@ -311,28 +311,23 @@ html h3, body h3 {
 }
 
 
-div.vis.highlight g.barGroup{ 
+div.vis g.barGroup{ 
     
-    animation:alert-success 2s;
-    -webkit-animation:alert-success 2s;
-    opacity: 0.2;
+transition: opacity 1s;
+  -webkit-transition: opacity 1s; /* Safari */
+
+}
+path.curves.bezier{   
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s; /* Safari */
 
 }
 
 
 
-@-webkit-keyframes alert-inverse{
-    0%   {opacity: 0.2;}
-    70%  {opacity: 0.55;}
-    90% {opacity: 0.80;}
-    100% {opacity: 1;}
-}
 
-@-webkit-keyframes alert-success{
-    0%   {opacity: 1;}
-    70%  {opacity: 0.55;}
-    90% {opacity: 0.30;}
-    100% {opacity: 0.2;}
-}
+
+
+
 div.vis.highlight g.barGroup.highlight { opacity: 1;}
 
