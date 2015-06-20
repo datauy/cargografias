@@ -117,7 +117,7 @@ text.barLabel {
 }
 
 text.itemLabel{
-  font-size: 1em;
+  font-size: 0.9em;
   fill: #000;
 }
 
@@ -129,10 +129,12 @@ text.boxLabel tspan.sub{
 }
 text.membershipLabel, text.territoryLabel{
  fill: #000; 
- font-size: 1em;
+ font-size: 0.9em;
 }
 
-
+tspan.sub {
+  font-style: italic;
+}
 
 
 

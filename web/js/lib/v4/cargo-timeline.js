@@ -479,7 +479,7 @@ function refreshGraph() {
         .text(function(d) { 
               //if (d.)
               if (controls.height == "memberships"){
-                return ''; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return '' //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else if (controls.height == "territory"){
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   

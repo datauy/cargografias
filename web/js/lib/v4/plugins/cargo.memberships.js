@@ -25,12 +25,24 @@ window.cargo.plugins.memberships =  {
       });
       //now we order them
       memberships.sort(function(a, b){ return d3.ascending(a, b);});
-      this.data = memberships;
+      
+      this.data = memberships.map(function(d,i){
+      	return {
+      			i: i,
+      			key: d,
+      			pos: d.split('-')[0],
+      			org: d.split('-')[1]
+      		}
+      	});
 
 	},
 	processIndex: function(d,i){
 		//Memberiship.ProcessIndex
-        d.membershipsPosition = this.data.indexOf(d.role + "-" + d.organization.name);
+        //d.membershipsPosition = 
+        var key = d.role + "-" + d.organization.name;
+        d.membershipsPosition = this.data.filter(
+        	function(d) { if (d.key === key)  return d;})[0];
+        console.log(d.membershipsPosition);
 
 	},
 	setBoxHeight: function(){
@@ -51,7 +63,7 @@ window.cargo.plugins.memberships =  {
 
 			var transform = {
 				tx: scales.years(d.start),
-				ty: scales.indexes(d.membershipsPosition)
+				ty: scales.indexes(d.membershipsPosition.i)
 			};
 			return transform;
 
@@ -90,7 +102,7 @@ window.cargo.plugins.memberships =  {
 	        	}
 	        //Scale Left
 	          var fromX = scales.years(d.end) ;	
-	          var fromY = scales.indexes(d.membershipsPosition) + barHeight /2;
+	          var fromY = scales.indexes(d.membershipsPosition.i) + barHeight /2;
 
 			//Jump!
 	          var control1X = fromX + controlLenght;
@@ -98,7 +110,7 @@ window.cargo.plugins.memberships =  {
 
 	        //Scale Right
 	          var toX = scales.years(d.after.start) - 2;	
-	          var toY = scales.indexes(d.after.membershipsPosition) + barHeight /2;
+	          var toY = scales.indexes(d.after.membershipsPosition.i) + barHeight /2;
 	        //Jump!
 	          var contorl2X = toX - controlLenght;
 	          var control2Y = toY;
@@ -121,13 +133,17 @@ window.cargo.plugins.memberships =  {
 	  var labels = vis.selectAll('text.membershipLabel')
 	    .data(this.data, function(d,i){ return i;});
 
-	  labels.enter()
+	  var texts = labels.enter()
 	    .append('text')
 	    .attr('class', 'membershipLabel')
 	    
 	    
       	.attr("x", function(){ return padding.left / 7;})
-		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
+		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;});
+
+	var main = texts.append('tspan').attr('class','main');
+	var subs  = texts.append('tspan').attr('class','sub');;
+
 	    
 	  
 	 
@@ -142,10 +158,17 @@ window.cargo.plugins.memberships =  {
 		      })
       	.attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
-      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
+      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;});
+
+    labels.selectAll('tspan.main')
       	.text(function(d) {
 	    	
-	    	return d;
+	    	return d.pos + " - ";
+	    });
+	labels.selectAll('tspan.sub')
+      	.text(function(d) {
+	    	
+	    	return d.org;
 	    });
 	 labels.exit().remove();
 
