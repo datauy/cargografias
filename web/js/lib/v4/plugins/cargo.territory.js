@@ -35,7 +35,7 @@ window.cargo.plugins.territory =  {
 	setBoxHeight: function(){
 		if (controls.height == "territory")
 		{
-		    hei =  (this.data.length  * boxHeight *1.25) ;
+		    hei =  (this.data.length  * boxHeight *1.35) ;
 		    barHeight = (hei - padding.top - padding.bottom) / this.data.length;
 		 }
 	},
@@ -72,6 +72,7 @@ updateAdditionalGraphs:function(d,context){
 
         var controlLenght = 20;
 
+        
         if (controls.height != "memberships" && controls.height != "territory"){
         	curves
 	        .transition()
