@@ -22,7 +22,6 @@ controls['group'] = 'name';
 
 
 
-
 function setVisSize() {
 
   wid = $(window).width() - 2;
@@ -589,33 +588,8 @@ function refreshGraph() {
 
 
 
-/************************************************************
- * Add interaction events after initial drawing
- ***********************************************************/
-function addInteractionEvents() {
-
-  // bar group hover
-  $("g.barGroup").hover(function(e) { 
-    showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
-    }
-  );
-  $(".vis .background, .vis .mouseLine").hover(function(e) { 
-    showInfoBox( e, null); 
-  });
 
 
-
-  
-}
-
-/************************************************************
- * Display info box for data index i, at mouse
- ***********************************************************/
-function showInfoBox(e, i, j) {
-
-
-
-}
 //In order to isolate order/filtering this method will execute everthing
 function setControlFix(o){
   setControls(o);
@@ -666,3 +640,61 @@ function formatYear(y) {
 }
 
 
+/************************************************************
+ * Add interaction events after initial drawing
+ ***********************************************************/
+function addInteractionEvents() {
+  var $tooltipEl  = $("#infobox");
+  // bar group hover
+  $("g.barGroup").on('mouseover', function(e) {
+      showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
+
+    }
+  );
+   $("g.barGroup").on('mouseout', function(e) {
+     $tooltipEl.css('display', 'none');
+     
+  });
+
+  $("g.barGroup").on('mousemove', function(e) {
+      $tooltipEl.css('top', event.pageY + 2 + 'px');
+      $tooltipEl.css('left', event.pageX + 10 + 'px');
+     
+  });
+
+}
+
+/************************************************************
+ * Display info box for data index i, at mouse
+ ***********************************************************/
+function showInfoBox(e, i, j) {
+ 
+    //TODO: Can we move this to angular?
+    var politician = data[i];
+    var membership = politician.memberships[j];
+
+
+    var info = "<span class='title'>" + politician.name + "</span>";
+    info += "<br />";
+    info += "<br />" + membership.role ;
+    info += "<br />" + membership.organization.name ;
+    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    
+
+    //Initial pos;
+    var infoPos;
+    if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
+    else infoPos = { left: e.pageX-200, top: e.pageY-80 };
+    
+    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
+    //clear all clases
+    document.getElementById('infobox').className = '';
+    
+    $("#infobox")
+      .addClass(classes)
+      .html(info)
+      .css(infoPos)
+      .show();
+  
+
+}

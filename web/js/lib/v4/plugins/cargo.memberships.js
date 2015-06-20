@@ -42,7 +42,7 @@ window.cargo.plugins.memberships =  {
         var key = d.role + "-" + d.organization.name;
         d.membershipsPosition = this.data.filter(
         	function(d) { if (d.key === key)  return d;})[0];
-        console.log(d.membershipsPosition);
+        
 
 	},
 	setBoxHeight: function(){
