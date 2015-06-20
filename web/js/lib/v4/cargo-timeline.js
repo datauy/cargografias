@@ -671,17 +671,18 @@ function addInteractionEvents() {
  ***********************************************************/
 
 function showOnlyHim(e,i){
-  $("g.barGroup[index!=" + i + "]").css('opacity',0);
+  $("g.barGroup[index!=" + i + "]").css('opacity',0.2);
   $("g.barGroup[index=" + i + "]").css('opacity',1);
   //TODO: How to include plugins here?
   window.cargo.plugins.memberships.showOnlyHim(e,i);
-
+  window.cargo.plugins.territory.showOnlyHim(e,i);
   
 }
 function showAll(e,i){
   $("g.barGroup").css('opacity',1);
   //TODO: HOw to include plugins here?
   window.cargo.plugins.memberships.showAll(e,i);
+  window.cargo.plugins.territory.showAll(e,i);
 
 }
 

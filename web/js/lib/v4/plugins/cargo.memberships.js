@@ -85,48 +85,49 @@ window.cargo.plugins.memberships =  {
 
         var controlLenght = 20;
 
-        if (controls.height != "memberships"){
+        if (controls.height != "memberships" && controls.height != "territory"){
         	curves
 	        .transition()
 	        .duration(transitionDuration)
 	        .attr('opacity', 0);
         	return;
         }
+        else if  (controls.height == "memberships"){
+	        curves
+		        .transition()
+		        .duration(transitionDuration)
+		        .attr('opacity', 1)
+		        .attr('d', function(d) {
+		        	if (!d.after || !d.pre){
+		        		return "";
+		        	}
+		        //Scale Left
+		          var fromX = scales.years(d.end) ;	
+		          var fromY = scales.indexes(d.membershipsPosition.i) + barHeight /2;
 
-        curves
-	        .transition()
-	        .duration(transitionDuration)
-	        .attr('opacity', 1)
-	        .attr('d', function(d) {
-	        	if (!d.after || !d.pre){
-	        		return "";
-	        	}
-	        //Scale Left
-	          var fromX = scales.years(d.end) ;	
-	          var fromY = scales.indexes(d.membershipsPosition.i) + barHeight /2;
+				//Jump!
+		          var control1X = fromX + controlLenght;
+		          var control1Y = fromY;
 
-			//Jump!
-	          var control1X = fromX + controlLenght;
-	          var control1Y = fromY;
+		        //Scale Right
+		          var toX = scales.years(d.after.start) - 2;	
+		          var toY = scales.indexes(d.after.membershipsPosition.i) + barHeight /2;
+		        //Jump!
+		          var contorl2X = toX - controlLenght;
+		          var control2Y = toY;
 
-	        //Scale Right
-	          var toX = scales.years(d.after.start) - 2;	
-	          var toY = scales.indexes(d.after.membershipsPosition.i) + barHeight /2;
-	        //Jump!
-	          var contorl2X = toX - controlLenght;
-	          var control2Y = toY;
+		          //From here! http://www.sitepoint.com/html5-svg-cubic-curves/
+		          var b = "M" + fromX + "," + fromY + " C" + control1X + "," + control1Y + " " + contorl2X + "," + control2Y + " " + toX + "," + toY;
 
-	          //From here! http://www.sitepoint.com/html5-svg-cubic-curves/
-	          var b = "M" + fromX + "," + fromY + " C" + control1X + "," + control1Y + " " + contorl2X + "," + control2Y + " " + toX + "," + toY;
+		          return b;
 
-	          return b;
-
-	        }).attr('stroke', function(d) {
-	          return window.cargo.plugins.memberships.colorScale(d.parent);
-	        });
+		        }).attr('stroke', function(d) {
+		          return window.cargo.plugins.territory.colorScale(d.parent);
+		        });
 
 
-        curves.exit().remove();
+	        curves.exit().remove();
+	    	}
 	},
 	updateLabels: function(){
 		this.setBoxHeight();
@@ -185,8 +186,8 @@ window.cargo.plugins.memberships =  {
 		return padding.left;     
 	},
 	showOnlyHim: function(e,i){
-		if (controls.height == "memberships"){
-			$("svg.vis path[index!=" + i + "]").css('opacity',0);
+		if (controls.height == "territory" || controls.height =="memberships"){
+			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
   		}
   		else {
@@ -194,7 +195,7 @@ window.cargo.plugins.memberships =  {
   		}
 	},
 	showAll: function(e,i){
-		if (controls.height == "memberships"){
+		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path").css('opacity',1);
 		}
 		else {
