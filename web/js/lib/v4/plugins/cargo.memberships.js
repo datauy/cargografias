@@ -48,8 +48,8 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
-		    hei =  (this.data.length  * boxHeight) ;
-		    barHeight = (hei - padding.top - padding.bottom) / this.data.length ;
+ 			hei =  (this.data.length  * boxHeight *1.25) ;
+		    barHeight = (hei - padding.top - padding.bottom) / this.data.length;
 		 }
 	},
 	updateBoxes: function(d,i){
@@ -185,11 +185,21 @@ window.cargo.plugins.memberships =  {
 		return padding.left;     
 	},
 	showOnlyHim: function(e,i){
-		$("svg.vis path[index!=" + i + "]").css('opacity',0);
-  		$("svg.vis path[index=" + i + "]").css('opacity',1);
+		if (controls.height == "memberships"){
+			$("svg.vis path[index!=" + i + "]").css('opacity',0);
+  			$("svg.vis path[index=" + i + "]").css('opacity',1);
+  		}
+  		else {
+  			$("svg.vis path").css('opacity',0);
+  		}
 	},
 	showAll: function(e,i){
-		$("svg.vis path").css('opacity',1);
+		if (controls.height == "memberships"){
+			$("svg.vis path").css('opacity',1);
+		}
+		else {
+			$("svg.vis path").css('opacity',0);
+		}
 	},
 
 }
