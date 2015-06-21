@@ -147,6 +147,8 @@ function processData() {
     var y_area = padding.top;
     // Height
     var y_popPercent = padding.top;
+
+    var counter = 0;
     for(i = 0; i < data.length; i++) {
 
       data[i].position = i;
@@ -170,6 +172,7 @@ function processData() {
         d[j].politician = data[i];
         d[j].parent = i;
         d[j].position = j;
+        d[j].generalPosition = counter;
 
         
         
@@ -192,6 +195,7 @@ function processData() {
           d[j].after = d[j+1];  
         }
         
+        counter++;
 
       };
 
@@ -221,9 +225,12 @@ function refreshGraph() {
 
   // hei = ($(window).height()/1.5);
   hei = (data.length  * boxHeight)+75 ;  
+  
+
   //Memberships.Height
   window.cargo.plugins.memberships.setBoxHeight();
   window.cargo.plugins.territory.setBoxHeight();
+  window.cargo.plugins.degroup.setBoxHeight();
   
   
   /************************************************************
