@@ -230,7 +230,7 @@ function refreshGraph() {
   //Memberships.Height
   window.cargo.plugins.memberships.setBoxHeight();
   window.cargo.plugins.territory.setBoxHeight();
-  window.cargo.plugins.degroup.setBoxHeight();
+  // window.cargo.plugins.degroup.setBoxHeight();
   
   
   /************************************************************

@@ -6,7 +6,7 @@ window.cargo.plugins.territory =  {
 	height: 0,
 	data : [],
 	colorScale: function(i){
-		return category20(i);
+		return colores_google(i);
 	},
 	count : function(){
     	return territories.length;
