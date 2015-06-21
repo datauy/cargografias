@@ -178,7 +178,7 @@ blockquote p {
   padding-right: 1em;
 	background-color: #f2f2f2;
 	border-color: #E6E6E6;
-	margin-bottom:15px;
+	margin-bottom:4px;
 	-moz-box-shadow:    inset 0 0 7px #8F8F8F;
    -webkit-box-shadow: inset 0 0 7px #8F8F8F;
    box-shadow:         inset 0 0 7px #8F8F8F;
@@ -556,4 +556,5 @@ box-shadow: inset 0 0 7px #8F8F8F;
 
  .search-row h3{
     font-size: 1em;
+      margin-bottom: -5px;
  }
