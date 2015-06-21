@@ -6,13 +6,16 @@
 }
 
 .vis .background{
-  fill:#FFF;
+  fill:rgba(255, 255, 255, 0);
 }
 
 .vis svg{
   font-family: 'RobotoDraft';
 }
 
+.visualizacion{
+  background-color: #FCFCFC;
+}
 rect.bar {
   stroke: rgb(233, 233, 233);
   fill: #969D9B;
