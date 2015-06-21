@@ -2,7 +2,7 @@
 .vis {
   border: none;
   /*shape-rendering: crispEdges;*/
-  background: #FFF
+  /*background: #FFF*/
 }
 
 .vis .background{
@@ -23,7 +23,9 @@ rect.bar {
   cursor: pointer;
 }
 
-
+#linea-de-tiempo .alert-error{
+  margin-bottom: 0px
+}
 
 /*http://www.google.com/design/spec/style/color.html#color-color-palette*/
 /* Google suggests using the 500 colors as the primary colors in your app and the other colors as accents colors.*/
@@ -150,7 +152,7 @@ path.bezier{
   stroke-opacity: 1;  
 }
 line.tickLine {
-  stroke: rgba(51, 51, 51, 0.2);
+  stroke: rgba(51, 51, 51, 0.1);
 }
 line.mouseLine {
   stroke: #0ff;
