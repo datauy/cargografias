@@ -1,7 +1,7 @@
 
 .vis {
   border: none;
-  shape-rendering: crispEdges;
+  /*shape-rendering: crispEdges;*/
   background: #FFF
 }
 
@@ -105,8 +105,8 @@ text {
 }
 
 text.rule {
-  fill: #A1A1A1;
-  font-size: 1em;
+  fill: #BABABA;
+  font-size: 0.9em;
   
 }
 
@@ -311,7 +311,7 @@ html h3, body h3 {
 }
 
 .nav{
-  margin-top: -35px;
+  margin-top: -16px;
 }
 
 
