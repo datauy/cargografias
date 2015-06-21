@@ -60,6 +60,10 @@ blockquote p {
 	font-size: 14.5px;
 }
 
+.nav-pills>li>a{
+  padding: 4px 14px;
+}
+
 .nav-pills>.active>a, .nav-pills>.active>a:hover, .nav-pills>.active>a:focus{
 	background-color:#646464;
 	color:#fafafa;
@@ -174,7 +178,7 @@ blockquote p {
   padding-right: 1em;
 	background-color: #f2f2f2;
 	border-color: #E6E6E6;
-	margin-bottom:15px;
+	margin-bottom:4px;
 	-moz-box-shadow:    inset 0 0 7px #8F8F8F;
    -webkit-box-shadow: inset 0 0 7px #8F8F8F;
    box-shadow:         inset 0 0 7px #8F8F8F;
@@ -307,7 +311,7 @@ svg text{
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
-	cursor: inherit;
+	cursor: default;
 }
 
 #year-marker-label {
@@ -362,7 +366,7 @@ width: 80px;
   margin: 0;
   padding: 0;
   list-style: none;
-
+  border-radius: 15px;
 }
 .persona-seleccionada img.photo{ }
 
@@ -476,7 +480,7 @@ div.main{
 
 .photo-frame{
   background-size: cover;
-  background-position: 51% 50%;
+  background-position: 50% 3%;
 }
 .twitter{
   background-color: #79CEDF;
@@ -493,7 +497,7 @@ div.main{
   width: 33.3333%;
 }
 .person-box{
-    display: inline-flex;
+    /*display: inline-flex;*/
 }
 .person-box li{
   list-style: none;
@@ -552,4 +556,5 @@ box-shadow: inset 0 0 7px #8F8F8F;
 
  .search-row h3{
     font-size: 1em;
+      margin-bottom: -5px;
  }
