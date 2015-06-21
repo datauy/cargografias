@@ -60,6 +60,10 @@ blockquote p {
 	font-size: 14.5px;
 }
 
+.nav-pills>li>a{
+  padding: 4px 14px;
+}
+
 .nav-pills>.active>a, .nav-pills>.active>a:hover, .nav-pills>.active>a:focus{
 	background-color:#646464;
 	color:#fafafa;
@@ -307,7 +311,7 @@ svg text{
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
-	cursor: inherit;
+	cursor: default;
 }
 
 #year-marker-label {

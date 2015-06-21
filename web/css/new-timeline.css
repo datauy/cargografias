@@ -17,6 +17,7 @@ rect.bar {
   stroke: rgb(233, 233, 233);
   fill: #969D9B;
   fill-opacity: .75;
+  cursor: pointer;
 }
 
 
@@ -121,6 +122,9 @@ text.itemLabel{
   fill: #000;
 }
 
+text.boxLabel {
+  cursor: pointer;
+}
 text.boxLabel tspan.main {
     font-size: 1.1em;
 }
@@ -307,7 +311,7 @@ html h3, body h3 {
 }
 
 .nav{
-  margin-top: -20px;
+  margin-top: -35px;
 }
 
 
