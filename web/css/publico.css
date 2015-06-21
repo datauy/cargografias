@@ -366,7 +366,7 @@ width: 80px;
   margin: 0;
   padding: 0;
   list-style: none;
-
+  border-radius: 15px;
 }
 .persona-seleccionada img.photo{ }
 
@@ -480,7 +480,7 @@ div.main{
 
 .photo-frame{
   background-size: cover;
-  background-position: 51% 50%;
+  background-position: 50% 3%;
 }
 .twitter{
   background-color: #79CEDF;
@@ -497,7 +497,7 @@ div.main{
   width: 33.3333%;
 }
 .person-box{
-    display: inline-flex;
+    /*display: inline-flex;*/
 }
 .person-box li{
   list-style: none;
