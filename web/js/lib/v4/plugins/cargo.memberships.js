@@ -133,7 +133,7 @@ window.cargo.plugins.memberships =  {
 		this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.membershipLabel')
-	    .data(this.data, function(d,i){ return i;});
+	    .data(this.data, function(d,i){ return d.key;});
 
 	  var texts = labels.enter()
 	    .append('text')
