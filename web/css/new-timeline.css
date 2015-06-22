@@ -322,13 +322,13 @@ html h3, body h3 {
 
 div.vis g.barGroup{ 
     
-transition: opacity 1s;
-  -webkit-transition: opacity 1s; /* Safari */
+transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;/* Safari */
 
 }
 path.curves.bezier{   
-  transition: opacity 1s;
-  -webkit-transition: opacity 1s; /* Safari */
+  transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;/* Safari */
 
 }
 

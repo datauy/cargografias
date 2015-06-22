@@ -3,7 +3,7 @@ window.cargo  =  window.cargo || {};
 window.cargo.plugins  = window.cargo.plugins || {};
 window.cargo.plugins.memberships =  {
 	key: "memberships",
-
+	boxHeight: 15,
 	height: 0,
 	data : [],
 	colorScale: function(i){
@@ -48,8 +48,8 @@ window.cargo.plugins.memberships =  {
 	setBoxHeight: function(){
 		if (controls.height == "memberships")
 		{
- 			hei =  (this.data.length  * boxHeight *1.35) ;
-		    barHeight = (hei - padding.top - padding.bottom) / this.data.length;
+ 			hei = (this.data.length * this.boxHeight)+100;
+    		barHeight = (hei - padding.top - padding.bottom) / this.data.length;
 		 }
 	},
 	updateBoxes: function(d,i){

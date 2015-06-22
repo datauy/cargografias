@@ -2,7 +2,7 @@ window.cargo  =  window.cargo || {};
 window.cargo.plugins  = window.cargo.plugins || {};
 window.cargo.plugins.territory =  {
 	key: "territory",
-
+	boxHeight: 33,
 	height: 0,
 	data : [],
 	colorScale: function(i){
@@ -35,8 +35,8 @@ window.cargo.plugins.territory =  {
 	setBoxHeight: function(){
 		if (controls.height == "territory")
 		{
-		    hei =  (this.data.length  * boxHeight *1.35) ;
-		    barHeight = (hei - padding.top - padding.bottom) / this.data.length;
+ 			hei = (this.data.length * this.boxHeight)+100;
+    		barHeight = (hei - padding.top - padding.bottom) / this.data.length;
 		 }
 	},
 	updateBoxes: function(d,i){
