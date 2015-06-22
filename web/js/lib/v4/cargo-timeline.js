@@ -252,6 +252,9 @@ function refreshGraph() {
   ***********************************************************/
 
 
+  window.cargo.plugins.memberships.updatePreviouslGraphs();
+  window.cargo.plugins.territory.updatePreviouslGraphs();
+
 
 
   /************************************************************
@@ -311,8 +314,7 @@ function refreshGraph() {
   * Process Politicians names 
   ***********************************************************/
 
-  window.cargo.plugins.memberships.updatePreviouslGraphs();
-  window.cargo.plugins.territory.updatePreviouslGraphs();
+
    
   var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});

@@ -98,7 +98,7 @@ updatePreviouslGraphs:function(){
 	  
 	  this.setBoxHeight();
 	  var groupBackgrounds = vis.selectAll('rect.backgroundGroup')
-	    .data(this.counter, function(d,i){ return i;});
+	    .data(this.counter, function(d,i){ return d.label;});
 
 	  groupBackgrounds.enter()
 	    .append('rect')
@@ -204,7 +204,7 @@ updateAdditionalGraphs:function(d,context){
 	  this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.territoryLabel')
-	    .data(this.counter, function(d,i){ return i;});
+	    .data(this.counter, function(d,i){ return d.label;});
 
 	  labels.enter()
 	    .append('text')
