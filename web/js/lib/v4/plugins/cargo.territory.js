@@ -5,6 +5,7 @@ window.cargo.plugins.territory =  {
 	boxHeight: 33,
 	height: 0,
 	data : [],
+	counter:[],
 	colorScale: function(i){
 		return colores_google(i);
 	},
@@ -24,12 +25,50 @@ window.cargo.plugins.territory =  {
       });
       //now we order them
       territories.sort(function(a, b){ return d3.ascending(a, b);});
-      this.data = territories;
+      
+      //now we count instances
+      var counter = territories.reduce(function (acc, curr) {
+      	var key  = curr.split('-')[0];
+		  if (typeof acc[key] == 'undefined') {
+		    acc[key] = 1;
+		  } else {
+		    acc[key] += 1;
+		  }
+		  return acc;
+		}, {});
+
+     
+      this.data = territories.map(function(d,i){
+      	var group = d.split('-')[0];
+      	return {
+      			index: i,
+      			label : group,
+      			key : d,
+      			count: counter[group]
+      		};
+
+      	});
+      var i = 0;
+      for(x in counter){ 
+      	this.counter.push({
+      		label:x,
+      		index:i,
+      		count:counter[x],
+      		firstIndex: this.data.filter(
+      			function(d,i) { 
+      				if (d.label === x)  
+      				return d;
+      		})[0].index
+      	});
+      	i++;
+      };
+
 
 	},
 	processIndex: function(d,i){
-		//Memberiship.ProcessIndex
-        d.territoryPosition = this.data.indexOf(d.organization.name.capitalize() + '-' + d.role);
+        var key = d.organization.name.capitalize() + '-' + d.role
+        d.territoryPosition  = this.data.filter(
+        	function(d) { if (d.key === key)  return d;})[0].index;
 
 	},
 	setBoxHeight: function(){
@@ -55,8 +94,50 @@ window.cargo.plugins.territory =  {
 			return transform;
 
 	},
+updatePreviouslGraphs:function(){
+	  
+	  this.setBoxHeight();
+	  var groupBackgrounds = vis.selectAll('rect.backgroundGroup')
+	    .data(this.counter, function(d,i){ return i;});
+
+	  groupBackgrounds.enter()
+	    .append('rect')
+	    .attr('class', 'backgroundGroup')
+      	.attr("x", function(){ return padding.left / 8.5 ;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
+	    
+	  
+	 
+
+	 groupBackgrounds
+	 	.transition()
+      	.duration(transitionDuration)
+      	.style("opacity", function(d) {
+		    //On CarreerMeter hide years.
+		    if (controls.height == "territory"){
+	         return 1;
+	     	}
+	     	else {
+	     		return 0;
+	     	}
+		})
+
+		.attr('width', '100%')
+		.attr('height', function(d,i){ return ((d.count)*(barHeight)+20) + 'px'})
+		.attr("x", function(){ return padding.left / 8.5;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
+
+
+	 groupBackgrounds.exit().remove();
+
+},
 updateAdditionalGraphs:function(d,context){
 		
+
+
+		var greyBox = d3.select(context).select()
+
+
 		var curves = d3.select(context)
 			.selectAll('path.curves')
 	        .data(d.memberships, function(d,i){ return i;});
@@ -120,18 +201,16 @@ updateAdditionalGraphs:function(d,context){
 	},
 	updateLabels: function(){
 
-		this.setBoxHeight();
+	  this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.territoryLabel')
-	    .data(this.data, function(d,i){ return i;});
+	    .data(this.counter, function(d,i){ return i;});
 
 	  labels.enter()
 	    .append('text')
-	    .attr('class', 'territoryLabel')
-
-	    
-      	.attr("x", function(){ return padding.left / 7;})
-		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
+	    .attr('class', 'territoryLabel')	    
+      	.attr("x", function(d,i){ return padding.left / 7;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
 	    
 	  
 	 
@@ -149,9 +228,9 @@ updateAdditionalGraphs:function(d,context){
 	     	}
 		}).attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
-      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
+      	.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d,i) {
-	    	return d.split('-')[0];
+	    	return d.label;
 	    })
 	 labels.exit().remove();
 
@@ -170,7 +249,7 @@ updateAdditionalGraphs:function(d,context){
 		if (controls.height == "territory" || controls.height =="memberships"){
 			
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
-			
+
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
   		}
   		else {

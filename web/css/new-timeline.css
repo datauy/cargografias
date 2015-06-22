@@ -314,3 +314,9 @@ path.curves.bezier{
 
 div.vis.highlight g.barGroup.highlight { opacity: 1;}
 
+div.vis rect.backgroundGroup:nth-child(odd) {
+    fill: grey
+}
+div.vis rect.backgroundGroup:nth-child(even) {
+    fill: #ffffff;
+ }

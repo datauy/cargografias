@@ -311,6 +311,9 @@ function refreshGraph() {
   * Process Politicians names 
   ***********************************************************/
 
+  window.cargo.plugins.memberships.updatePreviouslGraphs();
+  window.cargo.plugins.territory.updatePreviouslGraphs();
+   
   var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});
     
@@ -333,6 +336,7 @@ function refreshGraph() {
     names.each(function(politician, j){
        
       
+
       var memberships = 
           d3.select(this)
             .selectAll("g.barGroup")
@@ -346,6 +350,7 @@ function refreshGraph() {
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
+
 
       
       memberships.enter()
