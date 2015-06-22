@@ -174,8 +174,8 @@ angular.module('cargoApp.controllers')
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
-
-      reloadTimeline();
+      console.log($scope.filter);
+      reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();
     }
@@ -183,7 +183,7 @@ angular.module('cargoApp.controllers')
 
     $scope.filterLine = function(f) {
       $scope.filter = f;
-      setControlFix(f);
+      reloadCargoTimeline(f);
       updateTheUrl();
     }
 

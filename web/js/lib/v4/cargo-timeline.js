@@ -599,7 +599,7 @@ function refreshGraph() {
 
 
 //In order to isolate order/filtering this method will execute everthing
-function setControlFix(o){
+function reloadCargoTimeline(o){
   setControls(o);
   reloadTimeline();
   

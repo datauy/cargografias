@@ -168,7 +168,9 @@ updateAdditionalGraphs:function(d,context){
 	},
 	showOnlyHim: function(e,i){
 		if (controls.height == "territory" || controls.height =="memberships"){
+			
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
+			
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
   		}
   		else {
