@@ -19,7 +19,7 @@ angular.module('cargoApp.controllers')
     var processParameters = function(params) {
       parsedParams = params.split('-');
       $scope.filter = parsedParams.shift();
-      $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
+      // $scope.poderometroYear = $scope.activeYear = parseInt(parsedParams.shift());
 
     }
 
@@ -64,7 +64,9 @@ angular.module('cargoApp.controllers')
       $rootScope.estado = "Listo!";
       $rootScope.ready = true;
 
-      if (parsedParams && parsedParams.length == 1 && parsedParams[0] == '') parsedParams.pop(); //Remove spurius parsing
+      if (parsedParams && parsedParams.length == 1 && parsedParams[0] == '') {
+        parsedParams.pop(); //Remove spurius parsing
+      }
       if (parsedParams && parsedParams.length) {
         //Initial load with parameters in the URL
         for (var i = 0; i < parsedParams.length; i++) {
@@ -148,7 +150,7 @@ angular.module('cargoApp.controllers')
 
     function updateTheUrl() {
       //Update the URL
-      $location.path("/" + $scope.filter + "-" + $scope.activeYear + "-" + $scope.activePersons.map(function(p) {
+      $location.path("/" + $scope.filter + "-" + $scope.activePersons.map(function(p) {
         return p.autoPersona.popitID
       }).join('-'));
     }
@@ -175,8 +177,8 @@ angular.module('cargoApp.controllers')
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
-
-      reloadTimeline();
+      console.log($scope.filter);
+      reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();
     }
@@ -184,7 +186,7 @@ angular.module('cargoApp.controllers')
 
     $scope.filterLine = function(f) {
       $scope.filter = f;
-      setControlFix(f);
+      reloadCargoTimeline(f);
       updateTheUrl();
     }
 

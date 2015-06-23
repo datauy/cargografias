@@ -252,6 +252,9 @@ function refreshGraph() {
   ***********************************************************/
 
 
+  window.cargo.plugins.memberships.updatePreviouslGraphs();
+  window.cargo.plugins.territory.updatePreviouslGraphs();
+
 
 
   /************************************************************
@@ -311,6 +314,8 @@ function refreshGraph() {
   * Process Politicians names 
   ***********************************************************/
 
+
+   
   var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});
     
@@ -333,6 +338,7 @@ function refreshGraph() {
     names.each(function(politician, j){
        
       
+
       var memberships = 
           d3.select(this)
             .selectAll("g.barGroup")
@@ -346,6 +352,7 @@ function refreshGraph() {
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
+
 
       
       memberships.enter()
@@ -599,7 +606,7 @@ function refreshGraph() {
 
 
 //In order to isolate order/filtering this method will execute everthing
-function setControlFix(o){
+function reloadCargoTimeline(o){
   setControls(o);
   reloadTimeline();
   

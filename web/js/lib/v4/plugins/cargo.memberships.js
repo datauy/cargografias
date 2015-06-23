@@ -68,6 +68,10 @@ window.cargo.plugins.memberships =  {
 			return transform;
 
 	},
+	updatePreviouslGraphs:function(d,context){
+	
+
+	},
 	updateAdditionalGraphs:function(d,context){
 		
 		var curves = d3.select(context)
