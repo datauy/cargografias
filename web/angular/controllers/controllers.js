@@ -121,10 +121,11 @@ angular.module('cargoApp.controllers')
 
     $scope.clearFilter = function() {
       //HACK: why?????????
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '',
         $scope.autoPersons = [];
-      $scope.search = false;
+        $scope.search = false;
+        $scope.showResult = false;
     };
 
     $scope.clearResults = function() {
