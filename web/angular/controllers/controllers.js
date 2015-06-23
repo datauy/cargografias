@@ -11,6 +11,7 @@ angular.module('cargoApp.controllers')
     $rootScope.yearObserver = [];
     $rootScope.jerarquimetroObserver = [];
     $scope.filter = "name";
+    $scope.showResult = false;
 
     $scope.showPresets = true;
     var parsedParams;
@@ -114,23 +115,26 @@ angular.module('cargoApp.controllers')
         $scope.showPresets = false;
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersons(q);
+        $scope.showResult = true;
       }
     };
 
     $scope.clearFilter = function() {
       //HACK: why?????????
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '',
         $scope.autoPersons = [];
-      $scope.search = false;
+        $scope.search = false;
+        $scope.showResult = false;
     };
 
     $scope.clearResults = function() {
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '';
+        $scope.showResult = false;
         $scope.autoPersons = [];
-      $scope.showPresets = true;
-      $scope.search = false;
+        $scope.showPresets = true;
+        $scope.search = false;
     }
 
 
