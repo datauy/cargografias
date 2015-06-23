@@ -124,11 +124,11 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.clearResults = function() {
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '',
         $scope.autoPersons = [];
-      $scope.showPresets = true;
-      $scope.search = false;
+        $scope.showPresets = true;
+        $scope.search = false;
     }
 
 

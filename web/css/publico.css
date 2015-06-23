@@ -270,8 +270,8 @@ div.search-row .badge.badge-warning.remove {
   background: #fff;
   padding: 6px;
   border-bottom: solid 3px white;
-  max-height: 80px;
-  min-height: 80px;
+  max-height: 200px;
+  min-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-bottom: 1em;

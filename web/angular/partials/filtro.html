@@ -1,77 +1,170 @@
-  <div class="row" id="filtro">
-	<div class="accordion-group">
-  		<div layout="row" layout-wrap>
-    		<div class="" flex="40">
-    				<div class="search-row clearfix">
-                <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
-    	  				
-                <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
-    	  		    </div>
-            <div ng-show="showPresets && presets.length">
-              <h3 style="margin-bottom: 5px;">¿No sabés que buscar? Probá los siguientes grupos</h3>
-              <div class="search-row clearfix">
+<style>
+    #filter-container .btn-filter {
+        padding: 5px;
+        margin-right: 5px;
+    }
+
+    #filter-container hr.filter-separator {
+        border-top: 1px solid white;
+        display: block;
+        width: 98%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #filter-container [layout-wrap] {
+        width: 98%;
+        margin:0 auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    #filter-container #buttons-container {
+        margin-top: 10px;
+    }
+
+    #filter-container .fa-chevron-down, #filter-container .fa-chevron-up {
+        margin-right: 0px;
+        margin-left: 2px;
+    }
+
+    #filter-container .share-btn-container {
+        text-align: right;
+        width: 100%;
+    }
+
+    #filter-container .share-btn-container .twitter{
+        margin-right: 0px;
+    }
+
+    #filter-container #nombre {
+        width: 100%; margin:0 auto; margin-top: 15px; height: 36px; margin-bottom: 2px;
+    }
+
+    #filter-container .resultados {
+        padding: 5px 0;
+        z-index: 999;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        width: 100%;
+    }
+
+    #filter-container .resultados-item {
+        margin:0 auto;
+        width: 100%;
+        padding-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    #filter-container h3 {
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="row" id="filter-container" ng-controller="filterController">
+    <div class="accordion-group">
+
+        <!-- Filter -->
+        <div layout="row" layout-wrap>
+
+            <div class="share-btn-container">
+                <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
+                    <i class="fa fa-twitter"></i>Compartír busqueda
+                </a>
+            </div>
+
+            <input id="nombre" type="search"
+                   placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario"
+                   ng-model="nombre" ng-change="filterAutoPersons(nombre)" autocomplete="off">
+
+            <div class="resultados" ng-show="nombre.length >= minLength">
+                <div class="item" ng-repeat="item in autoPersons">
+                    <a ng-click="add(item,item.index)"
+                       class="badge badge-warning resultados-item" ng-class="item.styles" style="margin-bottom:4px">
+                        <i ng-hide="item.agregada" class="fa fa-check"></i> {{item.name}}
+                    </a>
+                </div>
+            </div>
+
+            <div id="buttons-container">
+                <a href="#" class="btn-filter label label-success" ng-click="showFilterOptions = !showFilterOptions; showAdvanceOptions = false">
+                    <i class="fa fa-users"></i>¿No sabés que buscar?
+                    <i class="fa fa-chevron-down" ng-show="!showFilterOptions"></i>
+                    <i class="fa fa-chevron-up" ng-show="showFilterOptions"></i>
+                </a>
+
+                <a href="#" class="btn-filter label label-info" ng-click="showAdvanceOptions = !showAdvanceOptions; showFilterOptions = false">
+                    <i class="fa fa-search"></i>Busqueda avanzada
+                    <i class="fa fa-chevron-down" ng-show="!showAdvanceOptions"></i>
+                    <i class="fa fa-chevron-up" ng-show="showAdvanceOptions"></i></avanzada>
+                </a>
+
+                <a href="#" class="btn-filter label label-warning" ng-click="clearResults()">
+                    <i class="fa fa-times"></i>Limpiar filtro
+                </a>
+            </div>
+
+        </div>
+        <!-- /Filter -->
+
+        <hr class="filter-separator" ng-show="showFilterOptions || showAdvanceOptions">
+
+        <!-- Default Filter options -->
+        <div layout="row" layout-wrap>
+            <div ng-show="showFilterOptions">
+
+                <h3>¿No sabés que buscar? Probá los siguientes grupos</h3>
+
+                <div class="search-row clearfix">
                     <ul>
-                        <li ng-repeat="p in presets"> 
-                          <h3><a class="hand" ng-click="load(p.valores, true)">{{p.nombre}}</a></h3>
+                        <li ng-repeat="p in presets">
+                            <h3><a class="hand" ng-click="load(p.valores, true)">{{p.nombre}}</a></h3>
                         </li>
 
                     </ul>
-              </div>
-            </div>
-        </div>
-         <div flex="40">
-            <div ng-show="!showPresets && search" class="full-width" >
-                <div class="items">
-                  <span class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
-                  <a ng-click="clearResults()" alt="Limpiar filtro" class="badge badge-warning remove" style="padding-right:10px" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i>Limpiar resultados</a>          
-                  <div class="resultados">
-                  <div  class="item" ng-repeat="item in autoPersons" >
-                    <a id="limpiar-buscar-filtro" ng-click="add(item,item.index)" class="badge badge-warning" ng-class="item.styles" style="margin-bottom:4px">
-                      <i ng-hide="item.agregada"class="fa fa-check" ></i> {{item.name}}
-                      </a>                      
-                  </div>
                 </div>
-              </div>
-         </div>
-       </div>
-     </div>
-      <div class="row full-width person-box">
-       <div class="eighty left">
-         <div>
-                      <div class="row" ng-show="activePersons.length > 0">
-                        <div class="full-width" id="personas-seleccionadas-box">
-                          <div class="persona-seleccionada" ng-repeat="active in activePersons">
-                                  <a ng-click="remove(active)" class="badge badge-warning remove"><i class="fa fa-times"></i></a>
-                                    <div class="photo-frame"
-                                    ng-style="{'background-image':'url(' +active.image +')'}"
-                                    >
-                                          
-                                        </div>
-                                  <p>{{active.name}}</p>
-                                </div>
-                      
-                        </div>
-                      </div>
             </div>
         </div>
-        <div class="twenty right" ng-show="activePersons.length > 0">
-            <small>
-              <span class="label full-width">
-              Seleccionados ({{activePersons.length}})</span>
-            </small>
-            <ul class="nav nav-pills alert-error ">
-            <li>
-                   <a href="#" class="badge badge-warning twitter" ng-click="clearAll()"><i class="fa fa-times"></i>Limpiar Todos</a>  
-                </li>
-               <li>
-                    <a href="#" class="badge badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
-                    return false;"><i class="fa fa-twitter"></i>Compartí esta Linea</a>    </div>
-              </li>
-            </ul>
+        <!-- /Default Filter options -->
+
+        <!-- Default Filter options -->
+        <div layout="row" layout-wrap>
+            <div ng-show="showAdvanceOptions">
+
+                <h3>Busqueda Avanzada</h3>
+
+            </div>
         </div>
-      </div>
+        <!-- /Default Filter options -->
 
-		<div class="clearfix"></div>
-	</div>
+
+        <!-- Img List -->
+        <hr class="filter-separator">
+
+        <div layout="row">
+            <div class="left">
+                <div class="row" ng-show="activePersons.length > 0">
+                    <div class="full-width" id="personas-seleccionadas-box">
+                        <div class="persona-seleccionada" ng-repeat="active in activePersons">
+                            <a ng-click="remove(active)" class="badge badge-warning remove">
+                                <i class="fa fa-times"></i>
+                            </a>
+
+                            <div class="photo-frame" ng-style="{'background-image':'url(' +active.image +')'}"></div>
+                            <p>{{active.name}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Img List -->
+    </div>
+
+    <div class="clearfix"></div>
 </div>
-
