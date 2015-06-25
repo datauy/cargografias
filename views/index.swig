@@ -161,6 +161,7 @@
     <script src="angular/app.js"></script>
     <script src="angular/controllers/controllers.js"></script>
     <script src="angular/controllers/loaderController.js"></script>
+    <script src="angular/controllers/filterController.js"></script>
     <script src="angular/filters/filters.js"></script>
     <script src="angular/directives/cargoBubbles.js"></script>
     <script src="angular/directives/cargoLoc.js"></script>
