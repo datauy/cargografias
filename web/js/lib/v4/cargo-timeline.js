@@ -12,14 +12,14 @@ var barHeight = 10;
 var defaultPopPercent = .08;
 var boxHeight = 35;
 var waitStart = false;
-var yearsPadding = 5;
+var yearsPadding = 3;
+
 
 //TODO: move to loader? .init()?
 var controls = {}
 controls['display'] = 'timeline';
 controls['height'] = 'contiguous';
 controls['group'] = 'name';
-
 
 
 
@@ -105,7 +105,7 @@ function processData() {
     maxYear = d3.max(data, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
     minYear = d3.min(data, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
     scales.years = d3.scale.linear()
-      .domain([ minYear,maxYear + yearsPadding])
+      .domain([ minYear - yearsPadding ,maxYear + yearsPadding])
       .range([ padding.left, wid - padding.right ]);
         
     hei = (data.length * boxHeight)+100;
@@ -119,7 +119,7 @@ function processData() {
     //   .range([ padding.top, hei - padding.bottom - barHeight ]);
 
 
-    scales.colorsScale = d3.scale.category20();
+    scales.colorsScale = d3.scale.category10();
 
 
     scales.politicians = function(a) {
@@ -147,6 +147,8 @@ function processData() {
     var y_area = padding.top;
     // Height
     var y_popPercent = padding.top;
+
+    var counter = 0;
     for(i = 0; i < data.length; i++) {
 
       data[i].position = i;
@@ -170,6 +172,7 @@ function processData() {
         d[j].politician = data[i];
         d[j].parent = i;
         d[j].position = j;
+        d[j].generalPosition = counter;
 
         
         
@@ -192,6 +195,7 @@ function processData() {
           d[j].after = d[j+1];  
         }
         
+        counter++;
 
       };
 
@@ -221,9 +225,12 @@ function refreshGraph() {
 
   // hei = ($(window).height()/1.5);
   hei = (data.length  * boxHeight)+75 ;  
+  
+
   //Memberships.Height
   window.cargo.plugins.memberships.setBoxHeight();
   window.cargo.plugins.territory.setBoxHeight();
+  // window.cargo.plugins.degroup.setBoxHeight();
   
   
   /************************************************************
@@ -245,6 +252,9 @@ function refreshGraph() {
   ***********************************************************/
 
 
+  window.cargo.plugins.memberships.updatePreviouslGraphs();
+  window.cargo.plugins.territory.updatePreviouslGraphs();
+
 
 
   /************************************************************
@@ -256,9 +266,56 @@ function refreshGraph() {
       .range([ padding.left, wid - padding.right ]);
 
   /************************************************************
+  * Process Years  
+  ***********************************************************/
+  var yearsNumbers = scales.years.ticks(10);
+  
+  /************************************************************
+  * Add Years Lines
+  ***********************************************************/
+  var yearTicks = vis.selectAll("line.tickLine")
+    .data(yearsNumbers); 
+
+
+  yearTicks.enter().append("line")
+      .attr("class", "tickLine")
+      .attr("x1", padding.left)
+      .attr("x2", padding.left)
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+    
+  yearTicks.transition().duration(transitionDuration)
+      .style("opacity", function(d) {
+        //On CarreerMeter hide years. 
+        if (controls.display == "aligned")  return 0;
+        else return 1;
+      })
+      .attr("x1", function(d, i) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        //On CarreerMeter move years to left
+        else return padding.left;
+      })
+      .attr("x2", function(d) {
+        if (controls.display == "timeline") return scales.years(d);
+        else if (controls.display == "centered") return visCenter;
+        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
+        else if (controls.display == "territory") return window.cargo.plugins.territory.getYearTickPosition();
+        else return padding.left;
+      })
+      .attr("y1", padding.top)
+      .attr("y2", hei - padding.bottom);
+
+  yearTicks.exit().remove();
+
+
+  /************************************************************
   * Process Politicians names 
   ***********************************************************/
 
+
+   
   var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});
     
@@ -281,6 +338,7 @@ function refreshGraph() {
     names.each(function(politician, j){
        
       
+
       var memberships = 
           d3.select(this)
             .selectAll("g.barGroup")
@@ -294,6 +352,7 @@ function refreshGraph() {
             .domain([ 0,  data.length - 1 ])
             .range([ padding.top, hei - padding.bottom - barHeight]);
       
+
 
       
       memberships.enter()
@@ -386,7 +445,7 @@ function refreshGraph() {
                
 
           .attr("transform", processTransform)
-          .attr("width", 100)
+          .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
           .attr("height", barHeight) //ask this to current plugin.
     
 
@@ -434,7 +493,7 @@ function refreshGraph() {
         .text(function(d) { 
               //if (d.)
               if (controls.height == "memberships"){
-                return d.organization.name //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return '' //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else if (controls.height == "territory"){
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
@@ -498,50 +557,7 @@ function refreshGraph() {
     
       
 
-  /************************************************************
-  * Process Years  
-  ***********************************************************/
-  var yearsNumbers = scales.years.ticks(10);
   
-  /************************************************************
-  * Add Years Lines
-  ***********************************************************/
-  var yearTicks = vis.selectAll("line.tickLine")
-    .data(yearsNumbers); 
-
-
-  yearTicks.enter().append("line")
-      .attr("class", "tickLine")
-      .attr("x1", padding.left)
-      .attr("x2", padding.left)
-      .attr("y1", padding.top)
-      .attr("y2", hei - padding.bottom);
-
-    
-  yearTicks.transition().duration(transitionDuration)
-      .style("opacity", function(d) {
-        //On CarreerMeter hide years. 
-        if (controls.display == "aligned")  return 0;
-        else return 1;
-      })
-      .attr("x1", function(d, i) {
-        if (controls.display == "timeline") return scales.years(d);
-        else if (controls.display == "centered") return visCenter;
-        //On CarreerMeter move years to left
-        else return padding.left;
-      })
-      .attr("x2", function(d) {
-        if (controls.display == "timeline") return scales.years(d);
-        else if (controls.display == "centered") return visCenter;
-        else if (controls.display == "memberships") return window.cargo.plugins.memberships.getYearTickPosition();
-        else if (controls.display == "territory") return window.cargo.plugins.territory.getYearTickPosition();
-        else return padding.left;
-      })
-      .attr("y1", padding.top)
-      .attr("y2", hei - padding.bottom);
-
-  yearTicks.exit().remove();
-
 
   
   /************************************************************
@@ -587,35 +603,10 @@ function refreshGraph() {
 
 
 
-/************************************************************
- * Add interaction events after initial drawing
- ***********************************************************/
-function addInteractionEvents() {
-
-  // bar group hover
-  $("g.barGroup").hover(function(e) { 
-    showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  ); 
-    }
-  );
-  $(".vis .background, .vis .mouseLine").hover(function(e) { 
-    showInfoBox( e, null); 
-  });
 
 
-
-  
-}
-
-/************************************************************
- * Display info box for data index i, at mouse
- ***********************************************************/
-function showInfoBox(e, i, j) {
-
-
-
-}
 //In order to isolate order/filtering this method will execute everthing
-function setControlFix(o){
+function reloadCargoTimeline(o){
   setControls(o);
   reloadTimeline();
   
@@ -663,4 +654,83 @@ function formatYear(y) {
   else return y;
 }
 
+//TODO > Move to plugin?
+/************************************************************
+ * Add interaction events after initial drawing
+ ***********************************************************/
+function addInteractionEvents() {
+  var $tooltipEl  = $("#infobox");
+  // bar group hover
+  $("g.barGroup").on('mouseover', function(e) {
+      showInfoBox( e, $(this).attr("index"),  $(this).attr("membership")  );  
+      showOnlyHim(e,$(this).attr("index"));
+    }
+  );
+   $("g.barGroup").on('mouseout', function(e) {
+     $tooltipEl.css('display', 'none');
+     showAll(e,$(this).attr("index")); 
+  });
 
+  $("g.barGroup").on('mousemove', function(e) {
+      $tooltipEl.css('top', event.pageY + 2 + 'px');
+      $tooltipEl.css('left', event.pageX + 10 + 'px');
+     
+  });
+
+}
+
+
+/************************************************************
+ * Highlight all persons posts
+ ***********************************************************/
+
+function showOnlyHim(e,i){
+  $("g.barGroup[index!=" + i + "]").css('opacity',0.2);
+  $("g.barGroup[index=" + i + "]").css('opacity',1);
+  //TODO: How to include plugins here?
+  window.cargo.plugins.memberships.showOnlyHim(e,i);
+  window.cargo.plugins.territory.showOnlyHim(e,i);
+  
+}
+function showAll(e,i){
+  $("g.barGroup").css('opacity',1);
+  //TODO: HOw to include plugins here?
+  window.cargo.plugins.memberships.showAll(e,i);
+  window.cargo.plugins.territory.showAll(e,i);
+
+}
+
+/************************************************************
+ * Display info box for data index i, at mouse
+ ***********************************************************/
+function showInfoBox(e, i, j) {
+ 
+    //TODO: Can we move this to angular?
+    var politician = data[i];
+    var membership = politician.memberships[j];
+
+
+    var info = "<span class='title'>" + politician.name + "</span>";
+    info += "<br />";
+    info += "<br />" + membership.role ;
+    info += "<br />" + membership.organization.name ;
+    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    
+
+    //Initial pos;
+    var infoPos;
+    if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
+    else infoPos = { left: e.pageX-200, top: e.pageY-80 };
+    
+    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
+    //clear all clases
+    document.getElementById('infobox').className = '';
+    
+    $("#infobox")
+      .addClass(classes)
+      .html(info)
+      .css(infoPos)
+      .show();
+  
+
+}
