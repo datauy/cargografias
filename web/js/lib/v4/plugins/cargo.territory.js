@@ -2,11 +2,12 @@ window.cargo  =  window.cargo || {};
 window.cargo.plugins  = window.cargo.plugins || {};
 window.cargo.plugins.territory =  {
 	key: "territory",
-
+	boxHeight: 33,
 	height: 0,
 	data : [],
+	counter:[],
 	colorScale: function(i){
-		return category20(i);
+		return colores_google(i);
 	},
 	count : function(){
     	return territories.length;
@@ -24,19 +25,57 @@ window.cargo.plugins.territory =  {
       });
       //now we order them
       territories.sort(function(a, b){ return d3.ascending(a, b);});
-      this.data = territories;
+      
+      //now we count instances
+      var counter = territories.reduce(function (acc, curr) {
+      	var key  = curr.split('-')[0];
+		  if (typeof acc[key] == 'undefined') {
+		    acc[key] = 1;
+		  } else {
+		    acc[key] += 1;
+		  }
+		  return acc;
+		}, {});
+
+     
+      this.data = territories.map(function(d,i){
+      	var group = d.split('-')[0];
+      	return {
+      			index: i,
+      			label : group,
+      			key : d,
+      			count: counter[group]
+      		};
+
+      	});
+      var i = 0;
+      for(x in counter){ 
+      	this.counter.push({
+      		label:x,
+      		index:i,
+      		count:counter[x],
+      		firstIndex: this.data.filter(
+      			function(d,i) { 
+      				if (d.label === x)  
+      				return d;
+      		})[0].index
+      	});
+      	i++;
+      };
+
 
 	},
 	processIndex: function(d,i){
-		//Memberiship.ProcessIndex
-        d.territoryPosition = this.data.indexOf(d.organization.name.capitalize() + '-' + d.role);
+        var key = d.organization.name.capitalize() + '-' + d.role
+        d.territoryPosition  = this.data.filter(
+        	function(d) { if (d.key === key)  return d;})[0].index;
 
 	},
 	setBoxHeight: function(){
 		if (controls.height == "territory")
 		{
-		    hei =  (this.data.length  * boxHeight *1.25) ;
-		    barHeight = (hei - padding.top - padding.bottom) / this.data.length;
+ 			hei = (this.data.length * this.boxHeight)+100;
+    		barHeight = (hei - padding.top - padding.bottom) / this.data.length;
 		 }
 	},
 	updateBoxes: function(d,i){
@@ -55,8 +94,50 @@ window.cargo.plugins.territory =  {
 			return transform;
 
 	},
-	updateAdditionalGraphs:function(d,context){
+updatePreviouslGraphs:function(){
+	  
+	  this.setBoxHeight();
+	  var groupBackgrounds = vis.selectAll('rect.backgroundGroup')
+	    .data(this.counter, function(d,i){ return d.label;});
+
+	  groupBackgrounds.enter()
+	    .append('rect')
+	    .attr('class', 'backgroundGroup')
+      	.attr("x", function(){ return padding.left / 8.5 ;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
+	    
+	  
+	 
+
+	 groupBackgrounds
+	 	.transition()
+      	.duration(transitionDuration)
+      	.style("opacity", function(d) {
+		    //On CarreerMeter hide years.
+		    if (controls.height == "territory"){
+	         return 1;
+	     	}
+	     	else {
+	     		return 0;
+	     	}
+		})
+
+		.attr('width', '100%')
+		.attr('height', function(d,i){ return ((d.count)*(barHeight)+20) + 'px'})
+		.attr("x", function(){ return padding.left / 8.5;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
+
+
+	 groupBackgrounds.exit().remove();
+
+},
+updateAdditionalGraphs:function(d,context){
 		
+
+
+		var greyBox = d3.select(context).select()
+
+
 		var curves = d3.select(context)
 			.selectAll('path.curves')
 	        .data(d.memberships, function(d,i){ return i;});
@@ -64,6 +145,7 @@ window.cargo.plugins.territory =  {
         curves.enter()
 	        .append('path')
 	        .attr('class', 'curves bezier')
+	       	.attr('index',d.position)
 	        .attr('opacity', 0)
 	        .attr('fill', 'none')
 	        .attr('stroke', 'red')
@@ -71,63 +153,64 @@ window.cargo.plugins.territory =  {
 
         var controlLenght = 20;
 
-        if (controls.height != "territory"){
+        
+        if (controls.height != "memberships" && controls.height != "territory"){
         	curves
 	        .transition()
 	        .duration(transitionDuration)
 	        .attr('opacity', 0);
         	return;
         }
+        else if (controls.height == "territory"){
 
-        curves
-	        .transition()
-	        .duration(transitionDuration)
-	        .attr('opacity', 1)
-	        .attr('d', function(d) {
-	        	if (!d.after || !d.pre){
-	        		return "";
-	        	}
-	        //Scale Left
-	          var fromX = scales.years(d.end) ;	
-	          var fromY = scales.indexes(d.territoryPosition) + barHeight /2;
+	        curves
+		        .transition()
+		        .duration(transitionDuration)
+		        .attr('opacity', 1)
+		        .attr('d', function(d) {
+		        	if (!d.after || !d.pre){
+		        		return "";
+		        	}
+		        //Scale Left
+		          var fromX = scales.years(d.end) ;	
+		          var fromY = scales.indexes(d.territoryPosition) + barHeight /2;
 
-			//Jump!
-	          var control1X = fromX + controlLenght;
-	          var control1Y = fromY;
+				//Jump!
+		          var control1X = fromX + controlLenght;
+		          var control1Y = fromY;
 
-	        //Scale Right
-	          var toX = scales.years(d.after.start) - 2;	
-	          var toY = scales.indexes(d.after.territoryPosition) + barHeight /2;
-	        //Jump!
-	          var contorl2X = toX - controlLenght;
-	          var control2Y = toY;
+		        //Scale Right
+		          var toX = scales.years(d.after.start) - 2;	
+		          var toY = scales.indexes(d.after.territoryPosition) + barHeight /2;
+		        //Jump!
+		          var contorl2X = toX - controlLenght;
+		          var control2Y = toY;
 
-	          //From here! http://www.sitepoint.com/html5-svg-cubic-curves/
-	          var b = "M" + fromX + "," + fromY + " C" + control1X + "," + control1Y + " " + contorl2X + "," + control2Y + " " + toX + "," + toY;
+		          //From here! http://www.sitepoint.com/html5-svg-cubic-curves/
+		          var b = "M" + fromX + "," + fromY + " C" + control1X + "," + control1Y + " " + contorl2X + "," + control2Y + " " + toX + "," + toY;
 
-	          return b;
+		          return b;
 
-	        }).attr('stroke', function(d) {
-	          return window.cargo.plugins.territory.colorScale(d.parent);
-	        });
+		        }).attr('stroke', function(d) {
+		          return window.cargo.plugins.territory.colorScale(d.parent);
+		        });
 
 
-        curves.exit().remove();
+	        curves.exit().remove();
+    	}
 	},
 	updateLabels: function(){
 
-		this.setBoxHeight();
+	  this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.territoryLabel')
-	    .data(this.data, function(d,i){ return i;});
+	    .data(this.counter, function(d,i){ return d.label;});
 
 	  labels.enter()
 	    .append('text')
-	    .attr('class', 'territoryLabel')
-
-	    
-      	.attr("x", function(){ return padding.left / 7;})
-		.attr("y", function(d,i) {return (i)*(barHeight) + padding.top;})
+	    .attr('class', 'territoryLabel')	    
+      	.attr("x", function(d,i){ return padding.left / 7;})
+		.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + padding.top;})
 	    
 	  
 	 
@@ -145,9 +228,9 @@ window.cargo.plugins.territory =  {
 	     	}
 		}).attr('dy','.33em')
       	.attr("x", function(){ return padding.left / 7;})
-      	.attr("y", function(d,i) {return (i)*(barHeight) + barHeight/2+ padding.top;})
+      	.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d,i) {
-	    	return d.split('-')[0];
+	    	return d.label;
 	    })
 	 labels.exit().remove();
 
@@ -161,6 +244,25 @@ window.cargo.plugins.territory =  {
 	},
 	getYearTickPosition: function(){
 		return padding.left;     
-	}
+	},
+	showOnlyHim: function(e,i){
+		if (controls.height == "territory" || controls.height =="memberships"){
+			
+			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
+
+  			$("svg.vis path[index=" + i + "]").css('opacity',1);
+  		}
+  		else {
+  			$("svg.vis path").css('opacity',0);
+  		}
+	},
+	showAll: function(e,i){
+		if (controls.height == "territory" || controls.height =="memberships"){
+			$("svg.vis path.territory").css('opacity',1);
+		}
+		else {
+			$("svg.vis path.territory").css('opacity',0);
+		}
+	},
 
 }

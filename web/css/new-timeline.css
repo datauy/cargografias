@@ -1,25 +1,31 @@
 
 .vis {
   border: none;
-  shape-rendering: crispEdges;
-  background: #FFF
+  /*shape-rendering: crispEdges;*/
+  /*background: #FFF*/
 }
 
 .vis .background{
-  fill:#FFF;
+  fill:rgba(255, 255, 255, 0);
 }
 
 .vis svg{
   font-family: 'RobotoDraft';
 }
 
+.visualizacion{
+  background-color: #FCFCFC;
+}
 rect.bar {
   stroke: rgb(233, 233, 233);
   fill: #969D9B;
   fill-opacity: .75;
+  cursor: pointer;
 }
 
-
+#linea-de-tiempo .alert-error{
+  margin-bottom: 0px
+}
 
 /*http://www.google.com/design/spec/style/color.html#color-color-palette*/
 /* Google suggests using the 500 colors as the primary colors in your app and the other colors as accents colors.*/
@@ -104,8 +110,8 @@ text {
 }
 
 text.rule {
-  fill: #000;
-  font-size: 1.2em;
+  fill: #BABABA;
+  font-size: 0.9em;
   
 }
 
@@ -117,22 +123,27 @@ text.barLabel {
 }
 
 text.itemLabel{
-  font-size: 1em;
+  font-size: 0.9em;
   fill: #000;
 }
 
+text.boxLabel {
+  cursor: pointer;
+}
 text.boxLabel tspan.main {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 text.boxLabel tspan.sub{
     font-style: oblique;
 }
 text.membershipLabel, text.territoryLabel{
  fill: #000; 
- font-size: 1em;
+ font-size: 0.9em;
 }
 
-
+tspan.sub {
+  font-style: italic;
+}
 
 
 
@@ -141,7 +152,7 @@ path.bezier{
   stroke-opacity: 1;  
 }
 line.tickLine {
-  stroke: rgba(51, 51, 51, 0.2);
+  stroke: rgba(51, 51, 51, 0.1);
 }
 line.mouseLine {
   stroke: #0ff;
@@ -274,63 +285,38 @@ html h3, body h3 {
 }
 
 
-#infobox.bar.ejecutivo,
-#infobox.bar.Ejecutivo{
-  background-color: #F44336; /*Material Red 500*/
-}
-#infobox.bar.ejecutivo.nacional{
-  background-color: #F44336; /*Material Red 500*/
-}
-#infobox.bar.ejecutivo.provincial{
-  background-color: #E57373;/*Material Red 300*/
-}
-#infobox.bar.ejecutivo.municipal.intendent,
-#infobox.bar.ejecutivo.intendente{
-  background-color: #FFCDD2; /*Material Red 100*/
-}
-#infobox.bar.legislativo,
-#infobox.bar.Legislativo {
-  background-color: #3F51B5;/*Material Indigo 500*/
-}
-#infobox.bar.legislativo.nacional{
-  background-color: #3F51B5;/*Material Indigo 500*/
-}
-#infobox.bar.legislativo.provincial{
-  background-color: #7986CB;/*Material Indigo 300*/
-}
-
-#infobox.bar.legislativo.concejal,
-#infobox.bar.legislativo.municipal.concejal{
-  background-color: #C5CAE9;/*Material Indigo 100*/
+#infobox.bar{
+  background: #DFDFDF;
 }
 
 .nav{
-  margin-top: -20px;
+  margin-top: -16px;
 }
 
 
-div.vis.highlight g.barGroup{ 
+div.vis g.barGroup{ 
     
-    animation:alert-success 2s;
-    -webkit-animation:alert-success 2s;
-    opacity: 0.2;
+transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;/* Safari */
+
+}
+path.curves.bezier{   
+  transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;/* Safari */
 
 }
 
 
 
-@-webkit-keyframes alert-inverse{
-    0%   {opacity: 0.2;}
-    70%  {opacity: 0.55;}
-    90% {opacity: 0.80;}
-    100% {opacity: 1;}
-}
 
-@-webkit-keyframes alert-success{
-    0%   {opacity: 1;}
-    70%  {opacity: 0.55;}
-    90% {opacity: 0.30;}
-    100% {opacity: 0.2;}
-}
+
+
+
 div.vis.highlight g.barGroup.highlight { opacity: 1;}
 
+div.vis rect.backgroundGroup:nth-child(odd) {
+    fill: #E1E2E4;
+}
+div.vis rect.backgroundGroup:nth-child(even) {
+    fill: #ffffff;
+ }
