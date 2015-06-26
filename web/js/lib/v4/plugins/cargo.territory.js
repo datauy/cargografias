@@ -146,7 +146,7 @@ updateAdditionalGraphs:function(d,context){
 
 		var curves = d3.select(context)
 			.selectAll('path.curves')
-	        .data(d.memberships, function(d,i){ return d.index;});
+	        .data(d.memberships, function(d,i){ return i;});
 
         curves.enter()
 	        .append('path')
