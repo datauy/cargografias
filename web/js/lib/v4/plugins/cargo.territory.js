@@ -140,34 +140,37 @@ updatePreviouslGraphs:function(){
 updateAdditionalGraphs:function(d,context){
 		
 
-
-		var greyBox = d3.select(context).select()
-
-
-		var curves = d3.select(context)
-			.selectAll('path.curves')
-	        .data(d.memberships, function(d,i){ return i;});
-
-        curves.enter()
-	        .append('path')
-	        .attr('class', 'curves bezier')
-	       	.attr('index',d.position)
-	        .attr('opacity', 0)
-	        .attr('fill', 'none')
-	        .attr('stroke', 'red')
-	        .attr('stroke-width', '2px');
-
-        var controlLenght = 20;
-
-        
-        if (controls.height != "memberships" && controls.height != "territory"){
-        	curves
+		if (controls.height != "memberships" && controls.height != "territory"){
+        	console.log('borro curvas', controls.height);
+        	d3
+        	.select(context)
+			.selectAll('path.bezier')
 	        .transition()
 	        .duration(transitionDuration)
 	        .attr('opacity', 0);
         	return;
         }
         else if (controls.height == "territory"){
+			var greyBox = d3.select(context).select()
+
+
+			var curves = d3.select(context)
+				.selectAll('path.curves')
+		        .data(d.memberships, function(d,i){ return i;});
+
+	        curves.enter()
+		        .append('path')
+		        .attr('class', 'curves bezier')
+		       	.attr('index',d.position)
+		        .attr('opacity', 0)
+		        .attr('fill', 'none')
+		        .attr('stroke', 'red')
+		        .attr('stroke-width', '2px');
+
+	        var controlLenght = 20;
+
+        
+        
 
 	        curves
 		        .transition()
