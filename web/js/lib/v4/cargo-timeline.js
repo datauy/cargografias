@@ -357,14 +357,15 @@ function refreshGraph() {
       
       memberships.enter()
             .append("g")
-            .attr("index", function(d, i) { return j; })
-            .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {              
               return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
             })
+      memberships.attr("index", function(d, i) { return j; })
+            .attr("membership", function(d, i) { return i; })
+
 
       memberships.append('rect')
             .attr("rx", 6)
@@ -423,10 +424,14 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             };
-
+    memberships.select('g')
+          .attr("index", function(d, i) { return j; })
+          .attr("membership", function(d, i) { return i; });
       memberships.select('rect')
         .transition()
           .duration(transitionDuration)
+          .attr("index", function(d, i) { return j; })
+          .attr("membership", function(d, i) { return i; })
           .style("fill-opacity", function(d) { 
                           return 1;
                 })

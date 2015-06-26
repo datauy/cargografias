@@ -74,7 +74,7 @@ window.cargo.plugins.memberships =  {
 	},
 	updateAdditionalGraphs:function(d,context){
 		if (controls.height != "memberships" && controls.height != "territory"){
-        	console.log('borro curvas', controls.height);
+        	
 	        	d3
 	        	.select(context)
 				.selectAll('path.bezier')
