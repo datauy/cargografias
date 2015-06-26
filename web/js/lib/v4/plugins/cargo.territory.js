@@ -13,6 +13,9 @@ window.cargo.plugins.territory =  {
     	return territories.length;
 	},
 	processData: function(){
+	  this.counter =[];
+	  this.data = [];
+	  console.log('process')
 	  //territories.processData
       //clear all;
       var territories = [];
@@ -52,6 +55,7 @@ window.cargo.plugins.territory =  {
       for(x in counter){ 
       	this.counter.push({
       		label:x,
+      		name: x,
       		index:i,
       		count:counter[x],
       		firstIndex: this.data.filter(
@@ -97,8 +101,10 @@ window.cargo.plugins.territory =  {
 updatePreviouslGraphs:function(){
 	  
 	  this.setBoxHeight();
-	  var groupBackgrounds = vis.selectAll('rect.backgroundGroup')
-	    .data(this.counter, function(d,i){ return d.label;});
+
+	  var groupBackgrounds = 
+	  vis.selectAll('rect.backgroundGroup')
+	    .data(this.counter, function(d,i){ return d.name;});
 
 	  groupBackgrounds.enter()
 	    .append('rect')
@@ -140,7 +146,7 @@ updateAdditionalGraphs:function(d,context){
 
 		var curves = d3.select(context)
 			.selectAll('path.curves')
-	        .data(d.memberships, function(d,i){ return i;});
+	        .data(d.memberships, function(d,i){ return d.index;});
 
         curves.enter()
 	        .append('path')
@@ -204,7 +210,7 @@ updateAdditionalGraphs:function(d,context){
 	  this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.territoryLabel')
-	    .data(this.counter, function(d,i){ return d.label;});
+	    .data(this.counter, function(d,i){ return d.name;});
 
 	  labels.enter()
 	    .append('text')
@@ -231,7 +237,10 @@ updateAdditionalGraphs:function(d,context){
       	.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d,i) {
 	    	return d.label;
-	    })
+	    });
+
+
+
 	 labels.exit().remove();
 
 
