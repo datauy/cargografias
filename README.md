@@ -63,7 +63,7 @@ $ npm install
 * Bajate la base de datos de tu instancia.
 
 ```bash
-$  node getInstanceData.js cargo
+$  node getInstanceData.js cargografias 
 ```
 
 
