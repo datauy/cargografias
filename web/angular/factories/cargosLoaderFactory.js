@@ -78,6 +78,10 @@ angular.module('cargoApp.factories', [])
                     res.data[i].lastName = res.data[i].name ? splitedName.reverse()[0] : '';
                     try{
                       res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
+                      res.data[i].chequeado = false;
+                      if (chequeados.indexOf(res.data[i].popitID) > -1){
+                          res.data[i].chequeado = true;
+                      }
                     }
                     catch(e){
                       console.log("No Id?-", res.data[i].name, res.data[i].id_sha1);
@@ -114,4 +118,7 @@ angular.module('cargoApp.factories', [])
         }
         return f;
 });
+
+//TODO: this should be on popit, hard hack for Elections BA.
+var chequeados = ["2c109a", "55a99b","5928af", "1d3338", "f4b3f5"];
 

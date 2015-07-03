@@ -320,3 +320,39 @@ div.vis rect.backgroundGroup:nth-child(odd) {
 div.vis rect.backgroundGroup:nth-child(even) {
     fill: #ffffff;
  }
+
+div.persona-seleccionada{
+  position: relative;
+}
+
+.checkeado{
+  font-family: 'Roboto', sans-serif;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  
+}
+
+div.checkeado {
+  font-size: 0.65em;
+  padding-left: 0.35em;
+  bottom: 25px;
+  position: absolute;
+  opacity: .8;
+  width: 74px;
+  border-radius: 0 0 4px 4px;
+}
+div.checkeado a {
+  text-decoration: none;
+  color:white;
+
+}
+
+p.checkeado{
+  font-size: 1em;
+  position: inherit;
+  opacity: .8;
+  width: 90%;
+  border-radius: 4px 4px;
+}
