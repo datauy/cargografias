@@ -450,7 +450,13 @@ function refreshGraph() {
                
 
           .attr("transform", processTransform)
-          .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+          .attr("width", function(d) { 
+            var duration  = d.end -d.start;
+            var rightPadding = 0;
+            if (duration == 0){
+              rightPadding = 0.5;
+            } 
+            return scales.years(d.end + rightPadding) - scales.years(d.start); })
           .attr("height", barHeight) //ask this to current plugin.
     
 
