@@ -160,7 +160,7 @@ angular.module('cargoApp.controllers')
         autoPersona.styles = "badge-selected"
         var person = cargosFactory.getFullPerson(id);
         person.autoPersona = autoPersona;
-        $scope.activePersons.push(person);
+        $scope.activePersons.unshift(person);
       }
     }
     $scope.add = function(autoPersona, id) {
