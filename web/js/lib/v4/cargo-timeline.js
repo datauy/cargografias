@@ -726,6 +726,12 @@ function showInfoBox(e, i, j) {
     info += "<br />" + membership.role ;
     info += "<br />" + membership.organization.name ;
     info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    if (politician.chequeado){
+      info += "<p class='checkeado' > <i class='fa fa-check'></i> Chequeado</p>";  
+    }
+    
+    
+
     
 
     //Initial pos;
