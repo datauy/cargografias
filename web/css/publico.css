@@ -267,13 +267,12 @@ div.search-row .badge.badge-warning.remove {
 
 .resultados {
     background: #fff;
-    padding: 6px;
     border-bottom: solid 3px white;
-    max-height: 200px;
-    min-height: 200px;
-    overflow-y: scroll;
+    max-height: 160px;
+    min-height: 160px;
+    overflow-y: scroll !important;
     overflow-x: hidden;
-    margin-bottom: 1em;
+    border-radius: 4px;
 }
 
 .span6 {
@@ -587,8 +586,7 @@ li {
 #filter-container [layout-wrap] {
     width: 98%;
     margin: 0 auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 #filter-container #buttons-container {
@@ -603,30 +601,31 @@ li {
 #filter-container .share-btn-container {
     text-align: right;
     width: 100%;
+    margin-bottom: 5px;
 }
 
 #filter-container .share-btn-container .twitter {
-    margin-right: 0px;
+    margin-right: 7px;
 }
 
 #filter-container #nombre {
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 15px;
+    width: 95%;
+    margin-top: 0px;
     height: 36px;
     margin-bottom: 2px;
 }
 
 #filter-container .resultados {
+    overflow-y: auto !important;
     padding: 5px 0;
     z-index: 999;
-    width: 100%;
+    width: 99%;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, .2);
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-    width: 100%;
+    width: 100% !importat;
 }
 
 #filter-container .resultados-item {
@@ -644,6 +643,6 @@ li {
     position: absolute;
     padding: 10px 0px 10px 9px;
     margin-left: -34px;
-    margin-top: 21px;
+    margin-top: 6px;
     z-index: 2;
 }
