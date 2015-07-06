@@ -586,7 +586,7 @@ li {
 #filter-container [layout-wrap] {
     width: 98%;
     margin: 0 auto;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 #filter-container #buttons-container {
@@ -602,6 +602,7 @@ li {
     text-align: right;
     width: 100%;
     margin-bottom: 5px;
+    margin-top: 0px;
 }
 
 #filter-container .share-btn-container .twitter {
@@ -616,6 +617,7 @@ li {
 }
 
 #filter-container .resultados {
+    margin-bottom: 10px;
     overflow-y: auto !important;
     padding: 5px 0;
     z-index: 999;
@@ -636,7 +638,11 @@ li {
 }
 
 #filter-container h3 {
-    margin-bottom: 5px;
+    margin-bottom: 12px;
+}
+
+#filter-container h3.title {
+    margin-top: 0px;
 }
 
 #filter-container .filter-clean {

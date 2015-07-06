@@ -17,14 +17,6 @@
         <div role="tabpanel" class="tab-pane fade in active" id="basic-filter">
             <!-- Filter -->
             <div layout="row" layout-wrap>
-                <div class="span12 share-btn-container">
-                    <a href="#" class="btn-filter label label-warning" ng-click="clearAll();clearResults()">
-                        <i class="fa fa-times"></i>Limpiar filtro
-                    </a>
-                    <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
-                        <i class="fa fa-twitter"></i>Compartír busqueda
-                    </a>
-                </div>
                 <div class="span6">
                     <input id="nombre" type="search"
                            placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario"
@@ -42,6 +34,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="span12 share-btn-container">
+                    <span id="quantiy-result" class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
+
+                    <a href="#" class="btn-filter label label-warning" ng-click="clearAll();clearResults()">
+                        <i class="fa fa-times"></i>Limpiar filtro
+                    </a>
+                    <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
+                        <i class="fa fa-twitter"></i>Compartír busqueda
+                    </a>
+                </div>
             </div>
             <!-- /Filter -->
         </div>
@@ -50,7 +52,7 @@
             <!-- Default Filter options -->
             <div layout="row" layout-wrap>
                 <div>
-                    <h3>¿No sabés que buscar? Probá los siguientes grupos</h3>
+                    <h3 class="title">¿No sabés que buscar? Probá los siguientes grupos</h3>
 
                     <div class="search-row clearfix">
                         <ul>
@@ -67,29 +69,15 @@
 
             <!-- Filter -->
             <div layout="row" layout-wrap>
-                <div class="span12 share-btn-container">
-                    <a href="#" class="btn-filter label label-warning" ng-click="clearAll();clearResults()">
-                        <i class="fa fa-times"></i>Limpiar filtro
-                    </a>
-                    <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
-                        <i class="fa fa-twitter"></i>Compartír busqueda
-                    </a>
-                </div>
                 <div class="span6">
-                    <select>
-                        <option>Personas</option>
-                        <option>Personas</option>
-                        <option>Personas</option>
+                    <select id="">
+                        <option value = "0" label = "Seleccionar territorio"></option>
                     </select>
                     <select>
-                        <option>Personas</option>
-                        <option>Personas</option>
-                        <option>Personas</option>
+                        <option value = "0" label = "Seleccionar cargo"></option>
                     </select>
                     <select>
-                        <option>Personas</option>
-                        <option>Personas</option>
-                        <option>Personas</option>
+                        <option value = "0" label = "Seleccionar decada"></option>
                     </select>
                 </div>
                 <div class="span6">
@@ -101,6 +89,16 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="span12 share-btn-container">
+                    <span id="quantiy-result" class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
+
+                    <a href="#" class="btn-filter label label-warning" ng-click="clearAll();clearResults()">
+                        <i class="fa fa-times"></i>Limpiar filtro
+                    </a>
+                    <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
+                        <i class="fa fa-twitter"></i>Compartír busqueda
+                    </a>
                 </div>
             </div>
             <!-- /Filter -->
@@ -122,7 +120,7 @@
 
     #filter-container .tab-content {
         background: white;
-        height: 215px;
+        height: 220px;
         margin-top: -1px;
     }
 
@@ -136,6 +134,11 @@
         height: 46px;
         margin-top: 0px;
         margin-bottom: 11px;
+    }
+
+    #filter-container #quantiy-result {
+        padding: 5px;
+        margin-right: 7px;
     }
 </style>
 <!-- Img List -->
