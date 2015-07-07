@@ -39,9 +39,7 @@
     <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
 
 
-    
-
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     <!-- V2 Styles -->    
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
