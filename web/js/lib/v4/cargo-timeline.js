@@ -357,14 +357,15 @@ function refreshGraph() {
       
       memberships.enter()
             .append("g")
-            .attr("index", function(d, i) { return j; })
-            .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {              
               return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
             })
+      memberships.attr("index", function(d, i) { return j; })
+            .attr("membership", function(d, i) { return i; })
+
 
       memberships.append('rect')
             .attr("rx", 6)
@@ -423,10 +424,14 @@ function refreshGraph() {
                 d.ty = transform.ty;
                 return "translate(" + transform.tx + ", " + transform.ty + ")"; 
             };
-
+    memberships.select('g')
+          .attr("index", function(d, i) { return j; })
+          .attr("membership", function(d, i) { return i; });
       memberships.select('rect')
         .transition()
           .duration(transitionDuration)
+          .attr("index", function(d, i) { return j; })
+          .attr("membership", function(d, i) { return i; })
           .style("fill-opacity", function(d) { 
                           return 1;
                 })
@@ -445,7 +450,13 @@ function refreshGraph() {
                
 
           .attr("transform", processTransform)
-          .attr("width", function(d) { return scales.years(d.end) - scales.years(d.start); })
+          .attr("width", function(d) { 
+            var duration  = d.end -d.start;
+            var rightPadding = 0;
+            if (duration == 0){
+              rightPadding = 0.5;
+            } 
+            return scales.years(d.end + rightPadding) - scales.years(d.start); })
           .attr("height", barHeight) //ask this to current plugin.
     
 
@@ -715,6 +726,12 @@ function showInfoBox(e, i, j) {
     info += "<br />" + membership.role ;
     info += "<br />" + membership.organization.name ;
     info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    if (politician.chequeado){
+      info += "<p class='checkeado' > <i class='fa fa-check'></i> Chequeado</p>";  
+    }
+    
+    
+
     
 
     //Initial pos;

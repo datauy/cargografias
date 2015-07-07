@@ -16,7 +16,9 @@ html{
 	text-shadow: 2px 2px white;
 }
 .row{
-  margin-left: auto; 
+	  margin-left: auto;
+  max-width: 100%;
+  min-width: 100%;
 }
 .counters .no-well h2,
 .counters .no-well h3 {
@@ -335,21 +337,21 @@ svg text{
 }
 
 .persona-seleccionada p{
-    font-size: 12px;
+  font-size: 12px;
   line-height: 12px;
   width: 100%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 78px;
 }
 
 .persona-seleccionada {   
-width: 80px;
+  width: 80px;
   margin: 1em;
   float: left;
-  display: inline-block;
-
+  display: inline-table;
   padding: 0;
   list-style: none;
   margin-bottom: 0em;
@@ -486,8 +488,32 @@ div.main{
   background-color: #79CEDF;
 }
 
-.full-width{
+.full-width {
   width: 100%;
+  background-color: rgb(232, 232, 232);
+  max-width: 100%;
+  display: inline-flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.full-width .persons{
+	  padding-top: 1em;
+}
+.label.full-width{
+  width: 100%;
+  background-color: rgb(232, 232, 232);
+  max-width: 100%;
+  display: inherit;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: inherit;
+}
+span.label.full-width{
+	background-color: #999;
+}
+.twenty.right{
+ 	background-color: rgb(232, 232, 232);
 }
 
 .two-third-width{
@@ -508,7 +534,7 @@ div.main{
   padding:0;
 }
 .twenty {
-  width: 14%;
+  width: 19%;
 }
 .eighty{
   width: 86%;

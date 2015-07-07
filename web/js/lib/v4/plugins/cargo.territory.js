@@ -13,6 +13,9 @@ window.cargo.plugins.territory =  {
     	return territories.length;
 	},
 	processData: function(){
+	  this.counter =[];
+	  this.data = [];
+	  console.log('process')
 	  //territories.processData
       //clear all;
       var territories = [];
@@ -52,6 +55,7 @@ window.cargo.plugins.territory =  {
       for(x in counter){ 
       	this.counter.push({
       		label:x,
+      		name: x,
       		index:i,
       		count:counter[x],
       		firstIndex: this.data.filter(
@@ -97,8 +101,10 @@ window.cargo.plugins.territory =  {
 updatePreviouslGraphs:function(){
 	  
 	  this.setBoxHeight();
-	  var groupBackgrounds = vis.selectAll('rect.backgroundGroup')
-	    .data(this.counter, function(d,i){ return d.label;});
+
+	  var groupBackgrounds = 
+	  vis.selectAll('rect.backgroundGroup')
+	    .data(this.counter, function(d,i){ return d.name;});
 
 	  groupBackgrounds.enter()
 	    .append('rect')
@@ -134,34 +140,37 @@ updatePreviouslGraphs:function(){
 updateAdditionalGraphs:function(d,context){
 		
 
-
-		var greyBox = d3.select(context).select()
-
-
-		var curves = d3.select(context)
-			.selectAll('path.curves')
-	        .data(d.memberships, function(d,i){ return i;});
-
-        curves.enter()
-	        .append('path')
-	        .attr('class', 'curves bezier')
-	       	.attr('index',d.position)
-	        .attr('opacity', 0)
-	        .attr('fill', 'none')
-	        .attr('stroke', 'red')
-	        .attr('stroke-width', '2px');
-
-        var controlLenght = 20;
-
-        
-        if (controls.height != "memberships" && controls.height != "territory"){
-        	curves
+		if (controls.height != "memberships" && controls.height != "territory"){
+        	
+        	d3
+        	.select(context)
+			.selectAll('path.bezier')
 	        .transition()
 	        .duration(transitionDuration)
 	        .attr('opacity', 0);
         	return;
         }
         else if (controls.height == "territory"){
+			var greyBox = d3.select(context).select()
+
+
+			var curves = d3.select(context)
+				.selectAll('path.curves')
+		        .data(d.memberships, function(d,i){ return i;});
+
+	        curves.enter()
+		        .append('path')
+		        .attr('class', 'curves bezier')
+		       	.attr('index',d.position)
+		        .attr('opacity', 0)
+		        .attr('fill', 'none')
+		        .attr('stroke', 'red')
+		        .attr('stroke-width', '2px');
+
+	        var controlLenght = 20;
+
+        
+        
 
 	        curves
 		        .transition()
@@ -204,7 +213,7 @@ updateAdditionalGraphs:function(d,context){
 	  this.setBoxHeight();
         
 	  var labels = vis.selectAll('text.territoryLabel')
-	    .data(this.counter, function(d,i){ return d.label;});
+	    .data(this.counter, function(d,i){ return d.name;});
 
 	  labels.enter()
 	    .append('text')
@@ -231,7 +240,10 @@ updateAdditionalGraphs:function(d,context){
       	.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d,i) {
 	    	return d.label;
-	    })
+	    });
+
+
+
 	 labels.exit().remove();
 
 

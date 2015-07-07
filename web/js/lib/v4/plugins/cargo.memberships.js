@@ -73,7 +73,17 @@ window.cargo.plugins.memberships =  {
 
 	},
 	updateAdditionalGraphs:function(d,context){
-		
+		if (controls.height != "memberships" && controls.height != "territory"){
+        	
+	        	d3
+	        	.select(context)
+				.selectAll('path.bezier')
+		        .transition()
+		        .duration(transitionDuration)
+		        .attr('opacity', 0);
+        	return;
+        }
+        else if (controls.height == "memberships"){
 		var curves = d3.select(context)
 			.selectAll('path.curves')
 	        .data(d.memberships, function(d,i){ return i;});
@@ -89,14 +99,7 @@ window.cargo.plugins.memberships =  {
 
         var controlLenght = 20;
 
-        if (controls.height != "memberships" && controls.height != "territory"){
-        	curves
-	        .transition()
-	        .duration(transitionDuration)
-	        .attr('opacity', 0);
-        	return;
-        }
-        else if  (controls.height == "memberships"){
+     
 	        curves
 		        .transition()
 		        .duration(transitionDuration)
