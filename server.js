@@ -43,12 +43,12 @@ app.set('views', __dirname + "/views");
 // all environments
 app.set('port', process.env.PORT || 3000);
 
-app.use(express.static(__dirname + '/web'));
-
 app.get('/', function(req, res) {
     req.params.instanceName = 'cargografias';
     instanceRouteHandler(req,res);
 });
+
+app.use(express.static(__dirname + '/web'));
 
 app.get('/:instanceName', instanceRouteHandler);
         
