@@ -29,4 +29,5 @@ static-public/datasets/*.json
 
 /web/js/datasets/*.json
 /web/js/datasets/gz/*.json
+/web/version.txt
 .env
