@@ -26,7 +26,7 @@ function getFiles(instanceName) {
       } else if (response.statusCode != 200) {
         console.log("Error getting file", filename, response.statusCode, response.statusMessage);
       } else {
-        var dest = path.normalize("public/datasets/" + filename);
+        var dest = path.normalize("static-public/datasets/" + filename);
         fs.writeFile(dest, beautify(body), function(err) {
           if (err) console.log("Error writing", dest, err);
           else console.log("Complete:", dest);
