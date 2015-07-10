@@ -43,6 +43,8 @@ app.set('views', __dirname + "/views");
 // all environments
 app.set('port', process.env.PORT || 3000);
 
+app.use(express.static(__dirname + '/web'));
+
 app.get('/', function(req, res) {
     req.params.instanceName = 'cargografias';
     instanceRouteHandler(req,res);
@@ -85,8 +87,6 @@ app.get('/d/:instanceName', function(req, res) {
     });
 
 });
-
-app.use(express.static(__dirname + '/web'));
 
 app.disable('etag');
 var server = http.createServer(app);
