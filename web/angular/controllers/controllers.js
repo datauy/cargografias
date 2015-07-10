@@ -4,6 +4,7 @@
 angular.module('cargoApp.controllers')
   .controller('homeController', function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
+    $scope.filterAdvance = {};
     $scope.autoPersons = [];
     $scope.activePersons = [];
     $scope.estado = "";
@@ -119,6 +120,13 @@ angular.module('cargoApp.controllers')
       }
     };
 
+    $scope.filterAutoPersonsAdvance = function () {
+        $scope.showPresets = false;
+        $scope.search = true;
+        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        $scope.showResult = true;
+    };
+
     $scope.clearFilter = function() {
       //HACK: why?????????
         $("#nombre").val('');
@@ -215,6 +223,18 @@ angular.module('cargoApp.controllers')
       $scope.showPresets = true;
       $scope.refreshAllVisualizations();
 
+    }
+
+    $scope.getOrganizations = function() {
+        return cargosFactory.getOrganizations();
+    }
+
+    $scope.getMemberships = function() {
+        return cargosFactory.getMemberships();
+    }
+
+    $scope.getDecades = function() {
+        return cargosFactory.getDecades();
     }
 
 

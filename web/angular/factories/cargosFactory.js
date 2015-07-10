@@ -143,6 +143,43 @@ angular.module('cargoApp.factories')
     factory.getAutoPersons = function(q){
       return $filter('filter')(this.autoPersons, {name: q}, ignoreAccentsCompare);
     };
+
+    factory.getAutoPersonsAdvance = function(filter){
+        var search = false;
+        var autoPersonsResult = this.autoPersons;
+
+        if( filter.organization !== undefined && filter.organization !== null) {
+            autoPersonsResult = $filter('filter')(autoPersonsResult, {
+                memberships: {
+                    organization_id: filter.organization
+                }
+            });
+
+            search = true;
+        }
+
+        if( filter.membership !== undefined && filter.membership !== null) {
+            autoPersonsResult = $filter('filter')(autoPersonsResult, {
+                memberships: {
+                    id: filter.membership
+                }
+            });
+
+            search = true;
+        }
+
+        if( filter.decade !== undefined && filter.decade !== 0) {
+
+            //TODO: Implementar
+        }
+
+        if(search) {
+            return autoPersonsResult;
+        }
+
+        return [];
+    };
+
     factory.getPoderometro = function(year, persons){
 
       var ejecutivo = { name:"Ejecutivo", children: []};
@@ -356,10 +393,7 @@ angular.module('cargoApp.factories')
         //Si el periodo ya termino.        
         resume.yearsPolitics = parseFloat(years.toFixed(2));
 
-
-
       return resume ;
-
 
     };
     factory.getSummary = function(person){
@@ -426,9 +460,24 @@ angular.module('cargoApp.factories')
       }
       return undefined;
     }
+
+    factory.getOrganizations = function() {
+        //Obtener los datos correctos
+        return this.organizations;
+    }
+
+    factory.getMemberships = function() {
+        //Obtener los datos correctos
+        return this.memberships;
+    }
+
+    factory.getDecades = function() {
+        //Modificar por las decadas existentes
+        return [1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010,2020];
+    }
+
     factory.load = function ($scope,callback, $rootScope) {
       cargoLoaderFactory.load($scope,factory,callback, $rootScope);
-      
     }
 
 
