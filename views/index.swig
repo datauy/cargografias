@@ -51,6 +51,10 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/new-timeline.css" type="text/css">
 
+    <style>
+        {{customization.customCSS|safe}}
+    </style>
+
 
     <script>
         window.__config = {
