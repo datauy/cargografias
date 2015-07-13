@@ -4,14 +4,9 @@
  *  Filter Controller
  */
 angular.module('cargoApp.controllers').controller('filterController',
-    function($rootScope, $q, $scope) {
+    function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
-        /**
-         * Cantidad mínima de caracteres
-         * @type {number}
-         */
-        $scope.minLength = 3;
-
+        //Todo: Refactoring
 
     }
 );

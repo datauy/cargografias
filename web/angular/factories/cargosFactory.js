@@ -149,19 +149,23 @@ angular.module('cargoApp.factories')
         var autoPersonsResult = this.autoPersons;
 
         if( filter.organization !== undefined && filter.organization !== null) {
-            autoPersonsResult = $filter('filter')(autoPersonsResult, {
-                memberships: {
-                    organization_id: filter.organization
-                }
-            });
+            var organization = factory.getOrganizationByName(filter.organization);
 
-            search = true;
+            if(organization.id !== undefined) {
+                autoPersonsResult = $filter('filter')(autoPersonsResult, {
+                    memberships: {
+                        organization_id: organization.id
+                    }
+                });
+
+                search = true;
+            }
         }
 
-        if( filter.membership !== undefined && filter.membership !== null) {
+        if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
             autoPersonsResult = $filter('filter')(autoPersonsResult, {
                 memberships: {
-                    id: filter.membership
+                    cargonominal: filter.jobTitle
                 }
             });
 
@@ -169,8 +173,28 @@ angular.module('cargoApp.factories')
         }
 
         if( filter.decade !== undefined && filter.decade !== 0) {
+            var inDecade = false;
 
-            //TODO: Implementar
+            var autoPersonsResult = _.filter(autoPersonsResult, function(data){
+                inDecade = false;
+
+                _.each(data.memberships, function(membership){
+                    if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
+                        if(filter.jobTitle == membership.cargonominal && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                            inDecade = true;
+                            search = true;
+                        }
+                    } else {
+                        if(factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                            inDecade = true;
+                            search = true;
+                        }
+                    }
+
+                });
+
+                return inDecade;
+            });
         }
 
         if(search) {
@@ -178,6 +202,22 @@ angular.module('cargoApp.factories')
         }
 
         return [];
+    };
+
+    factory.inDecade = function(decade, startDate, endDate) {
+
+        var startYear = new Date(startDate).getFullYear();
+        var endYear = new Date(endDate).getFullYear();
+
+        if(startYear >= decade && startYear < decade + 10) {
+            return true;
+        }
+
+        if(endYear >= decade && endYear < decade + 10) {
+            return true;
+        }
+
+        return false;
     };
 
     factory.getPoderometro = function(year, persons){
@@ -445,6 +485,7 @@ angular.module('cargoApp.factories')
       console.log('post not found:'  + post_id);
       return {cargotipo: 'unknown', cargoclase:'unknown'};
     }
+
     factory.getOrganization = function(organization_id){
 
       for (var i = 0; i < this.organizations.length; i++) {
@@ -461,19 +502,49 @@ angular.module('cargoApp.factories')
       return undefined;
     }
 
+    factory.getOrganizationByName = function(organizationName){
+
+      for (var i = 0; i < this.organizations.length; i++) {
+        var o = this.organizations[i];
+        if (o.name === organizationName){
+          return o;
+        }
+      }
+      return undefined;
+    }
+
     factory.getOrganizations = function() {
-        //Obtener los datos correctos
-        return this.organizations;
+        var allOrganizations = new Array();
+
+        _.each(this.organizations, function(organization, index) {
+            if(_.isString(organization.name) && organization.name !== '') {
+                allOrganizations.push(organization.name);
+            }
+        });
+
+        return _.unique(allOrganizations);
     }
 
-    factory.getMemberships = function() {
-        //Obtener los datos correctos
-        return this.memberships;
+    factory.getJobTitle = function() {
+        var allMemberships = [];
+
+        _.each(this.memberships, function(membership) {
+            allMemberships.push(membership.cargonominal);
+        })
+
+       return _.unique(allMemberships);
     }
 
-    factory.getDecades = function() {
-        //Modificar por las decadas existentes
-        return [1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010,2020];
+    factory.getDecades = function(from) {
+        var to   = new Date().getFullYear();
+        var decades = [];
+
+        while(from < to + 10) {
+            decades.push(from);
+            from += 10;
+        }
+
+        return decades;
     }
 
     factory.load = function ($scope,callback, $rootScope) {

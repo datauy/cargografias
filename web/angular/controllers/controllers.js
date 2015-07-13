@@ -4,6 +4,12 @@
 angular.module('cargoApp.controllers')
   .controller('homeController', function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
+      /**
+       * FromDecade
+       * @type {number}
+       */
+      var fromDecade = 1900;
+
     $scope.filterAdvance = {};
     $scope.autoPersons = [];
     $scope.activePersons = [];
@@ -24,7 +30,7 @@ angular.module('cargoApp.controllers')
 
     }
 
-    
+
     //Load initial ids from the url
     if ($routeParams.ids) {
       processParameters($routeParams.ids);
@@ -186,7 +192,6 @@ angular.module('cargoApp.controllers')
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
-      console.log($scope.filter);
       reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();
@@ -222,20 +227,41 @@ angular.module('cargoApp.controllers')
       updateTheUrl();
       $scope.showPresets = true;
       $scope.refreshAllVisualizations();
-
+      cleanAdvanceFilter();
     }
 
-    $scope.getOrganizations = function() {
+      /**
+       * Clean advance filter
+       */
+      var cleanAdvanceFilter = function() {
+        $scope.filterAdvance.organization = null;
+        $scope.filterAdvance.jobTitle = null;
+        $scope.filterAdvance.decade = null;
+      }
+
+      /**
+       * Get all Organizations
+       * @returns {*}
+       */
+      $scope.getOrganizations = function() {
         return cargosFactory.getOrganizations();
-    }
+      }
 
-    $scope.getMemberships = function() {
-        return cargosFactory.getMemberships();
-    }
+      /**
+       * get All JobTitles
+       * @returns {*}
+       */
+      $scope.getJobTitle = function() {
+        return cargosFactory.getJobTitle();
+      }
 
-    $scope.getDecades = function() {
-        return cargosFactory.getDecades();
-    }
+      /**
+       * Get decades
+       * @returns {*}
+       */
+      $scope.getDecades = function() {
+        return cargosFactory.getDecades(fromDecade);
+      }
 
 
     //TODO: Move this to a new controller that only handles hello tutorial

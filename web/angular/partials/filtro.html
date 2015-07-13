@@ -51,7 +51,7 @@
         <div role="tabpanel" class="tab-pane fade" id="preset-filter">
             <!-- Default Filter options -->
             <div layout="row" layout-wrap>
-                <div>
+                <div class="span12">
                     <h3 class="title">¿No sabés que buscar? Probá los siguientes grupos</h3>
 
                     <div class="search-row clearfix">
@@ -62,18 +62,25 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="span12 share-btn-container">
+                    <a href="#" class="btn-filter label badge-blue twitter" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); return false;">
+                        <i class="fa fa-twitter"></i>Compartír busqueda
+                    </a>
+                </div>
             </div>
             <!-- /Default Filter options -->
+
         </div>
         <div role="tabpanel" class="tab-pane fade" id="advance-filter">
 
             <!-- Filter -->
             <div layout="row" layout-wrap>
                 <div class="span6">
-                    <select ng-model="filterAdvance.organization" ng-change="filterAutoPersonsAdvance()" ng-options="organization.id as organization.name for organization in getOrganizations()">
+                    <select ng-model="filterAdvance.organization" ng-change="filterAutoPersonsAdvance()" ng-options="organization as organization for organization in getOrganizations() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>
                     </select>
-                    <select ng-model="filterAdvance.membership" ng-change="filterAutoPersonsAdvance()" ng-options="membership.id as membership.cargonominal for membership in getMemberships()">
+                    <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
                         <option value="">Seleccionar cargo</option>
                     </select>
                     <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="decade as decade for decade in getDecades()">
