@@ -652,3 +652,31 @@ li {
     margin-top: 6px;
     z-index: 2;
 }
+
+#filter-container ul.nav {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#filter-container .tab-content {
+    background: white;
+    height: 220px;
+    margin-top: -1px;
+}
+
+#filter-container .span6 {
+    width: 50% !important;
+    margin-left: 0 !important;
+}
+
+#filter-container #advance-filter select {
+    width: 95% !important;
+    height: 46px;
+    margin-top: 0px;
+    margin-bottom: 11px;
+}
+
+#filter-container #quantiy-result {
+    padding: 5px;
+    margin-right: 7px;
+}

@@ -7,7 +7,7 @@
         <li role="presentation"  ng-click="clearFilter()">
             <a href="#preset-filter" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i> No sabes que buscar?</a>
         </li>
-        <li role="presentation"  ng-click="clearFilter()">
+        <li role="presentation"  ng-click="clearFilter(); cleanAdvanceFilter()">
             <a href="#advance-filter" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-search"></i> Busqueda avanzada</a>
         </li>
     </ul>
@@ -113,41 +113,6 @@
     </div>
 </div>
 
-<script>
-    $('#filter-tab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show');
-    })
-</script>
-<style>
-    #filter-container ul.nav {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    #filter-container .tab-content {
-        background: white;
-        height: 220px;
-        margin-top: -1px;
-    }
-
-    #filter-container .span6 {
-        width: 50% !important;
-        margin-left: 0 !important;
-    }
-
-    #filter-container #advance-filter select {
-        width: 95% !important;
-        height: 46px;
-        margin-top: 0px;
-        margin-bottom: 11px;
-    }
-
-    #filter-container #quantiy-result {
-        padding: 5px;
-        margin-right: 7px;
-    }
-</style>
 <!-- Img List -->
 <hr class="filter-separator">
 

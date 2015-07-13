@@ -172,7 +172,7 @@ angular.module('cargoApp.factories')
             search = true;
         }
 
-        if( filter.decade !== undefined && filter.decade !== 0) {
+        if( filter.decade !== undefined && filter.decade !== null) {
             var inDecade = false;
 
             var autoPersonsResult = _.filter(autoPersonsResult, function(data){

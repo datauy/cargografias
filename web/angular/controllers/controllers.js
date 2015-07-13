@@ -227,13 +227,13 @@ angular.module('cargoApp.controllers')
       updateTheUrl();
       $scope.showPresets = true;
       $scope.refreshAllVisualizations();
-      cleanAdvanceFilter();
+      $scope.cleanAdvanceFilter();
     }
 
       /**
        * Clean advance filter
        */
-      var cleanAdvanceFilter = function() {
+      $scope.cleanAdvanceFilter = function() {
         $scope.filterAdvance.organization = null;
         $scope.filterAdvance.jobTitle = null;
         $scope.filterAdvance.decade = null;
