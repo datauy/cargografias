@@ -90,7 +90,7 @@ app.get('/d/:instanceName', function(req, res) {
 
 });
 
-app.get('/:instanceName/ficha/:personId', fichasController.index)
+app.get('/:instanceName/ficha/:personId/:nameslug?', fichasController.index)
 
 app.disable('etag');
 var server = http.createServer(app);
