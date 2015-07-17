@@ -22,6 +22,7 @@ ehthumbs.db
 Thumbs.db
 npm-debug.log
 static-public/datasets/*.json
+static-public/**/*
 **/*.swp
 
 # other dataousrces non compressed# 
@@ -31,3 +32,4 @@ static-public/datasets/*.json
 /web/js/datasets/gz/*.json
 /web/version.txt
 .env
+
