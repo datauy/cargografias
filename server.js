@@ -5,6 +5,8 @@ var compression = require('compression');
 var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGO_URL;
 var swig = require('swig');
+var fichasController = require('./controllers/fichas.js')
+
 swig.setDefaults({
     cache: false,
     locals: {
@@ -87,6 +89,8 @@ app.get('/d/:instanceName', function(req, res) {
     });
 
 });
+
+app.get('/:instanceName/ficha/:personId', fichasController.index)
 
 app.disable('etag');
 var server = http.createServer(app);
