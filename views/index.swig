@@ -49,12 +49,14 @@
     <link rel="stylesheet" href="/css/flexboxgrid.min.css" type="text/css">
     
     <link rel="stylesheet" href="/css/cargo-base.css" type="text/css">
+    
     <!-- V2 Libs -->
-    <script src="/js/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/js/lib/underscore.min.js"></script>
     <script type="text/javascript" src="js/lib/d3.min.js"></script>
 
     
-
+    
     <!-- V3 Libs -->
     <!-- Angular Material Dependencies -->
     <script src="/bower_components/angular/angular.js"></script>
@@ -96,31 +98,6 @@
 
     </script>
 
-    <!-- V2 Libs -->
-    <script src="/js/lib/jquery-2.0.0.min.js"></script>
-    <script type="text/javascript" src="js/lib/d3.min.js"></script>
-
-    
-
-    <!-- V3 Libs -->
-    <!-- Angular Material Dependencies -->
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-aria/angular-aria.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/hammerjs/hammer.js"></script>
-    <script src="/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="/bower_components/angular-material/angular-material.js"></script>
-    <script src="/js/lib/sha1.js"></script>
-
-    <!-- V4 Libs -->
-    <script type="text/javascript" src="js/lib/own.js"></script>
-
-    <!-- V2 Libs Angular-->
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/angular-moment/angular-moment.js"></script>
-    <script src="/bower_components/moment/lang/es.js"></script>
-    
 
 
 
@@ -227,6 +204,7 @@
     
     <script src="angular/app.js"></script>
     <script src="angular/controllers/controllers.js"></script>
+    <script src="angular/controllers/filterController.js"></script>
     <script src="angular/controllers/loaderController.js"></script>
     <script src="angular/filters/filters.js"></script>
     <script src="angular/directives/cargoBubbles.js"></script>

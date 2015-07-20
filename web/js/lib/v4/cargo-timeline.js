@@ -25,7 +25,6 @@ controls['group'] = 'name';
 
 function setVisSize() {
 
-
   var mainWid = $('.main').width();
 
   if (mainWid > 980){
@@ -36,11 +35,7 @@ function setVisSize() {
     wid = 980;
     hei = 500;
   }
-
   
-  
-
-
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
     

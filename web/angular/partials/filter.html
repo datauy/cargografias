@@ -1,13 +1,8 @@
-  <div class="filter">
-	<div>
-  		<div>
-    		<div>
-    				<div class="search-row">
-                <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
-    	  				
-                <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
-    	  		    </div>
-            <div ng-show="showPresets && presets.length">
+
+
+<div class="filter-container" ng-controller="filterController">
+    <div role="tabpanel" id="advance-filter">
+        <div ng-show="showPresets && presets.length">
               <p>¿No sabés que buscar? Probá los siguientes grupos</p>
               <div class="">
                     <ul>
@@ -18,23 +13,41 @@
                     </ul>
               </div>
             </div>
-        </div>
-         <div>
-            <div ng-show="!showPresets && search">
-                <div class="items">
-                  <span class="label ng-binding">{{autoPersons.length}} funcionarios encontrados</span>
-                  <a ng-click="clearResults()" alt="Limpiar filtro"ng-show="autoPersons.length > 0"><i class="fa fa-times"></i>Limpiar resultados</a>          
-                  <div class="resultados">
-                  <div  class="item" ng-repeat="item in autoPersons" >
-                    <a id="limpiar-buscar-filtro" ng-click="add(item,item.index)"  ng-class="item.styles" s>
-                      <i ng-hide="item.agregada"class="fa fa-check" ></i> {{item.name}}
-                      </a>                      
-                  </div>
+            <div>
+                    <div class="search-row">
+                <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
+                        
+                <!-- <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a> -->
                 </div>
-              </div>
-         </div>
-       </div>
-     </div>
-	</div>
+            </div>
+            <!-- Filter -->
+            <div>
+
+                <div class="filters">
+                    <select ng-model="filterAdvance.organization" ng-change="filterAutoPersonsAdvance()" ng-options="organization as organization for organization in getOrganizations() | orderBy:'toString()'">
+                        <option value="">Seleccionar territorio</option>
+                    </select>
+                    <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
+                        <option value="">Seleccionar cargo</option>
+                    </select>
+                    <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="decade as decade for decade in getDecades()">
+                        <option value="">Seleccionar decada</option>
+                    </select>
+                </div>
+                <div>
+
+                    <span id="quantiy-result" class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
+                    <div class="results">
+                        <div class="item" ng-repeat="item in autoPersons">
+                            <a ng-click="add(item,item.index)" class="resultados-item" ng-class="item.styles" style="margin-bottom:4px">
+                                <i ng-hide="item.agregada" class="fa fa-check"></i> {{item.name}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Filter -->
+        </div>
+    </div>
 </div>
 

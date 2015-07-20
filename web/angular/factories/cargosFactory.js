@@ -143,6 +143,83 @@ angular.module('cargoApp.factories')
     factory.getAutoPersons = function(q){
       return $filter('filter')(this.autoPersons, {name: q}, ignoreAccentsCompare);
     };
+
+    factory.getAutoPersonsAdvance = function(filter){
+        var search = false;
+        var autoPersonsResult = this.autoPersons;
+
+        if( filter.organization !== undefined && filter.organization !== null) {
+            var organization = factory.getOrganizationByName(filter.organization);
+
+            if(organization.id !== undefined) {
+                autoPersonsResult = $filter('filter')(autoPersonsResult, {
+                    memberships: {
+                        organization_id: organization.id
+                    }
+                });
+
+                search = true;
+            }
+        }
+
+        if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
+            autoPersonsResult = $filter('filter')(autoPersonsResult, {
+                memberships: {
+                    cargonominal: filter.jobTitle
+                }
+            });
+
+            search = true;
+        }
+
+        if( filter.decade !== undefined && filter.decade !== null) {
+            var inDecade = false;
+
+            var autoPersonsResult = _.filter(autoPersonsResult, function(data){
+                inDecade = false;
+
+                _.each(data.memberships, function(membership){
+                    if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
+                        if(filter.jobTitle == membership.cargonominal && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                            inDecade = true;
+                            search = true;
+                        }
+                    } else {
+                        if(factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                            inDecade = true;
+                            search = true;
+                        }
+                    }
+
+                });
+
+                return inDecade;
+            });
+        }
+
+        if(search) {
+            return autoPersonsResult;
+        }
+
+        return [];
+    };
+
+    factory.inDecade = function(decade, startDate, endDate) {
+
+        var startYear = new Date(startDate).getFullYear();
+        var endYear = new Date(endDate).getFullYear();
+
+        if(startYear >= decade && startYear < decade + 10) {
+            return true;
+        }
+
+        if(endYear >= decade && endYear < decade + 10) {
+            return true;
+        }
+
+        return false;
+    };
+
     factory.getPoderometro = function(year, persons){
 
       var ejecutivo = { name:"Ejecutivo", children: []};
@@ -356,10 +433,7 @@ angular.module('cargoApp.factories')
         //Si el periodo ya termino.        
         resume.yearsPolitics = parseFloat(years.toFixed(2));
 
-
-
       return resume ;
-
 
     };
     factory.getSummary = function(person){
@@ -411,6 +485,7 @@ angular.module('cargoApp.factories')
       console.log('post not found:'  + post_id);
       return {cargotipo: 'unknown', cargoclase:'unknown'};
     }
+
     factory.getOrganization = function(organization_id){
 
       for (var i = 0; i < this.organizations.length; i++) {
@@ -426,9 +501,54 @@ angular.module('cargoApp.factories')
       }
       return undefined;
     }
+
+    factory.getOrganizationByName = function(organizationName){
+
+      for (var i = 0; i < this.organizations.length; i++) {
+        var o = this.organizations[i];
+        if (o.name === organizationName){
+          return o;
+        }
+      }
+      return undefined;
+    }
+
+    factory.getOrganizations = function() {
+        var allOrganizations = new Array();
+
+        _.each(this.organizations, function(organization, index) {
+            if(_.isString(organization.name) && organization.name !== '') {
+                allOrganizations.push(organization.name);
+            }
+        });
+
+        return _.unique(allOrganizations);
+    }
+
+    factory.getJobTitle = function() {
+        var allMemberships = [];
+
+        _.each(this.memberships, function(membership) {
+            allMemberships.push(membership.cargonominal);
+        })
+
+       return _.unique(allMemberships);
+    }
+
+    factory.getDecades = function(from) {
+        var to   = new Date().getFullYear();
+        var decades = [];
+
+        while(from < to + 10) {
+            decades.push(from);
+            from += 10;
+        }
+
+        return decades;
+    }
+
     factory.load = function ($scope,callback, $rootScope) {
       cargoLoaderFactory.load($scope,factory,callback, $rootScope);
-      
     }
 
 

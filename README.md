@@ -80,7 +80,7 @@ $  node server.js
 $  node static-local.js
 ```
 
-* Abri tu navegador en 'http://localhost:3000' y navega.
+* Abri tu navegador en 'http://localhost:3001' y navega.
 
 
 
