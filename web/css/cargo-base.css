@@ -68,6 +68,7 @@ header ul.instance-detail li {
   	padding-right: 1em;
   	display: inline-flex;
   	line-height: 20px;
+  	font-size: 0.8em;
 }
 header div.items{
 	 text-align: center;
@@ -123,6 +124,8 @@ html h3, body h3 {
   display: block;
    -webkit-margin-before: 0em; 
    -webkit-margin-after: 0;
+   font-size: 0.9em;
+   font-weight: normal;
 }
 
 div.main div.module div.filter-container select {

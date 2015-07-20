@@ -55,7 +55,7 @@ svg text{
 
 .persona-seleccionada {   
   width: 80px;
-  margin: 1em;
+  margin: 0.2em;
   float: left;
   display: inline-table;
   padding: 0;
@@ -74,7 +74,7 @@ svg text{
   margin: 0;
   padding: 0;
   list-style: none;
-  border-radius: 15px;
+  border-radius: 7px;
 }
 .persona-seleccionada img.photo{ }
 
@@ -148,8 +148,13 @@ a.hand{
 
 #nombre{
   width: 328px;
-  height: 36px;
+  height: 30px;
   margin-top: 11px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 12px;
+  margin-bottom: 7px;
+  color: rgb(76, 61, 57);
 }
 
 div.loader h3{
@@ -648,7 +653,6 @@ p.checkeado{
 
 div.persona-seleccionada {
   position: relative;
-  width: 25%;
   float: left;
 }
 .full-width{
