@@ -14,16 +14,22 @@
               </div>
             </div>
             <div>
-                    <div class="search-row">
-                <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >
-                        
+                <div class="search-row">
+                    <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >    
                 <!-- <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a> -->
+                    <div class="opciones-busqueda">
+                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado" >BUSQUEDA AVANZADA</a>
+                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado" >BUSQUEDA SIMPLE</a>
+                        <a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
+                    return false;"><i class="fa fa-twitter"></i>COMPARTIR</a>
+                        <a ng-click="clearAll()">LIMPIAR SELECCION</a>
+                    </div>
                 </div>
             </div>
             <!-- Filter -->
             <div>
 
-                <div class="filters">
+                <div class="filters" ng-show="showBusAvanzado">
                     <select ng-model="filterAdvance.organization" ng-change="filterAutoPersonsAdvance()" ng-options="organization as organization for organization in getOrganizations() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>
                     </select>

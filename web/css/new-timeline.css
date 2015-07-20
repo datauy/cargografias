@@ -147,9 +147,8 @@ a.hand{
 }
 
 #nombre{
-  width: 328px;
+  width: 100%; /*para mobiles*/
   height: 30px;
-  margin-top: 11px;
   border: none;
   border-radius: 8px;
   padding-left: 12px;
@@ -204,7 +203,7 @@ div.main{
   background-color: rgb(232, 232, 232);
   max-width: 100%;
   display: inline-flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
 }
@@ -679,7 +678,10 @@ div.persona-seleccionada {
 }
 
 
+@media (min-width: 768px) {
 
+  #nombre {
+    width: 328px;
+  }
 
-
-
+}
