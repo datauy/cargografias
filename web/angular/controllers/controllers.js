@@ -4,6 +4,13 @@
 angular.module('cargoApp.controllers')
   .controller('homeController', function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
+      /**
+       * FromDecade
+       * @type {number}
+       */
+      var fromDecade = 1900;
+
+    $scope.filterAdvance = {};
     $scope.autoPersons = [];
     $scope.activePersons = [];
     $scope.estado = "";
@@ -11,6 +18,7 @@ angular.module('cargoApp.controllers')
     $rootScope.yearObserver = [];
     $rootScope.jerarquimetroObserver = [];
     $scope.filter = "name";
+    $scope.showResult = false;
 
     $scope.showPresets = true;
     var parsedParams;
@@ -22,7 +30,7 @@ angular.module('cargoApp.controllers')
 
     }
 
-    
+
     //Load initial ids from the url
     if ($routeParams.ids) {
       processParameters($routeParams.ids);
@@ -114,23 +122,33 @@ angular.module('cargoApp.controllers')
         $scope.showPresets = false;
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersons(q);
+        $scope.showResult = true;
       }
+    };
+
+    $scope.filterAutoPersonsAdvance = function () {
+        $scope.showPresets = false;
+        $scope.search = true;
+        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        $scope.showResult = true;
     };
 
     $scope.clearFilter = function() {
       //HACK: why?????????
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '',
         $scope.autoPersons = [];
-      $scope.search = false;
+        $scope.search = false;
+        $scope.showResult = false;
     };
 
     $scope.clearResults = function() {
-      $("#nombre").val('');
-      $scope.nombre = '',
+        $("#nombre").val('');
+        $scope.nombre = '';
+        $scope.showResult = false;
         $scope.autoPersons = [];
-      $scope.showPresets = true;
-      $scope.search = false;
+        $scope.showPresets = true;
+        $scope.search = false;
     }
 
 
@@ -174,7 +192,6 @@ angular.module('cargoApp.controllers')
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
       //$scope.redrawPoderometro();
       data = $scope.activePersons;
-      console.log($scope.filter);
       reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();
@@ -210,8 +227,41 @@ angular.module('cargoApp.controllers')
       updateTheUrl();
       $scope.showPresets = true;
       $scope.refreshAllVisualizations();
-
+      $scope.cleanAdvanceFilter();
     }
+
+      /**
+       * Clean advance filter
+       */
+      $scope.cleanAdvanceFilter = function() {
+        $scope.filterAdvance.organization = null;
+        $scope.filterAdvance.jobTitle = null;
+        $scope.filterAdvance.decade = null;
+      }
+
+      /**
+       * Get all Organizations
+       * @returns {*}
+       */
+      $scope.getOrganizations = function() {
+        return cargosFactory.getOrganizations();
+      }
+
+      /**
+       * get All JobTitles
+       * @returns {*}
+       */
+      $scope.getJobTitle = function() {
+        return cargosFactory.getJobTitle();
+      }
+
+      /**
+       * Get decades
+       * @returns {*}
+       */
+      $scope.getDecades = function() {
+        return cargosFactory.getDecades(fromDecade);
+      }
 
 
     //TODO: Move this to a new controller that only handles hello tutorial

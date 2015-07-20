@@ -25,9 +25,19 @@ controls['group'] = 'name';
 
 function setVisSize() {
 
-  wid = $(window).width() - 2;
+  var innerWidth = $('.main').width();
+  if (innerWidth < 980){
+    wid = 980;
+    hei = ($(window).height()/1.5) - 100;
+
+
+  }else{
+    wid = $(window).width() - 2;
+  
+  }
   hei = ($(window).height()/1.5) - 100;
 
+  
   $(".vis").attr("width", wid).attr("height", hei);
   $(".vis .background").attr("width", wid).attr("height", hei);
     
