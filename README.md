@@ -50,6 +50,7 @@ Setup
 
 
 ### Node.Js - /server
+### MongoDB 
 
 ### Como empezar?
 
@@ -63,8 +64,9 @@ $ npm install
 * Bajate la base de datos de tu instancia.
 
 ```bash
-$  node getInstanceData.js cargo
+$  node getInstanceData.js cargo2 
 ```
+* Crea un archivo .env en tu root, Podes utilizar .env.example como guia.
 
 * Inicia el servidor nodejs utilizando el comando
 
@@ -72,7 +74,7 @@ $  node getInstanceData.js cargo
 $  node server.js 
 ```
 
-* Inicia el servidor de archivos estaticos 
+* En otra consola, inicia el servidor de archivos estaticos 
 
 ```bash
 $  node static-local.js
