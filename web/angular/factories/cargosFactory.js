@@ -10,6 +10,7 @@ angular.module('cargoApp.factories')
     factory.persons= [];
     factory.posts= [];
     factory.memberships= [];
+    factory.territories= [];
     factory.organizations= [];
     factory.weight= [];
     factory.autoPersons=[];
@@ -126,13 +127,13 @@ angular.module('cargoApp.factories')
     factory.setWeight = function(person){
       for (var i = 0; i < person.memberships.length; i++) {
         var m = person.memberships[i];
-        if (m.cargonominal)        
+        if (m.label)        
           for (var j = 0; j < this.weight.length; j++) {
             
             var w = this.weight[j];
 
-            if (w.cargo.toLowerCase() === m.cargonominal.toLowerCase()
-              && w.poder.toLowerCase()  === m.post.cargotipo.toLowerCase()){
+            if (w.cargo.toLowerCase() === m.label.toLowerCase()
+              && w.poder.toLowerCase()  === m.type.toLowerCase()){
               m.weight = this.weight[j].representacion;
               m.hierarchy = this.weight[j].posicion;
             }
@@ -144,17 +145,18 @@ angular.module('cargoApp.factories')
       return $filter('filter')(this.autoPersons, {name: q}, ignoreAccentsCompare);
     };
 
-    factory.getAutoPersonsAdvance = function(filter){
+    factory.getAutoPersonsAdvance = function(filter,name){
         var search = false;
         var autoPersonsResult = this.autoPersons;
 
-        if( filter.organization !== undefined && filter.organization !== null) {
-            var organization = factory.getOrganizationByName(filter.organization);
 
-            if(organization.id !== undefined) {
+        if( filter.territory !== undefined && filter.territory !== null) {
+            var territory = factory.getTerritoryByName(filter.territory);
+
+            if(territory !== undefined) {
                 autoPersonsResult = $filter('filter')(autoPersonsResult, {
                     memberships: {
-                        organization_id: organization.id
+                        area_name: territory
                     }
                 });
 
@@ -165,7 +167,7 @@ angular.module('cargoApp.factories')
         if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
             autoPersonsResult = $filter('filter')(autoPersonsResult, {
                 memberships: {
-                    cargonominal: filter.jobTitle
+                    label: filter.jobTitle
                 }
             });
 
@@ -180,7 +182,7 @@ angular.module('cargoApp.factories')
 
                 _.each(data.memberships, function(membership){
                     if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
-                        if(filter.jobTitle == membership.cargonominal && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                        if(filter.jobTitle == membership.label && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
                             inDecade = true;
                             search = true;
                         }
@@ -235,15 +237,15 @@ angular.module('cargoApp.factories')
           if (activeMembershipForYear){
             var item = {
               name: p.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               size: activeMembershipForYear.weight
             }
 
-              if (activeMembershipForYear.post.cargotipo == 'Ejecutivo'){
+              if (activeMembershipForYear.type == 'Ejecutivo'){
                 ejecutivo.children.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Legislativo'){
+              }else if (activeMembershipForYear.type == 'Legislativo'){
                 legistlativo.children.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Judicial'){
+              }else if (activeMembershipForYear.type == 'Judicial'){
                 judicial.children.push(item)
               }
           }
@@ -273,12 +275,12 @@ angular.module('cargoApp.factories')
             };
           if (activeMembershipForYear){
             item = {
-              cargo:activeMembershipForYear.post.cargotipo.toLowerCase(),
+              cargo:activeMembershipForYear.type.toLowerCase(),
               name: p.name,
               initials: p.initials,
               classification: activeMembershipFrYear.organization.classification,
               district: activeMembershipForYear.organization.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               size: activeMembershipForYear.weight
             }
           }
@@ -317,17 +319,17 @@ angular.module('cargoApp.factories')
           var activeMembershipForYear = factory.getActiveMembershipByYear(p,year);
           if (activeMembershipForYear){
             var item = {
-              cargo:activeMembershipForYear.post.cargotipo.toLowerCase(),
+              cargo:activeMembershipForYear.type.toLowerCase(),
               name: p.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               level: activeMembershipForYear.hierarchy
             }
             //TODO: Translate?
-             if (activeMembershipForYear.post.cargotipo == 'Ejecutivo'){
+             if (activeMembershipForYear.type == 'Ejecutivo'){
                 ejecutivo.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Legislativo'){
+              }else if (activeMembershipForYear.type == 'Legislativo'){
                 legistlativo.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Judicial'){
+              }else if (activeMembershipForYear.type == 'Judicial'){
                 judicial.push(item)
               }
             
@@ -449,21 +451,20 @@ angular.module('cargoApp.factories')
       for (var i = 0; i < person.memberships.length; i++) {
 
         var m = person.memberships[i];
-        person.memberships[i].post = this.getPost(person.memberships[i].post_id);
         person.memberships[i].organization = this.getOrganization(m.organization_id); 
-        var cargo = person.memberships[i].post;
+        var cargo = person.memberships[i];
         if (cargo){
-          if (cargo.cargoclase == 'Electivo'){
+          if (cargo.class == 'Electivo'){
             summary.elected++;
-          }else if (cargo.cargoclase == 'No Electivo'){
+          }else if (cargo.class == 'No Electivo'){
             summary.notElected++;
           }
 
-          if (cargo.cargotipo == 'Ejecutivo'){
+          if (cargo.type == 'Ejecutivo'){
             summary.executives++;
-          }else if (cargo.cargotipo == 'Legislativo'){
+          }else if (cargo.type == 'Legislativo'){
             summary.legislative++;
-          }else if (cargo.cargotipo == 'Judicial'){
+          }else if (cargo.type == 'Judicial'){
             summary.judiciary++;
           }
         }
@@ -474,17 +475,7 @@ angular.module('cargoApp.factories')
 
     };
 
-    factory.getPost = function(post_id){
-
-      for (var i = 0; i < this.posts.length; i++) {
-        var p = this.posts[i];
-        if (p.id === post_id){
-          return p;
-        }
-      }
-      console.log('post not found:'  + post_id);
-      return {cargotipo: 'unknown', cargoclase:'unknown'};
-    }
+    
 
     factory.getOrganization = function(organization_id){
 
@@ -502,6 +493,17 @@ angular.module('cargoApp.factories')
       return undefined;
     }
 
+    factory.getTerritoryByName = function(territoryName){
+
+      for (var i = 0; i < factory.territories.length; i++) {
+        var o = factory.territories[i];
+        if (o === territoryName){
+          return o;
+        }
+      }
+      return undefined;
+    }
+   
     factory.getOrganizationByName = function(organizationName){
 
       for (var i = 0; i < this.organizations.length; i++) {
@@ -524,15 +526,36 @@ angular.module('cargoApp.factories')
 
         return _.unique(allOrganizations);
     }
+      factory.getTerritories = function() {
+        if (factory.territories.length === 0){
+          var allTerritories = new Array();
+          _.each(factory.persons, function(p, index) {
+              _.each(p.memberships,function(m,i){
+                if(_.isString(m.area.name) && m.area.name !== '') {
+                  allTerritories.push(m.area.name);
+                }  
+              });
+              
+          });
+          factory.territories = _.unique(allTerritories);
+        }
+
+      return factory.territories;
+    }
 
     factory.getJobTitle = function() {
-        var allMemberships = [];
+        var allMemberships = new Array();
+        
+        _.each(this.persons, function(p, index) {
+            _.each(p.memberships,function(m,i){
+              if(_.isString(m.label) && m.label !== '') {
+                allMemberships.push(m.label);
+              }  
+            });
+            
+        });
 
-        _.each(this.memberships, function(membership) {
-            allMemberships.push(membership.cargonominal);
-        })
-
-       return _.unique(allMemberships);
+        return _.unique(allMemberships);
     }
 
     factory.getDecades = function(from) {
@@ -556,36 +579,3 @@ angular.module('cargoApp.factories')
 
 		return factory;
 });
-
- function removeAccents(value) {
-    return value
-         .replace(/á/g, 'a') 
-         .replace(/â/g, 'a')            
-         .replace(/é/g, 'e')
-         .replace(/è/g, 'e') 
-         .replace(/ê/g, 'e')
-         .replace(/í/g, 'i')
-         .replace(/ï/g, 'i')
-         .replace(/ì/g, 'i')
-         .replace(/ó/g, 'o')
-         .replace(/ô/g, 'o')
-         .replace(/ú/g, 'u')
-         .replace(/ü/g, 'u')
-         .replace(/ç/g, 'c')
-         .replace(/ß/g, 's');
-}
-
-function ignoreAccentsCompare(actual, expected){
-        var pureActual = removeAccents(actual.toLowerCase())
-        var pureExpected = removeAccents(expected.toLowerCase());
-        var words = pureExpected.split(' ');
-        var count = 0;
-        for (var i = 0; i < words.length; i++) {
-          if (pureActual.indexOf(words[i]) > -1){
-            count++;
-          }
-        };
-        return count === words.length;
-}
-
-

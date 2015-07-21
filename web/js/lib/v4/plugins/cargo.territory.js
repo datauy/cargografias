@@ -20,7 +20,13 @@ window.cargo.plugins.territory =  {
       //clear all;
       var territories = [];
       //find all other territories by region and province
-      var territoriesArray = data.map(function(d) { return d.memberships.map( function(z){ return z.organization.name.capitalize() + '-' + z.role; }); })
+      var territoriesArray = data.map(function(d) {  
+      	var map = d.memberships.map( function(z){ 
+      		var area = z.area ? z.area.name : "AREA-NOT-FOUND";
+      		return  area.capitalize() + "-" + z.role ;
+      }); 
+      return map;
+  	})
       //and now we remove duplicates
       territoriesArray = d3.merge(territoriesArray);
       $.each(territoriesArray, function(i, el){
@@ -70,7 +76,8 @@ window.cargo.plugins.territory =  {
 
 	},
 	processIndex: function(d,i){
-        var key = d.organization.name.capitalize() + '-' + d.role
+		var area = d.area ? d.area.name : "AREA-NOT-FOUND";
+        var key = area.capitalize() + '-' + d.role;
         d.territoryPosition  = this.data.filter(
         	function(d) { if (d.key === key)  return d;})[0].index;
 

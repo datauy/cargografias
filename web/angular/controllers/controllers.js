@@ -248,6 +248,13 @@ angular.module('cargoApp.controllers')
       $scope.getOrganizations = function() {
         return cargosFactory.getOrganizations();
       }
+      /**
+       * Get all Organizations
+       * @returns {*}
+       */
+      $scope.getTerritories = function() {
+        return cargosFactory.getTerritories();
+      }
 
       /**
        * get All JobTitles
@@ -265,21 +272,6 @@ angular.module('cargoApp.controllers')
         return cargosFactory.getDecades(fromDecade);
       }
 
-
-    //TODO: Move this to a new controller that only handles hello tutorial
-
-    // //First time Loader    
-    // var showSlides = $cookies.showSlides;
-    // if (!showSlides){
-    //    $scope.showSlides = true;
-    //    $cookies.showSlides = true;
-    // }
-    // //TODO: Descomentar para que se muestre solo la primera vez
-    // $scope.closeSlides = function(){
-    //   $scope.showSlides = false;
-    //   // Setting  cookie
-    //   $cookies.showSlides = true;
-    // }
 
 
   });

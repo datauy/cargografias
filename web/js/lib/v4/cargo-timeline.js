@@ -366,7 +366,7 @@ function refreshGraph() {
       memberships.enter()
             .append("g")
             .attr("class", function(d) {              
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+              return "barGroup bar " + d.type.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
@@ -383,7 +383,7 @@ function refreshGraph() {
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
               //TODO: change to type and region?
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+              return "barGroup bar " + d.type.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
@@ -496,10 +496,10 @@ function refreshGraph() {
         .text(function(d) { 
               //if (d.)
               if (controls.height == "memberships"){
-                return d.politician.lastName; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.politician.family_name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else if (controls.height == "territory"){
-                return d.politician.lastName; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.politician.family_name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else {
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
@@ -518,7 +518,7 @@ function refreshGraph() {
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else {
-                return d.organization.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.area.name ; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
         })
 
@@ -724,16 +724,15 @@ function showAll(e,i){
  ***********************************************************/
 function showInfoBox(e, i, j) {
  
-    //TODO: Can we move this to angular?
+    //TODO: Can we move this to angular 
     var politician = data[i];
     var membership = politician.memberships[j];
 
-
-    var info = "<span class='title'>" + politician.name + "</span>";
-    info += "<br />";
-    info += "<br />" + membership.role ;
-    info += "<br />" + membership.organization.name ;
-    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    var info = "<p class='title'>" + politician.name + "</p>";
+    info += "<p class='mid'>" + membership.role  + "</p>";
+    info += "<p class='sub'>" + membership.organization.name  + "</p>";
+    info += "<p  class='mid'>" + membership.area.name  + "</p>";
+    info += "<p class='mid'>" + formatYear(membership.start) + " - " + formatYear(membership.end) + "</p>";
     if (politician.chequeado){
       info += "<p class='checkeado' > <i class='fa fa-check'></i> Chequeado</p>";  
     }
@@ -747,7 +746,7 @@ function showInfoBox(e, i, j) {
     if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
     else infoPos = { left: e.pageX-200, top: e.pageY-80 };
     
-    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
+    var classes = "bar " + membership.type.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
     //clear all clases
     document.getElementById('infobox').className = '';
     
