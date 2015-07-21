@@ -18,11 +18,11 @@
                     <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="nombre" ng-change="filterAutoPersons(nombre)" autocomplete="off" >    
                 <!-- <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a> -->
                     <div class="opciones-busqueda">
-                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i>BUSQUEDA AVANZADA</a>
-                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i>BUSQUEDA SIMPLE</a>
+                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">B&Uacute;SQUEDA </span>AVANZADA</a>
+                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">B&Uacute;SQUEDA </span>SIMPLE</a>
                         <a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
                     return false;"><i class="fa fa-share-alt"></i>COMPARTIR</a>
-                        <a ng-click="clearAll()"><i class="fa fa-trash"></i>LIMPIAR SELECCION</a>
+                        <a ng-click="clearAll()"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCI&Oacute;N</span SELECCION</a>
                     </div>
                 </div>
             </div>

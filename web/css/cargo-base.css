@@ -36,14 +36,12 @@ header, footer {
 }
 header .row{
 	padding-left: 0.3em;
-	
-  	padding-right: 1em;
-  vertical-align: middle;
-  padding-bottom: 0.25em;
+	padding-right: 1em;
+  	vertical-align: middle;
+  	padding-bottom: 0.25em;
+  	
 }
 
-
-	
 header div.logo img{
 	  max-width: 100%;
 	  max-height: 60px;
@@ -51,7 +49,6 @@ header div.logo img{
 header div.title h1{
 	text-transform: uppercase;
 	font-size: 1.6em;
-	
 	padding: 0;
   	margin: 0;
 }
@@ -72,15 +69,19 @@ header ul {
 }
 header ul > li{
 	text-transform: uppercase;
-	font-weight: 0;
 	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	padding-bottom: 0.5em; 
 }
+
+header ul > li, header ul > li a{
+	font-size: 0.8em;
+	}
+
 header ul.instance-detail li {
 	padding-left: 1em;
   	padding-right: 1em;
   	display: inline-flex;
-  	line-height: 20px;
+  	line-height: 13px;
 }
 
 header ul {
@@ -89,10 +90,6 @@ header ul {
 
 header div.items{
 	 text-align: center;
-}
-header .fa{
-	font-size: 30px;
-  	
 }
 
 a{
@@ -107,11 +104,17 @@ a:hover{
 
 header li a, header li a:visited, header li a:link{
 	color:#EEEEEE;
+	display: block;
+  	width: 71px;
 }
 
 header li a:hover{
 	color:#BCAAA4;
 }
+
+.hideOnMobile{
+    	display:none;
+    }
 
 div.main{
 	color:rgb(32, 32, 32);
@@ -232,8 +235,8 @@ div.main div.module div.timeline-filter ul > li.active a  {
 }
 
 .opciones-busqueda a{
-	font-size: 0.8em;
-	margin-left: 15px;
+	font-size: 0.7em;
+	margin-right: 12px;
 }
 
 #resultadosBusqueda{
@@ -291,10 +294,27 @@ div.main div.module div.timeline-filter ul > li.active a  {
 	}
 
 	header div.title h1{
-		
-	font-size: 2em;
+		font-size: 2em;
 	}
 
+	header ul{
+		font-size: 1em;
+		line-height: 27px;
+  	
+	}
+
+	header li a, header li a:visited, header li a:link{
+		margin-right: 12px;
+		display: inline;
+		width: inherit;
+	}
+
+	header ul.instance-detail li {
+		padding-left: 1em;
+	  	padding-right: 1em;
+	  	display: inline-flex;
+	  	line-height: 20px;
+	}
 	div.main{
   		margin-top: 0;
   		margin-left: 20px;
@@ -325,8 +345,13 @@ div.main div.module div.timeline-filter ul > li.active a  {
 		margin-top: 3px;
 	}
 	.opciones-busqueda a{
+		font-size: 0.8em;
+		margin-left: 15px;
 	}
 
+    .hideOnMobile{
+    	display: inherit;
+    }
 }
 
 
