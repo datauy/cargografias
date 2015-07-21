@@ -126,6 +126,7 @@ angular.module('cargoApp.controllers')
         $scope.showResult = true;
       } else {
         $scope.autoPersons = [];
+        $scope.search = false;
       }
     };
 
@@ -137,19 +138,25 @@ angular.module('cargoApp.controllers')
         $scope.showResult = true;
     };
 
-    $scope.clearFilter = function() {
+    $scope.clearEverthing = function() {
         console.log('clearFilter');
-        
-        // $scope.filterAdvance.name = '';
-        // $scope.filterAdvance.territory = '';
-        // $scope.filterAdvance.jobTitle = '';
-        // $scope.filterAdvance.decade = '';
+        $scope.filterAdvance.name = '';
+        $scope.filterAdvance.territory = '';
+        $scope.filterAdvance.jobTitle = '';
+        $scope.filterAdvance.decade = '';
         $scope.autoPersons = [];
         $scope.search = false;
         $scope.showResult = false;
+        for (var i = 0; i < $scope.activePersons.length; i++) {
+          $scope.activePersons[i].autoPersona.agregada = false;
+        };
+        $scope.activePersons = [];
+        updateTheUrl();
+        $scope.showPresets = true;
+        $scope.refreshAllVisualizations();
     };
 
-    
+
 
     $scope.clearResults = function() {
         console.log('clearResuls');
@@ -248,13 +255,13 @@ angular.module('cargoApp.controllers')
        */
       $scope.cleanAdvanceFilter = function() {
         console.log('cleanAdvanceFilter');
-        // $scope.autoPersons = [];
-        // $("#nombre").val('');
-        // console.log('clearFilter');
-        // $scope.filterAdvance.name = null;
-        // $scope.filterAdvance.organization = null;
-        // $scope.filterAdvance.jobTitle = null;
-        // $scope.filterAdvance.decade = null;
+          // $scope.autoPersons = [];
+          // $("#nombre").val('');
+          // console.log('clearFilter');
+          // $scope.filterAdvance.name = null;
+          // $scope.filterAdvance.organization = null;
+          // $scope.filterAdvance.jobTitle = null;
+          // $scope.filterAdvance.decade = null;
         
       }
 
