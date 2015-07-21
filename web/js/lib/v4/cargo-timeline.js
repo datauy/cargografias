@@ -496,10 +496,10 @@ function refreshGraph() {
         .text(function(d) { 
               //if (d.)
               if (controls.height == "memberships"){
-                return d.politician.lastName; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.politician.family_name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else if (controls.height == "territory"){
-                return d.politician.lastName; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.politician.family_name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else {
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
@@ -518,7 +518,7 @@ function refreshGraph() {
                 return d.role; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
               else {
-                return d.organization.name; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
+                return d.area.name ; //TODO: when do we add the years? + "(" + d.start + "-"+ d.end + ")"  ;   
               }
         })
 
@@ -724,15 +724,15 @@ function showAll(e,i){
  ***********************************************************/
 function showInfoBox(e, i, j) {
  
-    //TODO: Can we move this to angular?
+    //TODO: Can we move this to angular 
     var politician = data[i];
     var membership = politician.memberships[j];
-
 
     var info = "<span class='title'>" + politician.name + "</span>";
     info += "<br />";
     info += "<br />" + membership.role ;
     info += "<br />" + membership.organization.name ;
+    info += "<br />" + membership.area.name ;
     info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
     if (politician.chequeado){
       info += "<p class='checkeado' > <i class='fa fa-check'></i> Chequeado</p>";  

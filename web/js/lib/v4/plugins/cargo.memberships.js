@@ -17,7 +17,15 @@ window.cargo.plugins.memberships =  {
       //clear all;
       var memberships = [];
       //find all other memberships by region and province
-      var membershipsArray = data.map(function(d) { return d.memberships.map( function(z){ return z.role + "-" + z.organization.name }); })
+      var membershipsArray = data.map(function(d) {  
+
+      	var map = d.memberships.map( function(z){ 
+
+      		var area = z.area ? z.area.name : "AREA-NOT-FOUND";
+      		return z.role + "-" + area  ;
+      }); 
+      return map;
+  	})
       //and now we remove duplicates
       membershipsArray = d3.merge(membershipsArray);
       $.each(membershipsArray, function(i, el){
@@ -39,7 +47,8 @@ window.cargo.plugins.memberships =  {
 	processIndex: function(d,i){
 		//Memberiship.ProcessIndex
         //d.membershipsPosition = 
-        var key = d.role + "-" + d.organization.name;
+        var area = d.area ? d.area.name : "AREA-NOT-FOUND";
+        var key = d.role + "-" + area ;
         d.membershipsPosition = this.data.filter(
         	function(d) { if (d.key === key)  return d;})[0];
         

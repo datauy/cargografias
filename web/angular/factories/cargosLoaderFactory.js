@@ -15,108 +15,103 @@ angular.module('cargoApp.factories', [])
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-persons.json');
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-memberships.json');
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-organizations.json');
-    cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-posts.json');
-
-
-    //TODO: Uncoment to test other data sources
-    // var legisladoresSources = [];
-
-    // legisladoresSources.push('/js/datasets/legisladores-ar-persons.json');
-    // legisladoresSources.push('/js/datasets/legisladores-ar-memberships.json');
-    // legisladoresSources.push('/js/datasets/legisladores-ar-organizations.json');
-    // legisladoresSources.push('/js/datasets/legisladores-ar-posts.json');
-
-
-    // var finlandiaSources = [];
-
-    // finlandiaSources.push('/js/datasets/eduskunta-persons.json');
-    // finlandiaSources.push('/js/datasets/eduskunta-memberships.json');
-    // finlandiaSources.push('/js/datasets/eduskunta-organizations.json');
-    // finlandiaSources.push('/js/datasets/eduskunta-posts.json');
-
-
-    
-
-    // datasources.push(cargografiasSources);
-    // datasources.push(legisladoresSources);
-    // datasources.push(finlandiaSources);
-    
-
 
     var currentDataSource = cargografiasSources;
 
     var f = {};
 
     f.load = function($scope,factory,callback, $rootScope){
-
-            //TODO; How we can make this into popit?
-            // $http.get('/js/datasets/pesopoder.json')
-            //       .then(function(res){
-
-            //         $rootScope.estado = "Representatividad";
-            //         factory.weight = res.data;
-            //       });
-
-            $http.get(currentDataSource[0])
-               .then(function(res){
-                $rootScope.estado = "Personas";
-                factory.persons = res.data;
-                  for (var i = 0; i < res.data.length; i++) {
-                    //Search Index
-                    res.data[i].index = i;
-                    //Photo or default photo
-                    try{
-                      res.data[i].image = res.data[i].images ? res.data[i].images[0].url :'/img/person.png'    // get popit picture
-                    }
-                    catch(e){
-                      res.data[i].image = '/img/person.png' ;
-                    }
-                    //Initials for graphics
-                    var splitedName =  res.data[i].name.split(' ')
-                    res.data[i].initials = res.data[i].name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
-                    //TODO: This should come 100% from data. Remove in the future
-                    res.data[i].lastName = res.data[i].name ? splitedName.reverse()[0] : '';
-                    try{
-                      res.data[i].popitID = res.data[i].id_sha1.substring(0,6);
-                      res.data[i].chequeado = false;
-                      if (chequeados.indexOf(res.data[i].popitID) > -1){
-                          res.data[i].chequeado = true;
-                      }
-                    }
-                    catch(e){
-                      console.log("No Id?-", res.data[i].name, res.data[i].id_sha1);
-                    }
-                    factory.mapId[res.data[i].popitID] = i;
-                    factory.autoPersons.push(res.data[i]);
-                  };
-              }).then(function(){
-
-                $http.get(currentDataSource[1])
+              $http.get(currentDataSource[0])
                  .then(function(res){
-                  $rootScope.estado = "Puestos";
-                      for (var i = 0; i < res.data.length; i++) {
-                          if (res.data[i].post_id){
-                            factory.memberships.push(res.data[i]);
-                          }
-                      };
-                }).then(function(){
+                  $rootScope.estado = "Personas";
+                  factory.persons = res.data;
+                    for (var i = 0; i < res.data.length; i++) {
+                      //Search Index
+                      var item = res.data[i]
+                      res.data[i].index = i;
+                      f.processImages(item);
+                      f.setInitials(item);
+                      //TODO: This should come 100% from data. Remove in the future
+                      try{
+                        f.setShareableID(item);
+                        f.setCheaqueadoCheck(item);
+                        f.processMemberships(item);
+                      }
+                      catch(e){
+                        console.log("No Id?-", res.data[i].name, res.data[i].id_sha1);
+                      }
+                      
+                      factory.mapId[item.popitID] = i;
+                      factory.autoPersons.push(item);
+                    };
+              }).then(function(){
                   $http.get(currentDataSource[2])
                     .then(function(res){
                       $rootScope.estado = "Organizaciones";
                       factory.organizations = res.data;
                       //TODO: Why is this here? Shouldn't go to organization level attribute?
                       //nivel: res.data[i].name === 'Argentina' ? 'nacional' : 'provincial'
-                  }).then(function(){
-                    $http.get(currentDataSource[3])
-                      .then(function(res){
-                        factory.posts = res.data;
-                        $rootScope.estado = "Partidos";
-                    }).then(callback);
-                  });
+                  }).then(callback);
                 });
-             });
+  };
+
+  //Photo or default photo
+  f.processImages = function(d){
+    
+    try{
+      d.image = d.images ? d.images[0].url :'/img/person.png'    // get popit picture
+    }
+    catch(e){
+      d.image = '/img/person.png' ;
+    }
+  };
+
+  //Initials for graphics
+  f.setInitials = function(d){
+    var splitedName =  d.name.split(' ')
+    d.initials = d.name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
+                    
+  }
+
+  f.setShareableID = function(d){
+    d.popitID = d.id_sha1.substring(0,6);
+  }
+
+  f.setCheaqueadoCheck = function(d){
+    d.chequeado = false;
+    if (chequeados.indexOf(d.popitID) > -1){
+      d.chequeado = true;
+    }
+  }
+
+  f.processMemberships = function(d){
+    for (var i = 0; i < d.memberships.length; i++) {  
+      var m = d.memberships[i];
+      
+      if (m.area){
+          var z = m.area.id.trim();
+          //HACK: Forcing load of territories.
+          if (z.split(',').length === 1){
+            z = z.replace(/,/g,'')
+          }
+          m.area.id = toTitleCase(z);
+          m.area.name =  toTitleCase(z); 
         }
-        return f;
+      else {
+        console.log('No area found: memberships',m.id);
+          m.area ={
+            id: "AREA-NOT-FOUND",
+            name: "AREA-NOT-FOUND"
+          };
+      }
+    }
+                 
+  }
+
+
+
+
+  return f;
 });
 
 //TODO: this should be on popit, hard hack for Elections BA.

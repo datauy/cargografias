@@ -1,21 +1,21 @@
 
 <div class="timeline-filter" ng-show="activePersons.length > 0">
 <ul>
-    <li ng-class="filter === 'name' ? 'active' : '' ">
-          <a id="ordenNombre" href="" ng-click="filterLine('name')">
+    <li ng-click="filterLine('name')" ng-class="filter === 'name' ? 'active' : '' ">
+          <a id="ordenNombre" href="" >
             <i class="fa fa-user"></i>
             Nombre</a>
         </li>
-    <li class="" ng-class="filter === 'memberships' ? 'active' : '' ">
-      <a id="ordenCargo" href="" ng-click="filterLine('memberships')">
+    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+      <a id="ordenCargo" href="" >
         <i class="fa fa-briefcase"></i>Cargo</a>
     </li>
-    <li class="" ng-class="filter === 'territory' ? 'active' : '' ">
-      <a id="ordenCargo" href="" ng-click="filterLine('territory')">
+    <li ng-click="filterLine('territory')" class="" ng-class="filter === 'territory' ? 'active' : '' ">
+      <a id="ordenCargo" href="" >
         <i class="fa fa-flag"></i>Territorio</a>
     </li>
-    <li class="" ng-class="filter === 'career' ? 'active' : '' ">
-      <a id="ordenNombre" href="" ng-click="filterLine('career')">
+    <li  ng-click="filterLine('career')" class="" ng-class="filter === 'career' ? 'active' : '' ">
+      <a id="ordenNombre" href="">
         <i class="fa fa-tasks"></i>Carrera</a>
     </li>
     
