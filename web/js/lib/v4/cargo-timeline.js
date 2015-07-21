@@ -728,12 +728,11 @@ function showInfoBox(e, i, j) {
     var politician = data[i];
     var membership = politician.memberships[j];
 
-    var info = "<span class='title'>" + politician.name + "</span>";
-    info += "<br />";
-    info += "<br />" + membership.role ;
-    info += "<br />" + membership.organization.name ;
-    info += "<br />" + membership.area.name ;
-    info += "<br />" + formatYear(membership.start) + " - " + formatYear(membership.end);
+    var info = "<p class='title'>" + politician.name + "</p>";
+    info += "<p class='mid'>" + membership.role  + "</p>";
+    info += "<p class='sub'>" + membership.organization.name  + "</p>";
+    info += "<p  class='mid'>" + membership.area.name  + "</p>";
+    info += "<p class='mid'>" + formatYear(membership.start) + " - " + formatYear(membership.end) + "</p>";
     if (politician.chequeado){
       info += "<p class='checkeado' > <i class='fa fa-check'></i> Chequeado</p>";  
     }

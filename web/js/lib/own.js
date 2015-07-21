@@ -15,3 +15,37 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+
+
+ function removeAccents(value) {
+    return value
+         .replace(/á/g, 'a') 
+         .replace(/â/g, 'a')            
+         .replace(/é/g, 'e')
+         .replace(/è/g, 'e') 
+         .replace(/ê/g, 'e')
+         .replace(/í/g, 'i')
+         .replace(/ï/g, 'i')
+         .replace(/ì/g, 'i')
+         .replace(/ó/g, 'o')
+         .replace(/ô/g, 'o')
+         .replace(/ú/g, 'u')
+         .replace(/ü/g, 'u')
+         .replace(/ç/g, 'c')
+         .replace(/ß/g, 's');
+}
+
+function ignoreAccentsCompare(actual, expected){
+        var pureActual = removeAccents(actual.toLowerCase())
+        var pureExpected = removeAccents(expected.toLowerCase());
+        var words = pureExpected.split(' ');
+        var count = 0;
+        for (var i = 0; i < words.length; i++) {
+          if (pureActual.indexOf(words[i]) > -1){
+            count++;
+          }
+        };
+        return count === words.length;
+}
+
+

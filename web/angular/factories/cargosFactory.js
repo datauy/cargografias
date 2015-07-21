@@ -10,6 +10,7 @@ angular.module('cargoApp.factories')
     factory.persons= [];
     factory.posts= [];
     factory.memberships= [];
+    factory.terriories= [];
     factory.organizations= [];
     factory.weight= [];
     factory.autoPersons=[];
@@ -513,15 +514,33 @@ angular.module('cargoApp.factories')
 
         return _.unique(allOrganizations);
     }
+      factory.getTerritories = function() {
+        var allTerritories = new Array();
+        _.each(this.persons, function(p, index) {
+            _.each(p.memberships,function(m,i){
+              if(_.isString(m.area.name) && m.area.name !== '') {
+                allTerritories.push(m.area.name);
+              }  
+            });
+            
+        });
+
+        return _.unique(allTerritories);
+    }
 
     factory.getJobTitle = function() {
-        var allMemberships = [];
+        var allMemberships = new Array();
+        
+        _.each(this.persons, function(p, index) {
+            _.each(p.memberships,function(m,i){
+              if(_.isString(m.label) && m.label !== '') {
+                allMemberships.push(m.label);
+              }  
+            });
+            
+        });
 
-        _.each(this.memberships, function(membership) {
-            allMemberships.push(membership.label);
-        })
-
-       return _.unique(allMemberships);
+        return _.unique(allMemberships);
     }
 
     factory.getDecades = function(from) {
@@ -545,36 +564,3 @@ angular.module('cargoApp.factories')
 
 		return factory;
 });
-
- function removeAccents(value) {
-    return value
-         .replace(/á/g, 'a') 
-         .replace(/â/g, 'a')            
-         .replace(/é/g, 'e')
-         .replace(/è/g, 'e') 
-         .replace(/ê/g, 'e')
-         .replace(/í/g, 'i')
-         .replace(/ï/g, 'i')
-         .replace(/ì/g, 'i')
-         .replace(/ó/g, 'o')
-         .replace(/ô/g, 'o')
-         .replace(/ú/g, 'u')
-         .replace(/ü/g, 'u')
-         .replace(/ç/g, 'c')
-         .replace(/ß/g, 's');
-}
-
-function ignoreAccentsCompare(actual, expected){
-        var pureActual = removeAccents(actual.toLowerCase())
-        var pureExpected = removeAccents(expected.toLowerCase());
-        var words = pureExpected.split(' ');
-        var count = 0;
-        for (var i = 0; i < words.length; i++) {
-          if (pureActual.indexOf(words[i]) > -1){
-            count++;
-          }
-        };
-        return count === words.length;
-}
-
-

@@ -30,12 +30,13 @@
             <div>
 
                 <div class="filters" ng-show="showBusAvanzado">
-                    <select ng-model="filterAdvance.organization" ng-change="filterAutoPersonsAdvance()" ng-options="organization as organization for organization in getOrganizations() | orderBy:'toString()'">
+                    <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="organization as organization for organization in getTerritories() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>
                     </select>
                     <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
                         <option value="">Seleccionar cargo</option>
                     </select>
+                    
                     <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="decade as decade for decade in getDecades()">
                         <option value="">Seleccionar decada</option>
                     </select>

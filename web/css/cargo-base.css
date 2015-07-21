@@ -249,6 +249,20 @@ div.main div.module div.timeline-filter ul > li.active a  {
 	color: white;
 }
 
+div.main div.module div#linea-de-tiempo div#infobox p.title{
+	font-size: 1em;
+	text-transform: capitalize;
+}
+div.main div.module div#linea-de-tiempo div#infobox p.sub{
+	font-size: 0.75em;
+	text-transform: capitalize;
+}
+div.main div.module div#linea-de-tiempo div#infobox p.med{
+	font-size: 0.9em;
+	text-transform: capitalize;
+}
+
+
 .opciones-busqueda{
 	margin-top: 7px;
 }
