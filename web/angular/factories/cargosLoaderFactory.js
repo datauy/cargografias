@@ -96,13 +96,16 @@ angular.module('cargoApp.factories', [])
           }
           m.area.id = toTitleCase(z);
           m.area.name =  toTitleCase(z); 
+          //HACK: To use angular filter
+          m.area_name =  toTitleCase(z); 
         }
       else {
         console.log('No area found: memberships',m.id);
           m.area ={
             id: "AREA-NOT-FOUND",
-            name: "AREA-NOT-FOUND"
+            name: "AREA-NOT-FOUND",
           };
+          m.area_name = "AREA-NOT-FOUND";
       }
     }
                  

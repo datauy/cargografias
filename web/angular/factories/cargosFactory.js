@@ -10,7 +10,7 @@ angular.module('cargoApp.factories')
     factory.persons= [];
     factory.posts= [];
     factory.memberships= [];
-    factory.terriories= [];
+    factory.territories= [];
     factory.organizations= [];
     factory.weight= [];
     factory.autoPersons=[];
@@ -145,17 +145,18 @@ angular.module('cargoApp.factories')
       return $filter('filter')(this.autoPersons, {name: q}, ignoreAccentsCompare);
     };
 
-    factory.getAutoPersonsAdvance = function(filter){
+    factory.getAutoPersonsAdvance = function(filter,name){
         var search = false;
         var autoPersonsResult = this.autoPersons;
 
-        if( filter.organization !== undefined && filter.organization !== null) {
-            var organization = factory.getOrganizationByName(filter.organization);
 
-            if(organization.id !== undefined) {
+        if( filter.territory !== undefined && filter.territory !== null) {
+            var territory = factory.getTerritoryByName(filter.territory);
+
+            if(territory !== undefined) {
                 autoPersonsResult = $filter('filter')(autoPersonsResult, {
                     memberships: {
-                        organization_id: organization.id
+                        area_name: territory
                     }
                 });
 
@@ -492,6 +493,17 @@ angular.module('cargoApp.factories')
       return undefined;
     }
 
+    factory.getTerritoryByName = function(territoryName){
+
+      for (var i = 0; i < factory.territories.length; i++) {
+        var o = factory.territories[i];
+        if (o === territoryName){
+          return o;
+        }
+      }
+      return undefined;
+    }
+   
     factory.getOrganizationByName = function(organizationName){
 
       for (var i = 0; i < this.organizations.length; i++) {
@@ -515,17 +527,20 @@ angular.module('cargoApp.factories')
         return _.unique(allOrganizations);
     }
       factory.getTerritories = function() {
-        var allTerritories = new Array();
-        _.each(this.persons, function(p, index) {
-            _.each(p.memberships,function(m,i){
-              if(_.isString(m.area.name) && m.area.name !== '') {
-                allTerritories.push(m.area.name);
-              }  
-            });
-            
-        });
+        if (factory.territories.length === 0){
+          var allTerritories = new Array();
+          _.each(factory.persons, function(p, index) {
+              _.each(p.memberships,function(m,i){
+                if(_.isString(m.area.name) && m.area.name !== '') {
+                  allTerritories.push(m.area.name);
+                }  
+              });
+              
+          });
+          factory.territories = _.unique(allTerritories);
+        }
 
-        return _.unique(allTerritories);
+      return factory.territories;
     }
 
     factory.getJobTitle = function() {
