@@ -148,8 +148,14 @@ angular.module('cargoApp.factories')
     factory.getAutoPersonsAdvance = function(filter,name){
         var search = false;
         var autoPersonsResult = this.autoPersons;
-
-
+        if( filter.name !== undefined && filter.name !== null) {
+          autoPersonsResult =  $filter('filter')(autoPersonsResult, 
+            {name: filter.name}, 
+          ignoreAccentsCompare);
+          search = true;
+          
+        }
+        
         if( filter.territory !== undefined && filter.territory !== null) {
             var territory = factory.getTerritoryByName(filter.territory);
 
@@ -159,7 +165,6 @@ angular.module('cargoApp.factories')
                         area_name: territory
                     }
                 });
-
                 search = true;
             }
         }

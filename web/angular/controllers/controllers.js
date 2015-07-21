@@ -42,7 +42,7 @@ angular.module('cargoApp.controllers')
 
 
     $scope.load = function(params, hideAfterClick) {
-      $scope.clearAll();
+      
       processParameters(params);
       //light add all persons from url
       if (parsedParams) {
@@ -130,6 +130,7 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.filterAutoPersonsAdvance = function () {
+        console.log('filterAutoPersonsAdvance')
         $scope.showPresets = false;
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
@@ -137,19 +138,21 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.clearFilter = function() {
-      //HACK: why?????????
-        $("#nombre").val('');
-        $scope.filterAdvance.name = '';
-        $scope.filterAdvance.territory = '';
-        $scope.filterAdvance.jobTitle = '';
-        $scope.filterAdvance.decade = '';
+        console.log('clearFilter');
+        
+        // $scope.filterAdvance.name = '';
+        // $scope.filterAdvance.territory = '';
+        // $scope.filterAdvance.jobTitle = '';
+        // $scope.filterAdvance.decade = '';
         $scope.autoPersons = [];
         $scope.search = false;
         $scope.showResult = false;
     };
 
+    
+
     $scope.clearResults = function() {
-        $("#nombre").val('');
+        console.log('clearResuls');
         $scope.filterAdvance.name = '';
         $scope.filterAdvance.territory = '';
         $scope.filterAdvance.jobTitle = '';
@@ -229,6 +232,7 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.clearAll = function() {
+      
       for (var i = 0; i < $scope.activePersons.length; i++) {
         $scope.activePersons[i].autoPersona.agregada = false;
       };
@@ -236,16 +240,22 @@ angular.module('cargoApp.controllers')
       updateTheUrl();
       $scope.showPresets = true;
       $scope.refreshAllVisualizations();
-      $scope.cleanAdvanceFilter();
+      
     }
 
       /**
        * Clean advance filter
        */
       $scope.cleanAdvanceFilter = function() {
-        $scope.filterAdvance.organization = null;
-        $scope.filterAdvance.jobTitle = null;
-        $scope.filterAdvance.decade = null;
+        console.log('cleanAdvanceFilter');
+        // $scope.autoPersons = [];
+        // $("#nombre").val('');
+        // console.log('clearFilter');
+        // $scope.filterAdvance.name = null;
+        // $scope.filterAdvance.organization = null;
+        // $scope.filterAdvance.jobTitle = null;
+        // $scope.filterAdvance.decade = null;
+        
       }
 
       /**

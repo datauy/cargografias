@@ -38,7 +38,7 @@ angular.module('cargoApp.factories', [])
                         f.processMemberships(item);
                       }
                       catch(e){
-                        console.log("No Id?-", res.data[i].name, res.data[i].id_sha1);
+                        console.log("Loading error", e, res.data[i].name, res.data[i].id_sha1);
                       }
                       
                       factory.mapId[item.popitID] = i;
@@ -87,8 +87,8 @@ angular.module('cargoApp.factories', [])
   f.processMemberships = function(d){
     for (var i = 0; i < d.memberships.length; i++) {  
       var m = d.memberships[i];
+      try{
       
-      if (m.area){
           var z = m.area.id.trim();
           //HACK: Forcing load of territories.
           if (z.split(',').length === 1){
@@ -99,7 +99,7 @@ angular.module('cargoApp.factories', [])
           //HACK: To use angular filter
           m.area_name =  toTitleCase(z); 
         }
-      else {
+      catch(e){
         console.log('No area found: memberships',m.id);
           m.area ={
             id: "AREA-NOT-FOUND",
