@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGO_URL;
 var swig = require('swig');
 var fichasController = require('./controllers/fichas.js')
+var embedController = require('./controllers/embed.js')
 
 swig.setDefaults({
     cache: false,
@@ -92,6 +93,8 @@ app.get('/d/:instanceName', function(req, res) {
 
 app.get('/:instanceName/person/:personId/:nameslug?', fichasController.person)
 app.get('/:instanceName/organization/:organizationId/:nameslug?', fichasController.organization)
+
+app.get('/:instanceName/embed/:id', embedController.index)
 
 app.disable('etag');
 var server = http.createServer(app);
