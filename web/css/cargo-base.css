@@ -4,12 +4,21 @@
 black:  color: rgb(33, 33, 33);
 grey: color: rgb(232, 232, 232);
 darker: color: rgb(116, 116, 116);
-darkbrown: color: rgb(76, 61, 57);
+darkbrown: color: #5D4037;
+brown: color: #795548;
+lightbrown: color: #8d6e63;
+lightishbrown: color: #BCAAA4;
 */
 /* Reset */
 p {	padding: 0; margin:0;}
 
 /* Main */
+html
+{
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
+}
+
 body{
 	color: white;
 	background-color: rgb(116, 116, 116);	
@@ -50,6 +59,7 @@ header div.title p{
 	font-size: 0.75em;
 	padding: 0;
   	margin: 0;
+  	font-weight: normal;
 }
 header ul {
   list-style-type: none;
@@ -68,8 +78,12 @@ header ul.instance-detail li {
   	padding-right: 1em;
   	display: inline-flex;
   	line-height: 20px;
-  	font-size: 0.8em;
 }
+
+header ul {
+	font-size: 0.8em;
+}
+
 header div.items{
 	 text-align: center;
 }
@@ -78,6 +92,23 @@ header .fa{
   	
 }
 
+a{
+	color: #5D4037;
+	font-weight: bold;
+}
+
+a:hover{
+	color: #8d6e63;
+
+}
+
+header li a, header li a:visited, header li a:link{
+	color:#EEEEEE;
+}
+
+header li a:hover{
+	color:#BCAAA4;
+}
 
 div.main{
 	color:rgb(32, 32, 32);
@@ -106,6 +137,7 @@ div.main div.module > div.description{
 	margin-left: 0em;
 	margin-right: 0.5em;
 }
+
 /* Filter Module */
 
 div.main div.module div.filter ul{
@@ -131,10 +163,14 @@ html h3, body h3 {
 
 div.main div.module div.filter-container select {
   width: 100%;
+  border: 0;
+  height: 23px;
+  margin-right: 6px;
+  margin-top: 8px;
+  border-radius: 5px;
+
 }
 div.main div.module div.filter-container div.results{
-	background-color: white;
-	border: 1px grey solid;
 	padding-left: 1em;
 	padding-right: 1em;
 	overflow-y: scroll;
@@ -158,14 +194,18 @@ div.main div.module div.timeline-filter ul > li {
 	width: 50%;
 	background-color: white;
 	margin: 0.5em 0.3em;
-	padding: 0.1em 0.2em;
+	padding: 0.2em 0.35em 0.25em 0em;
 	color: rgb(121, 83, 75);
 	cursor: pointer;
 	border-radius: 5px;
-	border: 2px solid #FFFFFF;
 	text-transform: uppercase;
+	text-align: center;
 }
 
+
+div.main div.module div.timeline-filter ul > li a{
+	display: block;
+}
 
 div.main div.module div.timeline-filter ul > li a:visited,
 div.main div.module div.timeline-filter ul > li a:active,
@@ -174,25 +214,48 @@ div.main div.module div.timeline-filter ul > li a:link{
 }
 
 div.main div.module div.timeline-filter ul > li.active,
-div.main div.module div.timeline-filter ul > li:hover{
-	border: 2px solid rgb(116, 116, 116);	
-}
-
-div.main div.module div.timeline-filter ul > li.active,
 div.main div.module div.timeline-filter ul > li:hover,
 div.main div.module div.timeline-filter ul > li a:hover{
 	color: white;
-	background-color: rgb(116, 116, 116);	
+	background-color: #5D4037;	
 
 }
 div.main div.module div.timeline-filter ul > li.active a  {
 	color: white;
 }
 
-.opciones-busqueda a{
-	font-size: 0.7em;
+.opciones-busqueda{
+	margin-top: 7px;
 }
 
+.opciones-busqueda a{
+	font-size: 0.8em;
+	margin-left: 15px;
+}
+
+#resultadosBusqueda{
+  padding: 5px 9px 12px 9px;
+  background-color: #F5F5F5;
+  margin-top: 10px;
+  border: 1px silver solid;
+  border-radius: 5px;
+}
+
+#resultadosBusqueda h3{
+	color:#757575;
+}
+
+#resultadosBusqueda .close{
+	float:right;
+}
+
+#resultadosBusqueda .close i{
+	margin-right: 3px
+}
+
+.search-row{
+	overflow: hidden;
+}
 
 @media (min-width: 768px) {
 	header .fa{
@@ -213,7 +276,8 @@ div.main div.module div.timeline-filter ul > li.active a  {
 		font-size: 2em;
 	}
 	header div.title p{
-		font-size: 0.8em;
+		font-size: 0.9em;
+		font-weight: normal;
 	}
 	header div.items{
 	 	text-align: inherit;
@@ -232,24 +296,27 @@ div.main div.module div.timeline-filter ul > li.active a  {
 	
 	div.main div.module div.filter-container select {
   		  width: 21%;
-		  border: 0;
-		  height: 23px;
-		  margin-left: 6px;
-		  border-radius: 5px;
+
 	}
 
 	div.main div.module div.filter-container div.results{
 		font-size: 0.8em;
 	}
-
+	
+	#resultadosBusqueda{
+		  width: 380px;
+	
+	}
 
 	.opciones-busqueda{
-		float: right;
+		float: left;
+		margin-top: 3px;
 	}
-	
-
+	.opciones-busqueda a{
+	}
 
 }
+
 
 
 

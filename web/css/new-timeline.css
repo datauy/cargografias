@@ -1,8 +1,4 @@
-html
-{
-  
-  font-family: 'Lato', sans-serif;
-}
+
 .label, .badge{
   padding-left: 11px;
   padding-right: 11px;
@@ -39,7 +35,7 @@ svg text{
 
 .fa{ /*iconitos!*/
   font-size: 14px;
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 .persona-seleccionada p{
@@ -68,7 +64,7 @@ svg text{
 .persona-seleccionada div.photo-frame {
   overflow: hidden;
   max-height: 60px;
-  min-width: 75px;
+  min-width: 80px;
   height: 60px;
   display: inline-block;
   margin: 0;
@@ -78,11 +74,15 @@ svg text{
 }
 .persona-seleccionada img.photo{ }
 
+
 .label-warning, .badge-warning {
   background-color: #F57C52;
 }
 .badge-selected {
-  background-color: #999;
+  color: #BDBDBD;
+  font-weight: normal;
+  pointer-events: none;
+  cursor: default;
   }
 
 badge{
@@ -152,7 +152,6 @@ a.hand{
   border: none;
   border-radius: 8px;
   padding-left: 12px;
-  margin-bottom: 7px;
   color: rgb(76, 61, 57);
 }
 
@@ -391,10 +390,6 @@ text.barLabel {
   fill: black;
 }
 
-text.itemLabel{
-  font-size: 0.9em;
-  fill: #000;
-}
 
 text.boxLabel {
   cursor: pointer;
@@ -405,9 +400,9 @@ text.boxLabel tspan.main {
 text.boxLabel tspan.sub{
     font-style: oblique;
 }
-text.membershipLabel, text.territoryLabel{
+text.itemLabel, text.membershipLabel, text.territoryLabel{
  fill: #000; 
- font-size: 0.9em;
+ font-size: 0.8em;
 }
 
 tspan.sub {
@@ -618,7 +613,7 @@ div.persona-seleccionada{
     background-color: #aaa;
 }*/
 
-.checkeado{
+.chequeado{
   font-family: 'Roboto', sans-serif;
   background-color: red;
   color: white;
@@ -627,22 +622,21 @@ div.persona-seleccionada{
   
 }
 
-div.checkeado {
+div.chequeado {
   font-size: 0.65em;
   padding-left: 0.35em;
-  bottom: 25px;
+  bottom: 15px;
   position: absolute;
   opacity: .8;
-  width: 74px;
-  border-radius: 0 0 4px 4px;
+  width: 76px;
+  border-radius: 0 0 7px 7px;
 }
-div.checkeado a {
+div.chequeado a {
   text-decoration: none;
   color:white;
-
 }
 
-p.checkeado{
+p.chequeado{
   font-size: 1em;
   position: inherit;
   opacity: .8;
@@ -650,14 +644,44 @@ p.checkeado{
   border-radius: 4px 4px;
 }
 
+.chequeado i{
+    margin-right: -2px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+}
+
 div.persona-seleccionada {
   position: relative;
   float: left;
 }
+
+div.persona-seleccionada a.crucecita{
+  position: absolute;
+  right: 0px;
+  background-color: #D7CCC8;
+  border-radius: 4px;
+}
+
+div.persona-seleccionada a.crucecita:hover{
+  background-color: #795548;
+  border-radius: 4px;
+  color:#D7CCC8;
+  
+}
+
+div.persona-seleccionada a.crucecita i{
+  margin: 0 5px 3px;
+}
 .full-width{
   width: 100%;
   max-width: 100%;
+  height: 90px;
 }
+
+.full-width.persons{
+  margin-bottom: 10px;
+}
+
 .stats{
   overflow-x:scroll;
   width: 100%;
@@ -666,7 +690,10 @@ div.persona-seleccionada {
 
 .stats-container table{
   width: 200%;
+  font-size: 0.8em;
+  font-weight: normal;
 }
+
 @media (min-width: 666px) {
  .stats-container{
     width: 135%;
@@ -681,7 +708,11 @@ div.persona-seleccionada {
 @media (min-width: 768px) {
 
   #nombre {
-    width: 328px;
+    width: 399px;
+    float: left;
+  }
+  .full-width{
+    height: inherit;
   }
 
 }

@@ -38,12 +38,11 @@
     <link href="/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
 
-
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
+    
     <!-- V3 Styles -->
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/new-timeline.css" type="text/css">
     <!-- V4 Styles -->
     <link rel="stylesheet" href="/css/flexboxgrid.min.css" type="text/css">
@@ -116,8 +115,8 @@
                             </div>
                             <div class="info col-xs-9">
                                 <div class="title box">
-                                    <h1> Cargografias </h1>
-                                    <p> La linea de tiempo de Politicos Argentinos</p>
+                                    <h1> Cargograf&iacute;as </h1>
+                                    <p> La l&iacute;nea de tiempo de Pol&iacute;ticos Argentinos</p>
                                 </div>
                             </div>
                         
@@ -138,16 +137,17 @@
             <div class="items col-xs-12 col-sm-2 col-md-2 col-lg-2">
                  <ul class="menu">
                     <li>
-                      <span><i class="fa fa-twitter"></i></span>
+                    <a target="_blank" title="Sigue a @Cargografias en Twitter" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
+                        <i class="fa fa-twitter"></i></a>
                     </li>
                     <li>
-                      <span><i class="fa fa-github"></i></span>
+                      <a href="https://github.com/cargografias" target="_blank"><i class="fa fa-github"></i></a>
                     </li>
                     <li>
-                      <span><i class="fa fa-envelope-o"></i></span>
+                    <a href="http://www.google.com/recaptcha/mailhide/d?k=01C7lOvjG_N7EaBpT3Yp2Lmw==&amp;c=so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501C7lOvjG_N7EaBpT3Yp2Lmw\75\75\46c\75so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address"><i class="fa fa-envelope-o"></i></a>
                     </li>
                     <li>
-                       <span><i class="fa fa-cog"></i></span>
+                       <a href="#"><i class="fa fa-cog"></i></a>
                     </li>
                     
                 </ul>

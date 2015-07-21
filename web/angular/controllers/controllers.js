@@ -123,6 +123,8 @@ angular.module('cargoApp.controllers')
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersons(q);
         $scope.showResult = true;
+      } else {
+        $scope.autoPersons = [];
       }
     };
 

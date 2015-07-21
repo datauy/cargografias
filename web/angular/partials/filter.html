@@ -15,14 +15,14 @@
             </div>
             <div>
                 <div class="search-row">
-                    <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido (m&iacute;nimo 4 caracteres) de un funcionario" ng-model="nombre" ng-change="filterAutoPersons(nombre)" >    
+                    <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="nombre" ng-change="filterAutoPersons(nombre)" autocomplete="off" >    
                 <!-- <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" class="badge badge-warning remove" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a> -->
                     <div class="opciones-busqueda">
-                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado" >BUSQUEDA AVANZADA</a>
-                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado" >BUSQUEDA SIMPLE</a>
+                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i>BUSQUEDA AVANZADA</a>
+                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i>BUSQUEDA SIMPLE</a>
                         <a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
-                    return false;"><i class="fa fa-twitter"></i>COMPARTIR</a>
-                        <a ng-click="clearAll()">LIMPIAR SELECCION</a>
+                    return false;"><i class="fa fa-share-alt"></i>COMPARTIR</a>
+                        <a ng-click="clearAll()"><i class="fa fa-trash"></i>LIMPIAR SELECCION</a>
                     </div>
                 </div>
             </div>
@@ -40,13 +40,19 @@
                         <option value="">Seleccionar decada</option>
                     </select>
                 </div>
-                <div>
+                
+                <div id="resultadosBusqueda" ng-hide="autoPersons.length == 0 && !showBusAvanzado">
+                    <h3 id="quantiy-result" class="description"><i class="fa fa-users"></i> Personas encontradas: {{autoPersons.length}}
+                        <div class="close">
+                            <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
+                        </div>
+                    </h3>
+                    
 
-                    <span id="quantiy-result" class="label ng-binding" style="margin-bottom:4px">{{autoPersons.length}} funcionarios encontrados</span>
-                    <div class="results">
-                        <div class="item" ng-repeat="item in autoPersons">
-                            <a ng-click="add(item,item.index)" class="resultados-item" ng-class="item.styles" style="margin-bottom:4px">
-                                <i ng-hide="item.agregada" class="fa fa-check"></i> {{item.name}}
+                    <div class="results" ng-hide="autoPersons.length == 0 && showBusAvanzado">
+                        <div class="item" ng-repeat="item in autoPersons" >
+                            <a ng-click="add(item,item.index)" class="resultados-item" ng-class="item.styles">
+                                <i ng-hide="item.agregada" class="fa fa-user-plus"></i> {{item.name}}
                             </a>
                         </div>
                     </div>
