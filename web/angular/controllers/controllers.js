@@ -121,7 +121,8 @@ angular.module('cargoApp.controllers')
       if (q.length > 3) {
         $scope.showPresets = false;
         $scope.search = true;
-        $scope.autoPersons = cargosFactory.getAutoPersons(q);
+        $scope.filterAdvance.name = q;
+        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
         $scope.showResult = true;
       } else {
         $scope.autoPersons = [];
@@ -138,7 +139,10 @@ angular.module('cargoApp.controllers')
     $scope.clearFilter = function() {
       //HACK: why?????????
         $("#nombre").val('');
-        $scope.nombre = '',
+        $scope.filterAdvance.name = '';
+        $scope.filterAdvance.territory = '';
+        $scope.filterAdvance.jobTitle = '';
+        $scope.filterAdvance.decade = '';
         $scope.autoPersons = [];
         $scope.search = false;
         $scope.showResult = false;
@@ -146,7 +150,10 @@ angular.module('cargoApp.controllers')
 
     $scope.clearResults = function() {
         $("#nombre").val('');
-        $scope.nombre = '';
+        $scope.filterAdvance.name = '';
+        $scope.filterAdvance.territory = '';
+        $scope.filterAdvance.jobTitle = '';
+        $scope.filterAdvance.decade = '';
         $scope.showResult = false;
         $scope.autoPersons = [];
         $scope.showPresets = true;

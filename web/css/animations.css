@@ -1,0 +1,9 @@
+.icon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
+
+.fa-spin-2 {
+  -webkit-animation: fa-spin .7s infinite linear;
+  animation: fa-spin .7s infinite linear;
+}
