@@ -126,13 +126,13 @@ angular.module('cargoApp.factories')
     factory.setWeight = function(person){
       for (var i = 0; i < person.memberships.length; i++) {
         var m = person.memberships[i];
-        if (m.cargonominal)        
+        if (m.label)        
           for (var j = 0; j < this.weight.length; j++) {
             
             var w = this.weight[j];
 
-            if (w.cargo.toLowerCase() === m.cargonominal.toLowerCase()
-              && w.poder.toLowerCase()  === m.post.cargotipo.toLowerCase()){
+            if (w.cargo.toLowerCase() === m.label.toLowerCase()
+              && w.poder.toLowerCase()  === m.type.toLowerCase()){
               m.weight = this.weight[j].representacion;
               m.hierarchy = this.weight[j].posicion;
             }
@@ -165,7 +165,7 @@ angular.module('cargoApp.factories')
         if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
             autoPersonsResult = $filter('filter')(autoPersonsResult, {
                 memberships: {
-                    cargonominal: filter.jobTitle
+                    label: filter.jobTitle
                 }
             });
 
@@ -180,7 +180,7 @@ angular.module('cargoApp.factories')
 
                 _.each(data.memberships, function(membership){
                     if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
-                        if(filter.jobTitle == membership.cargonominal && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
+                        if(filter.jobTitle == membership.label && factory.inDecade(filter.decade, membership.start_date, membership.end_date)) {
                             inDecade = true;
                             search = true;
                         }
@@ -235,15 +235,15 @@ angular.module('cargoApp.factories')
           if (activeMembershipForYear){
             var item = {
               name: p.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               size: activeMembershipForYear.weight
             }
 
-              if (activeMembershipForYear.post.cargotipo == 'Ejecutivo'){
+              if (activeMembershipForYear.type == 'Ejecutivo'){
                 ejecutivo.children.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Legislativo'){
+              }else if (activeMembershipForYear.type == 'Legislativo'){
                 legistlativo.children.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Judicial'){
+              }else if (activeMembershipForYear.type == 'Judicial'){
                 judicial.children.push(item)
               }
           }
@@ -273,12 +273,12 @@ angular.module('cargoApp.factories')
             };
           if (activeMembershipForYear){
             item = {
-              cargo:activeMembershipForYear.post.cargotipo.toLowerCase(),
+              cargo:activeMembershipForYear.type.toLowerCase(),
               name: p.name,
               initials: p.initials,
               classification: activeMembershipFrYear.organization.classification,
               district: activeMembershipForYear.organization.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               size: activeMembershipForYear.weight
             }
           }
@@ -317,17 +317,17 @@ angular.module('cargoApp.factories')
           var activeMembershipForYear = factory.getActiveMembershipByYear(p,year);
           if (activeMembershipForYear){
             var item = {
-              cargo:activeMembershipForYear.post.cargotipo.toLowerCase(),
+              cargo:activeMembershipForYear.type.toLowerCase(),
               name: p.name,
-              position: activeMembershipForYear.cargonominal,
+              position: activeMembershipForYear.label,
               level: activeMembershipForYear.hierarchy
             }
             //TODO: Translate?
-             if (activeMembershipForYear.post.cargotipo == 'Ejecutivo'){
+             if (activeMembershipForYear.type == 'Ejecutivo'){
                 ejecutivo.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Legislativo'){
+              }else if (activeMembershipForYear.type == 'Legislativo'){
                 legistlativo.push(item)
-              }else if (activeMembershipForYear.post.cargotipo == 'Judicial'){
+              }else if (activeMembershipForYear.type == 'Judicial'){
                 judicial.push(item)
               }
             
@@ -449,21 +449,20 @@ angular.module('cargoApp.factories')
       for (var i = 0; i < person.memberships.length; i++) {
 
         var m = person.memberships[i];
-        person.memberships[i].post = this.getPost(person.memberships[i].post_id);
         person.memberships[i].organization = this.getOrganization(m.organization_id); 
-        var cargo = person.memberships[i].post;
+        var cargo = person.memberships[i];
         if (cargo){
-          if (cargo.cargoclase == 'Electivo'){
+          if (cargo.class == 'Electivo'){
             summary.elected++;
-          }else if (cargo.cargoclase == 'No Electivo'){
+          }else if (cargo.class == 'No Electivo'){
             summary.notElected++;
           }
 
-          if (cargo.cargotipo == 'Ejecutivo'){
+          if (cargo.type == 'Ejecutivo'){
             summary.executives++;
-          }else if (cargo.cargotipo == 'Legislativo'){
+          }else if (cargo.type == 'Legislativo'){
             summary.legislative++;
-          }else if (cargo.cargotipo == 'Judicial'){
+          }else if (cargo.type == 'Judicial'){
             summary.judiciary++;
           }
         }
@@ -474,17 +473,7 @@ angular.module('cargoApp.factories')
 
     };
 
-    factory.getPost = function(post_id){
-
-      for (var i = 0; i < this.posts.length; i++) {
-        var p = this.posts[i];
-        if (p.id === post_id){
-          return p;
-        }
-      }
-      console.log('post not found:'  + post_id);
-      return {cargotipo: 'unknown', cargoclase:'unknown'};
-    }
+    
 
     factory.getOrganization = function(organization_id){
 
@@ -529,7 +518,7 @@ angular.module('cargoApp.factories')
         var allMemberships = [];
 
         _.each(this.memberships, function(membership) {
-            allMemberships.push(membership.cargonominal);
+            allMemberships.push(membership.label);
         })
 
        return _.unique(allMemberships);

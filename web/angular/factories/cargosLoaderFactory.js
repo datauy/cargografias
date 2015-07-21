@@ -92,7 +92,7 @@ angular.module('cargoApp.factories', [])
           var z = m.area.id.trim();
           //HACK: Forcing load of territories.
           if (z.split(',').length === 1){
-            z = z.replace(/,/g,'')
+            z = z.replace(/ ,/g,' ')
           }
           m.area.id = toTitleCase(z);
           m.area.name =  toTitleCase(z); 

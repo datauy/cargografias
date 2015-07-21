@@ -366,7 +366,7 @@ function refreshGraph() {
       memberships.enter()
             .append("g")
             .attr("class", function(d) {              
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+              return "barGroup bar " + d.type.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
@@ -383,7 +383,7 @@ function refreshGraph() {
             .attr("membership", function(d, i) { return i; })
             .attr("class", function(d) {
               //TODO: change to type and region?
-              return "barGroup bar " + d.post.cargotipo.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
+              return "barGroup bar " + d.type.toLowerCase()  + " " + d.organization.level.toLowerCase() + " " + d.role.toLowerCase();
             })
             .style("fill-opacity", function(d) { 
                 return 1;
@@ -747,7 +747,7 @@ function showInfoBox(e, i, j) {
     if (i <= data.length/2) infoPos = { left: e.pageX, top: e.pageY };
     else infoPos = { left: e.pageX-200, top: e.pageY-80 };
     
-    var classes = "bar " + membership.post.cargotipo.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
+    var classes = "bar " + membership.type.toLowerCase()  + " " + membership.organization.level.toLowerCase() + " " + membership.role.toLowerCase();
     //clear all clases
     document.getElementById('infobox').className = '';
     
