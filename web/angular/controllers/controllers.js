@@ -140,10 +140,10 @@ angular.module('cargoApp.controllers')
 
     $scope.clearEverthing = function() {
         console.log('clearFilter');
-        $scope.filterAdvance.name = '';
-        $scope.filterAdvance.territory = '';
-        $scope.filterAdvance.jobTitle = '';
-        $scope.filterAdvance.decade = '';
+        $scope.filterAdvance.name = null;
+        $scope.filterAdvance.territory= null;
+        $scope.filterAdvance.jobTitle = null;
+        $scope.filterAdvance.decade = null;
         $scope.autoPersons = [];
         $scope.search = false;
         $scope.showResult = false;
