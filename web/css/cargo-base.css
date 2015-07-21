@@ -112,13 +112,35 @@ header li a, header li a:visited, header li a:link{
 header li a:hover{
 	color:#BCAAA4;
 }
-
 div.main{
 	color:rgb(32, 32, 32);
   	margin-top: 0;
   	margin-left: 10px;
   	margin-right: 10px;
 }
+div.main div.loader {
+	margin-top:100px;
+	margin-bottom:200px;
+	height:200px;
+	width:500px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color: white;
+	background-color: color: rgb(232, 232, 232);
+	border-bottom: 2px solid rgb(116, 116, 116);
+}
+div.main div.loader h1{
+	font-size: 3em;
+
+}
+div.main div.loader h3{
+	font-size: 2em;
+}
+div.main div.loader h3 .fa{
+	font-size: 1em;
+}
+
 div.main div.module{
   margin-top: 2.5px;
   background-color: white;

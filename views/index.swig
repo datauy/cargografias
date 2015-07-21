@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="/css/flexboxgrid.min.css" type="text/css">
     
     <link rel="stylesheet" href="/css/cargo-base.css" type="text/css">
+    <link rel="stylesheet" href="/css/animations.css" type="text/css">
     
     <!-- V2 Libs -->
     <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
