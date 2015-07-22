@@ -107,7 +107,7 @@ angular.module('cargoApp.controllers')
     }
 
     function loadPresets() {
-      var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
+      var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
       instanceName = instanceName || 'cargografias';
       var req = $http.get('/js/datasets/gz/' + instanceName + '_locdata.json');
       req.then(function(res) {
@@ -136,6 +136,18 @@ angular.module('cargoApp.controllers')
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
         $scope.showResult = true;
+    };
+
+    $scope.createEmbed = function(){
+      $http.post('/createEmbedUrl', {
+        persons:  ( $scope.activePersons || [] ).map(function(person){ return {  popitID: person.popitID, id: person.id } }), 
+        filter: $scope.filter
+      })
+      .success(function(result){
+        var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
+        instanceName = instanceName || 'cargografias';
+        $scope.embedAvailable = "/" + instanceName + "/embed/" + result.embed._id
+      })
     };
 
     $scope.clearEverthing = function() {
