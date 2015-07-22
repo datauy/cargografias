@@ -8,3 +8,7 @@
     <meta name="twitter:player:height" property="twitter:player:height" content="450">
     <meta name="twitter:player:width" property="twitter:player:width" content="438">
     
+
+    <pre>
+        {{data | json}}
+    </pre>
