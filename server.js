@@ -87,6 +87,7 @@ app.get('/:instanceName/organization/:organizationId/:nameslug?', fichasControll
 
 app.get('/:instanceName/embed/:id', embedController.index)
 app.post('/createEmbedUrl', embedController.createEmbedUrl)
+app.post('/createShortUrl', embedController.createShortUrl)
 
 app.disable('etag');
 var server = http.createServer(app);

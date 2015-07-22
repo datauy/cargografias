@@ -19,8 +19,7 @@
                     <div class="opciones-busqueda">
                         <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span>AVANZADA</a>
                         <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span>SIMPLE</a>
-                        <a href="#" onclick="window.open('https://twitter.com/intent/tweet?text=Linea%20de%20tiempo%20de%20politicos%3A&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url='+encodeURIComponent(location.href),'twitter-share-dialog','width=626,height=436'); 
-                    return false;"><i class="fa fa-share-alt"></i>COMPARTIR</a>
+                        <a ng-click="shareIt()"><i class="fa fa-share-alt"></i>COMPARTIR</a>
                         <a ng-click="clearEverthing()"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCIÓN</span></a>
                         <a ng-click="createEmbed()"><i class="fa fa-trash"></i>CREATE EMBED</a>
                         <a ng-show="embedAvailable" target="_blank" href="{{embedAvailable}}"><i class="fa fa-trash"></i>VIEW EMBED</a>

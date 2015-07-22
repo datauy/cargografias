@@ -150,6 +150,17 @@ angular.module('cargoApp.controllers')
       })
     };
 
+    $scope.shareIt = function(){
+      window.open('about:blank', 'twitterShareWindow', 'width=626,height=436')
+      var urlToShorten = location.href;
+      $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
+        var text = "Linea de tiempo de politicos:"
+        var sharedUrl = result.shortUrl;
+        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url=' + encodeURIComponent(sharedUrl)
+        window.open(url, 'twitterShareWindow')                
+      })
+    };
+
     $scope.clearEverthing = function() {
         console.log('clearFilter');
         $scope.filterAdvance.name = null;
