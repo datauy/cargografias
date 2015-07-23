@@ -7,16 +7,17 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "body-parser": "^1.13.2",
     "compression": "~1.0.11",
     "dotenv": "^1.1.0",
     "express": "^4.8.8",
+    "js-beautify": "*",
     "mongo": "^0.1.0",
     "mongodb": "^2.0.33",
     "mongoose": "^4.0.5",
     "q": "^1.4.1",
     "request": "^2.58.0",
-    "swig": "^1.4.2",
-    "js-beautify": "*"
+    "swig": "^1.4.2"
   },
   "devDependencies": {},
   "repository": {

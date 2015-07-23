@@ -2,11 +2,10 @@ require('dotenv').load();
 var express = require('express');
 var http = require('http');
 var compression = require('compression');
-var mongoose = require('mongoose');
-var mongoUrl = process.env.MONGO_URL;
 var swig = require('swig');
 var fichasController = require('./controllers/fichas.js')
 var embedController = require('./controllers/embed.js')
+var conn = require('./db.js');
 
 swig.setDefaults({
     cache: false,
@@ -18,24 +17,9 @@ swig.setDefaults({
 });
 var Q = require('q');
 
-console.log("trying to connect to", mongoUrl);
-
-mongoose.connect(mongoUrl);
 var instancesMap = null;
 var allInstances = null;
-var db = null;
 
-var MongoClient = require('mongodb').MongoClient,
-    assert = require('assert');
-
-MongoClient.connect(mongoUrl, function(err, _db) {
-    db = _db;
-    if (err) {
-        console.log("cannot connect to db", err);
-    } else {
-        console.log("Connected correctly to server");
-    }
-});
 
 var app = express();
 
@@ -45,6 +29,13 @@ app.set('views', __dirname + "/views");
 
 // all environments
 app.set('port', process.env.PORT || 3000);
+app.use(require('body-parser').urlencoded({
+    extended: true,
+    limit: '5mb'
+}));
+app.use(require('body-parser').json({
+    limit: '5mb'
+}));
 
 app.get('/', function(req, res) {
     req.params.instanceName = 'cargografias';
@@ -57,7 +48,7 @@ app.get('/:instanceName', instanceRouteHandler);
         
 function instanceRouteHandler(req, res) {
 
-    var instances = db.collection('cargoinstances');
+    var instances = conn.getDb().collection('cargoinstances');
     instances.find({instanceName: req.params.instanceName}).toArray(function(err, instances) {
         if (err) {
             res.send('error');
@@ -75,7 +66,7 @@ function instanceRouteHandler(req, res) {
 
 app.get('/d/:instanceName', function(req, res) {
 
-    var instances = db.collection('cargoinstances');
+    var instances = conn.getDb().collection('cargoinstances');
     instances.find({instanceName: req.params.instanceName}).toArray(function(err, instances) {
         if (err) {
             res.send('error');
@@ -95,6 +86,7 @@ app.get('/:instanceName/person/:personId/:nameslug?', fichasController.person)
 app.get('/:instanceName/organization/:organizationId/:nameslug?', fichasController.organization)
 
 app.get('/:instanceName/embed/:id', embedController.index)
+app.post('/createEmbedUrl', embedController.createEmbedUrl)
 
 app.disable('etag');
 var server = http.createServer(app);

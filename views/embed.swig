@@ -30,10 +30,6 @@
         content="{{shareUrl}}">
     <meta name="twitter:player:height" property="twitter:player:height" content="450">
     <meta name="twitter:player:width" property="twitter:player:width" content="438">
- 
- 
-
-
 
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -91,7 +87,8 @@
     <script>
         window.__config = {
            baseStaticPath: '{{config.baseStaticPath}}' 
-        }    
+        }
+        window.__embedData = JSON.parse('{{dataJSONString|safe}}');
     </script>
 
     <script>
@@ -106,11 +103,18 @@
     </script>
 
 
-
-
 </head>
 
 <body>
+
+<!-- 
+
+    <pre>
+        {{data | json}}
+    </pre>
+
+-->
+
     <header>
         <div class="row">
             <div class="info col-xs-12 col-sm-6 col-md-6 col-lg-6">
