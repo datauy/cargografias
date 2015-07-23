@@ -12,7 +12,7 @@ Bitly.setAccessToken(process.env.BITLY_TOKEN);
 
 function index(req, res){
     var id = req.params.id;
-
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     EmbedUrls.findById(id, function(err, item){
         if(err){
             res.status(500).send({
@@ -22,6 +22,7 @@ function index(req, res){
         }else{
             if(item){
                 res.render('embed', {
+                    shareUrl: fullUrl,
                     data: item.toObject().data,
                     dataJSONString: JSON.stringify(item.toObject().data)
                 })                        
@@ -58,7 +59,14 @@ function createEmbedUrl(req, res){
 
 function createShortUrl(req, res){
 
-    Bitly.shorten({longUrl: req.body.url }, function(err, results) {
+
+    var currentUrl = req.body.url;
+    //Fociring URL for Embed Twitter request for https
+    if (currentUrl.indexOf('https') < 0){
+        currentUrl.replace('http', 'https');
+    }
+    var bitliyRequest = {longUrl: currentUrl };
+    Bitly.shorten(bitliyRequest, function(err, results) {
         results = JSON.parse(results)
         res.send({
             shortUrl: results.data.url
