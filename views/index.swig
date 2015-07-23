@@ -38,7 +38,7 @@
     <link href="/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
 
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
     
     <!-- V3 Styles -->
 

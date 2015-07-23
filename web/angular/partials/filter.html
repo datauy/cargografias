@@ -19,10 +19,8 @@
                     <div class="opciones-busqueda">
                         <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span>AVANZADA</a>
                         <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span>SIMPLE</a>
-                        <a href="#" ng-click="tweetThis()"; 
-                    return false;"><i class="fa fa-share-alt"></i>COMPARTIR</a>
+                        <a ng-click="tweetThis()"><i class="fa fa-share-alt"></i>COMPARTIR</a>
                         <a ng-click="clearEverthing()"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCIÓN</span></a>
-                        <a ng-click="createEmbed()"><i class="fa fa-trash"></i>CREATE EMBED</a>
                         <a ng-show="embedAvailable" target="_blank" href="{{embedAvailable}}"><i class="fa fa-trash"></i>VIEW EMBED</a>
 
                     </div>

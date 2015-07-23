@@ -157,19 +157,38 @@ angular.module('cargoApp.controllers')
 
 
     $scope.tweetThis =function(){
-
-      $scope.createEmbed(function(url){
+      $scope.createEmbed(function(embedUrl){
         
-        url = window.location.origin + url;
-        var base ="https://twitter.com/intent/tweet?text=";
-        base += encodeURIComponent("Aca está línea de tiempo de " 
-          + $scope.autoPersons[0].name +  " via @cargografias " 
-          +  url );
-        base += "&url='" + encodeURIComponent(url);
-        window.open(base,'twitter-share-dialog','width=626,height=436');
+        var urlToShorten = window.location.origin + embedUrl;
+        
+        $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
+
+
+          var prefix = data[0].name;
+          console.log(result);
+           var base ="https://twitter.com/intent/tweet?text=";
+            base += encodeURIComponent("Aca está línea de tiempo de " 
+            + prefix +  " via @cargografias " 
+            +  result.shortUrl );
+            base += "&url='" + encodeURIComponent(result.shortUrl);
+          window.open(base,'twitter-share-dialog','width=626,height=436');              
+        })
+
+       
+
 
       }); 
+    };
 
+    $scope.shareIt = function(){
+      
+      var urlToShorten = location.href;
+      $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
+        var text = "Linea de tiempo de politicos:"
+        var sharedUrl = result.shortUrl;
+        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url=' + encodeURIComponent(sharedUrl)
+        window.open(url, 'twitterShareWindow')                
+      })
     };
 
     $scope.clearEverthing = function() {
