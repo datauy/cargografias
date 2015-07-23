@@ -28,9 +28,12 @@ function index(req, res){
 };
 
 function createEmbedUrl(req, res){
-    EmbedUrls.create({
-        data: req.body
-    }, function (err, doc){
+
+    var embed = {
+        data: req.body,
+    };
+    console.log(embed);
+    EmbedUrls.create(embed, function (err, doc){
         if(err){
             console.log(err);
             res.status(500).send({

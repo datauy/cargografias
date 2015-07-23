@@ -56,7 +56,7 @@
     <!-- V2 Libs -->
     <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/js/lib/underscore.min.js"></script>
-    <script type="text/javascript" src="js/lib/d3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/d3.min.js"></script>
 
     
     
@@ -71,7 +71,7 @@
     <script src="/js/lib/sha1.js"></script>
 
     <!-- V4 Libs -->
-    <script type="text/javascript" src="js/lib/own.js"></script>
+    <script type="text/javascript" src="/js/lib/own.js"></script>
 
     <!-- V2 Libs Angular-->
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -214,16 +214,16 @@
 
     <script src="/js/remove-diacritics.js"></script>
     
-    <script src="angular/app.js"></script>
-    <script src="angular/controllers/controllers.js"></script>
-    <script src="angular/controllers/filterController.js"></script>
-    <script src="angular/controllers/loaderController.js"></script>
-    <script src="angular/filters/filters.js"></script>
-    <script src="angular/directives/cargoBubbles.js"></script>
-    <script src="angular/directives/cargoLoc.js"></script>
-    <script src="angular/factories/cargosLoaderFactory.js"></script>
-    <script src="angular/factories/cargosFactory.js"></script>
-    <script src="angular/factories/presetsFactory.js"></script>
+    <script src="/angular/app.js"></script>
+    <script src="/angular/controllers/controllers.js"></script>
+    <script src="/angular/controllers/filterController.js"></script>
+    <script src="/angular/controllers/loaderController.js"></script>
+    <script src="/angular/filters/filters.js"></script>
+    <script src="/angular/directives/cargoBubbles.js"></script>
+    <script src="/angular/directives/cargoLoc.js"></script>
+    <script src="/angular/factories/cargosLoaderFactory.js"></script>
+    <script src="/angular/factories/cargosFactory.js"></script>
+    <script src="/angular/factories/presetsFactory.js"></script>
 </body>
     
 </body>

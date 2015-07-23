@@ -138,7 +138,7 @@ angular.module('cargoApp.controllers')
         $scope.showResult = true;
     };
 
-    $scope.createEmbed = function(){
+    $scope.createEmbed = function(cb){
       $http.post('/createEmbedUrl', {
         persons:  ( $scope.activePersons || [] ).map(function(person){ return {  popitID: person.popitID, id: person.id } }), 
         filter: $scope.filter
@@ -146,8 +146,30 @@ angular.module('cargoApp.controllers')
       .success(function(result){
         var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
         instanceName = instanceName || 'cargografias';
-        $scope.embedAvailable = "/" + instanceName + "/embed/" + result.embed._id
+        var embed = "/" + instanceName + "/embed/" + result.embed._id;
+        $scope.embedAvailable = embed;
+        if (cb){
+          cb(embed);  
+        }
+        
       })
+    };
+
+
+    $scope.tweetThis =function(){
+
+      $scope.createEmbed(function(url){
+        
+        url = window.location.origin + url;
+        var base ="https://twitter.com/intent/tweet?text=";
+        base += encodeURIComponent("Aca está línea de tiempo de " 
+          + $scope.autoPersons[0].name +  " via @cargografias " 
+          +  url );
+        base += "&url='" + encodeURIComponent(url);
+        window.open(base,'twitter-share-dialog','width=626,height=436');
+
+      }); 
+
     };
 
     $scope.clearEverthing = function() {

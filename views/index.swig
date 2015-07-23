@@ -203,16 +203,16 @@
 
     <script src="/js/remove-diacritics.js"></script>
     
-    <script src="angular/app.js"></script>
-    <script src="angular/controllers/controllers.js"></script>
-    <script src="angular/controllers/filterController.js"></script>
-    <script src="angular/controllers/loaderController.js"></script>
-    <script src="angular/filters/filters.js"></script>
-    <script src="angular/directives/cargoBubbles.js"></script>
-    <script src="angular/directives/cargoLoc.js"></script>
-    <script src="angular/factories/cargosLoaderFactory.js"></script>
-    <script src="angular/factories/cargosFactory.js"></script>
-    <script src="angular/factories/presetsFactory.js"></script>
+    <script src="/angular/app.js"></script>
+    <script src="/angular/controllers/controllers.js"></script>
+    <script src="/angular/controllers/filterController.js"></script>
+    <script src="/angular/controllers/loaderController.js"></script>
+    <script src="/angular/filters/filters.js"></script>
+    <script src="/angular/directives/cargoBubbles.js"></script>
+    <script src="/angular/directives/cargoLoc.js"></script>
+    <script src="/angular/factories/cargosLoaderFactory.js"></script>
+    <script src="/angular/factories/cargosFactory.js"></script>
+    <script src="/angular/factories/presetsFactory.js"></script>
 </body>
     
 </body>
