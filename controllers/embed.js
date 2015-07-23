@@ -12,7 +12,7 @@ Bitly.setAccessToken(process.env.BITLY_TOKEN);
 
 function index(req, res){
     var id = req.params.id;
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    var fullUrl = req.protocol + '://' + 'beta.cargografias.org' + req.originalUrl;
     EmbedUrls.findById(id, function(err, item){
         if(err){
             res.status(500).send({
