@@ -16,19 +16,36 @@
             <div>
                 <div class="search-row">
                     <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="filterAdvance.name" ng-change="filterAutoPersons(filterAdvance.name)" autocomplete="off" >    
-                    <div class="opciones-busqueda">
-                        <a ng-click="switchSearch(true)" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span>AVANZADA</a>
-                        <a ng-click="switchSearch(false)" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span>SIMPLE</a>
-                        <a ng-click="tweetThis()"><i class="fa fa-share-alt"></i>COMPARTIR</a>
-                        <a ng-click="clearEverthing()"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCIÓN</span></a>
-                        <a ng-show="embedAvailable" target="_blank" href="{{embedAvailable}}"><i class="fa fa-trash"></i>VIEW EMBED</a>
+                    <div class="opciones-busqueda buttons">
+                        <div>
+                            <a ng-click="switchSearch(true)" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span><span>AVANZADA</span></a>
+                        </div>
+                        <div>
+                            <a ng-click="switchSearch(false)" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span><span>SIMPLE</span></a>
+                        </div>
+                        <div ng-class="showSharing ? 'active':''" >
+                        <a ng-click="switchSharing(true)" ng-hide="showSharing || autoPersons.length == 0"><i class="fa fa-share-alt"></i>COMPARTIR</a>
+                        <a ng-click="switchSharing(false)"  ng-show="showSharing && autoPersons.length > 0"><i class="fa fa-share-alt"></i>COMPARTIR</a>
+                        </div>
+                        <div>
+                            <a ng-click="clearEverthing()" ng-hide="autoPersons.length == 0"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCIÓN</span></a>
 
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Filter -->
             <div>
+                <div class="sharing buttons" ng-show="showSharing">
+                        <p><a ng-click="tweetThis()"><i class="fa fa-twitter"></i>Twiteea esta linea</a></p>
+                        <p><a href=""><i class="fa fa-link"></i>Copiar Link</a></p>
+                        <input type="text" value="{{currentLink()}}"/>
+                        <p><a href=""><i class="fa fa-globe"></i>Agrega la linea en tu sitio </a></p>
+                        <input type="text" value="{{embedIframe()}}"/>
 
+                </div>
+            </div>
+            <div>
                 <div class="filters" ng-show="showBusAvanzado">
                     <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>

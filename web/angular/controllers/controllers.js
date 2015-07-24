@@ -160,7 +160,8 @@ angular.module('cargoApp.controllers')
       $scope.createEmbed(function(embedUrl){
         
         var urlToShorten = window.location.origin + embedUrl;
-        
+        $scope.embedUrl = urlToShorten;
+        console.log(urlToShorten);
         $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
 
 
@@ -173,10 +174,6 @@ angular.module('cargoApp.controllers')
             base += "&url='" + encodeURIComponent(result.shortUrl);
           window.open(base,'twitter-share-dialog','width=626,height=436');              
         })
-
-       
-
-
       }); 
     };
 
@@ -191,6 +188,7 @@ angular.module('cargoApp.controllers')
       })
     };
 
+    $scope.showSharing = false;
 
     $scope.generateUrlProfile =function(a){
 
@@ -207,14 +205,45 @@ angular.module('cargoApp.controllers')
       $scope.search = false;  
     };
 
+    $scope.currentLink = function(){
+      console.log(location.href);
+      return location.href;      
+    }
+    $scope.embedIframe = function(){
+
+      var iframe = '<iframe width="560" height="315" src="' + $scope.embedUrl + '" frameborder="0" ></iframe>'
+      return iframe;
+    }
+
+    $scope.switchSharing = function(v){
+      $scope.showSharing = v;
+      if (v){
+        
+        $scope.createEmbed(function(embedUrl){
+            var urlToShorten = window.location.origin + embedUrl;
+            $scope.embedUrl = urlToShorten;
+            console.log(urlToShorten);
+            $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
+              $scope.shortUrl = result.shortUrl;             
+            });
+        }); 
+        
+      }
+      else {
+
+      }
+
+    };
     $scope.switchSearch = function(v){
       $scope.showBusAvanzado = v;
+      $scope.showSharing = false;
       console.log(v);
 
       if (v){
-
+        
       }
       else {
+
         $scope.filterAdvance.territory= null;
         $scope.filterAdvance.jobTitle = null;
         $scope.filterAdvance.decade = null;
