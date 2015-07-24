@@ -37,7 +37,8 @@
                         <option value="">Seleccionar cargo</option>
                     </select>
                     
-                    <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="decade as decade for decade in getDecades()">
+                    <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
+                        decade.key as decade.label for decade in getDecades()">
                         <option value="">Seleccionar decada</option>
                     </select>
                 </div>

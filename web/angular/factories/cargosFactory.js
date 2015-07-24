@@ -571,8 +571,8 @@ angular.module('cargoApp.factories')
             decades.push(from);
             from += 10;
         }
-
-        return decades;
+        var d = decades.map(function(d){ return {key:d, label:d + "-" + (d+10)}});
+        return d;
     }
 
     factory.load = function ($scope,callback, $rootScope) {

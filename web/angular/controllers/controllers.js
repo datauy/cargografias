@@ -345,8 +345,12 @@ angular.module('cargoApp.controllers')
        * Get decades
        * @returns {*}
        */
+      var decades = [];
       $scope.getDecades = function() {
-        return cargosFactory.getDecades(fromDecade);
+        if (decades.length === 0){
+          decades = cargosFactory.getDecades(fromDecade);;
+        }
+        return decades;
       }
 
 
