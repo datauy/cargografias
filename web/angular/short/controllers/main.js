@@ -27,7 +27,9 @@ angular.module('cargoApp.controllers')
           $scope.lightAdd(cargosFactory.autoPersons[id], id);
         };
         data = $scope.activePersons;
+        
         reloadCargoTimeline($scope.filter);
+
       } else {
         $rootScope.estado = "No hemos cargar tu linea de tiempo :-(";
         $rootScope.ready = false;
@@ -56,6 +58,13 @@ angular.module('cargoApp.controllers')
     cargosFactory.load($scope, onDataLoaded, $rootScope);
 
     
-    
+    $scope.fullUrl = function(){
+      var locations = window.location.href.split('/');
+
+      var persons = window.__embedData.persons.map(function(d) {return d.popitID;}).join('-')
+      var parameters  = '#/' +window.__embedData.filter + '-' + persons;
+      var instance = locations[3].indexOf('embed') > 0 ? '' : locations[3] + '';
+      return locations[0] + "//" + locations[2] + "/"  + instance + parameters;
+    }
     
 });
