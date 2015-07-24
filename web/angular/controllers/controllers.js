@@ -218,7 +218,8 @@ angular.module('cargoApp.controllers')
     $scope.switchSharing = function(v){
       $scope.showSharing = v;
       if (v){
-        
+        var prefix = data[0].name;
+        $scope.sharingCopy = "Aca está línea de tiempo de " + prefix +  " via @cargografias " ;
         $scope.createEmbed(function(embedUrl){
             var urlToShorten = window.location.origin + embedUrl;
             $scope.embedUrl = urlToShorten;

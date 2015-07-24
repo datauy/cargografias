@@ -116,6 +116,9 @@ header li a:hover{
 .hideOnMobile{
     	display:none;
     }
+ .showOnMobile{
+ 	display: block;
+ }
 
 div.main{
 	color:rgb(32, 32, 32);
@@ -332,6 +335,9 @@ div.main div.module div.filter-container div.sharing p{
 }
 
 @media (min-width: 768px) {
+	.showOnMobile{
+		display: none;
+	}
 	header .fa{
 		font-size: 20px;
 	}
