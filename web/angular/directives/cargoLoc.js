@@ -13,7 +13,7 @@ directive('ngCargoLoc', function() {
 
                 var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
                 instanceName = instanceName || 'cargografias';
-                var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json';
+                var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json' + '?v=' + window.__config.lastUpdate;
                 $http.get(locdataPath).then(function(res){
                   $scope.text = res.data[$scope.key] 
                 })

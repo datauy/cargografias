@@ -85,7 +85,8 @@
 
     <script>
         window.__config = {
-           baseStaticPath: '{{config.baseStaticPath}}' 
+           baseStaticPath: '{{config.baseStaticPath}}', 
+           lastUpdate: 0{{lastUpdate}} 
         }    
     </script>
 
