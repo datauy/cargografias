@@ -4,6 +4,9 @@
 angular.module('cargoApp.controllers')
   .controller('homeController', function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
+  var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
+  instanceName = instanceName || 'cargografias';
+  
       /**
        * FromDecade
        * @type {number}
@@ -107,8 +110,6 @@ angular.module('cargoApp.controllers')
     }
 
     function loadPresets() {
-      var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
-      instanceName = instanceName || 'cargografias';
       var req = $http.get('/js/datasets/gz/' + instanceName + '_locdata.json');
       req.then(function(res) {
         $scope.presets = JSON.parse(res.data.predefinedSearches || "[]");
@@ -144,8 +145,7 @@ angular.module('cargoApp.controllers')
         filter: $scope.filter
       })
       .success(function(result){
-        var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
-        instanceName = instanceName || 'cargografias';
+        
         var embed = "/" + instanceName + "/embed/" + result.embed._id;
         $scope.embedAvailable = embed;
         if (cb){
@@ -189,6 +189,14 @@ angular.module('cargoApp.controllers')
         var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&amp;tw_p=tweetbutton&amp;via=cargografias&amp;url=' + encodeURIComponent(sharedUrl)
         window.open(url, 'twitterShareWindow')                
       })
+    };
+
+
+    $scope.generateUrlProfile =function(a){
+
+      var url = "https://beta.cargografias.org/" + instanceName +  "/ficha/"+ a.id_sha1;
+      return url;
+      
     };
 
     $scope.clearFilter=function(){

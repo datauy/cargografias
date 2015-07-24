@@ -3,12 +3,16 @@
         <div class="persona-seleccionada" ng-repeat="active in activePersons">
                       <div class="chequeado" ng-show="active.chequeado"> <a href="http://chequeado.com" target="_blank"><i class="fa fa-check"></i> Chequeado </a></div>
                             <a ng-click="remove(active)" class="crucecita"><i class="fa fa-times"></i></a>
+                            
+                            <a ng-href="{{generateUrlProfile(active)}}" target="_blank">
                               <div class="photo-frame"
                               ng-style="{'background-image':'url(' +active.image +')'}"
                               >
                                     
                                   </div>
-                            <p>{{active.name}}</p>
+                            </a>
+                            <p>{{active.given_name}}</p>
+                            <p>{{active.family_name}}</p>
                           </div>
                 
             </div>
