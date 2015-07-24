@@ -2,7 +2,7 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('homeController', function($rootScope, $q, $scope, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
+  .controller('homeController', function($rootScope, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
@@ -54,6 +54,7 @@ angular.module('cargoApp.controllers')
           var id = cargosFactory.mapId[index];
           $scope.lightAdd(cargosFactory.autoPersons[id], id);
         };
+        
         $scope.refreshAllVisualizations();
         $scope.search = true;
         $scope.showPresets = hideAfterClick ? false : $scope.showPresets;

@@ -2,17 +2,6 @@
 
 <div class="filter-container" ng-controller="filterController">
     <div role="tabpanel" id="advance-filter">
-        <div ng-show="showPresets && presets.length">
-              <p>¿No sabés que buscar? Probá los siguientes grupos</p>
-              <div class="">
-                    <ul>
-                        <li ng-repeat="p in presets"> 
-                          <p><a class="hand" ng-click="load(p.valores, true)">{{p.nombre}}</a></p>
-                        </li>
-
-                    </ul>
-              </div>
-            </div>
             <div>
                 <div class="search-row">
                     <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="filterAdvance.name" ng-change="filterAutoPersons(filterAdvance.name)" autocomplete="off" >    
@@ -65,6 +54,17 @@
                         <option value="">Seleccionar decada</option>
                     </select>
                 </div>
+                <div ng-show="showPresets && presets.length">
+              <p>¿No sabés que buscar? Probá los siguientes grupos</p>
+              <div class="">
+                    <ul>
+                        <li ng-repeat="p in presets"> 
+                          <p><a class="hand" ng-click="load(p.valores, true)">{{p.nombre}}</a></p>
+                        </li>
+
+                    </ul>
+              </div>
+            </div>
                
                 <div id="resultadosBusqueda" ng-show="search">
                     <h3 id="quantiy-result" class="description">
