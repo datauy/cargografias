@@ -49,16 +49,18 @@
     
     <link rel="stylesheet" href="/css/cargo-base.css" type="text/css">
     <link rel="stylesheet" href="/css/animations.css" type="text/css">
+    <link rel="stylesheet" href="/bower_components/wow.js/css/libs/animate.css" type="text/css">
     
     <!-- V2 Libs -->
     <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/js/lib/underscore.min.js"></script>
-    <script type="text/javascript" src="js/lib/d3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/d3.min.js"></script>
 
     
     
     <!-- V3 Libs -->
     <!-- Angular Material Dependencies -->
+    <script src="/bower_components/wow.js/dist/wow.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-aria/angular-aria.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>

@@ -4,7 +4,7 @@ angular.module('cargoApp.controllers', []);
 angular.module('cargoApp.directives', []);
 
 // Declare app level module which depends on filters, and services
-angular.module('cargoApp', [
+var cargoApp = angular.module('cargoApp', [
   'ngRoute',
   'cargoApp.filters',
   'cargoApp.factories',
@@ -17,3 +17,6 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/:ids?', {templateUrl: '/angular/partials/main.html', controller: 'homeController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
+cargoApp.run(function(){
+	new WOW().init();
+})
