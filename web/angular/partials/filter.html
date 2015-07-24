@@ -51,7 +51,7 @@
                             <i class="fa fa-users"></i> 
                             Personas encontradas: {{autoPersons.length}} 
 
-                            para
+                            
                             <br>
                             <small> <span ng-show='filterAdvance.name'>'{{filterAdvance.name}}'  </span>
                 <span ng-show='filterAdvance.territory'> 
@@ -76,7 +76,7 @@
                             </small>
                         </div>
                         <div class="close">
-                            <a ng-click="clearFilter(nombre)" alt="Limpiar filtro" ng-show="nombre.length > 0"><i class="fa fa-times"></i></a>
+                            <a ng-click="clearFilter()" alt="Limpiar filtro" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i></a>
                         </div>
                     </h3>
                     

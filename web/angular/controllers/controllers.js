@@ -191,6 +191,13 @@ angular.module('cargoApp.controllers')
       })
     };
 
+    $scope.clearFilter=function(){
+      $scope.filterAdvance.name = null;
+      $scope.filterAdvance.territory= null;
+      $scope.filterAdvance.jobTitle = null;
+      $scope.filterAdvance.decade = null;
+      $scope.search = false;  
+    };
     $scope.clearEverthing = function() {
         console.log('clearFilter');
         $scope.filterAdvance.name = null;
