@@ -416,13 +416,19 @@ angular.module('cargoApp.factories')
       
       var expression = '-started';
       var a = $filter('orderBy')(person.memberships, expression, false);
-      var resume = {
-          started: moment(a[a.length-1].start_date),
-          last: a[0].end_date ? moment(a[0].end_date) : undefined,
-          yearsCharges: parseFloat(yearsSum.toFixed(2))
-      };
-
-      var now =moment(); 
+       var resume = {
+            started: undefined,
+            last: undefined,
+            yearsCharges: 0,
+            yearsPolitics:0,
+        };
+      try{ 
+        resume = {
+            started: moment(a[a.length-1].start_date),
+            last: a[0].end_date ? moment(a[0].end_date) : undefined,
+            yearsCharges: parseFloat(yearsSum.toFixed(2))
+        };
+         var now =moment(); 
         var years = 0;
         if (resume.last){
           //Si el periodo termina despues.
@@ -440,7 +446,14 @@ angular.module('cargoApp.factories')
         //Si el periodo ya termino.        
         resume.yearsPolitics = parseFloat(years.toFixed(2));
 
-      return resume ;
+        return resume ;
+      }
+      catch(e){
+        console.log('resume not available for, please check start/end dates', person);
+        return resume;
+      }
+
+     
 
     };
     factory.getSummary = function(person){
