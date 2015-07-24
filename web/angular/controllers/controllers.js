@@ -109,7 +109,8 @@ angular.module('cargoApp.controllers')
     function loadPresets() {
       var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
       instanceName = instanceName || 'cargografias';
-      var req = $http.get('/js/datasets/gz/' + instanceName + '_locdata.json');
+      var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json' + '?v=' + window.__config.lastUpdate;
+      var req = $http.get(locdataPath);
       req.then(function(res) {
         $scope.presets = JSON.parse(res.data.predefinedSearches || "[]");
         $scope.showPresets = $scope.presets && $scope.presets.length;
