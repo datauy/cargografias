@@ -266,38 +266,40 @@ div.main div.module div#linea-de-tiempo div#infobox p.med{
 	font-size: 0.9em;
 	text-transform: capitalize;
 }
+div.main div.module div.filter-container div#resultadosBusqueda {
+	position: relative;
+	padding: 5px 9px 12px 9px;
+	background-color: #F5F5F5;
+	margin-top: 10px;
+	border: 1px silver solid;
+	border-radius: 5px;
+}
+div.main div.module div.filter-container div#resultadosBusqueda div.close{
+	position: absolute;
+	float:right;
+	top:0;
+	right:0;
+	padding: 0.5em;
+}
+div.main div.module div.filter-container div#resultadosBusqueda div.close i{
+	margin-right: 3px
+}
 
+div.main div.module div.filter-container div#resultadosBusqueda h3{
+	color:#757575;
+	font-size: 0.8em;
+}
 
-.opciones-busqueda{
+div.main div.module div.filter-container div.opciones-busqueda{
 	margin-top: 7px;
 }
 
-.opciones-busqueda a{
+div.main div.module div.filter-container div.opciones-busqueda a{
 	font-size: 0.7em;
 	margin-right: 12px;
 }
 
-#resultadosBusqueda{
-  padding: 5px 9px 12px 9px;
-  background-color: #F5F5F5;
-  margin-top: 10px;
-  border: 1px silver solid;
-  border-radius: 5px;
-}
-
-#resultadosBusqueda h3{
-	color:#757575;
-}
-
-#resultadosBusqueda .close{
-	float:right;
-}
-
-#resultadosBusqueda .close i{
-	margin-right: 3px
-}
-
-.search-row{
+div.main div.module div.filter-container div.search-row{
 	overflow: hidden;
 }
 

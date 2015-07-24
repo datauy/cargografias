@@ -198,6 +198,20 @@ angular.module('cargoApp.controllers')
       $scope.filterAdvance.decade = null;
       $scope.search = false;  
     };
+
+    $scope.switchSearch = function(v){
+      $scope.showBusAvanzado = v;
+      console.log(v);
+
+      if (v){
+
+      }
+      else {
+        $scope.filterAdvance.territory= null;
+        $scope.filterAdvance.jobTitle = null;
+        $scope.filterAdvance.decade = null;
+      }
+    }
     $scope.clearEverthing = function() {
         console.log('clearFilter');
         $scope.filterAdvance.name = null;

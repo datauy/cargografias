@@ -17,8 +17,8 @@
                 <div class="search-row">
                     <input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="filterAdvance.name" ng-change="filterAutoPersons(filterAdvance.name)" autocomplete="off" >    
                     <div class="opciones-busqueda">
-                        <a ng-click="showBusAvanzado = true" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span>AVANZADA</a>
-                        <a ng-click="showBusAvanzado = false" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span>SIMPLE</a>
+                        <a ng-click="switchSearch(true)" ng-hide="showBusAvanzado"><i class="fa fa-sliders"></i><span class="hideOnMobile">BÚSQUEDA </span>AVANZADA</a>
+                        <a ng-click="switchSearch(false)" ng-show="showBusAvanzado"><i class="fa fa-chevron-up"></i><span class="hideOnMobile">BÚSQUEDA </span>SIMPLE</a>
                         <a ng-click="tweetThis()"><i class="fa fa-share-alt"></i>COMPARTIR</a>
                         <a ng-click="clearEverthing()"><i class="fa fa-trash"></i>LIMPIAR<span class="hideOnMobile"> SELECCIÓN</span></a>
                         <a ng-show="embedAvailable" target="_blank" href="{{embedAvailable}}"><i class="fa fa-trash"></i>VIEW EMBED</a>
@@ -52,31 +52,30 @@
                             Personas encontradas: {{autoPersons.length}} 
 
                             
-                            <br>
-                            <small> <span ng-show='filterAdvance.name'>'{{filterAdvance.name}}'  </span>
+                            <br><span ng-show='filterAdvance.name'>'{{filterAdvance.name}}'  </span>
                 <span ng-show='filterAdvance.territory'> 
                     en {{filterAdvance.territory}}  </span>
                 <span ng-show='filterAdvance.jobTitle'>
                     como {{filterAdvance.jobTitle}}  </span>
                 <span ng-show='filterAdvance.decade'> durante {{filterAdvance.decade}} </span>
                         </span>
-                    </small>
+                    
                         <div ng-show="autoPersons.length == 0 && search">
                             <span >
                                No encontramos nada para 
                             </span>
                             <br>
-                            <small>   
+                              
                 <span ng-show='filterAdvance.name'>'{{filterAdvance.name}}'  </span>
                 <span ng-show='filterAdvance.territory'> 
                     en {{filterAdvance.territory}}  </span>
                 <span ng-show='filterAdvance.jobTitle'>
                     como {{filterAdvance.jobTitle}}  </span>
                 <span ng-show='filterAdvance.decade'> durante {{filterAdvance.decade}} </span>
-                            </small>
+                            
                         </div>
                         <div class="close">
-                            <a ng-click="clearFilter()" alt="Limpiar filtro" ng-show="autoPersons.length > 0"><i class="fa fa-times"></i></a>
+                            <a ng-click="clearFilter()" alt="Limpiar filtro" ><i class="fa fa-times"></i></a>
                         </div>
                     </h3>
                     
