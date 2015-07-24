@@ -49,8 +49,18 @@
                         
                         <span ng-hide="autoPersons.length == 0" >
                             <i class="fa fa-users"></i> 
-                            Personas encontradas: {{autoPersons.length}}
+                            Personas encontradas: {{autoPersons.length}} 
+
+                            para
+                            <br>
+                            <small> <span ng-show='filterAdvance.name'>'{{filterAdvance.name}}'  </span>
+                <span ng-show='filterAdvance.territory'> 
+                    en {{filterAdvance.territory}}  </span>
+                <span ng-show='filterAdvance.jobTitle'>
+                    como {{filterAdvance.jobTitle}}  </span>
+                <span ng-show='filterAdvance.decade'> durante {{filterAdvance.decade}} </span>
                         </span>
+                    </small>
                         <div ng-show="autoPersons.length == 0 && search">
                             <span >
                                No encontramos nada para 
