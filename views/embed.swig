@@ -121,7 +121,7 @@
                         <div class="row">
                             <div class="info col-xs-3">
                                 <div class="logo box">
-                                    <img src="/img/logo.png">
+                                    <a href="/"><img src="/img/logo.png"></a>
                                 </div>
                             </div>
                             <div class="info col-xs-9">
@@ -134,36 +134,6 @@
                     </div>
                 </div>
             </div>
-            <div class="items col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <ul class="instance-detail">
-                    <li>
-                        <i class="fa fa-map-marker"></i><span ng-cargo-loc="siteTitle"></span>
-                    </li>
-                    <li>
-                        <i class="fa fa-globe"></i>Otros Paises</span>
-                    </li>
-                    
-                </ul>
-            </div>
-            <div class="items col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                 <ul class="menu">
-                    <li>
-                    <a target="_blank" title="Sigue a @Cargografias en Twitter" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
-                        <i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="https://github.com/cargografias" target="_blank"><i class="fa fa-github"></i></a>
-                    </li>
-                    <li>
-                    <a href="http://www.google.com/recaptcha/mailhide/d?k=01C7lOvjG_N7EaBpT3Yp2Lmw==&amp;c=so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501C7lOvjG_N7EaBpT3Yp2Lmw\75\75\46c\75so8gSuVp-5Xe2ocyAzNPdAZ8Uq5kd15DyhceyfZw3qY\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address"><i class="fa fa-envelope-o"></i></a>
-                    </li>
-                    <li>
-                       <a href="#"><i class="fa fa-cog"></i></a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
     </header>
  <!--    <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">

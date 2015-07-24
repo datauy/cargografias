@@ -36,7 +36,7 @@
             </div>
             <!-- Filter -->
             <div>
-                <div class="sharing buttons" ng-show="showSharing">
+                <div class="sharing buttons wow fadeIn" ng-show="showSharing">
                         <p><a ng-click="tweetThis()"><i class="fa fa-twitter"></i>Twiteea esta linea</a></p>
                         <!-- <p class="showOnMobile">
 
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div>
-                <div class="filters" ng-show="showBusAvanzado">
+                <div class="filters wow fadeIn" ng-show="showBusAvanzado">
                     <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>
                     </select>

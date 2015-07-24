@@ -113,7 +113,7 @@
                         <div class="row">
                             <div class="info col-xs-3">
                                 <div class="logo box">
-                                    <img src="/img/logo.png">
+                                    <a href="/"><img src="/img/logo.png"></a>
                                 </div>
                             </div>
                             <div class="info col-xs-9">

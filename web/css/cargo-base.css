@@ -160,6 +160,9 @@ div.main div.module{
   padding-top: 0.4em;
 
 }
+div.main div.module.full-version{
+	  text-align: center;
+}
 div.main div.module.timeline{	
 	background-color: #f5f5f5;
 }
