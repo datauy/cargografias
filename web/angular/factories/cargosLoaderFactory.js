@@ -69,8 +69,8 @@ angular.module('cargoApp.factories', [])
 
   //Initials for graphics
   f.setInitials = function(d){
-    var splitedName =  d.name.split(' ')
-    d.initials = d.name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
+    var splitedName =  d.given_name.split(' ')
+    d.initials = d.given_name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
                     
   }
 
