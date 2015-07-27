@@ -265,6 +265,7 @@ angular.module('cargoApp.controllers')
         $scope.showResult = false;
         for (var i = 0; i < $scope.activePersons.length; i++) {
           $scope.activePersons[i].autoPersona.agregada = false;
+          $scope.activePersons[i].autoPersona.styles = "";
         };
         $scope.activePersons = [];
         updateTheUrl();
@@ -358,6 +359,7 @@ angular.module('cargoApp.controllers')
       
       for (var i = 0; i < $scope.activePersons.length; i++) {
         $scope.activePersons[i].autoPersona.agregada = false;
+        $scope.activePersons[i].autoPersona.styles = "";
       };
       $scope.activePersons = [];
       updateTheUrl();
