@@ -84,15 +84,11 @@ window.cargo.plugins.memberships =  {
 	updateAdditionalGraphs:function(d,context){
 		if (controls.height != "memberships" && controls.height != "territory"){
         	
-	        	d3
-	        	.select(context)
-				.selectAll('path.bezier')
-		        .transition()
-		        .duration(transitionDuration)
-		        .attr('opacity', 0);
+	       	$("svg.vis path").css('opacity',0);
         	return;
         }
         else if (controls.height == "memberships"){
+
 		var curves = d3.select(context)
 			.selectAll('path.curves')
 	        .data(d.memberships, function(d,i){ return i;});
@@ -101,7 +97,7 @@ window.cargo.plugins.memberships =  {
 	        .append('path')
 	        .attr('class', 'curves bezier')
 	       	.attr('index',d.position)
-	        .attr('opacity', 0)
+	        .style('opacity', 0)
 	        .attr('fill', 'none')
 	        .attr('stroke', 'red')
 	        .attr('stroke-width', '2px');
@@ -112,6 +108,7 @@ window.cargo.plugins.memberships =  {
 	        curves
 		        .transition()
 		        .duration(transitionDuration)
+		        .style('opacity', 1)
 		        .attr('opacity', 1)
 		        .attr('d', function(d) {
 		        	if (!d.after || !d.pre){
@@ -140,10 +137,11 @@ window.cargo.plugins.memberships =  {
 		        }).attr('stroke', function(d) {
 		          return window.cargo.plugins.territory.colorScale(d.parent);
 		        });
-
+		        
 
 	        curves.exit().remove();
 	    	}
+
 	},
 	updateLabels: function(){
 		this.setBoxHeight();
@@ -205,17 +203,21 @@ window.cargo.plugins.memberships =  {
 		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
+  			console.log('territory paint showOnlyHim');
   		}
   		else {
   			$("svg.vis path").css('opacity',0);
+  			console.log('no paint member showOnlyHim');
   		}
 	},
 	showAll: function(e,i){
 		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path").css('opacity',1);
+			console.log(' member pinto todos');
 		}
 		else {
 			$("svg.vis path").css('opacity',0);
+			console.log(' member no paint showAll');
 		}
 	},
 

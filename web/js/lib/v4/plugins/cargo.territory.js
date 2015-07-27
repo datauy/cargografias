@@ -148,17 +148,11 @@ updateAdditionalGraphs:function(d,context){
 		
 
 		if (controls.height != "memberships" && controls.height != "territory"){
-        	
-        	d3
-        	.select(context)
-			.selectAll('path.bezier')
-	        .transition()
-	        .duration(transitionDuration)
-	        .attr('opacity', 0);
+        	$("svg.vis path").css('opacity',0);
         	return;
         }
         else if (controls.height == "territory"){
-			var greyBox = d3.select(context).select()
+			var greyBox = d3.select(context).select();
 
 
 			var curves = d3.select(context)
@@ -169,20 +163,20 @@ updateAdditionalGraphs:function(d,context){
 		        .append('path')
 		        .attr('class', 'curves bezier')
 		       	.attr('index',d.position)
-		        .attr('opacity', 0)
+		        .style('opacity', 0)
 		        .attr('fill', 'none')
 		        .attr('stroke', 'red')
 		        .attr('stroke-width', '2px');
 
 	        var controlLenght = 20;
 
-        
-        
+        	
+
 
 	        curves
 		        .transition()
 		        .duration(transitionDuration)
-		        .attr('opacity', 1)
+		        .style('opacity', 1)
 		        .attr('d', function(d) {
 		        	if (!d.after || !d.pre){
 		        		return "";
@@ -211,6 +205,7 @@ updateAdditionalGraphs:function(d,context){
 		          return window.cargo.plugins.territory.colorScale(d.parent);
 		        });
 
+		       console.log('nice draw')
 
 	        curves.exit().remove();
     	}
@@ -268,19 +263,23 @@ updateAdditionalGraphs:function(d,context){
 		if (controls.height == "territory" || controls.height =="memberships"){
 			
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
-
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
+  			console.log('territory paint showOnlyHim');
   		}
   		else {
   			$("svg.vis path").css('opacity',0);
+  			console.log('territory no paint showOnlyHim');
   		}
 	},
 	showAll: function(e,i){
 		if (controls.height == "territory" || controls.height =="memberships"){
-			$("svg.vis path.territory").css('opacity',1);
+			$("svg.vis path").css('opacity',1);
+			console.log('territory pinto todos');
 		}
 		else {
-			$("svg.vis path.territory").css('opacity',0);
+			
+			$("svg.vis path").css('opacity',0);
+			console.log('territory no paint showAll');
 		}
 	},
 
