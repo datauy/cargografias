@@ -5,8 +5,8 @@
 
 <script type="text/template" id="person">
     <h1>
-        <a target="_blank" href="https://cargo2.popit.mysociety.org/persons/<%=person.id%>"> <%=person.name%> </a>
-        <a target="_blank" href="http://beta.cargografias.org/cargo2#/memberships-<%=person.id_sha1.substr(0,6)%>"> <%=person.id_sha1.substr(0,6)%> </a>
+        <a target="_blank" href="https://<%=instance%>.popit.mysociety.org/persons/<%=person.id%>"> <%=person.name%> </a>
+        <a target="_blank" href="http://beta.cargografias.org/<%=instance%>#/memberships-<%=person.id_sha1.substr(0,6)%>"> <%=person.id_sha1.substr(0,6)%> </a>
     </h1>
     <% repes.forEach(function(r){ %>
         <h2>Repetidos mismo anio</h2>
@@ -22,13 +22,13 @@
             <% r.forEach(function(m){ %>
                 <tr>    
                 <td>
-                    <a target="_blank" href="https://cargo2.popit.mysociety.org/memberships/<%=m.id%>">popit</a>
+                    <a target="_blank" href="https://<%=instance%>.popit.mysociety.org/memberships/<%=m.id%>">popit</a>
                 </td>
                 <td><%=m.start_date%></td>
                 <td><%=m.end_date%></td>
                 <td><%=m.label%></td>
                 <td>
-                    <a target="_blank" href="https://cargo2.popit.mysociety.org/organizations/<%=m.organization_id%>"><%=orgid[m.organization_id].name%></a>
+                    <a target="_blank" href="https://<%=instance%>.popit.mysociety.org/organizations/<%=m.organization_id%>"><%=orgid[m.organization_id].name%></a>
                 </td>
                 </tr>
             <% }) %>
@@ -40,18 +40,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script>
 
+    var instance = 'cargografias';
+
+    try{
+        instance = window.location.href.split('?')[1]
+    }catch(ex){}
+
     var personTemplate = _.template($('#person').html());
 
-    jQuery.getJSON( "http://localhost:8080/static-public/datasets/cargo2-memberships.json" , function(res){
+    jQuery.getJSON( "http://localhost:8080/static-public/datasets/" + instance + "-memberships.json" , function(res){
     mem = res       
     console.log('mem')
     } )
-    jQuery.getJSON( "http://localhost:8080/static-public/datasets/cargo2-organizations.json" , function(res){
+    jQuery.getJSON( "http://localhost:8080/static-public/datasets/" + instance + "-organizations.json" , function(res){
     console.log('oprg')
     org = res
     orgid = org.reduce(function(memo, o){ memo[o.id] = o;  return memo;}, {})
     } )
-    jQuery.getJSON( "http://localhost:8080/static-public/datasets/cargo2-persons.json" , function(res){
+    jQuery.getJSON( "http://localhost:8080/static-public/datasets/" + instance + "-persons.json" , function(res){
     console.log('per')
         per = res
 
@@ -87,7 +93,8 @@ function filterPersons(){
             renderedparts.push(personTemplate({
                 person: p,
                 repes: repes,
-                orgid: orgid
+                orgid: orgid, 
+                instance: instance
             }))
 
             console.log(" PERSON " , p.name)
