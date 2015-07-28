@@ -109,9 +109,16 @@ updatePreviouslGraphs:function(){
 	  
 	  this.setBoxHeight();
 
+
+	  var backgroundG = vis.select('g.backgroundContainer');
+	  if (backgroundG.empty()){
+	  	backgroundG = vis.append('g').attr('class', 'backgroundContainer');
+	  }
+
+
 	  var groupBackgrounds = 
-	  vis.selectAll('rect.backgroundGroup')
-	    .data(this.counter, function(d,i){ return d.name;});
+	  backgroundG.selectAll('rect.backgroundGroup')
+	    .data(this.counter, function(d,i){ return d.index;});
 
 	  groupBackgrounds.enter()
 	    .append('rect')
@@ -152,7 +159,7 @@ updateAdditionalGraphs:function(d,context){
         	return;
         }
         else if (controls.height == "territory"){
-			var greyBox = d3.select(context).select();
+			
 
 
 			var curves = d3.select(context)
