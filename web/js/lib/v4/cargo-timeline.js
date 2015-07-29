@@ -555,7 +555,7 @@ function refreshGraph() {
         .attr("x", padding.left / 7)
         .attr("y", function(d,i) {
           
-          return (i)*barHeight + (barHeight/2) + padding.top;
+          return (d.position)*barHeight + (barHeight/2) + padding.top;
 
         })
         .text(function(d,i) {
