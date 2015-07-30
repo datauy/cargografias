@@ -161,6 +161,7 @@ angular.module('cargoApp.controllers')
 
 
     $scope.tweetThis =function(){
+      window.open('about:blank', 'twitter-share-dialog', 'width=626,height=436'); //To avoid the browser blocking the popup, open it first and update the url later
       $scope.createEmbed(function(embedUrl){
         
         var urlToShorten = window.location.origin + embedUrl;
@@ -176,7 +177,7 @@ angular.module('cargoApp.controllers')
             + prefix +  " via @cargografias " 
             +  result.shortUrl );
             base += "&url='" + encodeURIComponent(result.shortUrl);
-          window.open(base,'twitter-share-dialog','width=626,height=436');              
+           window.open(base,'twitter-share-dialog');
         })
       }); 
     };
