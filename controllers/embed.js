@@ -42,7 +42,6 @@ function createEmbedUrl(req, res){
     var embed = {
         data: req.body,
     };
-    console.log(embed);
     EmbedUrls.create(embed, function (err, doc){
         if(err){
             console.log(err);
