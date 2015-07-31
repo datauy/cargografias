@@ -14,7 +14,7 @@ function index(req, res){
     var id = req.params.id;
     //TODO: How to detect from where?
     
-    var fullUrl = 'https://' + 'beta.cargografias.org' + req.originalUrl;
+    var fullUrl = 'https://' + 'www.cargografias.org' + req.originalUrl;
     EmbedUrls.findById(id, function(err, item){
         if(err){
             res.status(500).send({
