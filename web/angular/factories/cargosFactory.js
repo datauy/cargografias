@@ -160,16 +160,20 @@ angular.module('cargoApp.factories')
             var territory = factory.getTerritoryByName(filter.territory);
 
             if(territory !== undefined) {
-                autoPersonsResult = $filter('filter')(autoPersonsResult, {
-                    memberships: {
-                        area_name: territory
+
+                var params = { memberships: {
+                        area_name: territory,
                     }
-                });
+                  };
+                if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
+                  params.memberships.label = filter.jobTitle;
+                }
+                autoPersonsResult = $filter('filter')(autoPersonsResult, params);
                 search = true;
             }
         }
+        else if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
 
-        if(filter.jobTitle !== undefined && filter.jobTitle !== null) {
             autoPersonsResult = $filter('filter')(autoPersonsResult, {
                 memberships: {
                     label: filter.jobTitle
