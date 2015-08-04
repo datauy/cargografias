@@ -66,7 +66,7 @@
               </div>
             </div>
                
-                <div id="resultadosBusqueda" ng-show="search">
+                <div id="resultadosBusqueda" ng-show="search && !showPresets">
                     <h3 id="quantiy-result" class="description">
 
                         
@@ -83,7 +83,7 @@
                 <span ng-show='filterAdvance.decade'> durante {{filterAdvance.decade}} </span>
                         </span>
                     
-                        <div ng-show="autoPersons.length == 0 && search">
+                        <div ng-show="autoPersons.length == 0 && search ">
                             <span >
                                No encontramos nada para 
                             </span>
