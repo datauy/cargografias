@@ -35,7 +35,6 @@ angular.module('cargoApp.factories', [])
                       //TODO: This should come 100% from data. Remove in the future
                       try{
                         f.setShareableID(item);
-                        f.setCheaqueadoCheck(item);
                         f.processMemberships(item);
                       }
                       catch(e){
@@ -78,22 +77,42 @@ angular.module('cargoApp.factories', [])
     d.popitID = d.id_sha1.substring(0,6);
   }
 
-  f.setCheaqueadoCheck = function(d){
-    d.chequeado = false;
-    if (chequeados.indexOf(d.popitID) > -1){
-      d.chequeado = true;
+  f.setCheaqueadoCheck = function(d,m){
+      if (m.sources){
+       for (var i = 0; i < m.sources.length; i++) {
+          var s = m.sources[i];
+          if (s.quality){
+            var isChequeado = s.quality.toLowerCase().indexOf('chequeado');
+            if (isChequeado){
+               d.chequeado = true;
+               m.chequeado = true;
+            }
+          }
+        }
+    
     }
   }
 
   f.processMemberships = function(d){
     var approved = [];
+    d.chequeado = false;
+    
     for (var i = 0; i < d.memberships.length; i++) {  
 
       var m = d.memberships[i];
       //Remuevo los privados
       if (m.type.toLowerCase() !== "privado" && m.type.toLowerCase() !== "otro"){
-        try{
-        
+        f.extractArea(m);
+        f.setCheaqueadoCheck(d,m);
+        approved.push(m);
+      }
+    }
+    d.memberships = approved;
+                 
+  }
+
+  f.extractArea = function(m){
+    try{
             var z = m.area.id.trim();
             //HACK: Forcing load of territories.
             if (z.split(',').length === 1){
@@ -112,11 +131,7 @@ angular.module('cargoApp.factories', [])
             };
             m.area_name = "AREA-NOT-FOUND";
         }
-        approved.push(m);
-      }
-    }
-    d.memberships = approved;
-                 
+
   }
 
 
