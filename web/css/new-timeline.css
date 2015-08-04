@@ -628,7 +628,7 @@ div.chequeado {
   bottom: 15px;
   position: absolute;
   opacity: .8;
-  width: 76px;
+  bottom: 27px;
   border-radius: 0 0 7px 7px;
 }
 div.chequeado a {
