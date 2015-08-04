@@ -10,7 +10,7 @@ var vis;
 var padding = { top: 40, right: 30, bottom: 30, left: 240 }
 var barHeight = 10; 
 var defaultPopPercent = .08;
-var boxHeight = 35;
+var boxHeight = 30;
 var waitStart = false;
 var yearsPadding = 3;
 

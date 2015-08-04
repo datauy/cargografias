@@ -2,7 +2,7 @@ window.cargo  =  window.cargo || {};
 window.cargo.plugins  = window.cargo.plugins || {};
 window.cargo.plugins.territory =  {
 	key: "territory",
-	boxHeight: 33,
+	boxHeight: 27,
 	height: 0,
 	data : [],
 	counter:[],
