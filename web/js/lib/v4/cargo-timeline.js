@@ -728,7 +728,11 @@ function showInfoBox(e, i, j) {
     var politician = data[i];
     var membership = politician.memberships[j];
 
-    var info = "<p class='title'>" + politician.name + "</p>";
+    var info = "";
+    if (politician.image){
+      info += "<img class='pic' src='" + politician.image + "'>"; 
+    }
+    info += "<p class='title'>" + politician.name + "</p>";
     info += "<p class='mid'>" + membership.role  + "</p>";
     info += "<p class='sub'>" + membership.organization.name  + "</p>";
     info += "<p  class='mid'>" + membership.area.name  + "</p>";
