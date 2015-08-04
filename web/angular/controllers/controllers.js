@@ -15,8 +15,10 @@ angular.module('cargoApp.controllers')
 
     $scope.filterAdvance = {};
     $scope.autoPersons = [];
+
     $scope.activePersons = [];
     $scope.estado = "";
+    $scope.search = false;
     $rootScope.observers = [];
     $rootScope.yearObserver = [];
     $rootScope.jerarquimetroObserver = [];
@@ -197,7 +199,7 @@ angular.module('cargoApp.controllers')
 
     $scope.generateUrlProfile =function(a){
 
-      var url = "https://beta.cargografias.org/" + instanceName +  "/ficha/"+ a.id_sha1;
+      var url = location.protocol + "//" + location.hostname +"/" + instanceName +  "/person/"+ a.id;
       return url;
       
     };
