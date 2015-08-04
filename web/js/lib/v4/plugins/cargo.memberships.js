@@ -203,21 +203,17 @@ window.cargo.plugins.memberships =  {
 		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
-  			console.log('territory paint showOnlyHim');
   		}
   		else {
   			$("svg.vis path").css('opacity',0);
-  			console.log('no paint member showOnlyHim');
   		}
 	},
 	showAll: function(e,i){
 		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path").css('opacity',1);
-			console.log(' member pinto todos');
 		}
 		else {
 			$("svg.vis path").css('opacity',0);
-			console.log(' member no paint showAll');
 		}
 	},
 

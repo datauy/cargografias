@@ -271,22 +271,18 @@ updateAdditionalGraphs:function(d,context){
 			
 			$("svg.vis path[index!=" + i + "]").css('opacity',0.2);
   			$("svg.vis path[index=" + i + "]").css('opacity',1);
-  			console.log('territory paint showOnlyHim');
   		}
   		else {
   			$("svg.vis path").css('opacity',0);
-  			console.log('territory no paint showOnlyHim');
   		}
 	},
 	showAll: function(e,i){
 		if (controls.height == "territory" || controls.height =="memberships"){
 			$("svg.vis path").css('opacity',1);
-			console.log('territory pinto todos');
 		}
 		else {
 			
 			$("svg.vis path").css('opacity',0);
-			console.log('territory no paint showAll');
 		}
 	},
 

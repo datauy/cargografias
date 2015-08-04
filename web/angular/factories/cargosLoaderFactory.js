@@ -86,29 +86,36 @@ angular.module('cargoApp.factories', [])
   }
 
   f.processMemberships = function(d){
+    var approved = [];
     for (var i = 0; i < d.memberships.length; i++) {  
+
       var m = d.memberships[i];
-      try{
-      
-          var z = m.area.id.trim();
-          //HACK: Forcing load of territories.
-          if (z.split(',').length === 1){
-            z = z.replace(/ ,/g,' ')
+      //Remuevo los privados
+      if (m.type.toLowerCase() !== "privado" && m.type.toLowerCase() !== "otro"){
+        try{
+        
+            var z = m.area.id.trim();
+            //HACK: Forcing load of territories.
+            if (z.split(',').length === 1){
+              z = z.replace(/ ,/g,' ')
+            }
+            m.area.id = toTitleCase(z);
+            m.area.name =  toTitleCase(z); 
+            //HACK: To use angular filter
+            m.area_name =  toTitleCase(z); 
           }
-          m.area.id = toTitleCase(z);
-          m.area.name =  toTitleCase(z); 
-          //HACK: To use angular filter
-          m.area_name =  toTitleCase(z); 
+        catch(e){
+          console.log('No area found: memberships',m.id);
+            m.area ={
+              id: "AREA-NOT-FOUND",
+              name: "AREA-NOT-FOUND",
+            };
+            m.area_name = "AREA-NOT-FOUND";
         }
-      catch(e){
-        console.log('No area found: memberships',m.id);
-          m.area ={
-            id: "AREA-NOT-FOUND",
-            name: "AREA-NOT-FOUND",
-          };
-          m.area_name = "AREA-NOT-FOUND";
+        approved.push(m);
       }
     }
+    d.memberships = approved;
                  
   }
 
