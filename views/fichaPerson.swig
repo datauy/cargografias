@@ -13,41 +13,25 @@
     <link href="/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
-
-    <!-- V2 Styles -->    
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/publico.css" />
-    <link rel="stylesheet" type="text/css" href="/css/animaciones.css" />
-
+<link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
+    
     <!-- V3 Styles -->
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/new-timeline.css" type="text/css">
-
+    <!-- V4 Styles -->
+    <link rel="stylesheet" href="/css/flexboxgrid.min.css" type="text/css">
+    
+    <link rel="stylesheet" href="/css/cargo-base.css" type="text/css">
+    <link rel="stylesheet" href="/css/animations.css" type="text/css">
+    <link rel="stylesheet" href="/bower_components/wow.js/css/libs/animate.css" type="text/css">
+    
     <!-- V2 Libs -->
-    <script src="/js/lib/jquery-2.0.0.min.js"></script>
-    <script type="text/javascript" src="js/lib/d3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/js/lib/underscore.min.js"></script>
+    <script type="text/javascript" src="/js/lib/d3.min.js"></script>
 
 
-    <!-- V3 Libs -->
-    <!-- Angular Material Dependencies -->
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-aria/angular-aria.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/hammerjs/hammer.js"></script>
-    <script src="/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="/bower_components/angular-material/angular-material.js"></script>
-    <script src="/js/lib/sha1.js"></script>
-
-    <!-- V4 Libs -->
-    <script type="text/javascript" src="js/lib/own.js"></script>
-
-    <!-- V2 Libs Angular-->
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/angular-moment/angular-moment.js"></script>
-    <script src="/bower_components/moment/lang/es.js"></script>
     
 
     <script type="text/javascript">
