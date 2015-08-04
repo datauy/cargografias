@@ -82,7 +82,7 @@ angular.module('cargoApp.factories', [])
        for (var i = 0; i < m.sources.length; i++) {
           var s = m.sources[i];
           if (s.quality){
-            var isChequeado = s.quality.toLowerCase().indexOf('chequeado');
+            var isChequeado = s.quality.toLowerCase().indexOf('chequeado') > 0;
             if (isChequeado){
                d.chequeado = true;
                m.chequeado = true;
