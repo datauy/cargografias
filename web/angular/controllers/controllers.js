@@ -226,10 +226,8 @@ angular.module('cargoApp.controllers')
     $scope.showSharing = false;
 
     $scope.generateUrlProfile =function(a){
-
       var url = location.protocol + "//" + location.hostname +"/" + instanceName +  "/person/"+ a.id;
       return url;
-      
     };
 
     $scope.clearFilter=function(){
@@ -345,6 +343,7 @@ angular.module('cargoApp.controllers')
         autoPersona.styles = "badge-selected"
         var person = cargosFactory.getFullPerson(id);
         person.autoPersona = autoPersona;
+        person.cargoProfileURL = $scope.generateUrlProfile(person);
         $scope.activePersons.unshift(person);
       }
     }

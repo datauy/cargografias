@@ -409,7 +409,9 @@ tspan.sub {
   font-style: italic;
 }
 
-
+svg text.itemLabel{
+  cursor: pointer;
+}
 
 path.bezier{
   stroke-width: 2px;

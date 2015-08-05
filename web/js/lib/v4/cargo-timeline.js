@@ -563,6 +563,8 @@ function refreshGraph() {
           if (controls.height == "memberships"){ return window.cargo.plugins.memberships.updateIndexLabel();}
           else if (controls.height == "territory"){ return window.cargo.plugins.territory.updateIndexLabel();}
           else{ return d.initials +  " " + d.family_name;} 
+        }).on('click',function(d,i){
+           window.open(d.cargoProfileURL);
         });
 
   //Memberships.UpdateLabel
