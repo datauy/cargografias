@@ -337,6 +337,16 @@ div.main div.module div.filter-container div.sharing p{
   padding-bottom: 0.5em;
 }
 
+
+div.main div.module div.hall-of-shame {
+	display: inline-flex;
+}
+div.main div.module div.hall-of-shame .shame {
+	padding: 1em;
+	text-align: center;
+	width: 50%;
+}
+
 @media (min-width: 768px) {
 	.showOnMobile{
 		display: none;
@@ -439,6 +449,12 @@ div.main div.module div.filter-container div.sharing p{
     .hideOnMobile{
     	display: inherit;
     }
+    
+    div.main div.module div.hall-of-shame .shame {
+		padding: 1em;
+		text-align: center;
+		width: 33.33%;
+	}
 }
 
 
