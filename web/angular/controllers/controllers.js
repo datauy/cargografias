@@ -13,6 +13,34 @@ angular.module('cargoApp.controllers')
        */
       var fromDecade = 1900;
 
+
+    $scope.downloadNow = function(){
+      var cache = [];
+
+      var cache = angular.copy(data);
+      for (var i = 0; i < cache.length; i++) {
+        cache[i].autoPersona = null;
+        // cache[i].memberships = null;
+        for (var j = 0; j < cache[i].memberships.length; j++) {
+          var m = cache[i].memberships[j];
+          m.politician =  null;
+          m.after =null;
+          m.before = null;
+          m.organization.memberships =  null;
+        };
+        
+      };
+
+      var innerText = cache[0].name;
+      innerText += (cache.length == 1 ?  "" : " y otros" );
+      var filename = "Cargografias de " + innerText + ".json";
+      
+      console.log(cache);
+        var blob = new Blob([JSON.stringify(cache)], {
+          type: "text/json;charset=utf-8"});
+        saveAs(blob, filename);
+        cache = null; // Enable garbage collection
+    }
     $scope.filterAdvance = {};
     $scope.autoPersons = [];
 

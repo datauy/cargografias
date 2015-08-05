@@ -77,6 +77,9 @@
     <script src="/bower_components/moment/moment.js"></script>
     <script src="/bower_components/angular-moment/angular-moment.js"></script>
     <script src="/bower_components/moment/lang/es.js"></script>
+
+    <script src="/bower_components/filesaver.js/filesaver.min.js"></script>    
+    <script src="/bower_components/blob/Blob.js"></script>
     
     <style>
         {{customization.customCSS|safe}}
