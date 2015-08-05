@@ -14,6 +14,8 @@ angular.module('cargoApp.controllers')
       var fromDecade = 1900;
 
 
+
+
     $scope.downloadNow = function(){
       var cache = [];
 
@@ -447,6 +449,19 @@ angular.module('cargoApp.controllers')
         }
         return decades;
       }
+
+
+
+      //Notifcation manager
+
+      var communicationProxy = {
+        remove: function(p){
+          $scope.$apply(function(){
+            $scope.remove(p);
+          });
+        }
+      }
+      notify.subscribe(communicationProxy);
 
 
 

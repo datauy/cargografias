@@ -413,6 +413,12 @@ svg text.itemLabel{
   cursor: pointer;
 }
 
+svg text.otemLabel{
+  cursor: pointer;
+  fill:red; 
+  color:red;
+}
+
 path.bezier{
   stroke-width: 2px;
   stroke-opacity: 1;  

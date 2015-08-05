@@ -14,6 +14,7 @@ var boxHeight = 30;
 var waitStart = false;
 var yearsPadding = 3;
 
+var observers =[];
 
 //TODO: move to loader? .init()?
 var controls = {}
@@ -21,7 +22,16 @@ controls['display'] = 'timeline';
 controls['height'] = 'contiguous';
 controls['group'] = 'name';
 
-
+var notify = {
+  subscribe: function(o){
+    observers.push(o);
+  },
+  remove: function(a){
+    for (var i = 0; i < observers.length; i++) {
+      observers[i].remove(a);
+    };
+  }
+}
 
 function setVisSize() {
 
@@ -327,9 +337,9 @@ function refreshGraph() {
   var names = vis.selectAll("g.group")
     .data(data, function(d){return d.id;});
     
-  names.enter().append("g")
-    .attr('class', 'group')
-    .append('text')
+  var gg = names.enter().append("g")
+    .attr('class', 'group'); 
+    gg.append('text')
     .attr('class', 'group')
     .attr('class', 'itemLabel')
     .attr('dy','.33em')
@@ -342,6 +352,20 @@ function refreshGraph() {
       return d.name;
 
     });
+    gg.append('text')
+    .attr('class', 'group')
+    .attr('class', 'otemLabel')
+    .attr('dy','.33em')
+    .attr("x", padding.left / 9)
+    .attr("y", function(d,i){
+      return (i+1)*(barHeight/2) ;
+    })
+    .text(function(d) {
+      
+      return '(x)';
+
+    });
+
 
     names.each(function(politician, j){
        
@@ -565,6 +589,23 @@ function refreshGraph() {
           else{ return d.initials +  " " + d.family_name;} 
         }).on('click',function(d,i){
            window.open(d.cargoProfileURL);
+        });
+  vis.selectAll('svg text.otemLabel')
+        .attr("x", function(d,i){
+
+          return padding.left -60;
+        })
+        .attr("y", function(d,i) {
+          return (d.position)*barHeight + (barHeight/2) + padding.top;
+
+        })
+        .text(function(d,i) {
+          //Memberships.IndexLabel
+          if (controls.height == "memberships"){ return window.cargo.plugins.memberships.updateIndexLabel();}
+          else if (controls.height == "territory"){ return window.cargo.plugins.territory.updateIndexLabel();}
+          else{ return 'x'} 
+        }).on('click',function(d,i){
+           notify.remove(d);
         });
 
   //Memberships.UpdateLabel
