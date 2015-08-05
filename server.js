@@ -5,6 +5,7 @@ var compression = require('compression');
 var swig = require('swig');
 var fichasController = require('./controllers/fichas.js')
 var embedController = require('./controllers/embed.js')
+var aboutController = require('./controllers/about.js')
 var conn = require('./db.js');
 
 swig.setDefaults({
@@ -41,6 +42,7 @@ app.get('/', function(req, res) {
     req.params.instanceName = 'cargografias';
     instanceRouteHandler(req,res);
 });
+app.get('/about', aboutController.index);
 
 app.use(express.static(__dirname + '/web'));
 
@@ -81,6 +83,7 @@ app.get('/d/:instanceName', function(req, res) {
     });
 
 });
+
 
 app.get('/:instanceName/person/:personId/:nameslug?', fichasController.person)
 app.get('/:instanceName/organization/:organizationId/:nameslug?', fichasController.organization)
