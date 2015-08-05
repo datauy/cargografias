@@ -178,13 +178,23 @@ window.cargo.plugins.memberships =  {
 
     labels.selectAll('tspan.main')
       	.text(function(d) {
+	    	if (controls.height == "memberships"){ 
+      			return d.pos + " - ";
+      		}
+      		else {
+      			return "";
+      		}
 	    	
-	    	return d.pos + " - ";
 	    });
 	labels.selectAll('tspan.sub')
       	.text(function(d) {
+	    	if (controls.height == "memberships"){ 
+      			return d.org;
+      		}
+      		else {
+      			return "";
+      		}
 	    	
-	    	return d.org;
 	    });
 	 labels.exit().remove();
 

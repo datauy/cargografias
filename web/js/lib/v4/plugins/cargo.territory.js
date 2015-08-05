@@ -248,7 +248,14 @@ updateAdditionalGraphs:function(d,context){
       	.attr("x", function(){ return padding.left / 7;})
       	.attr("y", function(d,i) {return (d.firstIndex)*(barHeight) + barHeight/2+ padding.top;})
       	.text(function(d,i) {
-	    	return d.label;
+      		if (controls.height == "territory"){ 
+      			return d.label;
+      		}
+      		else {
+      			return "";
+      		}
+          	
+	    	
 	    });
 
 

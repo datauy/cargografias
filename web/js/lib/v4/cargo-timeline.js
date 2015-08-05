@@ -339,34 +339,7 @@ function refreshGraph() {
     
   var gg = names.enter().append("g")
     .attr('class', 'group'); 
-    gg.append('text')
-    .attr('class', 'group')
-    .attr('class', 'itemLabel')
-    .attr('dy','.33em')
-    .attr("x", padding.left / 9)
-    .attr("y", function(d,i){
-      return (i+1)*(barHeight/2) ;
-    })
-    .text(function(d) {
-      
-      return d.name;
-
-    });
-    gg.append('text')
-    .attr('class', 'group')
-    .attr('class', 'otemLabel')
-    .attr('dy','.33em')
-    .attr("x", padding.left / 9)
-    .attr("y", function(d,i){
-      return (i+1)*(barHeight/2) ;
-    })
-    .text(function(d) {
-      
-      return '(x)';
-
-    });
-
-
+  
     names.each(function(politician, j){
        
       
@@ -568,12 +541,41 @@ function refreshGraph() {
             return 1;
           });
 
-
-
+//Memberships.UpdateLabel
+  window.cargo.plugins.memberships.updateLabels();
+  //Territory.UpdateLabel
+  window.cargo.plugins.territory.updateLabels();
   /************************************************************
   * Process Labels
   ***********************************************************/
   
+  gg.append('text')
+    .attr('class', 'group')
+    .attr('class', 'itemLabel')
+    .attr('dy','.33em')
+    .attr("x", padding.left / 9)
+    .attr("y", function(d,i){
+      return (i+1)*(barHeight/2) ;
+    })
+    .text(function(d) {
+      
+      return d.name;
+
+    });
+    gg.append('text')
+    .attr('class', 'group')
+    .attr('class', 'otemLabel')
+    .attr('dy','.33em')
+    .attr("x", padding.left / 9)
+    .attr("y", function(d,i){
+      return (i+1)*(barHeight/2) ;
+    })
+    .text(function(d) {
+      
+      return '(x)';
+
+    });
+
 
   vis.selectAll('svg text.itemLabel')
         .attr("x", padding.left / 7)
@@ -603,15 +605,12 @@ function refreshGraph() {
           //Memberships.IndexLabel
           if (controls.height == "memberships"){ return window.cargo.plugins.memberships.updateIndexLabel();}
           else if (controls.height == "territory"){ return window.cargo.plugins.territory.updateIndexLabel();}
-          else{ return 'x'} 
+          else{ return '   x  '} 
         }).on('click',function(d,i){
            notify.remove(d);
         });
 
-  //Memberships.UpdateLabel
-  window.cargo.plugins.memberships.updateLabels();
-  //Territory.UpdateLabel
-  window.cargo.plugins.territory.updateLabels();
+  
   
  
 
