@@ -287,7 +287,7 @@ angular.module('cargoApp.factories')
               cargo:activeMembershipForYear.type.toLowerCase(),
               name: p.name,
               initials: p.initials,
-              classification: activeMembershipFrYear.organization.classification,
+              classification: activeMembershipForYear.organization.classification,
               district: activeMembershipForYear.organization.name,
               position: activeMembershipForYear.label,
               size: activeMembershipForYear.weight
@@ -305,9 +305,6 @@ angular.module('cargoApp.factories')
           for (var j = 0; j < memberships.length; j++) {
               var m = memberships[j];
               if (year >= m.started.year() && m.finished.year() >=year){
-                if (!m.post){
-                  m.post = this.getPost(m.post_id);
-                }
                 if (!m.organization){
                   m.organization = this.getOrganization(m.organization_id); 
                 }

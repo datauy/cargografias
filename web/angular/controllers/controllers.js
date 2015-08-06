@@ -130,15 +130,21 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.redrawPoderometro = function() {
+
+      var diff = maxYear - minYear ;
+      $scope.years = [];
+      for (var i = 0; i < diff;  i++) {
+        $scope.years.push(minYear + i);
+      };
+      console.log(maxYear,minYear,$scope.years);
+
+      if (!$scope.activeYear){
+        $scope.activeYear = minYear;
+      }
       for (var i = 0; i < $rootScope.yearObserver.length; i++) {
         var observer = $rootScope.yearObserver[i];
-        var poderometro = cargosFactory.getPoderometroAnimado($scope.poderometroYear, $scope.activePersons);
+        var poderometro = cargosFactory.getPoderometroAnimado($scope.activeYear, $scope.activePersons);
         observer(poderometro);
-      };
-      for (var i = 0; i < $rootScope.jerarquimetroObserver.length; i++) {
-        var observer = $rootScope.jerarquimetroObserver[i];
-        var jerarquimetro = cargosFactory.getJerarquimetro($scope.poderometroYear, $scope.activePersons);
-        observer(jerarquimetro);
       };
     }
 
@@ -356,10 +362,13 @@ angular.module('cargoApp.controllers')
 
     $scope.refreshAllVisualizations = function() {
 
+
+      
       //TODO: This should all go to observers.
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
-      //$scope.redrawPoderometro();
+      $scope.redrawPoderometro();
       data = $scope.activePersons;
+
       reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();

@@ -1,6 +1,5 @@
 window.cargo = window.cargo || {};
-window.cargo.viz = window.cargo.viz || {};
-window.cargo.viz.bubblePoderometro = {
+window.cargo.bubblePoderometro = {
     options: {
         width: 960,
         height: 400,
