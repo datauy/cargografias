@@ -347,6 +347,41 @@ div.main div.module div.hall-of-shame .shame {
 	width: 50%;
 }
 
+
+/* ----- FICHAS ---- */
+
+div.main .ficha table{
+	clear: both;
+}
+
+div.main .ficha table.table.table-condensed th{
+	text-align: left;
+    font-size: 0.8em;
+}
+
+div.main .ficha div{
+	float:left;
+}
+
+div.main .ficha table{
+	clear:both;
+}
+
+
+/* ----- embed ---- */
+
+div.main div.module .embed ul > li{
+	background-color: white;
+    margin: 0.5em 0.3em;
+    padding: 0.2em 0.35em 0.25em 0em;
+    color: rgb(121, 83, 75);
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
 div.main div.module.powermeter select {
   width: 100%;
   border: 0;
@@ -354,7 +389,6 @@ div.main div.module.powermeter select {
   margin-right: 6px;
   margin-top: 8px;
   border-radius: 5px;
-
 }
 
 
