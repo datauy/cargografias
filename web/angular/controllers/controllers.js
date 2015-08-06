@@ -361,7 +361,7 @@ angular.module('cargoApp.controllers')
       
       //TODO: This should all go to observers.
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
-      $scope.redrawPoderometro();
+      // $scope.redrawPoderometro();
       data = $scope.activePersons;
 
       reloadCargoTimeline($scope.filter);
