@@ -350,7 +350,7 @@ div.main div.module div.hall-of-shame .shame {
 
 /* ----- FICHAS ---- */
 
-div.main .ficha table{
+div.main .ficha table.table.table-condensed{
 	clear: both;
 }
 
@@ -359,13 +359,38 @@ div.main .ficha table.table.table-condensed th{
     font-size: 0.8em;
 }
 
-div.main .ficha div{
+
+div.main div.module div.main.ficha div.items-personales{
 	float:left;
+}
+
+div.main div.module div.main.ficha div.items-personales h1{
+	margin: 14px 0px 3px 0px;
 }
 
 div.main .ficha table{
 	clear:both;
 }
+
+div.main div.module div.main.ficha div.items-personales img{
+	margin-right: 20px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+}
+
+
+/* ----- Poderometro ---- */
+
+div.main div.module.powermeter select {
+  width: 100%;
+  border: 0;
+  height: 23px;
+  margin-right: 6px;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+
 
 
 /* ----- embed ---- */
@@ -382,14 +407,7 @@ div.main div.module .embed ul > li{
 
 }
 
-div.main div.module.powermeter select {
-  width: 100%;
-  border: 0;
-  height: 23px;
-  margin-right: 6px;
-  margin-top: 8px;
-  border-radius: 5px;
-}
+
 
 
 @media (min-width: 768px) {

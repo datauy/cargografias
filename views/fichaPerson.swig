@@ -19,21 +19,20 @@
             Fichas Personales
         </div>
              <div class="main ficha">
-                         <div><img src="{{person.image}}" /></div>
-                  <div>
+                  <div class="items-personales"><img src="{{person.image}}" /></div>
+                  <div class="items-personales">
                       <h1>{{person.name}}</h1>
-                      <p><b>Bio:<b>{{m.bio}}
-                          <b>Nacimiento:<b>{{m.birth}}
-                          <b>Muerte:<b>{{m.death}}
+                      <p><b>Bio:</b>Nació en Buenos Aires el 13 de enero de 1957. Estudió Marketing en la U.A.D.E., de Buenos Aires. En 1991 se casó con Karina Rabolini. Fue deportista profesional. En su paso por la Motonáutica, sufrió un accidente por el que le amputaron un brazo. Fue diputado nacional, y Secretario de deportes y turismo de la Nación durante el gobierno de Carlos Menem. Fue electo Vicepresidente de la Nación en 2003 en la fórmula que encbezaba Néstor Kirchner. Es el actual Gobernador de la Provincia de Buenos Aires, cargo para el que fue reelecto en 2011. Su primer mandato como Gobernador se inició en 2007.{{m.bio}}
+                          <b>Nacimiento:</b>{{m.birth}}
+                          <b>Muerte:</b>{{person.death}}
                           <br>
-                          <b>Contacto:<b>mail: aslalalal@asasas.com | @tawwewewew | www.{{person.name}}.com
+                          <b>Contacto:</b>{{person.contact_details}}
                       </p>
+                    <a id="ordenNombre" target="_blank" href="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&hl=es" >
+                        <i class="fa fa-exclamation-triangle"></i>Reportar Errores</a>
+               
                   </div>
                   <div style="clear: both;"></div>
-          <a id="ordenNombre" target="_blank" href="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&hl=es" >
-            <i class="fa fa-exclamation-triangle"></i>
-            Reportar Errores</a>
-        
                     <table class="table table-condensed">
                         <tbody>
                             <tr>
@@ -44,6 +43,7 @@
                                 <th>Class</th>
                                 <th>Type</th>
                                 <th>Intended Duration</th>
+                                <th>Territorio</th>
                                 <th>Sources</th>
                             </tr>
 
@@ -57,6 +57,7 @@
                                 <td>{{m.class}}</td>
                                 <td>{{m.type}}</td>
                                 <td>{{m.intended_duration}}</td>
+                                <td>{{m.area.name}}</td>
                                 <td>
                                   {% for source in m.sources %}
                                     <div>{{source.quality}}</div>
