@@ -52,8 +52,8 @@
                             <tr ng-repeat="m in row.memberships">
                                 <td>{{m.role}}</td>
                                 <td><a target="_blank" class="organization load-organization" data-organization-id="{{m.organization_id}}" data-instance-name="{{instanceName}}" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
-                                <td>{{m.start_date}}</td>
-                                <td>{{m.end_date}}</td>
+                                <td class="format-fecha">{{m.start_date}}</td>
+                                <td class="format-fecha">{{m.end_date}}</td>
                                 <td>{{m.class}}</td>
                                 <td>{{m.type}}</td>
                                 <td>{{m.intended_duration}}</td>
@@ -85,6 +85,17 @@
     $.getJSON(url, function(data){
       $(el).html(data.result.name)
     })
+  })
+
+  var parts3 = /^\d\d\d\d-\d\d-\d\d$/
+  var parts2 = /^\d\d\d\d-\d\d$/
+  $('.format-fecha').each(function(ix, el){
+    var content = $(el).html();
+    if(parts3.test(content)){
+      $(el).html( moment(content, "YYYY-MM-DD").format('DD MMM YYYY') ) 
+    }else if(parts2.test(content)){
+      $(el).html( moment(content, "YYYY-MM").format('MMM YYYY') ) 
+    }
   })
 </script>
 
