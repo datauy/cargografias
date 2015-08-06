@@ -51,7 +51,7 @@
 
                             <tr ng-repeat="m in row.memberships">
                                 <td>{{m.role}}</td>
-                                <td><a target="_blank" class="organization" data-organization-id="" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
+                                <td><a target="_blank" class="organization load-organization" data-organization-id="{{m.organization_id}}" data-instance-name="{{instanceName}}" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
                                 <td>{{m.start_date}}</td>
                                 <td>{{m.end_date}}</td>
                                 <td>{{m.class}}</td>
@@ -75,6 +75,19 @@
     </div>
         </div>
     </div>
+
+<script>
+  $('.load-organization').each(function(ix, el){
+    var instanceName = $(el).attr('data-instance-name')
+    var organizationId = $(el).attr('data-organization-id')
+    var url = "https://" + instanceName + ".popit.mysociety.org/api/v0.1/organizations/" + organizationId
+    $(el).html('Loading...')
+    $.getJSON(url, function(data){
+      console.log(data);
+      $(el).html(data.result.name)
+    })
+  })
+</script>
 
 {% endblock %}
 
