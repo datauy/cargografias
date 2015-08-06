@@ -18,7 +18,7 @@
     <meta name="revisit-after" content="10 days">
     <link rel="shortcut icon" href="//www.cargografias.org/favicon.ico"  type="image/x-icon">
     <meta property="fb:page_id" content="">
-    <meta property="og:image" content="//www.cargografias.org/img/pics/cargo.png">
+    <meta property="og:image" content="http://www.cargografias.org/img/pics/cargo.png">
     <meta property="og:description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
     <meta property="og:title" content="cargografias.org">
     <meta name="twitter:card" content="summary_large_image">
@@ -26,7 +26,7 @@
     <meta name="twitter:creator" content="@cargografias">
     <meta name="twitter:title" content="Cargografias - Politicos en el tiempo">
     <meta name="twitter:description" content="Cargograf&#237as es una linea de tiempo que muestra los cargos publicos que tuvo cada funcionario a lo largo de su vida. Entra y arma tu comparacion.">
-    <meta name="twitter:image" content="//www.cargografias.org/img/pics/cargo.png">
+    <meta name="twitter:image" content="http://www.cargografias.org/img/pics/cargo.png">
 
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
