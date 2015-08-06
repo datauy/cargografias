@@ -352,11 +352,20 @@ div.main div.module div.hall-of-shame .shame {
 
 div.main .ficha table.table.table-condensed{
 	clear: both;
+	font-size: 13px;
 }
 
 div.main .ficha table.table.table-condensed th{
-	text-align: left;
-    font-size: 0.8em;
+    text-align: left;
+    font-size: 0.9em;
+    color: rgb(160, 160, 160);
+    font-weight: 300;
+}
+
+div.main .ficha table.table.table-condensed a.nota{
+  vertical-align: super; /* 2 */
+  font-size: 0.6em; /* 3 */
+  margin-left: 2px; /* 4 */
 }
 
 
@@ -364,19 +373,57 @@ div.main div.module div.main.ficha div.items-personales{
 	float:left;
 }
 
+div.main div.module div.main.ficha div.items-personales.image{
+	width: 210px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+div.main div.module div.main.ficha div.items-personales.image img{
+	border-radius: 8px;
+}
+
+div.main div.module div.main.ficha div.items-personales ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+div.main div.module div.main.ficha div.items-personales ul > li{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+div.main div.module div.main.ficha div.items-personales.data{
+    width: 65%;
+    font-size: 14px;
+}
+
 div.main div.module div.main.ficha div.items-personales h1{
-	margin: 14px 0px 3px 0px;
+	margin: 14px 0px 0px 0px;
 }
 
 div.main .ficha table{
 	clear:both;
+	background-color: rgb(248, 248, 248);
+    padding: 0px 9px;
+    border-radius: 5px;
+    margin-top: 23px;
+    width: 100%;
 }
 
-div.main div.module div.main.ficha div.items-personales img{
-	margin-right: 20px;
-	margin-bottom: 10px;
-	border-radius: 8px;
-}
+div.main .ficha #notas{
+	font-style: italic;
+	font-size: 0.7em;
+    color: rgb(160, 160, 160);
+    text-align: right;
+    padding: 9px 30px;
+    line-height: 12px;
+ }
 
 
 /* ----- Poderometro ---- */
@@ -394,19 +441,25 @@ div.main div.module.powermeter select {
 
 
 /* ----- embed ---- */
+div.main div.module.timeline.full-version.embed{
+	padding: 20px;
+	text-align: left;
+}
 
-div.main div.module .embed ul > li{
+a.boton{
 	background-color: white;
-    margin: 0.5em 0.3em;
-    padding: 0.2em 0.35em 0.25em 0em;
+    padding: 3px 13px 5px 13px;
     color: rgb(121, 83, 75);
-    cursor: pointer;
     border-radius: 5px;
     text-transform: uppercase;
     text-align: center;
+    margin-right: 10px;
 
 }
-
+a.boton:hover{
+	color: white;
+	background-color: #5D4037;	
+}
 
 
 
@@ -522,12 +575,5 @@ div.main div.module .embed ul > li{
 		width: 25%;
 	}
 }
-
-
-
-
-
-
-
 
 
