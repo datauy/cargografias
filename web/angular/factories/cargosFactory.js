@@ -274,6 +274,7 @@ angular.module('cargoApp.factories')
           var p = persons[i];
           var activeMembershipForYear = factory.getActiveMembershipByYear(p,year);
           var item = {
+              id:p.id,
               cargo:"Sin cargo en " + year,
               name: p.name,
               initials: p.initials,
@@ -285,6 +286,7 @@ angular.module('cargoApp.factories')
           if (activeMembershipForYear){
             item = {
               cargo:activeMembershipForYear.type.toLowerCase(),
+              id: p.id,
               name: p.name,
               initials: p.initials,
               classification: activeMembershipForYear.organization.classification,

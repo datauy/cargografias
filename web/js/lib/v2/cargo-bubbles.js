@@ -15,49 +15,12 @@ window.cargo.bubblePoderometro = {
     nodes: {},
     started: false,
     update: function(data) {
-        //starts again!
-        this.bubbles.data(data , function(d) {return d;});
-          this.svg.selectAll("g")
-            .transition()
-            .duration(450)
-            .selectAll("circle")
-            .attr("r", function(d) { return d.radius; });
-          this.force.start();
-    },
-    start: function(data) {
-
-
-        var types = [{
-            name: "Poder Ejecutivo",
-            color: "red",
-        }, {
-            name: "Poder Legislativo",
-            color: "blue",
-        }, {
-            name: "Poder Judicial",
-            color: "darkcyan",
-        }, {
-            name: "Sin Cargo",
-            color: "dark grey",
-        }, ];
-
-
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-        this.color = d3.scale.linear()
-            .domain([0, 3])
-            .range(["red", "blue", "darkcyan", "darkgray"]);
-
-        this.x = d3.scale.ordinal()
-            .domain(d3.range(1))
-            .rangePoints([0, this.options.width], 1);
-
-
+        
         this.nodes = data.map(function(d, e) {
             var i = Math.floor(Math.random() * window.cargo.bubblePoderometro.options.m);
             var item = data[e];
             return {
+                id: item.id,
                 radius: item.size,
                 name: item.name,
                 position: item.position,
@@ -70,34 +33,24 @@ window.cargo.bubblePoderometro = {
             };
         });
 
+        
+        this.bubbles = this.svg.selectAll("g.mainNode")
+            .data(this.nodes, function(d,i){
+                return i;
+            });
 
-
-
-        this.force = d3.layout.force()
-            .nodes(this.nodes)
-            .size([this.options.width, this.options.height])
-            .gravity(0)
-            .charge(0)
-            .on("tick", this.tick)
-            .start();
-
-        this.svg = d3.select("#bubbles").append("svg")
-            .attr("width", this.options.width)
-            .attr("height", this.options.height);
-       
-
-
-
-        this.bubbles = this.svg.selectAll(".mainNode")
-            .data(this.nodes)
-            .enter().append("g")
+        this.bubbles.enter()
+            .append("g")
             .attr("class", "mainNode")
-            .append("circle")
-            .attr("r", function(d) {
-                return d.radius;
-            })
+        var c = this.bubbles.append("circle")
+            .attr("class", "node")
             .attr("id", function(d) {
-                return d.name
+                return d.name;
+            });
+
+        c.attr("r", function(d) {
+                
+                return d.radius;
             })
             .style("fill", function(d) {
                 if (d.type == "ejecutivo") {
@@ -111,13 +64,27 @@ window.cargo.bubblePoderometro = {
                     return window.cargo.bubblePoderometro.color(3);
                 }
 
-            })
-            .call(function() {});
+            });
 
-        console.log('bubbles',bubbles);
+                  
+        
+   
+        
 
+        this.bubbles.exit().remove();
+
+
+        this.force = d3.layout.force()
+            .nodes(this.nodes)
+            .size([this.options.width, this.options.height])
+            .gravity(0)
+            .charge(0)
+            .on("tick", this.tick)
+            .start();
+        
         this.svg.selectAll("g")
             .append("text")
+            .attr("class","label")
             .style("text-anchor", "middle")
             .style("fill", "white")
             .attr('font-size', function(d){
@@ -135,6 +102,11 @@ window.cargo.bubblePoderometro = {
                 }
             });
 
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+        
+
         this.svg.selectAll("g")
             .on("mouseover", function(d) {
                 div.transition()
@@ -150,25 +122,61 @@ window.cargo.bubblePoderometro = {
                     .style("opacity", 0);
             });
 
-        
-        this.svg.selectAll('.references')
-            .data(types)
-            .enter()
-            .append('text')
-            .attr('class','references')
-            .attr("x", 750)
-            .attr("y", function(d, i) {
-                return 30 + (i*30);
-            })
-            .attr('font-size', "1.3em")
-            .text(function(d) {
-                return d.name;
-            })
-            .style("fill", function(d) {
-                return d.color;
-            });
 
+       
+    },
+    start: function(data) {
+
+        this.started = true;
+        var types = [{
+            name: "Poder Ejecutivo",
+            color: "red",
+        }, {
+            name: "Poder Legislativo",
+            color: "blue",
+        }, {
+            name: "Poder Judicial",
+            color: "darkcyan",
+        }, {
+            name: "Sin Cargo",
+            color: "dark grey",
+        }, ];
+
+                this.svg = d3.select("#bubbles").append("svg")
+            .attr("width", this.options.width)
+            .attr("height", this.options.height);
+        
+        this.color = d3.scale.linear()
+            .domain([0, 3])
+            .range(["red", "blue", "darkcyan", "darkgray"]);
+
+        this.x = d3.scale.ordinal()
+            .domain(d3.range(1))
+            .rangePoints([0, this.options.width], 1);
+
+
+        
+      
            
+            this.update(data);
+
+
+            this.svg.selectAll('.references')
+                .data(types)
+                .enter()
+                .append('text')
+                .attr('class','references')
+                .attr("x", 750)
+                .attr("y", function(d, i) {
+                    return 30 + (i*30);
+                })
+                .attr('font-size', "1.3em")
+                .text(function(d) {
+                    return d.name;
+                })
+                .style("fill", function(d) {
+                    return d.color;
+                });
 
     },
 
