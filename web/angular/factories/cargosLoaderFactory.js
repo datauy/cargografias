@@ -22,6 +22,11 @@ angular.module('cargoApp.factories', [])
     var f = {};
 
     f.load = function($scope,factory,callback, $rootScope){
+            $http.get('/js/datasets/pesopoder.json')
+                .then(function(res){
+                $rootScope.estado = "Representatividad";
+                factory.weight = res.data;
+              });
               $http.get(currentDataSource[0])
                  .then(function(res){
                   $rootScope.estado = "Personas";

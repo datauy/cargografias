@@ -304,7 +304,7 @@ angular.module('cargoApp.factories')
           var activeMembershipForYear;
           for (var j = 0; j < memberships.length; j++) {
               var m = memberships[j];
-              if (year >= m.started.year() && m.finished.year() >=year){
+              if (year >= m.start && m.end >=year){
                 if (!m.organization){
                   m.organization = this.getOrganization(m.organization_id); 
                 }
