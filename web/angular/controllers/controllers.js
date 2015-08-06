@@ -37,7 +37,6 @@ angular.module('cargoApp.controllers')
       innerText += (cache.length == 1 ?  "" : " y otros" );
       var filename = "Cargografias de " + innerText + ".json";
       
-      console.log(cache);
         var blob = new Blob([JSON.stringify(cache)], {
           type: "text/json;charset=utf-8"});
         saveAs(blob, filename);
@@ -71,9 +70,7 @@ angular.module('cargoApp.controllers')
       processParameters($routeParams.ids);
     }
 
-    $scope.$watch('activeYear', function() {
-      updateTheUrl();
-    });
+   
 
 
     $scope.load = function(params, hideAfterClick) {
@@ -129,16 +126,27 @@ angular.module('cargoApp.controllers')
 
     };
 
+
+
     $scope.redrawPoderometro = function() {
+      $scope.activeYear = $("#years").val();
+      var maxYear = d3.max($scope.activePersons, function(d) {  return d3.max(d.memberships, function(inner) {  return inner.end    }) });
+      var minYear = d3.min($scope.activePersons, function(d) {  return d3.min(d.memberships, function(inner) {  return inner.start; }) });
+    
+
+      var diff = maxYear - minYear ;
+      $scope.poderometroYears = [];
+      for (var i = 0; i < diff;  i++) {
+        $scope.poderometroYears.push(minYear + i);
+      };
+      
+      if (!$scope.activeYear){
+        $scope.activeYear = minYear;
+      }
       for (var i = 0; i < $rootScope.yearObserver.length; i++) {
         var observer = $rootScope.yearObserver[i];
-        var poderometro = cargosFactory.getPoderometroAnimado($scope.poderometroYear, $scope.activePersons);
+        var poderometro = cargosFactory.getPoderometroAnimado($scope.activeYear, $scope.activePersons);
         observer(poderometro);
-      };
-      for (var i = 0; i < $rootScope.jerarquimetroObserver.length; i++) {
-        var observer = $rootScope.jerarquimetroObserver[i];
-        var jerarquimetro = cargosFactory.getJerarquimetro($scope.poderometroYear, $scope.activePersons);
-        observer(jerarquimetro);
       };
     }
 
@@ -168,7 +176,6 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.filterAutoPersonsAdvance = function () {
-        console.log('filterAutoPersonsAdvance')
         $scope.showPresets = false;
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
@@ -198,12 +205,10 @@ angular.module('cargoApp.controllers')
         
         var urlToShorten = window.location.origin + embedUrl;
         $scope.embedUrl = urlToShorten;
-        console.log(urlToShorten);
         $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
 
 
           var prefix = data[0].name;
-          console.log(result);
            var base ="https://twitter.com/intent/tweet?text=";
             base += encodeURIComponent("Aca está línea de tiempo de " 
             + prefix +  " via @cargografias " 
@@ -241,7 +246,6 @@ angular.module('cargoApp.controllers')
     };
 
     $scope.currentLink = function(){
-      console.log(location.href);
       return location.href;      
     }
     $scope.embedIframe = function(){
@@ -258,7 +262,6 @@ angular.module('cargoApp.controllers')
         $scope.createEmbed(function(embedUrl){
             var urlToShorten = window.location.origin + embedUrl;
             $scope.embedUrl = urlToShorten;
-            console.log(urlToShorten);
             $http.post('/createShortUrl', {url: urlToShorten}).success(function(result){
               $scope.shortUrl = result.shortUrl;             
             });
@@ -273,8 +276,7 @@ angular.module('cargoApp.controllers')
     $scope.switchSearch = function(v){
       $scope.showBusAvanzado = v;
       $scope.showSharing = false;
-      console.log(v);
-
+      
       if (v){
         
       }
@@ -286,7 +288,6 @@ angular.module('cargoApp.controllers')
       }
     }
     $scope.clearEverthing = function() {
-        console.log('clearFilter');
         $scope.filterAdvance.name = null;
         $scope.filterAdvance.territory= null;
         $scope.filterAdvance.jobTitle = null;
@@ -307,7 +308,6 @@ angular.module('cargoApp.controllers')
 
 
     $scope.clearResults = function() {
-        console.log('clearResuls');
         $scope.filterAdvance.name = '';
         $scope.filterAdvance.territory = '';
         $scope.filterAdvance.jobTitle = '';
@@ -356,10 +356,13 @@ angular.module('cargoApp.controllers')
 
     $scope.refreshAllVisualizations = function() {
 
+
+      
       //TODO: This should all go to observers.
       $scope.hallOfShame = cargosFactory.getHallOfShame($scope.activePersons);
-      //$scope.redrawPoderometro();
+      $scope.redrawPoderometro();
       data = $scope.activePersons;
+
       reloadCargoTimeline($scope.filter);
       //Updates Url
       updateTheUrl();
@@ -404,7 +407,6 @@ angular.module('cargoApp.controllers')
        * Clean advance filter
        */
       $scope.cleanAdvanceFilter = function() {
-        console.log('cleanAdvanceFilter');
           // $scope.autoPersons = [];
           // $("#nombre").val('');
           // console.log('clearFilter');

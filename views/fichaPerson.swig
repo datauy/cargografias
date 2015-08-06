@@ -18,6 +18,7 @@
         <div class="description">
             Fichas Personales
         </div>
+<<<<<<< HEAD
 
 
              <div class="main ficha"
@@ -32,6 +33,20 @@
                       </p>
                   </div>
                   <div style="clear: both;"></div>
+=======
+             <div class="main" >
+                  <h1>{{person.name}}</h1>
+                    <div><img src="{{person.image}}" /></div>
+                    <div class="timeline-filter" ng-show="activePersons.length > 0">
+<ul>
+    <li>
+          <a id="ordenNombre" target="_blank" href="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&hl=es" >
+            <i class="fa fa-exclamation-triangle"></i>
+            Reportar Errores</a>
+        </li>
+ </ul>
+</div>
+>>>>>>> origin/master
                     <table class="table table-condensed">
                         <tbody>
                             <tr>

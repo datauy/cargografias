@@ -347,6 +347,7 @@ div.main div.module div.hall-of-shame .shame {
 	width: 50%;
 }
 
+
 /* ----- FICHAS ---- */
 
 div.main .ficha table{
@@ -378,6 +379,16 @@ div.main div.module .embed ul > li{
     border-radius: 5px;
     text-transform: uppercase;
     text-align: center;
+
+}
+
+div.main div.module.powermeter select {
+  width: 100%;
+  border: 0;
+  height: 23px;
+  margin-right: 6px;
+  margin-top: 8px;
+  border-radius: 5px;
 }
 
 
@@ -488,6 +499,9 @@ div.main div.module .embed ul > li{
 		padding: 1em;
 		text-align: center;
 		width: 33.33%;
+	}
+	div.main div.module.powermeter select {
+		width: 25%;
 	}
 }
 
