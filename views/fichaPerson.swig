@@ -41,15 +41,30 @@
                                 <th>Organizaci&oacute;n</th>
                                 <th>Comienzo</th>
                                 <th>Fin</th>
+                                <th>Class</th>
+                                <th>Type</th>
+                                <th>Intended Duration</th>
+                                <th>Sources</th>
                             </tr>
 
         {% for m in person.memberships %}
 
                             <tr ng-repeat="m in row.memberships">
                                 <td>{{m.role}}</td>
-                                <td><a target="_blank" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
+                                <td><a target="_blank" class="organization" data-organization-id="" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
                                 <td>{{m.start_date}}</td>
                                 <td>{{m.end_date}}</td>
+                                <td>{{m.class}}</td>
+                                <td>{{m.type}}</td>
+                                <td>{{m.intended_duration}}</td>
+                                <td>
+                                  {% for source in m.sources %}
+                                    <div>{{source.quality}}</div>
+                                    <div>{{source.source_url}}</div>
+                                    <div>{{source.source}}</div>
+                                    <div>{{source.data}}</div>
+                                  {% endfor %}
+                                </td>
                             </tr>
         {% endfor %}
 
