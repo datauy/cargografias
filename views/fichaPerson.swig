@@ -83,7 +83,6 @@
     var url = "https://" + instanceName + ".popit.mysociety.org/api/v0.1/organizations/" + organizationId
     $(el).html('Loading...')
     $.getJSON(url, function(data){
-      console.log(data);
       $(el).html(data.result.name)
     })
   })
