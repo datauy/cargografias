@@ -122,8 +122,14 @@
                             </div>
                             <div class="info col-xs-9">
                                 <div class="title box">
-                                    <h1> Cargograf&iacute;as </h1>
-                                    <p> La l&iacute;nea de tiempo de Pol&iacute;ticos Argentinos</p>
+                                    <h1>
+                                    {% if customization.siteTitle %}{{customization.siteTitle}}{% endif %}
+                                    {% if !customization.siteTitle %}Cargografías{% endif %}
+                                    </h1>
+                                    <p> 
+                                    {% if customization.subHeading %}{{customization.subHeading}}{% endif %}
+                                    {% if !customization.subHeading %}La línea de tiempo de Políticos Argentinos{% endif %}
+                                    </p>
                                 </div>
                             </div>
                         
