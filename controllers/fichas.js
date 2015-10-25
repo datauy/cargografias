@@ -17,14 +17,14 @@ function person(req, res) {
         } else {
             if (instances.length > 0) {
                 var url = "http://" + instances[0].popitUrl + "/api/v0.1/persons/" + personId
-                console.log(url);
                 request(url, function(error, response, body) {
                     if (!error && response.statusCode == 200) {
                         try {
                             body = JSON.parse(body);
                             res.render('fichaPerson', {
                                 person: body.result,
-                                instanceName: instanceName
+                                instanceName: instanceName, 
+                                popitUrl: instances[0].popitUrl
                             })
                         } catch (ex) {
                             res.send({

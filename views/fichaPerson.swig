@@ -66,7 +66,7 @@
 
                             <tr ng-repeat="m in row.memberships">
                                 <td>{{m.role}}</td>
-                                <td><a target="_blank" class="organization load-organization" data-organization-id="{{m.organization_id}}" data-instance-name="{{instanceName}}" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
+                                <td><a target="_blank" class="organization load-organization" data-organization-id="{{m.organization_id}}" data-popit-url="{{popitUrl}}" href="/{{instanceName}}/organization/{{m.organization_id}}">{{m.organization_id}}</a></td>
                                 <td>{{m.area.name}}</td>                                
                                 <td><span class="format-fecha">{{m.start_date}}</span><a href="#notas" class="nota">[{{k+1}}a]</a></td>
                                 <td>{% if m.end_date %}<span class="format-fecha">{{m.end_date}}</span><a href="#notas" class="nota">[{{k+1}}b]</a>{% endif %}</td>
@@ -95,9 +95,9 @@
 
 <script>
   $('.load-organization').each(function(ix, el){
-    var instanceName = $(el).attr('data-instance-name')
+    var popitUrl = $(el).attr('data-popit-url')
     var organizationId = $(el).attr('data-organization-id')
-    var url = "http://" + instanceName + "/api/v0.1/organizations/" + organizationId
+    var url = "http://" + popitUrl + "/api/v0.1/organizations/" + organizationId
     $(el).html('Loading...')
     $.getJSON(url, function(data){
       $(el).html(data.result.name)
