@@ -16,7 +16,7 @@ function person(req, res) {
             })
         } else {
             if (instances.length > 0) {
-                var url = "https://" + instances[0].popitUrl + "/api/v0.1/persons/" + personId
+                var url = "http://" + instances[0].popitUrl + "/api/v0.1/persons/" + personId
                 console.log(url);
                 request(url, function(error, response, body) {
                     if (!error && response.statusCode == 200) {
@@ -62,7 +62,7 @@ function organization(req, res) {
         } else {
 
             if (instances.length > 0) {
-                var url = "https://" + instances[0].popitUrl + "/api/v0.1/organizations/" + organizationId
+                var url = "http://" + instances[0].popitUrl + "/api/v0.1/organizations/" + organizationId
 
                 console.log(url);
 
