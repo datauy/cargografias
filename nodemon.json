@@ -4,7 +4,7 @@
         ".git/**/*",
         "node_modules/**/*",
         "web/**/*",
-        "views/**/*", 
+        "views/**/*"
     ],
     "watch": [
         "**/*"
