@@ -40,7 +40,8 @@ angular.module('cargoApp.factories', [])
                       //TODO: This should come 100% from data. Remove in the future
                       try{
                         f.setShareableID(item);
-                        f.processMemberships(item);
+                        f.processMemberships(item, factory);
+                        f.processMaxMin(item,factory);
                       }
                       catch(e){
                         console.log("Loading error", e, res.data[i].name, res.data[i].id_sha1);
@@ -98,7 +99,7 @@ angular.module('cargoApp.factories', [])
     }
   }
 
-  f.processMemberships = function(d){
+  f.processMemberships = function(d,factory){
     var approved = [];
     d.chequeado = false;
     
@@ -110,10 +111,34 @@ angular.module('cargoApp.factories', [])
         f.extractArea(m);
         f.setCheaqueadoCheck(d,m);
         approved.push(m);
+        
       }
     }
+    factory.membershipsCount += approved.length;
     d.memberships = approved;
                  
+  }
+
+  f.processMaxMin =function(d,factory){
+    for (var i = 0; i < d.memberships.length; i++) {  
+
+     var m = d.memberships[i];
+    var start = moment(m.start_date).year();
+    
+    if (!factory.minYear && !factory.maxYear){
+      factory.minYear = factory.maxYear =  start;
+    }
+    if (factory.minYear >= start){
+        factory.minYear = start;
+    }
+    if (m.end_date){
+      var end = moment(m.end_date).year()
+      if (factory.maxYear <= end){
+        factory.maxYear = end;
+      }
+    }
+  }
+
   }
 
   f.extractArea = function(m){

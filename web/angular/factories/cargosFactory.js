@@ -14,6 +14,7 @@ angular.module('cargoApp.factories')
     factory.organizations= [];
     factory.weight= [];
     factory.autoPersons=[];
+    factory.membershipsCount = 0;
     factory.getFullPerson = function(id){
       var p = this.persons[id]; 
       if (!p.full){
