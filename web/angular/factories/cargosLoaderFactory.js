@@ -64,7 +64,7 @@ angular.module('cargoApp.factories', [])
   f.processImages = function(d){
     
     try{
-      d.image = d.images ? d.images[0].url :'/img/person.png'    // get popit picture
+      d.image = d.images ? d.images[0].url :'/img/person.png'    
     }
     catch(e){
       d.image = '/img/person.png' ;

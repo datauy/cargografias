@@ -1,7 +1,11 @@
 <div class="module wow fadeIn" ng-show="ready">
 
 		<h1> {{cargosFactory.persons.length}} <small> politicos</small> </h1>
-		<h1> {{cargosFactory.organizations.length}} <small>territorios</small> </h1>
+		<h1> {{cargosFactory.organizations.length}} <small> organizaciones</small> </h1>
+		<h1> {{getTerritories().length}} <small>territorios</small> </h1>
+		<h1> {{getJobTitle().length}} <small> puestos</small> </h1>
+		<h1> {{cargosFactory.organizations.length}} <small>años </small> </h1>
+		
 		<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
 
 
