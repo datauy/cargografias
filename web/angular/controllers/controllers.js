@@ -12,7 +12,10 @@ angular.module('cargoApp.controllers')
        * @type {number}
        */
       var fromDecade = 1900;
-
+$scope.message = {
+   text: 'hello world!',
+   time: new Date()
+};
 
 
 
@@ -323,6 +326,7 @@ angular.module('cargoApp.controllers')
     cargosFactory.load($scope, onDataLoaded, $rootScope);
 
     var lastRoute = $route.current;
+    $scope.cargosFactory = cargosFactory;
     $scope.$on('$locationChangeSuccess', function(event) {
       // If same controller, then ignore the route change.
       if (lastRoute.controller == $route.current.controller) {
