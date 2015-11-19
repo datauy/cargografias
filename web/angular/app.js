@@ -11,7 +11,8 @@ var cargoApp = angular.module('cargoApp', [
   'cargoApp.directives',
   'cargoApp.controllers',
   'angularMoment',
-  'ngCookies'
+  'ngCookies',
+  'countTo'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/:ids?', {templateUrl: '/angular/partials/main.html', controller: 'homeController'});
