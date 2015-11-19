@@ -1,44 +1,45 @@
 <div class="module wow fadeIn" ng-show="ready">
+	<div class="dashboard">
 
-		<h1> <span 
-			 count-to="{{cargosFactory.membershipsCount}}" 
-			 value="1" duration="3"> </span> <small> puestos </small> </h1> 
-		
-		<h1>
-			<span 
-			 count-to="{{cargosFactory.persons.length}}" 
-			 value="1" duration="3">
-			</span>
-			<small> politicos</small>
-		</h1>
+			<h1> <span 
+				 count-to="{{cargosFactory.membershipsCount}}" 
+				 value="1" duration="3"> </span> <small> puestos </small> </h1> 
+			
+			<h1>
+				<span 
+				 count-to="{{cargosFactory.persons.length}}" 
+				 value="1" duration="3">
+				</span>
+				<small> politicos</small>
+			</h1>
 
-		<h1> 
-			<span 
-			 count-to="{{cargosFactory.organizations.length}}" 
-			 value="1" duration="3">
-			</span>
-			 <small> organizaciones</small> </h1>
-		<h1> <span 
-			 count-to="{{getTerritories().length}}" 
-			 value="1" duration="3">
-			</span><small> territorios</small> </h1>
-		<h1> <span 
-			 count-to="{{getJobTitle().length}}" 
-			 value="1" duration="3"> </span>  <small> categorias </small>   </h1>
-		<h1> {{cargosFactory.minYear}} a {{cargosFactory.maxYear}}  </h1>
+			<h1> 
+				<span 
+				 count-to="{{cargosFactory.organizations.length}}" 
+				 value="1" duration="3">
+				</span>
+				 <small> organizaciones</small> </h1>
+			<h1> <span 
+				 count-to="{{getTerritories().length}}" 
+				 value="1" duration="3">
+				</span><small> territorios</small> </h1>
+			<h1> <span 
+				 count-to="{{getJobTitle().length}}" 
+				 value="1" duration="3"> </span>  <small> categorias {{cargosFactory.minYear}} a {{cargosFactory.maxYear}}   </small>   </h1>
+			
 
-		<h1><span 
-			 count-to="{{cargosFactory.maxYear - cargosFactory.minYear}} " 
-			 value="1" duration="3">
-			</span> <small>años </small> </h1>
-		
-		<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
-
-
-
-    	<h1 ng-repeat="p in presets"> 
-            <a class="hand" ng-click="load(p.valores, true)">#{{p.nombre}}</a>
-        </h1>
+			<h1><span 
+				 count-to="{{cargosFactory.maxYear - cargosFactory.minYear}} " 
+				 value="1" duration="3">
+				</span> <small>años </small> </h1>
+			
+			<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
 
 
+
+	    	<h1 ng-repeat="p in presets"> 
+	            <a class="hand" ng-click="load(p.valores, true)">#{{p.nombre}}</a>
+	        </h1>
+
+        </div>
 </div>
