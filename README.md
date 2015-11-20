@@ -64,7 +64,7 @@ $ npm install
 * Bajate la base de datos de tu instancia.
 
 ```bash
-$  node getInstanceData.js cargo2 
+$  node getInstanceData.js [nombre_tu_instancia]
 ```
 * Crea un archivo .env en tu root, Podes utilizar .env.example como guia.
 
