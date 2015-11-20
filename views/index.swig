@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="/css/animations.css" type="text/css">
     <link rel="stylesheet" href="/bower_components/wow.js/css/libs/animate.css" type="text/css">
     <!-- V5 Styles -->
+    <link rel="stylesheet" href="/css/v5.grid.css" type="text/css">    
     <link rel="stylesheet" href="/css/v5.css" type="text/css">    
     <!-- V2 Libs -->
     <script type="text/javascript" src="/js/lib/jquery-2.0.0.min.js"></script>
