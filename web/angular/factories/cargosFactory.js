@@ -497,7 +497,15 @@ angular.module('cargoApp.factories')
 
     };
 
-    
+    factory.calculateRankings = function(){
+          var expression = '-memberships.length';
+          var nodes= $filter('orderBy')(this.persons, expression, false)
+          .map(function(d){
+            return { id: d.id, name: d.name, count:d.memberships.length};
+          });
+          console.log(nodes);
+          factory.membershipRanking = _.take(nodes,6);
+    }    
 
     factory.getOrganization = function(organization_id){
 
@@ -559,6 +567,7 @@ angular.module('cargoApp.factories')
               });
               
           });
+
           var groups = _.countBy(allTerritories, function(d){
                 return d.trim();
           });
@@ -580,6 +589,7 @@ angular.module('cargoApp.factories')
           nodes= $filter('orderBy')(nodes, expression, false);
           console.log(nodes);
           factory.territoryRanking = _.take(nodes,6);
+
           factory.territories = _.unique(allTerritories);
         }
 
@@ -597,7 +607,11 @@ angular.module('cargoApp.factories')
             });
             
         });
-
+        
+          
+          
+          
+          
         return _.unique(allMemberships);
     }
 
@@ -615,6 +629,7 @@ angular.module('cargoApp.factories')
 
     factory.load = function ($scope,callback, $rootScope) {
       cargoLoaderFactory.load($scope,factory,callback, $rootScope);
+          
 
     }
 

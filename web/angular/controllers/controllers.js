@@ -126,6 +126,7 @@ $scope.message = {
           }
         });
       }
+      cargosFactory.calculateRankings();
 
     };
 
