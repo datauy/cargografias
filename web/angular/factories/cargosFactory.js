@@ -559,6 +559,27 @@ angular.module('cargoApp.factories')
               });
               
           });
+          var groups = _.countBy(allTerritories, function(d){
+                return d.trim();
+          });
+          var nodes = [];
+            var i = 0;
+            for(var k in groups){ 
+                nodes.push({
+                    "color":i,
+                    "name": k.replace(/ /g,"").replace(',',''),
+                    "key": k,
+                    "count":groups[k]
+                });
+                i++;
+            }
+
+          
+          
+          var expression = '-count';
+          nodes= $filter('orderBy')(nodes, expression, false);
+          console.log(nodes);
+          factory.territoryRanking = _.take(nodes,6);
           factory.territories = _.unique(allTerritories);
         }
 
@@ -594,6 +615,7 @@ angular.module('cargoApp.factories')
 
     factory.load = function ($scope,callback, $rootScope) {
       cargoLoaderFactory.load($scope,factory,callback, $rootScope);
+
     }
 
 
