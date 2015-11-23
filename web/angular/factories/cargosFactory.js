@@ -501,7 +501,7 @@ angular.module('cargoApp.factories')
           var expression = '-memberships.length';
           var nodes= $filter('orderBy')(this.persons, expression, false)
           .map(function(d){
-            return { id: d.id, name: d.name, count:d.memberships.length};
+            return { person:d, id: d.id, name: d.name, count:d.memberships.length};
           });
           console.log(nodes);
           factory.membershipRanking = _.take(nodes,6);
