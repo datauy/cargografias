@@ -20,7 +20,7 @@ header .row {
 .trends img{
 	max-width: 100%;
 	opacity: 0.4;
-	width: 100%
+	max-height: 100%;
 }
 .trends .row, .trends .row .col{
 	margin:0;
@@ -29,6 +29,12 @@ header .row {
 .trends .col{
 	margin:0;
 	padding: 0;	
+}
+.trends .pic{
+	overflow: hidden;
+    max-width: 100%;
+    text-align: center;
+    height: 350px;
 }
 .trends .topic-row{
 	position: relative;
