@@ -192,7 +192,9 @@
         <div class="clearfix"></div>
     </footer>
     
-
+    <script>
+        window.customization = {{JSON.stringify(customization)}};
+    </script>
     
     <script src="/js/lib/v4/plugins/cargo.memberships.js"></script>
     <script src="/js/lib/v4/plugins/cargo.territory.js"></script>

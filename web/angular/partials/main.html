@@ -16,28 +16,62 @@
 			</div>
 		</div>
 		<div class="col s12 m8 wow fadeInLeftBig">
-			
-			<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
-			<div class="row">
-				<div class="col s12 m6">
-			    	<h2 ng-repeat="p in presets"> 
-			            <a class="hand" ng-click="load(p.valores, true)">#{{p.nombre}}</a>
-			        </h2>
-			        <h2 ng-repeat="p in cargosFactory.membershipRanking"> 
-			            <a class="hand">#{{p.name}}</a>
-			        </h2>
-	    		</div>
-	    		<div class="col s12 m6">
-			        <h2 ng-repeat="p in cargosFactory.territoryRanking"> 
-			            <a class="hand">#{{p.name}}</a>
-			        </h2>
-			        <h2 ng-repeat="p in cargosFactory.membershipRanking"> 
-			            <a class="hand">#{{p.name}}</a>
-			        </h2>	        
-	    		</div>
-	    	</div>
-        </div>
+			<div class="row trends">
+			    	<div class="col s12 m6" ng-repeat="p in presets"> 
+			    		<div class="row">
+			    			<div class="col s12 m12 topic-row">
+					            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Peron_tomando_un_caf%C3%A9.jpg">
+					         		<div class="topic">
+					            		<a class="hand" ng-click="load(p.valores, true)">#{{p.nombre}}</a>
+					            	</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="col s12 m6" > 
+			    		<div class="row">
+			    			<div class="col s12 m12 topic-row">
+					            <img src="https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0Bx4BSt6jniD7dmd3YXBWVmx1VG8/usability_bidirectionality_guidelines_whennot5.png">
+					         	<div class="topic">
+					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					            </div>
+			        		</div>
+			        	</div>
+			        </div>
 
+			        
+			        <div class="col s12 m6" ng-repeat="p in cargosFactory.membershipRanking"> 
+			    		<div class="row">
+			    			<div class="col s12 m12 topic-row">
+					            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Peron_tomando_un_caf%C3%A9.jpg">
+					         	<div class="topic">
+					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					        	</div>
+			        		</div>
+			        	</div>
+			        </div>
+
+			         <div class="col s12 m6" > 
+			    		<div class="row ">
+			    			<div class="col s12 m12 topic-row">
+					            <img src="https://image.freepik.com/free-icon/location-mark_318-40739.png">
+					         	<div class="topic">
+					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					        	</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="col s12 m6" ng-repeat="p in cargosFactory.territoryRanking"> 
+			    		<div class="row">
+			    			<div class="col s12 m12 topic-row">
+					            <img src="http://diarioalfil.com.ar/wp-content/uploads/2013/07/p09-11.jpg">
+					         	<div class="topic">
+					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					            </div>
+			        		</div>
+			        	</div>
+			        </div>        
+    		</div>
+    	</div>
 		<div class="col s12 m4 wow fadeInRightBig hide-on-small-only">
 			<div class="dashboard">
 				<h3>¿Que informacion tenemos?</h3>
@@ -72,6 +106,8 @@
 				</span> <small>años ({{cargosFactory.minYear}} - {{cargosFactory.maxYear}}) </small> </h1>
 			
         	</div>
+        	<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
+			
     	</div>
 		
 

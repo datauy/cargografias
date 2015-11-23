@@ -7,6 +7,7 @@ angular.module('cargoApp.controllers')
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
   
+  
       /**
        * FromDecade
        * @type {number}
