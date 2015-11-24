@@ -13,10 +13,10 @@ angular.module('cargoApp.controllers')
        * @type {number}
        */
       var fromDecade = 1900;
-$scope.message = {
-   text: 'hello world!',
-   time: new Date()
-};
+      $scope.message = {
+         text: 'hello world!',
+         time: new Date()
+      };
 
     $scope.filterAdvance = {};
     $scope.autoPersons = [];
@@ -34,16 +34,14 @@ $scope.message = {
     var parsedParams;
 
     $scope.load = function(params, hideAfterClick) {
-      // processParameters(params);
-      // //light add all persons from url
-      // if (parsedParams) {
-      //   for (var i = 0; i < parsedParams.length; i++) {
-      //     var index = parsedParams[i];
-      //     var id = cargosFactory.mapId[index];
-      //     $scope.lightAdd(cargosFactory.autoPersons[id], id);
-      //   };
-      $location.path('/timeline/name-801edb');
-      // }
+   
+      $location.path('/timeline/' + params);
+    
+    }
+     $scope.reload = function(params, hideAfterClick) {
+   
+      $location.path('/timeline/' + params);
+    
     }
 
     // Presets

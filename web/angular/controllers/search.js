@@ -11,6 +11,7 @@ angular.module('cargoApp.controllers')
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
         $scope.showResult = true;
+        $scope.started =true;
     };
 
   
@@ -48,8 +49,18 @@ angular.module('cargoApp.controllers')
       //     var id = cargosFactory.mapId[index];
       //     $scope.lightAdd(cargosFactory.autoPersons[id], id);
       //   };
-      $location.path('/timeline/name-801edb');
+      $location.path('/timeline/name-801edb');  
       // }
+    }
+
+
+    $scope.goto = function(p) {
+
+      if (p.person){
+        p = p.person;
+      }
+      $location.path('/timeline/name-' + p.popitID);
+      console.log(p);
     }
 
     // Presets

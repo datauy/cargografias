@@ -59,7 +59,7 @@ function reloadTimeline(){
   processData();
 
   //Creates the proper objects
-  if (!started){
+  if (!started || $("div.vis svg g").length === 0){
     setVisSize();
     setBasicsParams();
     started = true;

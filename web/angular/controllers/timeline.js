@@ -13,10 +13,10 @@ angular.module('cargoApp.controllers')
        * @type {number}
        */
       var fromDecade = 1900;
-$scope.message = {
-   text: 'hello world!',
-   time: new Date()
-};
+      $scope.message = {
+         text: 'hello world!',
+         time: new Date()
+      };
 
 
 
@@ -344,7 +344,7 @@ $scope.message = {
     }
 
     $scope.lightAdd = function(autoPersona, id) {
-      if (!autoPersona || autoPersona.agregada) return;
+      if (!autoPersona /*|| autoPersona.agregada */) return;
       else {
         $scope.autocomplete = " ";
         autoPersona.agregada = true;
