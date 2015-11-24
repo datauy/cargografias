@@ -18,9 +18,11 @@ header .row {
 
 
 .trends img{
-	max-width: 100%;
 	opacity: 0.4;
-	max-height: 100%;
+    max-width: 100%;
+}
+.trends img.ico{
+    max-height: 100%;
 }
 .trends .row, .trends .row .col{
 	margin:0;
@@ -34,7 +36,7 @@ header .row {
 	overflow: hidden;
     max-width: 100%;
     text-align: center;
-    height: 350px;
+    height: 200px;
 }
 .trends .topic-row{
 	position: relative;
