@@ -20,6 +20,9 @@ config(['$routeProvider', function($routeProvider) {
     controller: 'homeController'});
   $routeProvider.when('/search', {templateUrl: '/angular/partials/search.html', 
     controller: 'searchController'});
+  $routeProvider.when('/historycompare', {templateUrl: '/angular/partials/comparehistory.html', 
+    controller: 'historycompareController'});
+
   
   $routeProvider.when('/timeline/:ids?', 
     {templateUrl: '/angular/partials/main.html', controller: 'timelineController'});
