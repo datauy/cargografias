@@ -369,7 +369,10 @@ angular.module('cargoApp.controllers')
       // $scope.redrawPoderometro();
       data = $scope.activePersons;
 
-      reloadCargoTimeline($scope.filter);
+      $timeout(function(){
+        reloadCargoTimeline($scope.filter);  
+      },500);
+      
       //Updates Url
       updateTheUrl();
     }
@@ -378,6 +381,7 @@ angular.module('cargoApp.controllers')
     $scope.filterLine = function(f) {
       $scope.filter = f;
       reloadCargoTimeline(f);
+
       updateTheUrl();
     }
 
