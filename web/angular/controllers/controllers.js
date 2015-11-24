@@ -99,8 +99,23 @@ $scope.message = {
        * Get all Organizations
        * @returns {*}
        */
-      $scope.getMembershipCount = function() {
-        return cargosFactory.membershipsCount;
+      $scope.getMembershipRanking = function() {
+        return cargosFactory.membershipRanking;
+      }
+
+      /**
+       * Get all Organizations
+       * @returns {*}
+       */
+      $scope.getPersonRanking = function() {
+        return cargosFactory.personRanking();
+      }
+      /**
+       * Get all Organizations
+       * @returns {*}
+       */
+      $scope.getTerritoryRanking = function() {
+        return cargosFactory.territoryRanking;
       }
 
        /**
