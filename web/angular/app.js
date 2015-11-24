@@ -18,6 +18,9 @@ config(['$routeProvider', function($routeProvider) {
   
   $routeProvider.when('/', {templateUrl: '/angular/partials/home.html', 
     controller: 'homeController'});
+  $routeProvider.when('/search', {templateUrl: '/angular/partials/search.html', 
+    controller: 'searchController'});
+  
   $routeProvider.when('/timeline/:ids?', 
     {templateUrl: '/angular/partials/main.html', controller: 'timelineController'});
   $routeProvider.otherwise({redirectTo: '/'});

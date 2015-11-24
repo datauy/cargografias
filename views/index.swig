@@ -204,10 +204,17 @@
     <script src="/js/remove-diacritics.js"></script>
     
     <script src="/angular/app.js"></script>
+    
     <script src="/angular/controllers/home.js"></script>
     <script src="/angular/controllers/timeline.js"></script>
+    <script src="/angular/controllers/maps.js"></script>
+    <script src="/angular/controllers/powermeter.js"></script>
+    <script src="/angular/controllers/historycompare.js"></script>
     <script src="/angular/controllers/filter.js"></script>
+    <script src="/angular/controllers/search.js"></script>
     <script src="/angular/controllers/loader.js"></script>
+    
+
     <script src="/angular/filters/filters.js"></script>
     <script src="/angular/directives/cargoBubbles.js"></script>
     <script src="/angular/directives/cargoLoc.js"></script>
