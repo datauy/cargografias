@@ -1,0 +1,64 @@
+<div class="module " ng-show="ready">
+	<div class="row dashboard">
+
+		<div class="col s12 m4 wow fadeInLeftBig">
+			<div class="dashboard">
+			<h3>¿Que deseas buscar?</h3>
+					<h1>
+						<span 
+
+						count-to="{{autoPersons.length}}" 
+						 value="1" duration="3">
+						</span>
+						<small> politicos</small>
+					</h1>
+				<div>
+					<p>
+                    <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
+                        <option value="">Seleccionar territorio</option>
+                    </select>
+                </p><p>
+                    <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
+                        <option value="">Seleccionar cargo</option>
+                    </select>
+                 </p><p>
+                    <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
+                        decade.key as decade.label for decade in getDecades()">
+                        <option value="">Seleccionar decada</option>
+                    </select>
+                  </p>
+                </div>
+        	  </div>
+        	  <p>  </p>
+    	</div>
+    	<div class="col s12 m8 wow fadeInRightBig">
+			<div class="row search">
+			    	<div class="col s12 m12" ng-repeat="p in autoPersons"> 
+			    		<div class="row">
+			    			<div class="col s4">
+			    				<div class="pic">
+					            	<img ng-src="{{p.person.image}}">
+					        	</div>
+					        </div>
+					        <div class="col s8">
+					            	<h4><a class="hand" ng-click="load(p.valores, true)">{{p.name}}</a></h4>
+					        	
+			        		</div>
+			        	</div>
+			        </div>   
+			    	<div ng-hide="autoPersons.length > 0" class="col s12 m12" ng-repeat="p in getPersonRanking()"> 
+			    		<div class="row">
+			    			<div class="col s4">
+			    				<div class="pic">
+					            	<img ng-src="{{p.person.image}}">
+					        	</div>
+					        </div>
+					        <div class="col s8">
+					            	<h4><a class="hand" ng-click="load(p.valores, true)">{{p.name}}</a></h4>
+					        	
+			        		</div>
+			        	</div>
+			        </div>            
+    		</div>
+    	</div>
+</div>
