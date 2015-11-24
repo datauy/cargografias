@@ -54,18 +54,6 @@
                         <option value="">Seleccionar decada</option>
                     </select>
                 </div>
-                <div ng-show="showPresets && presets.length">
-              <p>¿No sabés que buscar? Probá los siguientes grupos</p>
-              <div class="">
-                    <ul>
-                        <li ng-repeat="p in presets"> 
-                          <p><a class="hand" ng-click="load(p.valores, true)">{{p.nombre}}</a></p>
-                        </li>
-
-                    </ul>
-              </div>
-            </div>
-               
                 <div id="resultadosBusqueda" ng-show="search && !showPresets">
                     <h3 id="quantiy-result" class="description">
 

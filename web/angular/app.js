@@ -16,8 +16,10 @@ var cargoApp = angular.module('cargoApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   
-  $routeProvider.when('/', {templateUrl: '/angular/partials/main.html', controller: 'homeController'});
-  $routeProvider.when('/timeline/:ids?', {templateUrl: '/angular/partials/main.html', controller: 'timeLineController'});
+  $routeProvider.when('/', {templateUrl: '/angular/partials/home.html', 
+    controller: 'homeController'});
+  $routeProvider.when('/timeline/:ids?', 
+    {templateUrl: '/angular/partials/main.html', controller: 'timelineController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
 cargoApp.run(function(){
