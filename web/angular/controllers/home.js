@@ -38,10 +38,11 @@ angular.module('cargoApp.controllers')
       $location.path('/timeline/' + params);
     
     }
-     $scope.reload = function(params, hideAfterClick) {
-   
+    $scope.reload = function(params, hideAfterClick) {
       $location.path('/timeline/' + params);
-    
+    }
+    $scope.loadPerson = function(p) {
+      $location.path('/timeline/territory-' + p.person.popitID);
     }
 
     // Presets
