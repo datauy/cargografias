@@ -35,7 +35,8 @@
     	</div>
     	<div class="col s12 m8 wow fadeInRightBig">
 			<div class="row search">
-			    	<div class="col s12 m12" ng-repeat="p in autoPersons"> 
+			    	<div class="col s12 m12" ng-repeat="p in autoPersons | 
+			    	orderBy:'-memberships.length'"> 
 			    		<div class="row">
 			    			<div class="col s4">
 			    				<div class="pic">
@@ -43,7 +44,9 @@
 					        	</div>
 					        </div>
 					        <div class="col s8">
-					            	<h4><a class="hand" ng-click="goto(p)">{{p.name}}</a></h4>
+					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2> 
+					            	<h2><small>({{p.memberships.length}} puestos)</h2>
+					            	
 					        	
 			        		</div>
 			        	</div>
@@ -57,7 +60,8 @@
 			        		</h2>
 			        	<h3> Intenta con algunos de estos resultados </h3>
 			        </div>
-			    	<div ng-hide="autoPersons.length > 0" class="col s12 m12" ng-repeat="p in getPersonRanking()"> 
+			    	<div ng-hide="autoPersons.length > 0" class="col s12 m12" ng-repeat="p in getPersonRanking() | 
+			    	orderBy:'-person.memberships.length'"> 
 			    		<div class="row">
 			    			<div class="col s4">
 			    				<div class="pic">
@@ -65,7 +69,7 @@
 					        	</div>
 					        </div>
 					        <div class="col s8">
-					            	<h4><a class="hand" ng-click="goto(p)">{{p.name}}</a></h4>
+					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2><h2> <small>({{p.person.memberships.length}} puestos) </small></h2>
 					        	
 			        		</div>
 			        	</div>
