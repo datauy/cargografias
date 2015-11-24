@@ -108,7 +108,7 @@ $scope.message = {
        * @returns {*}
        */
       $scope.getPersonRanking = function() {
-        return cargosFactory.personRanking();
+        return cargosFactory.personRanking;
       }
       /**
        * Get all Organizations

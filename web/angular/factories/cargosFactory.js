@@ -15,6 +15,9 @@ angular.module('cargoApp.factories')
     factory.weight= [];
     factory.autoPersons=[];
     factory.membershipsCount = 0;
+    factory.personRanking = [];
+    factory.membershipRanking = [];
+    factory.territoryRanking = [];
     factory.getFullPerson = function(id){
       var p = this.persons[id]; 
       if (!p.full){
@@ -503,7 +506,31 @@ angular.module('cargoApp.factories')
           .map(function(d){
             return { person:d, id: d.id, name: d.name, count:d.memberships.length};
           });
+          factory.personRanking = _.take(nodes,6);
+
+
+          
+
+          var groups = _.countBy(factory.allMemberships, function(d){
+                return d.trim();
+          });
+          nodes = [];
+            var i = 0;
+            for(var k in groups){ 
+                nodes.push({
+                    "color":i,
+                    "name": k,
+                    "key": k,
+                    "count":groups[k]
+                });
+                i++;
+            }
+
+          
+
           factory.membershipRanking = _.take(nodes,6);
+
+
     }    
 
     factory.getOrganization = function(organization_id){
@@ -595,12 +622,12 @@ angular.module('cargoApp.factories')
     }
 
     factory.getJobTitle = function() {
-        var allMemberships = new Array();
+        factory.allMemberships = new Array();
         
         _.each(this.persons, function(p, index) {
             _.each(p.memberships,function(m,i){
               if(_.isString(m.label) && m.label !== '') {
-                allMemberships.push(m.label);
+                factory.allMemberships.push(m.label);
               }  
             });
             
@@ -610,7 +637,7 @@ angular.module('cargoApp.factories')
           
           
           
-        return _.unique(allMemberships);
+        return _.unique(factory.allMemberships);
     }
 
     factory.getDecades = function(from) {

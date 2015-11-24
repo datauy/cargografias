@@ -22,6 +22,13 @@ angular.module('cargoApp.factories', [])
     var f = {};
 
     f.load = function($scope,factory,callback, $rootScope){
+
+        if (factory.isLoaded){
+          callback();
+        }
+        else {
+
+
             $http.get('/js/datasets/pesopoder.json')
                 .then(function(res){
                 $rootScope.estado = "Representatividad";
@@ -57,8 +64,12 @@ angular.module('cargoApp.factories', [])
                       factory.organizations = res.data;
                       //TODO: Why is this here? Shouldn't go to organization level attribute?
                       //nivel: res.data[i].name === 'Argentina' ? 'nacional' : 'provincial'
-                  }).then(callback);
+                  }).then(function(){
+                    factory.isLoaded = true;
+                    callback();
+                  });
                 });
+            }
   };
 
   //Photo or default photo
