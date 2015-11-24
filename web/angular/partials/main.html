@@ -1,21 +1,58 @@
 <div class="module " ng-show="ready">
 	<div class="row dashboard">
-		<div class="col s12 wow fadeIn">
+		<div class="col s12 wow fadeInRightBig">
 			<div class="row hide-on-med-and-up">
 				<h1> <span 
-					 count-to="{{cargosFactory.membershipsCount}}" 
+					 count-to="{{getMembershipsCount()}}" 
 					 value="1" duration="3"> </span> <small> puestos </small> 
 				</h1>
 				<h1>
 					<span 
-					 count-to="{{cargosFactory.persons.length}}" 
+					 count-to="{{getPersonsCount()}}" 
 					 value="1" duration="3">
 					</span>
 					<small> politicos</small>
 				</h1>
 			</div>
 		</div>
-		<div class="col s12 m8 wow fadeInLeftBig">
+		<div class="col s12 m4 wow fadeInLeftBig hide-on-small-only">
+			<div class="dashboard">
+				<h3>¿Que informacion tenemos?</h3>
+			<h1> <span 
+				 count-to="{{getMembershipCount()}}" 
+				 value="1" duration="3"> </span> <small> puestos </small> </h1> 
+			<h1>
+				<span 
+				 count-to="{{getPersonsCount()}}" 
+				 value="1" duration="3">
+				</span>
+				<small> politicos</small>
+			</h1>
+
+			<h1> 
+				<span 
+				 count-to="{{getOrganizations().length}}" 
+				 value="1" duration="3">
+				</span>
+				 <small> organizaciones</small> </h1>
+			<h1> <span 
+				 count-to="{{getTerritories().length}}" 
+				 value="1" duration="3">
+				</span><small> territorios</small> </h1>
+			<h1> <span 
+				 count-to="{{getJobTitle().length}}" 
+				 value="1" duration="3"> </span>  <small> categorias   </small>   </h1>
+			
+			<h1><span 
+				 count-to="{{getMaxYear() - getMinYear()}} " 
+				 value="1" duration="3">
+				</span> <small>años ({{getMaxYear()}} - {{getMinYear()}}) </small> </h1>
+			
+        	</div>
+        	<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
+			
+    	</div>
+		<div class="col s12 m8 wow fadeInRightBig">
 			<div class="row trends">
 			    	<div class="col s12 m6" ng-repeat="p in presets"> 
 			    		<div class="row">
@@ -56,7 +93,7 @@
 			        	</div>
 			        </div>
 
-			         <div class="col s12 m6" > 
+			        <!--  <div class="col s12 m6" > 
 			    		<div class="row ">
 			    			<div class="col s12 m12 topic-row">
 			    				<div class="pic">
@@ -67,7 +104,7 @@
 					        	</div>
 			        		</div>
 			        	</div>
-			        </div>
+			        </div> -->
 			        <div class="col s12 m6" ng-repeat="p in cargosFactory.territoryRanking"> 
 			    		<div class="row">
 			    			<div class="col s12 m12 topic-row">
@@ -82,43 +119,4 @@
 			        </div>        
     		</div>
     	</div>
-		<div class="col s12 m4 wow fadeInRightBig hide-on-small-only">
-			<div class="dashboard">
-				<h3>¿Que informacion tenemos?</h3>
-			<h1> <span 
-				 count-to="{{cargosFactory.membershipsCount}}" 
-				 value="1" duration="3"> </span> <small> puestos </small> </h1> 
-			<h1>
-				<span 
-				 count-to="{{cargosFactory.persons.length}}" 
-				 value="1" duration="3">
-				</span>
-				<small> politicos</small>
-			</h1>
-
-			<h1> 
-				<span 
-				 count-to="{{cargosFactory.organizations.length}}" 
-				 value="1" duration="3">
-				</span>
-				 <small> organizaciones</small> </h1>
-			<h1> <span 
-				 count-to="{{getTerritories().length}}" 
-				 value="1" duration="3">
-				</span><small> territorios</small> </h1>
-			<h1> <span 
-				 count-to="{{getJobTitle().length}}" 
-				 value="1" duration="3"> </span>  <small> categorias   </small>   </h1>
-			
-			<h1><span 
-				 count-to="{{cargosFactory.maxYear - cargosFactory.minYear}} " 
-				 value="1" duration="3">
-				</span> <small>años ({{cargosFactory.minYear}} - {{cargosFactory.maxYear}}) </small> </h1>
-			
-        	</div>
-        	<h3> Ultima actualizacion <span am-time-ago="message.time"></span> </h3>
-			
-    	</div>
-		
-
 </div>

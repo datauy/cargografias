@@ -503,7 +503,6 @@ angular.module('cargoApp.factories')
           .map(function(d){
             return { person:d, id: d.id, name: d.name, count:d.memberships.length};
           });
-          console.log(nodes);
           factory.membershipRanking = _.take(nodes,6);
     }    
 
@@ -587,7 +586,6 @@ angular.module('cargoApp.factories')
           
           var expression = '-count';
           nodes= $filter('orderBy')(nodes, expression, false);
-          console.log(nodes);
           factory.territoryRanking = _.take(nodes,6);
 
           factory.territories = _.unique(allTerritories);

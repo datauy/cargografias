@@ -54,3 +54,22 @@ header .row {
     background: rgba(151, 157, 162, 0.62);
     
 }
+
+
+div.main div.loader {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 80vh;
+    width: auto; 
+    margin-left: auto; 
+    margin-right: auto 
+}
+div.main div.loader h3 {
+
+    margin-top: auto;
+    margin-bottom: auto;
+    height: auto;
+    width: auto; 
+    margin-left: auto; 
+    margin-right: auto
+}
