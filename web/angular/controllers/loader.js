@@ -2,6 +2,7 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('loaderController', function() {
-   
+  .controller('loaderController', function($scope) {
+         $scope.customization= window.customization;
+
  });
