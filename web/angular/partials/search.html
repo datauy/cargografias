@@ -4,12 +4,11 @@
 		<div class="col s12 m4 wow fadeInLeftBig">
 			<div class="dashboard">
 			<h3>¿Que deseas buscar?</h3>
-					<h1>
+					<h1 >
 						<span 
-
 						count-to="{{autoPersons.length}}" 
-						 value="1" duration="3">
-						</span>
+						 value="1" duration="2">
+						</span> 
 						<small> politicos</small>
 					</h1>
 				<div>
@@ -31,10 +30,47 @@
                   </p>
                 </div>
         	  </div>
+
         	  <p>  </p>
+        	  <div ng-show="autoPersons.length < 10 &&  autoPersons.length > 0" class="wow fadeIn">
+				<div class="timeline-filter">
+						<ul>
+						    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+						      <a id="ordenCargo" href="" ng-click="compareResult()" >
+						        <i class="fa fa-tasks"></i>
+						    	   
+						    	   Comparar {{autoPersons.length}} personas
+						    </a>
+						    </li>
+						</ul>
+					</div>
+			</div>
+        	  <div ng-show="selectedPersons.length > 0"  class="wow fadeIn"> 
+
+        	  	<h2>
+						<span 
+
+						count-to="{{selectedPersons.length}}" 
+						 value="1" duration="1">
+						</span>
+						<small> personas seleccionadas </small>
+					</h2>
+        	  	
+	        	  <div class="timeline-filter">
+						<ul>
+						    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+						      <a id="ordenCargo" href="" ng-click="compareSelected()" >
+						        <i class="fa fa-tasks"></i>Comparar Selección</a>
+						    </li>
+						</ul>
+					</div>
+
+			</div>
+			
     	</div>
     	<div class="col s12 m8 wow fadeInRightBig">
 			<div class="row result">
+
 			    	<div class="col s12 m12" ng-repeat="p in autoPersons | 
 			    	orderBy:'-memberships.length'"> 
 			    		<div class="row">
@@ -43,12 +79,19 @@
 					            	<img ng-src="{{p.person.image}}">
 					        	</div>
 					        </div>
-					        <div class="col s8">
+					        <div class="col s6">
 					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2> 
 					            	<h2><small>({{p.memberships.length}} puestos)</h2>
-					            	
-					        	
 			        		</div>
+			        		<div class="col s2">
+			        			<h2 ng-show="p.added" class="wow fadeIn">
+			        				<a ng-click="removePerson(p)" class="crucecita"><i class="fa fa-times"></i></a></h2>
+			        			<h2  class="wow fadeIn">
+									<a ng-click="addPerson(p,p.index)" class="resultados-item" ng-class="item.styles">
+                                <i ng-hide="p.added" class="fa fa-user-plus"></i></h2>
+                            </a>
+			        		</div>
+
 			        	</div>
 			        </div>   
 			        <div ng-show="autoPersons.length == 0 && started" class="col s12 m12"> 

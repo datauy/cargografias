@@ -7,6 +7,42 @@ angular.module('cargoApp.controllers')
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
 
+      $scope.personList = [];
+
+      $scope.selectedPersons = [];
+      $scope.addPerson = function(p){
+        $scope.selectedPersons.push(p);
+        p.added= true;
+      }
+      $scope.removePerson = function(p){
+        var indexOf = $scope.selectedPersons.indexOf(p);
+        if (indexOf > -1) {
+          $scope.selectedPersons.splice(indexOf, 1);
+        }
+        p.added = false;
+      }
+
+      $scope.compareSelected = function(){
+       $scope.gotoList($scope.selectedPersons);
+    }
+    $scope.compareResult = function(){
+      $scope.gotoList($scope.autoPersons);
+    }
+
+    $scope.gotoList = function(list){
+       var ids = ""
+        for (var i = 0; i < list.length; i++) {
+          ids += list[i].popitID + "-";
+        };
+
+      
+      $location.path('/timeline/name-' + ids);
+      $anchorScroll();
+    }
+
+
+
+
 
       $scope.suggest =function(){
        

@@ -96,11 +96,36 @@ div.main div.result div.pic img{
 div.main div.search i.fa{
     font-size: 1em;
 }
+div.main div.search div.description i.fa{
+    font-size: 2.25em;
+}
 div.main div.search a.cta{
     text-decoration: underline;
 }
-div.main div.search select{
+div.main div.search input{
     width: 100%;
     max-width: 100%;
-    font-size: 20em;
+    padding: 5px;
+    font-size: 1.2em;
+    font-size: 1.2em;
+    line-height: 1;
+    border: 1;
+    border-radius: 0;
+    height: 34px;   
+}
+
+div.main div.search div.timeline-filter ul > li{
+    width: 100%;
+}
+div.main div.search select{
+    background: white;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    font-size: 1.2em;
+    line-height: 1;
+    border: 1;
+    border-radius: 0;
+    height: 34px;
+    /*-webkit-appearance: none;*/
 }
