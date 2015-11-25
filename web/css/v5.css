@@ -76,19 +76,31 @@ div.main div.loader h3 {
     margin-right: auto
 }
 
-div.main div.search div.dashboard{
+div.main div.result div.dashboard{
 	padding-bottom: 1em;
 }
-div.main div.search div.pic{
+div.main div.result div.pic{
 	text-align: center;
 	width: 100px;
 	height: 100px;
 	background-color: grey;
 }
-div.main div.search div.pic img{
+div.main div.result div.pic img{
 	max-width: 100%;
 	max-height: 100px;
 	width: 100px;
 	text-align: center;
 
+}
+
+div.main div.search i.fa{
+    font-size: 1em;
+}
+div.main div.search a.cta{
+    text-decoration: underline;
+}
+div.main div.search select{
+    width: 100%;
+    max-width: 100%;
+    font-size: 20em;
 }

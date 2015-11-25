@@ -1,4 +1,4 @@
-<div class="module " ng-show="ready">
+<div class="module search" ng-show="ready">
 	<div class="row dashboard">
 
 		<div class="col s12 m4 wow fadeInLeftBig">
@@ -13,8 +13,8 @@
 						<small> politicos</small>
 					</h1>
 				<div>
-					<input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" ng-model="filterAdvance.name" 
-						ng-change="filterAutoPersons(filterAdvance.name)" autocomplete="off" >    
+					<input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" 		ng-model="filterAdvance.name" 
+						ng-change="filterAutoPersons(filterAdvance.name)"/>    
 					<p>
                     <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
                         <option value="">Seleccionar territorio</option>
@@ -34,7 +34,7 @@
         	  <p>  </p>
     	</div>
     	<div class="col s12 m8 wow fadeInRightBig">
-			<div class="row search">
+			<div class="row result">
 			    	<div class="col s12 m12" ng-repeat="p in autoPersons | 
 			    	orderBy:'-memberships.length'"> 
 			    		<div class="row">
@@ -53,12 +53,16 @@
 			        </div>   
 			        <div ng-show="autoPersons.length == 0 && started" class="col s12 m12"> 
 			        	<h2> No hemos encontrado personas  
+			        		<span ng-show="filterAdvance.name"> con nombre '{{filterAdvance.name}}' </span>
 			        		<span ng-show="filterAdvance.jobTitle"> para {{filterAdvance.jobTitle}} </span>
 			        		<span ng-show="filterAdvance.territory">  en {{filterAdvance.territory}}</span>
 			        		<span ng-show="filterAdvance.decade">  durante {{filterAdvance.decade}} </span>
-			        		
-			        		</h2>
+			        		<p> <a href="" class="cta" ng-click="suggest()">Queres que ver esto en la plataforma? ¡Sugerilo ahora!  <i class="fa fa-twitter"></i></a></a> </p>
+			        	</h2>
 			        	<h3> Intenta con algunos de estos resultados </h3>
+			        </div>
+			        <div ng-show="autoPersons.length === 0 && !started">
+			        	<h2> Estos son los politicos con mas entradas </h2>
 			        </div>
 			    	<div ng-hide="autoPersons.length > 0" class="col s12 m12" ng-repeat="p in getPersonRanking() | 
 			    	orderBy:'-person.memberships.length'"> 

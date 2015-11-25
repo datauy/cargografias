@@ -88,8 +88,8 @@
     <script src="/bower_components/blob/Blob.js"></script>
 
     <!-- Version LABICBR -->
-    <!-- <script src="/bower_components/Chart-js/Chart.js"></script>-->
-    <script src="bower_components/ng-chartjs/dist/angular-chartjs.js"></script>
+    <script src="bower_components/Chart.js/Chart.min.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     
     <style>
         {{customization.customCSS|safe}}

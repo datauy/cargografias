@@ -8,9 +8,58 @@ angular.module('cargoApp.controllers')
   instanceName = instanceName || 'cargografias';
 
 
+      $scope.suggest =function(){
+       
+
+          var prefix = "";
+          if ($scope.filterAdvance.name){
+            prefix+= " para '" + $scope.filterAdvance.name +"'";
+          }
+          if ($scope.filterAdvance.jobTitle){
+            if (prefix.length > 0){
+              prefix+= " , " ;
+            }
+            else {
+              prefix+= " para " ;
+            }
+            prefix += $scope.filterAdvance.jobTitle ;
+          }
+          if ($scope.filterAdvance.territory)
+            {
+            prefix+= " en " + $scope.filterAdvance.territory ;
+          }
+          if ($scope.filterAdvance.decade){
+            if (prefix.length > 0){
+              prefix+= " para el año " 
+            }
+            else {
+              prefix+= " durante ";  
+            }
+            prefix+= $scope.filterAdvance.decade ;
+          }
+
+           var base ="https://twitter.com/intent/tweet?text=";
+            base += encodeURIComponent("Hey @cargografias, agreguen datos" 
+            + prefix);
+            
+           window.open(base,'twitter-share-dialog'); 
+      }; 
+    
 
 
     $scope.filterAdvance = {};
+    $scope.filterAutoPersons = function(q) {
+      if (q.length > 3) {
+        $scope.showPresets = false;
+        $scope.search = true;
+        $scope.filterAdvance.name = q;
+        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        $scope.showResult = true;
+      } else {
+        $scope.autoPersons = [];
+        $scope.search = false;
+      }
+    };
     $scope.filterAutoPersonsAdvance = function () {
         $scope.showPresets = false;
         $scope.search = true;
