@@ -5,7 +5,6 @@
 angular.module('cargoApp.factories')
 	.factory('cargosFactory', function($http, $filter, cargoLoaderFactory) {
 		
-    alert(" dd:"+customization.pessoas);
     
 
     var factory ={};
