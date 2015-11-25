@@ -4,19 +4,19 @@
     <li ng-click="filterLine('name')" ng-class="filter === 'name' ? 'active' : '' ">
           <a id="ordenNombre" href="" >
             <i class="fa fa-user"></i>
-            Nombre</a>
+          {{customization.name}}</a>
         </li>
     <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
       <a id="ordenCargo" href="" >
-        <i class="fa fa-briefcase"></i>Cargo</a>
+        <i class="fa fa-briefcase"></i>{{customization.role}}</a>
     </li>
     <li ng-click="filterLine('territory')" class="" ng-class="filter === 'territory' ? 'active' : '' ">
       <a id="ordenCargo" href="" >
-        <i class="fa fa-flag"></i>Territorio</a>
+        <i class="fa fa-flag"></i>{{customization.territory}}</a>
     </li>
     <li  ng-click="filterLine('career')" class="" ng-class="filter === 'career' ? 'active' : '' ">
       <a id="ordenNombre" href="">
-        <i class="fa fa-tasks"></i>Carrera</a>
+        <i class="fa fa-tasks"></i>{{customization.career}}</a>
     </li>
     
  </ul>

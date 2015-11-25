@@ -10,6 +10,7 @@ angular.module('cargoApp.controllers')
     $scope.estado = "";
     
 
+
     
     var onDataLoaded = function() {
 

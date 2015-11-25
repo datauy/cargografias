@@ -5,6 +5,9 @@
 angular.module('cargoApp.factories')
 	.factory('cargosFactory', function($http, $filter, cargoLoaderFactory) {
 		
+    alert(" dd:"+customization.pessoas);
+    
+
     var factory ={};
     factory.mapId ={};
     factory.persons= [];
@@ -37,28 +40,28 @@ angular.module('cargoApp.factories')
         }
         //TODO: tenemos que pasarlo a una lista
         shames.push({
-          name: 'Cargos Electos',
+          name: customization.electPosition,
           uom:'cargos',
           expression:'-summary.elected',
           value: 'elected',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Ejecutivos',
+          name: customization.executivePosition,
           uom:'cargos',
           expression:'-summary.executives',
           value: 'executives',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Legislativos',
+          name: customization.electivePositions,
           uom:'cargos',
           expression:'-summary.legislative',
           value: 'legislative',
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Judiciales',
+          name: customization.judiciaryPositions,
           expression:'-summary.judiciary',
           value: 'judiciary',
           getNumber: simpleNumber
@@ -78,7 +81,7 @@ angular.module('cargoApp.factories')
           getNumber: simpleNumber
         });
         shames.push({
-          name: 'Cargos Distintos',
+          name: customization.differentPositions,
           uom:'cargos',
           expression:'-memberships.length',
           getNumber: function(person){
@@ -86,7 +89,7 @@ angular.module('cargoApp.factories')
           }
         });
         shames.push({
-          name: 'Años en cargos',
+          name: customization.yearsInFunction,
           uom:'años',
           expression:'-periods.yearsCharges',
           getNumber: function(person){
@@ -94,7 +97,7 @@ angular.module('cargoApp.factories')
           }
         });
         shames.push({
-          name: 'Años en política',
+          name: customization.yearsInPolitics,
           uom:'años',
           expression:'-periods.yearsPolitics',
           getNumber: function(person){

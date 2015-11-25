@@ -13,7 +13,8 @@ angular.module('cargoApp.controllers')
        */
       var fromDecade = 1900;
 
-
+      //get values labels
+      $scope.customization= window.customization;
 
 
     $scope.downloadNow = function(){
