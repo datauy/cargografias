@@ -2,8 +2,10 @@
 <!DOCTYPE html>
 <html ng-app="cargoApp">
 <head>
-    
-    <title>{{customization.pageTitle}}</title>
+     <script>
+        window.customization = {{JSON.stringify(customization)}};
+    </script>
+    <title>{{customization.pageTitle}} {{customization.resumeLabel}}</title>
 
 
 
@@ -132,7 +134,7 @@
                                     </h1>
                                     <p> 
                                     {% if customization.subHeading %}{{customization.subHeading}}{% endif %}
-                                    {% if !customization.subHeading %}La línea de tiempo de Políticos Argentinos{% endif %}
+                                    {% if !customization.subHeading %}{{customization.subtitle}}{% endif %}
                                     </p>
                                 </div>
                             </div>
@@ -146,7 +148,7 @@
                         <i class="fa fa-map-marker"></i><span ng-cargo-loc="siteTitle"></span>
                     </li>
                     <li>
-                        <i class="fa fa-globe"></i>Otros Paises</span>
+                        <i class="fa fa-globe"></i>{{customization.otherCountries}}</span>
                     </li>
 
                     
@@ -155,7 +157,7 @@
             <div class="items col-xs-12 col-sm-2 col-md-2 col-lg-2">
                  <ul class="menu">
                     <li>
-                    <a target="_blank" title="Sigue a @Cargografias en Twitter" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
+                    <a target="_blank" title='{{customization.follow}}' href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A3000%2F&amp;region=follow_link&amp;screen_name=Cargografias&amp;tw_p=followbutton&amp;variant=2.0">
                         <i class="fa fa-twitter"></i></a>
                     </li>
                     <li>

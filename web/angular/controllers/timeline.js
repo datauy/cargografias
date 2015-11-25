@@ -13,11 +13,8 @@ angular.module('cargoApp.controllers')
        * @type {number}
        */
       var fromDecade = 1900;
-      $scope.message = {
-         text: 'hello world!',
-         time: new Date()
-      };
-
+      //get values labels
+      $scope.customization= window.customization;
 
 
     $scope.downloadNow = function(){
