@@ -1,3 +1,5 @@
+
+
 <div class="module " ng-show="ready">
 	<div class="row dashboard">
 
@@ -32,5 +34,18 @@
     	</div>
     	<div class="col s12 m8 wow fadeInRightBig">
 			<h1> Aca va el grafico </h1>
+            
+            <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-legend="true" chart-series="series"
+                chart-click="onClick" >
+            </canvas>  
+
+
+    
+
+           
+        </div>
+
     	</div>
 </div>
+

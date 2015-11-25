@@ -76,16 +76,20 @@
     <!-- V4 Libs -->
     <script type="text/javascript" src="js/lib/own.js"></script>
 
+
     <!-- V2 Libs Angular-->
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="/bower_components/moment/moment.js"></script>
     <script src="/bower_components/angular-moment/angular-moment.js"></script>
-     <script src="/bower_components/angular-count-to/build/angular-count-to.min.js"></script>
+    <script src="/bower_components/angular-count-to/build/angular-count-to.min.js"></script>
     <script src="/bower_components/moment/lang/es.js"></script>
 
     <script src="/bower_components/filesaver.js//FileSaver.min.js"></script>    
     <script src="/bower_components/blob/Blob.js"></script>
 
+    <!-- Version LABICBR -->
+    <!-- <script src="/bower_components/Chart-js/Chart.js"></script>-->
+    <script src="bower_components/ng-chartjs/dist/angular-chartjs.js"></script>
     
     <style>
         {{customization.customCSS|safe}}

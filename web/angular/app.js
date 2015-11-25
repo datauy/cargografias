@@ -12,7 +12,8 @@ var cargoApp = angular.module('cargoApp', [
   'cargoApp.controllers',
   'angularMoment',
   'ngCookies',
-  'countTo'
+  'countTo',
+  'chartjs'
 ]).
 config(['$routeProvider', function($routeProvider) {
   

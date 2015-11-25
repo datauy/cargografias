@@ -7,6 +7,7 @@ angular.module('cargoApp.controllers')
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
   
+
   $scope.filterAutoPersonsAdvance = function () {
         $scope.showPresets = false;
         $scope.search = true;
@@ -58,7 +59,7 @@ angular.module('cargoApp.controllers')
     var presetsLoader = loadPresets();
 
     var onDataLoaded = function() {
-      
+        console.log("onDataLoadde");
           cargosFactory.calculateRankings();
 
           $rootScope.estado = "Motor de Visualizacion";
@@ -69,9 +70,12 @@ angular.module('cargoApp.controllers')
           $rootScope.estado = "Listo!";
           $rootScope.ready = true;
 
+         
+
     };
     
     function loadPresets() {
+      console.log("loadPresets");
       var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
       instanceName = instanceName || 'cargografias';
       var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json' + '?v=' + window.__config.lastUpdate;
@@ -178,6 +182,17 @@ angular.module('cargoApp.controllers')
         return decades;
       }
 
+
+      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+      $scope.series = ['Series A', 'Series B'];
+      $scope.data = [
+          [65, 59, 80, 81, 56, 55, 40],
+          [28, 48, 40, 19, 86, 27, 90]
+          ];
+
+      $scope.onClick = function (points, evt) {
+        console.log(points, evt);
+      };
 
 
 
