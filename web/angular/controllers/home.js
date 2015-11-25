@@ -2,11 +2,17 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('homeController', function($rootScope, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
+  .controller('homeController', function($rootScope,$anchorScroll, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
+    
+    $scope.customization= window.customization;
 
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
-  
+  $scope.go = function ( path ) {
+
+    $location.path( path );
+    $anchorScroll();
+  };
   
       /**
        * FromDecade

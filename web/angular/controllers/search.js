@@ -2,11 +2,16 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('searchController', function($rootScope, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
+  .controller('searchController', function($rootScope,  $anchorScroll, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
-  $scope.filterAutoPersonsAdvance = function () {
+
+
+
+
+    $scope.filterAdvance = {};
+    $scope.filterAutoPersonsAdvance = function () {
         $scope.showPresets = false;
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
@@ -25,7 +30,8 @@ angular.module('cargoApp.controllers')
          time: new Date()
       };
 
-    $scope.filterAdvance = {};
+
+
     $scope.autoPersons = [];
 
     $scope.activePersons = [];
@@ -60,13 +66,12 @@ angular.module('cargoApp.controllers')
         p = p.person;
       }
       $location.path('/timeline/name-' + p.popitID);
-      console.log(p);
+      $anchorScroll();
     }
 
     // Presets
 
-    var presetsLoader = loadPresets();
-
+    
     var onDataLoaded = function() {
       
           cargosFactory.calculateRankings();
@@ -79,22 +84,22 @@ angular.module('cargoApp.controllers')
           $rootScope.estado = "Listo!";
           $rootScope.ready = true;
 
+          if ($routeParams.territory || $routeParams.membership){
+            $scope.filterAutoPersonsAdvance();
+          }
+
     };
+    $scope.customization= window.customization;
+
     
-    function loadPresets() {
-      var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
-      instanceName = instanceName || 'cargografias';
-      var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json' + '?v=' + window.__config.lastUpdate;
-      var req = $http.get(locdataPath);
-      req.then(function(res) {
-        $scope.presets = JSON.parse(res.data.predefinedSearches || "[]");
-        $scope.showPresets = $scope.presets && $scope.presets.length;
-      });
-      return req;
+    
+    if ($routeParams.territory){
+      $scope.filterAdvance.territory = $routeParams.territory;
     }
-
-    
-
+    if ($routeParams.membership){
+      $scope.filterAdvance.jobTitle = $routeParams.membership;
+    }
+       
     cargosFactory.load($scope, onDataLoaded, $rootScope);
 
      /**

@@ -79,7 +79,7 @@
 					            	<img class="ico" src="https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0Bx4BSt6jniD7dmd3YXBWVmx1VG8/usability_bidirectionality_guidelines_whennot5.png">
 					        	</div>
 					         	<div class="topic">
-					            	<a class="hand" href="/#/search">Buscar</a>
+					            	<a class="hand" ng-click="go('search')">Buscar</a>
 					            </div>
 			        		</div>
 			        		</a>
@@ -116,10 +116,11 @@
 			    		<div class="row">
 			    			<div class="col s12 m12 topic-row">
 			    				<div class="pic">
-					            	<img src="http://www.celag.org/wp-content/uploads/2014/10/brasil-mapa-bandera.jpg">
+					            	<img ng-src="
+					            	{{customization.territoryPlaceholder}}">
 					        	</div>
 					         	<div class="topic">
-					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					            	<a class="hand" ng-click="go('search/territory/' + p.key)">#{{p.name}}</a>
 					            </div>
 			        		</div>
 			        	</div>
@@ -128,10 +129,14 @@
 			    		<div class="row">
 			    			<div class="col s12 m12 topic-row">
 			    				<div class="pic">
-					            	<img src="http://job-images.com/material/086.png">
+					            	<img ng-src="
+					            	{{customization.membershipPlaceHolder}}">
 					        	</div>
 					         	<div class="topic">
-					            	<a class="hand" ng-click="load(p.valores, true)">#{{p.name}}</a>
+					            	<a class="hand"
+					            	ng-click="go('search/membership/' + p.name)"
+
+					            	>#{{p.name}}</a>
 					            </div>
 			        		</div>
 			        	</div>

@@ -20,6 +20,10 @@ config(['$routeProvider', function($routeProvider) {
     controller: 'homeController'});
   $routeProvider.when('/search', {templateUrl: '/angular/partials/search.html', 
     controller: 'searchController'});
+  $routeProvider.when('/search/territory/:territory', {templateUrl: '/angular/partials/search.html', 
+    controller: 'searchController'});
+  $routeProvider.when('/search/membership/:membership', {templateUrl: '/angular/partials/search.html', 
+    controller: 'searchController'});
   $routeProvider.when('/historycompare', {templateUrl: '/angular/partials/comparehistory.html', 
     controller: 'historycompareController'});
 
