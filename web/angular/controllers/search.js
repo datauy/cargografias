@@ -8,7 +8,7 @@ angular.module('cargoApp.controllers')
   instanceName = instanceName || 'cargografias';
 
       $scope.personList = [];
-
+      $scope.countResult = 0;
       $scope.selectedPersons = [];
       $scope.addPerson = function(p){
         $scope.selectedPersons.push(p);
@@ -89,7 +89,12 @@ angular.module('cargoApp.controllers')
         $scope.showPresets = false;
         $scope.search = true;
         $scope.filterAdvance.name = q;
-        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        
+        var result = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        $scope.countResult  = result.length;
+        var expression = '-memberships.length';
+        result = $filter('orderBy')(result, expression, false);
+        $scope.autoPersons = _.take(result,25);
         $scope.showResult = true;
       } else {
         $scope.autoPersons = [];
@@ -99,7 +104,11 @@ angular.module('cargoApp.controllers')
     $scope.filterAutoPersonsAdvance = function () {
         $scope.showPresets = false;
         $scope.search = true;
-        $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        var result = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        var expression = '-memberships.length';
+        result = $filter('orderBy')(result, expression, false);
+        $scope.countResult  = result.length;
+        $scope.autoPersons = _.take(result,25);
         $scope.showResult = true;
         $scope.started =true;
     };
