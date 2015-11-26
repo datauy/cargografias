@@ -31,12 +31,12 @@ angular.module('cargoApp.factories', [])
 
             $http.get('/js/datasets/pesopoder.json')
                 .then(function(res){
-                $rootScope.estado = "Representatividad";
+                $rootScope.estado =  window.customization.representetivity;
                 factory.weight = res.data;
               });
               $http.get(currentDataSource[0])
                  .then(function(res){
-                  $rootScope.estado = "Personas";
+                  $rootScope.estado = window.customization.people;
                   factory.persons = res.data;
                     for (var i = 0; i < res.data.length; i++) {
                       //Search Index
@@ -60,7 +60,7 @@ angular.module('cargoApp.factories', [])
               }).then(function(){
                   $http.get(currentDataSource[2])
                     .then(function(res){
-                      $rootScope.estado = "Organizaciones";
+                      $rootScope.estado = window.customization.organizations;
                       factory.organizations = res.data;
                       //TODO: Why is this here? Shouldn't go to organization level attribute?
                       //nivel: res.data[i].name === 'Argentina' ? 'nacional' : 'provincial'
