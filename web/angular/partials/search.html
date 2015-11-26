@@ -55,7 +55,7 @@
 						count-to="{{selectedPersons.length}}" 
 						 value="1" duration="1">
 						</span>
-						<small> {{customization.selectecPersons}} </small>
+						<small> {{customization.selectedPersons}} </small>
 					</h2>
         	  	
 	        	  <div class="timeline-filter">
@@ -88,7 +88,7 @@
 					        </div>
 					        <div class="col s6">
 					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2> 
-					            	<h2><small>({{p.memberships.length}} puestos)</h2>
+					            	<h2><small>({{p.memberships.length}} {{customization.post}})</h2>
 			        		</div>
 			        		<div class="col s2">
 			        			<h2 ng-show="p.added" class="wow fadeIn">
