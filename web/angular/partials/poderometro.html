@@ -1,14 +1,47 @@
-<div>
-	<div>
-		<div>
-			<h3><i class="fa fa-users"></i>Año 
-				 <select ng-model="activeYear" id="years" ng-change="redrawPoderometro()">
-				  <option ng-repeat="o in poderometroYears" ng-selected="{{o==activeYear}}" value="{{o}}">
-        			{{o}}
-    				</option>
-				</select>
-			</h3>
-		</div>
-    <div ng-cargobubbles></div>
-	</div>
+
+
+<div class="module " ng-show="ready">
+    <div class="row dashboard">
+
+        <div class="col s12 m4 wow fadeInLeftBig">
+            <div class="dashboard">
+            <h3>¿Que deseas buscar?</h3>
+                    <h1>
+                        <span 
+                         count-to="{{autoPersons.length}}" 
+                         value="1" duration="3">
+                        </span>
+                        <small> politicos</small>
+                    </h1>
+                <div>
+                    <p>
+                    <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
+                        <option value="">Seleccionar territorio</option>
+                    </select>
+                </p><p>
+                    <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
+                        <option value="">Seleccionar cargo</option>
+                    </select>
+                 </p><p>
+                    <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
+                        decade.key as decade.label for decade in getDecades()">
+                        <option value="">Seleccionar decada</option>
+                    </select>
+                  </p>
+                </div>
+              </div>
+              <p>  </p>
+        </div>
+        <div class="col s12 m8 wow fadeInRightBig">
+             <div class="example-chart" ng-cluster data="data" option="option"></div>
+            
+           
+
+    
+
+           
+        </div>
+
+        </div>
 </div>
+

@@ -90,7 +90,8 @@
     <!-- Version LABICBR -->
     <script src="bower_components/Chart.js/Chart.min.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-    
+    <script  src="bower_components/angular-d3-cluster/dist/angular-d3-cluster.min.js"></script>
+
     <style>
         {{customization.customCSS|safe}}
     </style>

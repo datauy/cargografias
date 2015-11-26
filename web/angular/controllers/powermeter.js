@@ -2,24 +2,156 @@
 
 /* Controllers */
 angular.module('cargoApp.controllers')
-  .controller('powermeterController', function($rootScope, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
-      $scope.customization= window.customization;
+  .controller('powermeterController', function($rootScope,  $anchorScroll, $q, $scope,presetsFactory, cargosFactory, $filter, $cookies, $routeParams, $location, $route, $timeout, $http) {
 
+  $scope.option = {
+        positiveColor: '#fe6869',
+        subjectRange: [35, 45],
+        arounderRange: [15, 25]
+    };
+    $scope.data = [{
+        name: 'Subject01',
+        value: 10.0,
+        children: [{
+            name: '01-01', //arounder
+            value: -5.1
+        }, {
+            name: '01-02',
+            value: 3.1
+        }]
+    }, {
+        name: 'Subject02',
+        value: 12.5,
+        children: [{
+            name: '02-01', //arounder
+            value: 3.1
+        }, {
+            name: '02-02',
+            value: 6.1
+        }]
+    }];
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
-  
+
+      $scope.personList = [];
+      $scope.countResult = 0;
+      $scope.selectedPersons = [];
+      $scope.addPerson = function(p){
+        $scope.selectedPersons.push(p);
+        p.added= true;
+      }
+      $scope.removePerson = function(p){
+        var indexOf = $scope.selectedPersons.indexOf(p);
+        if (indexOf > -1) {
+          $scope.selectedPersons.splice(indexOf, 1);
+        }
+        p.added = false;
+      }
+
+      $scope.compareSelected = function(){
+       $scope.gotoList($scope.selectedPersons);
+    }
+    $scope.compareResult = function(){
+      $scope.gotoList($scope.autoPersons);
+    }
+
+    $scope.gotoList = function(list){
+       var ids = ""
+        for (var i = 0; i < list.length; i++) {
+          ids += list[i].popitID + "-";
+        };
+
+      
+      $location.path('/timeline/name-' + ids);
+      $anchorScroll();
+    }
+
+
+
+
+
+      $scope.suggest =function(){
+       
+
+          var prefix = "";
+          if ($scope.filterAdvance.name){
+            prefix+= " para '" + $scope.filterAdvance.name +"'";
+          }
+          if ($scope.filterAdvance.jobTitle){
+            if (prefix.length > 0){
+              prefix+= " , " ;
+            }
+            else {
+              prefix+= " para " ;
+            }
+            prefix += $scope.filterAdvance.jobTitle ;
+          }
+          if ($scope.filterAdvance.territory)
+            {
+            prefix+= " en " + $scope.filterAdvance.territory ;
+          }
+          if ($scope.filterAdvance.decade){
+            if (prefix.length > 0){
+              prefix+= " para el año " 
+            }
+            else {
+              prefix+= " durante ";  
+            }
+            prefix+= $scope.filterAdvance.decade ;
+          }
+
+           var base ="https://twitter.com/intent/tweet?text=";
+            base += encodeURIComponent("Hey @cargografias, agreguen datos" 
+            + prefix);
+            
+           window.open(base,'twitter-share-dialog'); 
+      }; 
+    
+
+
+    $scope.filterAdvance = {};
+    $scope.filterAutoPersons = function(q) {
+      if (q.length > 3) {
+        $scope.showPresets = false;
+        $scope.search = true;
+        $scope.filterAdvance.name = q;
+        
+        var result = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        $scope.countResult  = result.length;
+        var expression = '-memberships.length';
+        result = $filter('orderBy')(result, expression, false);
+        $scope.autoPersons = _.take(result,25);
+        $scope.showResult = true;
+      } else {
+        $scope.autoPersons = [];
+        $scope.search = false;
+      }
+    };
+    $scope.filterAutoPersonsAdvance = function () {
+        $scope.showPresets = false;
+        $scope.search = true;
+        var result = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
+        var expression = '-memberships.length';
+        result = $filter('orderBy')(result, expression, false);
+        $scope.countResult  = result.length;
+        $scope.autoPersons = _.take(result,25);
+        $scope.showResult = true;
+        $scope.started =true;
+    };
+
   
       /**
        * FromDecade
        * @type {number}
        */
       var fromDecade = 1900;
-$scope.message = {
-   text: 'hello world!',
-   time: new Date()
-};
+      $scope.message = {
+         text: 'hello world!',
+         time: new Date()
+      };
 
-    $scope.filterAdvance = {};
+
+
     $scope.autoPersons = [];
 
     $scope.activePersons = [];
@@ -43,14 +175,23 @@ $scope.message = {
       //     var id = cargosFactory.mapId[index];
       //     $scope.lightAdd(cargosFactory.autoPersons[id], id);
       //   };
-      $location.path('/timeline/name-801edb');
+      $location.path('/timeline/name-801edb');  
       // }
+    }
+
+
+    $scope.goto = function(p) {
+
+      if (p.person){
+        p = p.person;
+      }
+      $location.path('/timeline/name-' + p.popitID);
+      $anchorScroll();
     }
 
     // Presets
 
-    var presetsLoader = loadPresets();
-
+    
     var onDataLoaded = function() {
       
           cargosFactory.calculateRankings();
@@ -63,22 +204,22 @@ $scope.message = {
           $rootScope.estado = "Listo!";
           $rootScope.ready = true;
 
+          if ($routeParams.territory || $routeParams.membership){
+            $scope.filterAutoPersonsAdvance();
+          }
+
     };
+    $scope.customization= window.customization;
+
     
-    function loadPresets() {
-      var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '') ;
-      instanceName = instanceName || 'cargografias';
-      var locdataPath = window.__config.baseStaticPath + '/datasets/' + instanceName + '_locdata.json' + '?v=' + window.__config.lastUpdate;
-      var req = $http.get(locdataPath);
-      req.then(function(res) {
-        $scope.presets = JSON.parse(res.data.predefinedSearches || "[]");
-        $scope.showPresets = $scope.presets && $scope.presets.length;
-      });
-      return req;
+    
+    if ($routeParams.territory){
+      $scope.filterAdvance.territory = $routeParams.territory;
     }
-
-    
-
+    if ($routeParams.membership){
+      $scope.filterAdvance.jobTitle = $routeParams.membership;
+    }
+       
     cargosFactory.load($scope, onDataLoaded, $rootScope);
 
      /**
