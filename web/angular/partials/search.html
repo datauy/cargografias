@@ -22,7 +22,7 @@
                     </select>
                 </p><p>
                     <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
-                        <option value="">{{customization.selectPost}}</option>
+                        <option value="">{{customization.selectPosition}}</option>
                     </select>
                  </p><p>
                     <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
