@@ -13,6 +13,7 @@ angular.module('cargoApp.controllers')
         $scope.search = true;
         $scope.autoPersons = cargosFactory.getAutoPersonsAdvance($scope.filterAdvance);
         $scope.showResult = true;
+        $scope.getData();
     };
 
   
@@ -20,11 +21,11 @@ angular.module('cargoApp.controllers')
        * FromDecade
        * @type {number}
        */
-      var fromDecade = 1900;
-      $scope.message = {
-         text: 'hello world!',
-         time: new Date()
-      };
+    var fromDecade = 1900;
+    $scope.message = {
+        text: 'hello world!',
+        time: new Date()
+    };
 
     $scope.filterAdvance = {};
     $scope.autoPersons = [];
@@ -167,7 +168,11 @@ angular.module('cargoApp.controllers')
        * @returns {*}
        */
       $scope.getJobTitle = function() {
-        return cargosFactory.getJobTitle();
+        var hall = cargosFactory.getJobTitle();
+        //console.log("Jobtitle:" +hall.length);
+          //$scope.getData();
+        return hall;
+             
       }
 
       /**
@@ -183,18 +188,69 @@ angular.module('cargoApp.controllers')
       }
 
 
-      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-      $scope.series = ['Series A', 'Series B'];
-      $scope.data = [
-          [65, 59, 80, 81, 56, 55, 40],
-          [28, 48, 40, 19, 86, 27, 90]
-          ];
+     
+
 
       $scope.onClick = function (points, evt) {
         console.log(points, evt);
       };
 
 
+    $scope.getData = function(){
+      $scope.labels = loadLabels($scope.autoPersons[1].memberships);//["1994", "1995", "1996", "1997", "1998", "1999", "2000"];
+
+      $scope.series = [$scope.autoPersons[1].name]//['Persona 1', 'Persona 2'];
+      $scope.data = loadData($scope.autoPersons[1].memberships); //[ [65, 59, 80, 81, 56, 55, 40]]; //,[28, 48, 40, 19, 86, 27, 90]];
+
+    }  
+
+    function loadLabels(memberships){
+      var arrayStartDate=[];
+      console.log("Cargos:: " +memberships.length);
+      
+      var expression = '-start_date';
+      memberships = $filter('orderBy')(memberships, expression,true);
+
+      for (var i = 0; i < memberships.length; i++) {
+        arrayStartDate[i] = memberships[i].start_date.substr(0,4);
+      };
+
+      
+      return arrayStartDate;// ["1994", "1995", "1996", "1997", "1998", "1999", "2000"];
+    }
+
+    function loadData(memberships){
+      var arrayParty=[];
+      var arrayTempKeyValue=[];
+
+      for (var i = 0; i < memberships.length; i++) {
+        arrayParty[i] = getId(memberships[i].party_id,memberships);//memberships[i].party_id;
+      };
+
+      return [ /* [65, 59, 80, 81, 56, 55, 40] */ arrayParty ]; 
+    
+    }
+
+    function getId(party,memberships){
+      var arrayParty=[];
+      var i = 0;
+      var posicion = 0;
+      for ( i = 0; i < memberships.length; i++) {
+       arrayParty[i] = memberships[i].party_id;
+
+      
+      };
+
+      for (var j = 1; j <= arrayParty.length; j++) {
+        if(arrayParty[j]==party){
+            
+            posicion=j;
+            break;
+        }
+      };
+      
+      return posicion ;
+    }
 
 
 
