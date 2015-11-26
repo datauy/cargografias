@@ -13,7 +13,8 @@ var cargoApp = angular.module('cargoApp', [
   'angularMoment',
   'ngCookies',
   'countTo',
-  'chart.js'
+  'chart.js',
+  'angular-d3-cluster'
 ]).
 config(['$routeProvider', function($routeProvider) {
   
@@ -25,6 +26,8 @@ config(['$routeProvider', function($routeProvider) {
     controller: 'searchController'});
   $routeProvider.when('/search/membership/:membership', {templateUrl: '/angular/partials/search.html', 
     controller: 'searchController'});
+  $routeProvider.when('/poderometro', {templateUrl: '/angular/partials/poderometro.html', 
+    controller: 'powermeterController'});
   $routeProvider.when('/historycompare', {templateUrl: '/angular/partials/comparehistory.html', 
     controller: 'historycompareController'});
 
