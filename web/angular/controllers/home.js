@@ -59,7 +59,7 @@ angular.module('cargoApp.controllers')
       
           cargosFactory.calculateRankings();
 
-          $rootScope.estado = "Motor de Visualizacion";
+          $rootScope.estado = window.customization.engine;
           for (var i = 0; i < $rootScope.observers.length; i++) {
             var observer = $rootScope.observers[i];
             observer();

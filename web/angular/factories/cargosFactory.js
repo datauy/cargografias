@@ -44,21 +44,21 @@ angular.module('cargoApp.factories')
         //TODO: tenemos que pasarlo a una lista
         shames.push({
           name: customization.electPosition,
-          uom:'cargos',
+          uom:window.customization.post,
           expression:'-summary.elected',
           value: 'elected',
           getNumber: simpleNumber
         });
         shames.push({
           name: customization.executivePosition,
-          uom:'cargos',
+          uom:window.customization.post,
           expression:'-summary.executives',
           value: 'executives',
           getNumber: simpleNumber
         });
         shames.push({
           name: customization.electivePositions,
-          uom:'cargos',
+          uom:window.customization.post,
           expression:'-summary.legislative',
           value: 'legislative',
           getNumber: simpleNumber
@@ -78,14 +78,14 @@ angular.module('cargoApp.factories')
         });
         shames.push({
           name: 'Cargos No electivos',
-          uom:'cargos',
+          uom:window.customization.post,
           expression:'-summary.notElected',
           value: 'notElected',
           getNumber: simpleNumber
         });
         shames.push({
           name: customization.differentPositions,
-          uom:'cargos',
+          uom:window.customization.post,
           expression:'-memberships.length',
           getNumber: function(person){
             return person.memberships.length;
@@ -93,7 +93,7 @@ angular.module('cargoApp.factories')
         });
         shames.push({
           name: customization.yearsInFunction,
-          uom:'años',
+          uom:window.customization.years,
           expression:'-periods.yearsCharges',
           getNumber: function(person){
             return person.periods.yearsCharges;
@@ -101,7 +101,7 @@ angular.module('cargoApp.factories')
         });
         shames.push({
           name: customization.yearsInPolitics,
-          uom:'años',
+          uom:window.customization.years,
           expression:'-periods.yearsPolitics',
           getNumber: function(person){
             return person.periods.yearsPolitics;

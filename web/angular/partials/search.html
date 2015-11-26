@@ -3,31 +3,31 @@
 
 		<div class="col s12 m4 wow fadeInLeftBig">
 			<div class="dashboard">
-			<h3>¿Que deseas buscar?</h3>
+			<h3>{{customization.whatosearch}}</h3>
 					<h1 >
 						<span 
 						count-to="{{countResult}}" 
 						 value="1" duration="2">
 						</span> 
-						<small> resultados</small>
+						<small> {{customization.results}}</small>
 					</h1>
 					
 
 				<div>
-					<input id="nombre" type="search" placeholder="Ingresá el Nombre y/​o Apellido" 		ng-model="filterAdvance.name" 
+					<input id="nombre" type="search" placeholder='{{customization.enterName}}'		ng-model="filterAdvance.name" 
 						ng-change="filterAutoPersons(filterAdvance.name)"/>    
 					<p>
                     <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
-                        <option value="">Seleccionar territorio</option>
+                        <option value="">{{customization.selectTerritory}}</option>
                     </select>
                 </p><p>
                     <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
-                        <option value="">Seleccionar cargo</option>
+                        <option value="">{{customization.selectPost}}</option>
                     </select>
                  </p><p>
                     <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
                         decade.key as decade.label for decade in getDecades()">
-                        <option value="">Seleccionar decada</option>
+                        <option value="">{{customization.selectDecade}}</option>
                     </select>
                   </p>
                 </div>
@@ -55,14 +55,14 @@
 						count-to="{{selectedPersons.length}}" 
 						 value="1" duration="1">
 						</span>
-						<small> personas seleccionadas </small>
+						<small> {{customization.selectecPersons}} </small>
 					</h2>
         	  	
 	        	  <div class="timeline-filter">
 						<ul>
 						    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
 						      <a id="ordenCargo" href="" ng-click="compareSelected()" >
-						        <i class="fa fa-tasks"></i>Comparar</a>
+						        <i class="fa fa-tasks"></i>{{customization.compare}}</a>
 						    </li>
 						    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
 						      <a id="ordenCargo" href="" ng-click="clearSelected()" >
@@ -77,7 +77,7 @@
     	<div class="col s12 m8 wow fadeInRightBig">
 			<div class="row result">
 					<div class="col s12 m12"> 
-						<h2 ng-show="countResult != autoPersons.length && countResult!=0" class="wow FadeIn"> Mostrando solo los mejores {{autoPersons.length}} de {{countResult}} </h2>
+						<h2 ng-show="countResult != autoPersons.length && countResult!=0" class="wow FadeIn"> {{customization.bests}} {{autoPersons.length}} de {{countResult}} </h2>
 					</div>
 			    	<div class="col s12 m12" ng-repeat="p in autoPersons"> 
 			    		<div class="row">
@@ -102,17 +102,17 @@
 			        	</div>
 			        </div>   
 			        <div ng-show="autoPersons.length == 0 && started" class="col s12 m12"> 
-			        	<h2> No hemos encontrado personas  
+			        	<h2> {{customization.notFound}}
 			        		<span ng-show="filterAdvance.name"> con nombre '{{filterAdvance.name}}' </span>
 			        		<span ng-show="filterAdvance.jobTitle"> para {{filterAdvance.jobTitle}} </span>
 			        		<span ng-show="filterAdvance.territory">  en {{filterAdvance.territory}}</span>
 			        		<span ng-show="filterAdvance.decade">  durante {{filterAdvance.decade}} </span>
 			        		<p> <a href="" class="cta" ng-click="suggest()">Queres que ver esto en la plataforma? ¡Sugerilo ahora!  <i class="fa fa-twitter"></i></a></a> </p>
 			        	</h2>
-			        	<h3> Intenta con algunos de estos resultados </h3>
+			        	<h3> {{customization.tryThis}}</h3>
 			        </div>
 			        <div ng-show="autoPersons.length === 0 && !started">
-			        	<h2> Estos son los politicos con mas entradas </h2>
+			        	<h2>{{customization.mostPopular}}</h2>
 			        </div>
 			    	<div ng-hide="autoPersons.length > 0" class="col s12 m12" ng-repeat="p in getPersonRanking() | 
 			    	orderBy:'-person.memberships.length'"> 
@@ -123,7 +123,7 @@
 					        	</div>
 					        </div>
 					        <div class="col s8">
-					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2><h2> <small>({{p.person.memberships.length}} puestos) </small></h2>
+					            	<h2><a class="hand" ng-click="goto(p)">{{p.name}}</a></h2><h2> <small>{{p.person.memberships.length}} {{customization.post}} </small></h2>
 					        	
 			        		</div>
 			        	</div>

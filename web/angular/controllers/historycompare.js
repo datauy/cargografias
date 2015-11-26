@@ -206,7 +206,6 @@ angular.module('cargoApp.controllers')
 
     $scope.getData = function(){
       $scope.labels = loadLabels($scope.autoPersons[1].memberships);//["1994", "1995", "1996", "1997", "1998", "1999", "2000"];
-
       $scope.series = [$scope.autoPersons[1].name]//['Persona 1', 'Persona 2'];
       $scope.data = loadData($scope.autoPersons[1].memberships); //[ [65, 59, 80, 81, 56, 55, 40]]; //,[28, 48, 40, 19, 86, 27, 90]];
 
@@ -224,7 +223,7 @@ angular.module('cargoApp.controllers')
       };
 
       
-      return arrayStartDate;// ["1994", "1995", "1996", "1997", "1998", "1999", "2000"];
+      return arrayStartDate;
     }
 
     function loadData(memberships){
@@ -235,7 +234,7 @@ angular.module('cargoApp.controllers')
         arrayParty[i] = getId(memberships[i].party_id,memberships);//memberships[i].party_id;
       };
 
-      return [ /* [65, 59, 80, 81, 56, 55, 40] */ arrayParty ]; 
+      return [ arrayParty ]; 
     
     }
 
