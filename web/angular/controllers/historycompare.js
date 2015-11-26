@@ -190,6 +190,14 @@ angular.module('cargoApp.controllers')
           [28, 48, 40, 19, 86, 27, 90]
           ];
 
+          $scope.options ={
+            bezierCurveTension : 0,
+            datasetFill : false,
+            scaleLabel: function(valuePayload){
+            console.log(valuePayload);
+            return "-" + valuePayload.value + "-";
+          }};
+
       $scope.onClick = function (points, evt) {
         console.log(points, evt);
       };
