@@ -1,54 +1,89 @@
+<div class="module search" ng-show="ready">
+    <div class="row dashboard">
 
-
-<div class="module " ng-show="ready">
-	<div class="row dashboard">
-
-		<div class="col s12 m4 wow fadeInLeftBig">
-			<div class="dashboard">
-			<h3>¿Que deseas buscar?</h3>
-					<h1>
-						<span 
-						 count-to="{{autoPersons.length}}" 
-						 value="1" duration="3">
-						</span>
-						<small> politicos</small>
-					</h1>
-				<div>
-					<p>
+        <div class="col s12 m4 wow fadeInLeftBig">
+            <div class="dashboard">
+            <h3>{{customization.whatosearch}}</h3>
+                    <h1 >
+                        <span 
+                        count-to="{{countResult}}" 
+                         value="1" duration="2">
+                        </span> 
+                        <small> {{customization.results}}</small>
+                    </h1>
+         
+                <div>
+                    <input id="nombre" type="search" placeholder='{{customization.enterName}}'      ng-model="filterAdvance.name" 
+                        ng-change="filterAutoPersons(filterAdvance.name)"/>    
+                    <p>
                     <select ng-model="filterAdvance.territory" ng-change="filterAutoPersonsAdvance()" ng-options="territory as territory for territory in getTerritories() | orderBy:'toString()'">
-                        <option value="">Seleccionar territorio</option>
+                        <option value="">{{customization.selectTerritory}}</option>
                     </select>
                 </p><p>
                     <select ng-model="filterAdvance.jobTitle" ng-change="filterAutoPersonsAdvance()" ng-options="jobTitle as jobTitle | lowercase for jobTitle in getJobTitle() | orderBy:'toString()'">
-                        <option value="">Seleccionar cargo</option>
+                        <option value="">{{customization.selectPosition}}</option>
                     </select>
                  </p><p>
                     <select ng-model="filterAdvance.decade" ng-change="filterAutoPersonsAdvance()" ng-options="
                         decade.key as decade.label for decade in getDecades()">
-                        <option value="">Seleccionar decada</option>
+                        <option value="">{{customization.selectDecade}}</option>
                     </select>
                   </p>
                 </div>
-        	  </div>
-        	  <p>  </p>
-    	</div>
-    	<div class="col s12 m8 wow fadeInRightBig">
-			<h1> Aca va el grafico </h1>
+              </div>
+
+              <p>  </p>
+              <div ng-show="autoPersons.length <= 10 &&  autoPersons.length > 0" class="wow fadeIn">
+                <div class="timeline-filter">
+                        <ul>
+                            <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+                              <a id="ordenCargo" href="" ng-click="compareResult()" >
+                                <i class="fa fa-tasks"></i>
+                                   
+                                   {{customization.compareNow}} {{autoPersons.length}} {{customization.people}}
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+              <div ng-show="selectedPersons.length > 0"  class="wow fadeIn"> 
+
+                <h2>
+                        <span 
+
+                        count-to="{{selectedPersons.length}}" 
+                         value="1" duration="1">
+                        </span>
+                        <small> {{customization.selectedPersons}} </small>
+                    </h2>
+                
+                  <div class="timeline-filter">
+                        <ul>
+                            <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+                              <a id="ordenCargo" href="" ng-click="compareSelected()" >
+                                <i class="fa fa-tasks"></i>{{customization.compareNow}}</a>
+                            </li>
+                            <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
+                              <a id="ordenCargo" href="" ng-click="clearSelected()" >
+                                <i class="fa fa-check"></i>{{customization.clear}}r</a>
+                            </li>
+                        </ul>
+                    </div>
+
+            </div>
             
-            <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" 
-                    chart-options="options"
-                    chart-legend="true" 
-                    chart-series="series"
-                chart-click="onClick" >
-            </canvas>  
-
-
-    
-
-           
         </div>
-
-    	</div>
+        <div class="col s12 m8 wow fadeInRightBig">
+            <div class="row result">
+                <div class="col s12 m12"> 
+                            <canvas id="line" class="chart chart-line" chart-data="data"
+                        chart-labels="labels" 
+                            chart-options="options"
+                            chart-legend="true" 
+                            chart-series="series"
+                        chart-click="onClick" >
+                    </canvas>  
+                </div>
+            </div>
+            
 </div>
-
