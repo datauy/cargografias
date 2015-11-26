@@ -66,7 +66,7 @@
 						    </li>
 						    <li class="" ng-click="filterLine('memberships')" ng-class="filter === 'memberships' ? 'active' : '' ">
 						      <a id="ordenCargo" href="" ng-click="clearSelected()" >
-						        <i class="fa fa-check"></i>Limpiar</a>
+						        <i class="fa fa-check"></i>{{customization.clear}}r</a>
 						    </li>
 						</ul>
 					</div>
@@ -103,11 +103,11 @@
 			        </div>   
 			        <div ng-show="autoPersons.length == 0 && started" class="col s12 m12"> 
 			        	<h2> {{customization.notFound}}
-			        		<span ng-show="filterAdvance.name"> con nombre '{{filterAdvance.name}}' </span>
-			        		<span ng-show="filterAdvance.jobTitle"> para {{filterAdvance.jobTitle}} </span>
-			        		<span ng-show="filterAdvance.territory">  en {{filterAdvance.territory}}</span>
-			        		<span ng-show="filterAdvance.decade">  durante {{filterAdvance.decade}} </span>
-			        		<p> <a href="" class="cta" ng-click="suggest()">Queres que ver esto en la plataforma? ¡Sugerilo ahora!  <i class="fa fa-twitter"></i></a></a> </p>
+			        		<span ng-show="filterAdvance.name"> {{customization.name}} '{{filterAdvance.name}}' </span>
+			        		<span ng-show="filterAdvance.jobTitle"> {{customization.forWord}}  {{filterAdvance.jobTitle}} </span>
+			        		<span ng-show="filterAdvance.territory">  {{customization.at}}  {{filterAdvance.territory}}</span>
+			        		<span ng-show="filterAdvance.decade">  {{customization.on}}  {{filterAdvance.decade}} </span>
+			        		<p> <a href="" class="cta" ng-click="suggest()">{{customization.suggestThis}} <i class="fa fa-twitter"></i></a></a> </p>
 			        	</h2>
 			        	<h3> {{customization.tryThis}}</h3>
 			        </div>
