@@ -8,8 +8,7 @@
     <title>{{customization.pageTitle}} {{customization.resumeLabel}}</title>
 
 
-
-
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta itemprop="name" content="{{customization.metaName}}">
     <meta itemprop="description" content="{{customization.metaDescription}}">
     <meta itemprop="image" content="{{customization.metaImage}}">

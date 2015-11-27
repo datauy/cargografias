@@ -174,6 +174,9 @@
         <div class="clearfix"></div>
     </footer>
     
+    <script>
+        window.customization = {{JSON.stringify(customization)}};
+    </script>
 
     
     <script src="/js/lib/v4/plugins/cargo.memberships.js"></script>
@@ -184,7 +187,7 @@
     
     <script src="/angular/short/app.js"></script>
     <script src="/angular/short/controllers/main.js"></script>
-    <script src="/angular/controllers/loaderController.js"></script>
+    <script src="/angular/controllers/loader.js"></script>
     <script src="/angular/factories/cargosLoaderFactory.js"></script>
     <script src="/angular/factories/cargosFactory.js"></script>
 </body>
