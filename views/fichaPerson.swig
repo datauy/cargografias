@@ -14,15 +14,16 @@
     <div class="main">
         <div ng-view="" id="cargoContainer" class="ng-scope">
 <div class="module timeline full-version embed">
-          <a href="http://www.cargografias.org" class="boton"><i class="fa fa-reply"></i> Ir a la Versi&oacute;n Completa </a>
+          <a href="http://www.cargografias.org" class="boton"><i class="fa fa-reply"></i> {{customization.completeVersion}} </a>
           <a id="ordenNombre" target="_blank" class="boton" href="https://docs.google.com/forms/d/1NoOYENvhHXqpLO3WpB8l6R8ofJkJiShLlx2A_DfrNd0/viewform?embedded=true&hl=es" >
-                        <i class="fa fa-exclamation-triangle"></i>Reportar Errores</a>
+                        <i class="fa fa-exclamation-triangle"></i>{{customization.errores}}</a>
           
 </div>
             <div class="module ng-scope">
 
         <div class="description">
             Fichas Personales
+            {{customization.profile}}
         </div>
              <div class="main ficha">
                   <div class="items-personales image"><a href="{{person.image_original}}" target="_blank"><img src="{{person.image}}" /><br><small>{{person.image_original}}</small></a></div>
@@ -52,11 +53,11 @@
                     <table class="table table-condensed">
                         <tbody>
                             <tr>
-                                <th>Cargo</th>
-                                <th>Organizaci&oacute;n</th>
-                                <th>Territorio</th>                                
-                                <th>Comienzo</th>
-                                <th>Fin</th>
+                                <th>{{customization.role}}</th>
+                                <th>{{customization.organizations}}</th>
+                                <th>{{customization.territoryPlaceholder}}</th>                                
+                                <th>{{customization.start}}</th>
+                                <th>{{customization.end}}</th>
                                 <th>Class</th>
                                 <th>Type</th>
                                 
