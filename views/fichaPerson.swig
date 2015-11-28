@@ -22,7 +22,6 @@
             <div class="module ng-scope">
 
         <div class="description">
-            Fichas Personales
             {{customization.profile}}
         </div>
              <div class="main ficha">
