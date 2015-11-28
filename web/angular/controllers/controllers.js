@@ -7,13 +7,14 @@ angular.module('cargoApp.controllers')
   var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').trim();
   instanceName = instanceName || 'cargografias';
   
+
       /**
        * FromDecade
        * @type {number}
        */
       var fromDecade = 1900;
-
-
+      //get values labels
+      $scope.customization= window.customization;
 
 
     $scope.downloadNow = function(){
@@ -123,6 +124,7 @@ angular.module('cargoApp.controllers')
           }
         });
       }
+      cargosFactory.calculateRankings();
 
     };
 
@@ -320,9 +322,9 @@ angular.module('cargoApp.controllers')
     }
 
 
-    cargosFactory.load($scope, onDataLoaded, $rootScope);
-
+    
     var lastRoute = $route.current;
+    $scope.cargosFactory = cargosFactory;
     $scope.$on('$locationChangeSuccess', function(event) {
       // If same controller, then ignore the route change.
       if (lastRoute.controller == $route.current.controller) {
@@ -332,14 +334,14 @@ angular.module('cargoApp.controllers')
     });
 
     function updateTheUrl() {
-      //Update the URL
-      $location.path("/" + $scope.filter + "-" + $scope.activePersons.map(function(p) {
+      // Update the URL
+      $location.path("/timeline/" + $scope.filter + "-" + $scope.activePersons.map(function(p) {
         return p.autoPersona.popitID
       }).join('-'));
     }
 
     $scope.lightAdd = function(autoPersona, id) {
-      if (!autoPersona || autoPersona.agregada) return;
+      if (!autoPersona /*|| autoPersona.agregada */) return;
       else {
         $scope.autocomplete = " ";
         autoPersona.agregada = true;
@@ -364,7 +366,10 @@ angular.module('cargoApp.controllers')
       // $scope.redrawPoderometro();
       data = $scope.activePersons;
 
-      reloadCargoTimeline($scope.filter);
+      $timeout(function(){
+        reloadCargoTimeline($scope.filter);  
+      },500);
+      
       //Updates Url
       updateTheUrl();
     }
@@ -373,6 +378,7 @@ angular.module('cargoApp.controllers')
     $scope.filterLine = function(f) {
       $scope.filter = f;
       reloadCargoTimeline(f);
+
       updateTheUrl();
     }
 
@@ -466,6 +472,7 @@ angular.module('cargoApp.controllers')
       }
       notify.subscribe(communicationProxy);
 
+      cargosFactory.load($scope, onDataLoaded, $rootScope);
 
 
   });

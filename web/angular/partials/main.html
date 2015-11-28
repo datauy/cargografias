@@ -1,24 +1,21 @@
+
 <div class="module">
 	<div class="description">
-		<h3><i class="fa fa-user"></i>Funcionarios Seleccionados: {{activePersons.length}}</h3>
+		<h3><i class="fa fa-user"></i>{{customization.selectFunctionary}}: {{activePersons.length}}</h3>
 	</div>
-	
 	<div ng-show="ready" ng-include="'/angular/partials/active-persons.html'"></div>
 	<div ng-show="ready" ng-include="'/angular/partials/filter.html'"></div>
 </div>
 <div class="module timeline">
 	<div class="description">
-		<h3><i class="fa fa-tasks"></i>Linea de Tiempo</h3>
+		<h3><i class="fa fa-tasks"></i>{{customization.timeline}}</h3>
 	</div>
-
 <div ng-show="ready" ng-include="'/angular/partials/linea.html'"></div>
 </div>
 <div class="module">
 	<div class="description">
-		<h3><i class="fa fa-bar-chart"></i>Estadisticas</h3>
+		<h3><i class="fa fa-bar-chart"></i>{{customization.stats}}</h3>
 	</div>
 	<div ng-show="ready" ng-include="'/angular/partials/hall-of-shame.html'"></div>
 	<div ng-show="ready" ng-include="'/angular/partials/stats.html'"></div>
 </div>
-
-
