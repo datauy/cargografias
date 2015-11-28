@@ -124,7 +124,7 @@ angular.module('cargoApp.controllers')
           }
         });
       }
-      cargosFactory.calculateRankings();
+      //cargosFactory.calculateRankings();
 
     };
 
