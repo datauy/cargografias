@@ -6,6 +6,8 @@ var swig = require('swig');
 var fichasController = require('./controllers/fichas.js')
 var embedController = require('./controllers/embed.js')
 var aboutController = require('./controllers/about.js')
+var homeController = require('./controllers/home.js')
+
 var conn = require('./db.js');
 
 swig.setDefaults({
@@ -38,10 +40,8 @@ app.use(require('body-parser').json({
     limit: '5mb'
 }));
 
-app.get('/', function(req, res) {
-    req.params.instanceName = 'cargografias';
-    instanceRouteHandler(req,res);
-});
+app.get('/', homeController.index);
+
 app.get('/about', aboutController.index);
 
 app.use(express.static(__dirname + '/web'));
