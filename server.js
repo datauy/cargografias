@@ -40,8 +40,11 @@ app.use(require('body-parser').json({
     limit: '5mb'
 }));
 
-app.get('/', homeController.index);
-
+// app.get('/', homeController.index);
+app.get('/', function(req, res) {
+    req.params.instanceName = 'cargografias';
+    instanceRouteHandler(req,res);
+});
 app.get('/about', aboutController.index);
 
 app.use(express.static(__dirname + '/web'));
