@@ -40,11 +40,8 @@ app.use(require('body-parser').json({
     limit: '5mb'
 }));
 
-// app.get('/', homeController.index);
-app.get('/', function(req, res) {
-    req.params.instanceName = 'cargografias';
-    instanceRouteHandler(req,res);
-});
+app.get('/', homeController.index);
+
 app.get('/about', aboutController.index);
 
 app.use(express.static(__dirname + '/web'));
@@ -100,3 +97,4 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
+
