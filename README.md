@@ -1,6 +1,6 @@
-=================
 Cargografias 
 =================
+
 ### La línea de tiempo de Funcionarios Polícitcos
 
 Version v.4  
@@ -18,7 +18,6 @@ La base de datos de Cargografias, fue creada sumando y curando diversas fuentes.
 Cargografías esta siempre dispuesto a corregir, aumentar y editar la base de datos para que la información sea fiel a la realidad y accesible a todos los ciudadanos.
 
 
-=======================
 BUSCAR Y COMPARAR 
 =========================
 Cargografías aspira a una arquitectura de datos que pueda reflejar, sintetizar y simplificar el entramado gubernamental. Una forma de humanizar esta estructura es a fuerza de nombres y apellidos, partidos, cargos y funciones.
