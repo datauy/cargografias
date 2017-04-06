@@ -13,12 +13,12 @@ Bitly.setAccessToken(process.env.BITLY_TOKEN);
 function index(req, res){
     var id = req.params.id;
     //TODO: How to detect from where?
-    
+
     var fullUrl = 'https://' + 'www.cargografias.org' + req.originalUrl;
     EmbedUrls.findById(id, function(err, item){
         if(err){
             res.status(500).send({
-                status: 'error', 
+                status: 'error',
                 error: err
             })
         }else{
@@ -27,7 +27,7 @@ function index(req, res){
                     shareUrl: fullUrl,
                     data: item.toObject().data,
                     dataJSONString: JSON.stringify(item.toObject().data)
-                })                        
+                })
             }else{
                 res.status(404).send({
                     status: 'not found'
@@ -46,12 +46,12 @@ function createEmbedUrl(req, res){
         if(err){
             console.log(err);
             res.status(500).send({
-                status: 'error', 
+                status: 'error',
                 error: err
             })
         }else{
             res.send({
-                status:'ok', 
+                status:'ok',
                 embed: doc
             })
         }

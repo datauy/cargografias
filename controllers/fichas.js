@@ -3,6 +3,7 @@ var request = require('request');
 
 
 function person(req, res) {
+    console.log("ENTRO");
     var instanceName = req.params.instanceName;
     var personId = req.params.personId;
     var instances = conn.getDb().collection('cargoinstances');
@@ -23,7 +24,7 @@ function person(req, res) {
                             body = JSON.parse(body);
                             res.render('fichaPerson', {
                                 person: body.result,
-                                instanceName: instanceName, 
+                                instanceName: instanceName,
                                 popitUrl: instances[0].popitUrl
                             })
                         } catch (ex) {

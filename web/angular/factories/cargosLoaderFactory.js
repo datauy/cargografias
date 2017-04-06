@@ -4,7 +4,7 @@
 
 angular.module('cargoApp.factories', [])
   .factory('cargoLoaderFactory', function($http, $filter) {
-    
+
     var datasources = [];
 
     var cargografiasSources = [];
@@ -12,7 +12,7 @@ angular.module('cargoApp.factories', [])
     var instanceName = window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
     instanceName = instanceName.split('/')[0];
     instanceName = instanceName || 'cargografias';
-    
+
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-persons.json' + '?v=' + window.__config.lastUpdate);
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-memberships.json' + '?v=' + window.__config.lastUpdate);
     cargografiasSources.push(window.__config.baseStaticPath + '/datasets/' + instanceName + '-organizations.json' + '?v=' + window.__config.lastUpdate);
@@ -45,7 +45,7 @@ angular.module('cargoApp.factories', [])
                       catch(e){
                         console.log("Loading error", e, res.data[i].name, res.data[i].id_sha1);
                       }
-                      
+
                       factory.mapId[item.popitID] = i;
                       factory.autoPersons.push(item);
                     };
@@ -62,9 +62,15 @@ angular.module('cargoApp.factories', [])
 
   //Photo or default photo
   f.processImages = function(d){
-    
+    //console.log(d.image);
     try{
-      d.image = d.images ? d.images[0].url :'/img/person.png'    // get popit picture
+      if(d.image){
+        //This is a patch for sinar estructure
+      }else{
+        //This is the cargografias structure
+        d.image = d.images ? d.images[0].url :'/img/person.png'    // get popit picture
+      }
+
     }
     catch(e){
       d.image = '/img/person.png' ;
@@ -73,13 +79,26 @@ angular.module('cargoApp.factories', [])
 
   //Initials for graphics
   f.setInitials = function(d){
-    var splitedName =  d.given_name.split(' ')
-    d.initials = d.given_name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';  
-                    
+    if(d.given_name){
+	    var splitedName =  d.given_name.split(' ')
+	    d.initials = d.given_name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';
+    }else{
+      if(d.name){
+        var splitedName =  d.name.split(' ')
+        d.initials = d.name ? splitedName.map(function(item){ return item.substr(0,1).toUpperCase() }).join('.') + "." : '-';
+      }else{
+        d.initials = d.family_name;
+      }
+    }
   }
 
   f.setShareableID = function(d){
-    d.popitID = d.id_sha1.substring(0,6);
+    if(d.id_sha1){
+      d.popitID = d.id_sha1.substring(0,6);
+    }else{
+      d.popitID = d.id;
+    }
+
   }
 
   f.setCheaqueadoCheck = function(d,m){
@@ -94,40 +113,70 @@ angular.module('cargoApp.factories', [])
             }
           }
         }
-    
     }
   }
 
   f.processMemberships = function(d){
     var approved = [];
     d.chequeado = false;
-    
-    for (var i = 0; i < d.memberships.length; i++) {  
+    //console.log(d);
+    for (var i = 0; i < d.memberships.length; i++) {
 
       var m = d.memberships[i];
       //Remuevo los privados
-      if (m.type.toLowerCase() !== "privado" && m.type.toLowerCase() !== "otro"){
+      if(m.type){
+        if (m.type.toLowerCase() !== "privado" && m.type.toLowerCase() !== "otro"){
+          f.extractArea(m);
+          f.setCheaqueadoCheck(d,m);
+          approved.push(m);
+        }
+      }else{
         f.extractArea(m);
         f.setCheaqueadoCheck(d,m);
         approved.push(m);
       }
+
     }
     d.memberships = approved;
-                 
+
   }
 
   f.extractArea = function(m){
-    try{
-            var z = m.area.id.trim();
-            //HACK: Forcing load of territories.
-            if (z.split(',').length === 1){
-              z = z.replace(/ ,/g,' ')
+    if(m.area){
+      try{
+              var z = m.area.id.trim();
+              //HACK: Forcing load of territories.
+              if (z.split(',').length === 1){
+                z = z.replace(/ ,/g,' ')
+              }
+              m.area.id = toTitleCase(z);
+              m.area.name =  toTitleCase(z);
+              //HACK: To use angular filter
+              m.area_name =  toTitleCase(z);
             }
-            m.area.id = toTitleCase(z);
-            m.area.name =  toTitleCase(z); 
-            //HACK: To use angular filter
-            m.area_name =  toTitleCase(z); 
+          catch(e){
+            console.log('No area found: memberships',m.id);
+              m.area ={
+                id: "AREA-NOT-FOUND",
+                name: "AREA-NOT-FOUND",
+              };
+              m.area_name = "AREA-NOT-FOUND";
           }
+    }else{
+      if(m.organization.area){
+        try{
+          var z = m.organization.area;
+          //HACK: Forcing load of territories.
+          if (z.split(',').length === 1){
+            z = z.replace(/ ,/g,' ')
+          }
+          m.area ={
+            id: toTitleCase(z),
+            name: toTitleCase(z),
+          };
+          //HACK: To use angular filter
+          m.area_name =  toTitleCase(z);
+        }
         catch(e){
           console.log('No area found: memberships',m.id);
             m.area ={
@@ -136,6 +185,10 @@ angular.module('cargoApp.factories', [])
             };
             m.area_name = "AREA-NOT-FOUND";
         }
+      }
+
+    }
+
 
   }
 
@@ -147,4 +200,3 @@ angular.module('cargoApp.factories', [])
 
 //TODO: this should be on popit, hard hack for Elections BA.
 var chequeados = ["2c109a", "55a99b","5928af", "1d3338", "f4b3f5"];
-

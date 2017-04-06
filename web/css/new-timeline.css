@@ -49,7 +49,7 @@ svg text{
   max-width: 78px;
 }
 
-.persona-seleccionada {   
+.persona-seleccionada {
   width: 80px;
   margin: 0.2em;
   float: left;
@@ -113,23 +113,23 @@ badge:hover{
     stroke: #ccc;
     stroke-width: 2px;
   }
-  
-  div.tooltip {   
-    position: absolute;           
-    text-align: center;           
-    width: 200px;                  
-    height: 50px;                 
-    padding: 2px;             
-    font: 12px sans-serif;        
-    background: lightsteelblue; 
-    border: 0px;      
-    border-radius: 8px;           
-    pointer-events: none;         
+
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 
 div.box img {
-   max-height: 200px; 
-  
+   max-height: 200px;
+
 }
 
 .row.centered{
@@ -280,7 +280,7 @@ margin-bottom: 15px;
 box-shadow: inset 0 0 7px #8F8F8F;
 }
 
- 
+
 .vis {
   border: none;
   background: #FFF
@@ -379,7 +379,7 @@ text {
 text.rule {
   fill: #BABABA;
   font-size: 0.9em;
-  
+
 }
 
 
@@ -401,7 +401,7 @@ text.boxLabel tspan.sub{
   font-size: 0.8em;
 }
 text.itemLabel, text.membershipLabel, text.territoryLabel{
- fill: #000; 
+ fill: #000;
  font-size: 0.75em;
 }
 
@@ -415,13 +415,13 @@ svg text.itemLabel{
 
 svg text.otemLabel{
   cursor: pointer;
-  fill:red; 
+  fill:red;
   color:red;
 }
 
 path.bezier{
   stroke-width: 2px;
-  stroke-opacity: 1;  
+  stroke-opacity: 1;
 }
 line.tickLine {
   stroke: rgba(51, 51, 51, 0.1);
@@ -545,13 +545,13 @@ html h3, body h3 {
   -moz-transition: background-color 250ms linear;
   -o-transition: background-color 250ms linear;
   -ms-transition: background-color 250ms linear;
-  transition: background-color 250ms linear; 
+  transition: background-color 250ms linear;
 
   -webkit-transition: display 250ms linear;
   -moz-transition: display 250ms linear;
   -o-transition: display 250ms linear;
   -ms-transition: display 250ms linear;
-  transition: display 250ms linear; 
+  transition: display 250ms linear;
 }
 
 
@@ -572,17 +572,17 @@ div.timeline ul.nav-pills li {
 
 div.timeline ul.nav-pills li a{
   background: #000;
-  
+
 }
 
 
-div.vis g.barGroup{ 
-    
+div.vis g.barGroup{
+
 transition: opacity 300ms;
   -webkit-transition: opacity 300ms;/* Safari */
 
 }
-path.curves.bezier{   
+path.curves.bezier{
   transition: opacity 300ms;
   -webkit-transition: opacity 300ms;/* Safari */
 
@@ -627,7 +627,7 @@ div.persona-seleccionada{
   color: white;
   font-weight: bold;
   text-decoration: none;
-  
+
 }
 
 div.chequeado {
@@ -674,7 +674,7 @@ div.persona-seleccionada a.crucecita:hover{
   background-color: #795548;
   border-radius: 4px;
   color:#D7CCC8;
-  
+
 }
 
 div.persona-seleccionada a.crucecita i{
@@ -706,7 +706,7 @@ div.persona-seleccionada a.crucecita i{
  .stats-container{
     width: 135%;
     font-size:1em;
-  } 
+  }
   .stats-container table{
     width: 100%;
   }
